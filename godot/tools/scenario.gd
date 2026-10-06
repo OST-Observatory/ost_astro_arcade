@@ -70,6 +70,29 @@ func _ready() -> void:
 					g._on_tap(Vector2(300, 300))
 				"blink_found":
 					g._on_tap(a)
+		"psf":
+			# PSF test chart: stars from 3 to 15 mag in a row, through the real CCD display.
+			var stars := []
+			var mags := [3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 15.0]
+			for i in mags.size():
+				stars.append([Vector2(110 + (i % 6) * 260, 260 + (i / 6) * 500), mags[i]])
+			var frames := CcdFrames.new()
+			add_child(frames)
+			frames.build(stars, [{"asteroid": Vector2(-50, -50), "asteroid_mag": 30.0, "cosmics": [], "hot": [], "variable": {}, "satellite": []}])
+			var view := TextureRect.new()
+			view.texture = frames.textures[0]
+			view.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			view.size = Vector2(1536 * 1.25, 1024 * 1.25)
+			var m := ShaderMaterial.new()
+			m.shader = preload("res://games/asteroid/ccd/ccd_display.gdshader")
+			m.set_shader_parameter("frame", frames.textures[0])
+			m.set_shader_parameter("image_size", Vector2(1536, 1024))
+			view.material = m
+			add_child(view)
+			for i in mags.size():
+				var l := UiTheme.label("%.0f mag" % mags[i], 28, "medium", UiTheme.SCIENCE)
+				l.position = (stars[i][0] + Vector2(-40, 200)) * 1.25
+				add_child(l)
 		"placeholder":
 			Router.current = GameRegistry.get_entry("asteroid")
 			add_child(load(GameRegistry.PLACEHOLDER).instantiate())
