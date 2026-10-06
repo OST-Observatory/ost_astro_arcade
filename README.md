@@ -41,6 +41,8 @@ godot --path godot -s res://tools/capture.gd -- res://spikes/galaxy_particles.ts
 OST_DATA_DIR=/tmp/ost_capture SCENARIO=attract godot --path godot -s res://tools/capture.gd -- res://tools/scenario.tscn captures/attract
 
 # After adding a new `class_name` script, re-run the import once so Godot registers it.
+# Captures open a short-lived window; if it is hidden behind other windows, Wayland may
+# throttle rendering and the run can time out. Just re-run it.
 
 # Rebuild logo textures from the T-shirt artwork
 cd tools && uv run brand/make_logo.py

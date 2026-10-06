@@ -73,7 +73,9 @@ func test_normalised_difficulty() -> void:
 		var r: Dictionary = BlinkChallenge.RULES[diff]
 		for e in pool:
 			var c := BlinkChallenge.create(AsteroidScenario.load_by_id(e.id), diff, RandomNumberGenerator.new())
-			assert_almost(c.asteroid_mag, r.mag, r.jitter + 0.01, "%s %s brightness" % [diff, e.id])
+			var ok: bool = c.asteroid_mag >= r.mag - r.brighter - r.jitter - 0.01 and c.asteroid_mag <= r.mag + r.jitter + 0.01
+			assert_true(ok, "%s %s brightness %.2f" % [diff, e.id, c.asteroid_mag])
+			assert_true(c.depth <= BlinkChallenge.MAX_SHORTEN + 0.001, "exposure shortened too much")
 			var px := c.motion_arcsec() / AsteroidScenario.ARCSEC_PER_PX
 			assert_almost(px, r.motion_px, r.motion_px * 0.3, "%s %s motion" % [diff, e.id])
 

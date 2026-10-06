@@ -9,18 +9,23 @@ class_name BlinkChallenge
 extends RefCounted
 
 const FRAMES := 3
-const MAX_DEPTH := 3.0                # max exposure shift in mag (x16 in exposure time)
+const MAX_DEPTH := 3.0                # longer exposure: up to 3 mag deeper (x16 in time)
+const MAX_SHORTEN := 1.0              # shorter exposure: at most 1 mag, so the star field stays rich
 const INTERVAL_MIN := 12.0            # minutes between exposures, allowed range
-const INTERVAL_MAX := 60.0
+const INTERVAL_MAX := 90.0
 
-## mag: asteroid brightness in the image; motion_px: path from frame 1 to frame 3.
+## mag: asteroid brightness in the image (it may be up to `brighter` mag brighter if the
+## object is bright and the exposure cannot be shortened further); motion_px: path from
+## frame 1 to frame 3.
+## Tuned after playtests (2026-10): explorer clearly visible, pro only slightly harder
+## than researcher.
 const RULES := {
-	"explorer": {"mag": 14.0, "jitter": 0.3, "motion_px": 26.0, "cosmics": 1, "hot": 0,
-		"variable": false, "satellite": 0.0, "tol": 34.0, "hints": [15.0, 30.0, 50.0], "mult": 1.0},
-	"researcher": {"mag": 15.8, "jitter": 0.2, "motion_px": 18.0, "cosmics": 2, "hot": 3,
-		"variable": true, "satellite": 0.0, "tol": 22.0, "hints": [25.0, 50.0, 80.0], "mult": 1.5},
-	"pro": {"mag": 16.8, "jitter": 0.2, "motion_px": 11.0, "cosmics": 3, "hot": 4,
-		"variable": true, "satellite": 0.5, "tol": 14.0, "hints": [45.0, 80.0, 120.0], "mult": 2.5},
+	"explorer": {"mag": 12.3, "jitter": 0.3, "brighter": 3.0, "motion_px": 32.0, "cosmics": 1, "hot": 0,
+		"variable": false, "satellite": 0.0, "tol": 40.0, "hints": [12.0, 25.0, 40.0], "mult": 1.0},
+	"researcher": {"mag": 14.0, "jitter": 0.2, "brighter": 1.0, "motion_px": 26.0, "cosmics": 1, "hot": 2,
+		"variable": true, "satellite": 0.0, "tol": 32.0, "hints": [15.0, 30.0, 50.0], "mult": 1.5},
+	"pro": {"mag": 14.8, "jitter": 0.2, "brighter": 0.4, "motion_px": 18.0, "cosmics": 3, "hot": 4,
+		"variable": true, "satellite": 0.5, "tol": 22.0, "hints": [30.0, 55.0, 85.0], "mult": 2.5},
 }
 
 var scenario: AsteroidScenario
@@ -59,10 +64,18 @@ static func ideal_interval(entry: Dictionary, diff: String) -> float:
 	return RULES[diff].motion_px / 2.0 / maxf(px_per_min(entry), 1e-6)
 
 
+## Exposure shift (mag) that brings an object of brightness v closest to `target`.
+static func depth_for(v: float, target: float) -> float:
+	# Positive = fainter (shorter exposure), negative = brighter (longer exposure).
+	return clampf(target - v, -MAX_DEPTH, MAX_SHORTEN)
+
+
 ## Can this scenario be played at this difficulty without bending physics too far?
 static func is_eligible(entry: Dictionary, diff: String) -> bool:
+	var r: Dictionary = RULES[diff]
 	var iv := ideal_interval(entry, diff)
-	return absf(RULES[diff].mag - float(entry.v)) <= MAX_DEPTH and iv >= INTERVAL_MIN and iv <= INTERVAL_MAX
+	var m := float(entry.v) + depth_for(float(entry.v), r.mag)
+	return m >= r.mag - r.brighter - 0.01 and m <= r.mag + 0.01 and iv >= INTERVAL_MIN and iv <= INTERVAL_MAX
 
 
 ## Index entries playable at this difficulty, closest exposures first.
@@ -75,8 +88,8 @@ static func eligible(index: Array, diff: String) -> Array:
 func _setup(rng: RandomNumberGenerator) -> void:
 	var entry := {"v": scenario.data.v_best, "rate_arcsec_h": scenario.data.rate_arcsec_h}
 	interval_min = clampf(ideal_interval(entry, difficulty), INTERVAL_MIN, INTERVAL_MAX)
-	asteroid_mag = rules.mag + rng.randf_range(-rules.jitter, rules.jitter)
-	depth = clampf(asteroid_mag - float(scenario.data.v_best), -MAX_DEPTH, MAX_DEPTH)
+	var target: float = rules.mag + rng.randf_range(-rules.jitter, rules.jitter)
+	depth = depth_for(float(scenario.data.v_best), target)
 	asteroid_mag = float(scenario.data.v_best) + depth
 
 	var step := interval_min / 10.0  # track samples are 10 minutes apart
