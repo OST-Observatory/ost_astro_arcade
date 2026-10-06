@@ -57,6 +57,8 @@ func _ready() -> void:
 			add_child(g)
 			await get_tree().create_timer(0.5).timeout
 			var a: Vector2 = g.challenge.asteroid_px[1] / Vector2(AsteroidScenario.IMAGE_SIZE) * g.IMAGE_RECT.size
+			print("ASTEROID_VIEW ", g.IMAGE_RECT.position + a, " mag ", snappedf(g.challenge.asteroid_mag, 0.01),
+				" interval ", snappedf(g.challenge.interval_min, 0.1), " ", g.challenge.scenario.display_name())
 			match scenario:
 				"blink_loupe":
 					g._paused = true

@@ -43,8 +43,8 @@ func test_tap_classification() -> void:
 				assert_eq(c.classify(p, f), "cosmic")
 	for h in c.hot_px:
 		if h.distance_to(c.asteroid_px[1]) > 60:
-			var k := c.classify(h + c.dither[0], 0)
-			assert_true(k.begins_with("hot") or k == "cosmic", "hot pixel classified as %s" % k)
+			var k := c.classify(h, 0)
+			assert_true(k == "hot" or k == "cosmic", "hot pixel classified as %s" % k)
 
 
 func test_difficulty_rules() -> void:
@@ -62,6 +62,20 @@ func test_scoring() -> void:
 	assert_eq(BlinkChallenge.stars_for(0, 0), 3)
 	assert_eq(BlinkChallenge.stars_for(3, 1), 2)
 	assert_eq(BlinkChallenge.stars_for(9, 2), 1)
+
+
+func test_normalised_difficulty() -> void:
+	# Every eligible scenario ends up with the target brightness and motion of its stage.
+	var idx := AsteroidScenario.load_index()
+	for diff in ["explorer", "researcher", "pro"]:
+		var pool := BlinkChallenge.eligible(idx, diff)
+		assert_true(pool.size() >= 3, "%s: only %d eligible scenarios" % [diff, pool.size()])
+		var r: Dictionary = BlinkChallenge.RULES[diff]
+		for e in pool:
+			var c := BlinkChallenge.create(AsteroidScenario.load_by_id(e.id), diff, RandomNumberGenerator.new())
+			assert_almost(c.asteroid_mag, r.mag, r.jitter + 0.01, "%s %s brightness" % [diff, e.id])
+			var px := c.motion_arcsec() / AsteroidScenario.ARCSEC_PER_PX
+			assert_almost(px, r.motion_px, r.motion_px * 0.3, "%s %s motion" % [diff, e.id])
 
 
 func test_same_seed_same_setup() -> void:

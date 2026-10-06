@@ -33,6 +33,8 @@ var _press_pos := Vector2.ZERO
 var _loupe_on := false
 var skip_intro := false  # screenshots/tests: go straight to the blink view
 var rng_seed := 0        # 0 = random
+var _played: Array = []  # scenario ids already used in this session
+var _revealed := false
 
 
 func _ready() -> void:
@@ -84,20 +86,22 @@ func _new_round() -> void:
 			c.queue_free()
 	Session.ensure_name()
 	var diff := Session.difficulty_name()
-	var sc := AsteroidScenario.pick(diff, _rng)
+	var sc := AsteroidScenario.pick(diff, _rng, _played)
 	if sc == null:
 		push_error("No asteroid scenarios found – run tools/asteroid/build_scenarios.py")
 		return
+	_played.append(sc.data.id)
 	challenge = BlinkChallenge.create(sc, diff, _rng)
 	_frames = CcdFrames.new()
 	add_child(_frames)
-	_frames.build(challenge.stars_px, challenge.frames, challenge.rules.depth)
+	_frames.build(challenge.stars_px, challenge.frames)
 	_build_ui()
 	_frame = 0
 	_blink_t = 0.0
 	_elapsed = 0.0
 	_wrong = 0
 	_hints = 0
+	_revealed = false
 	_paused = false
 	_running = true
 	_show_frame(0)
@@ -167,7 +171,10 @@ func _build_ui() -> void:
 		dots.add_child(b)
 		_dots.append(l)
 	panel.add_child(dots)
-	var minutes := UiTheme.label("AST_FRAME_TIMES", UiTheme.SIZE_SMALL, "regular", UiTheme.TEXT_DIM)
+	var minutes := UiTheme.label("", UiTheme.SIZE_SMALL, "regular", UiTheme.TEXT_DIM)
+	minutes.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	var mins := challenge.frame_minutes()
+	minutes.text = tr("AST_FRAME_TIMES") % [mins[1], mins[2]]
 	minutes.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	minutes.custom_minimum_size = Vector2(PANEL_W, 0)
 	panel.add_child(minutes)
@@ -218,6 +225,9 @@ func _process(delta: float) -> void:
 	var hint_times: Array = challenge.rules.hints
 	if _hints < hint_times.size() and _elapsed >= hint_times[_hints]:
 		_hints += 1
+		if _hints == hint_times.size():
+			_reveal()
+			return
 		_msg.text = tr("AST_HINT_%d" % _hints)
 		Audio.play("tick")
 		_marks.queue_redraw()
@@ -302,23 +312,30 @@ func _on_tap(view_pos: Vector2) -> void:
 	_msg.text = tr("AST_WRONG_" + kind.to_upper())
 
 
+## Last hint: show where the asteroid was, then the result (1 star, low score).
+func _reveal() -> void:
+	_revealed = true
+	_msg.text = tr("AST_REVEALED")
+	_found()
+
+
 func _found() -> void:
 	_running = false
 	_paused = true
-	Audio.play("success")
-	Router.step("found")
+	Audio.play("tick" if _revealed else "success")
+	Router.step("revealed" if _revealed else "found")
 	var secs := _elapsed
 	var pts := challenge.score(secs, _wrong, _hints)
-	var stars := BlinkChallenge.stars_for(_wrong, _hints)
+	var stars := 1 if _revealed else BlinkChallenge.stars_for(_wrong, _hints)
 	var rank := Scores.submit("asteroid", Session.player_name, pts, stars,
 		{"object": challenge.scenario.display_name()})
 	Router.complete({"score": pts, "stars": stars, "wrong": _wrong, "hints": _hints,
 		"seconds": snappedf(secs, 0.1), "object": challenge.scenario.data.number})
 	_marks.show_solution = true
 	_marks.queue_redraw()
-	await get_tree().create_timer(1.6).timeout
+	await get_tree().create_timer(3.5 if _revealed else 1.6).timeout
 	var result := BlinkResult.new()
-	result.setup(challenge, pts, stars, rank, secs)
+	result.setup(challenge, pts, stars, rank, secs, _revealed)
 	result.again.connect(_new_round)
 	add_child(result)
 

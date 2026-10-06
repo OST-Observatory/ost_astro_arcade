@@ -31,7 +31,7 @@ def test_scenario_is_observable_and_consistent(sc):
     best = sc["track"][sc["best_index"]]
     assert best["sun_alt"] < -12, "best time must be dark"
     assert best["alt"] > 30, "target well above the horizon"
-    assert 7.0 <= sc["v_best"] <= 17.5
+    assert 7.0 <= sc["v_best"] <= 18.0  # survey limit 17.8 at the 2-h samples
     # Field centre is the target at the best time.
     assert abs(best["xi"]) < 1.0 and abs(best["eta"]) < 1.0
     # Frames 1..3 (best-2 .. best+2 in 10-min steps) stay within the fetched star field.

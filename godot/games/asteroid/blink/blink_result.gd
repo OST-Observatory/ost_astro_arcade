@@ -16,9 +16,11 @@ var _points: int
 var _stars: int
 var _rank: Dictionary
 var _secs: float
+var _revealed := false
 
 
-func setup(ch: BlinkChallenge, points: int, stars: int, rank: Dictionary, secs: float) -> void:
+func setup(ch: BlinkChallenge, points: int, stars: int, rank: Dictionary, secs: float, revealed := false) -> void:
+	_revealed = revealed
 	_ch = ch
 	_points = points
 	_stars = stars
@@ -44,7 +46,8 @@ func _ready() -> void:
 	head.add_theme_constant_override("separation", 28)
 	head.add_child(UiTheme.icon("search", 110, UiTheme.SUCCESS))
 	var hv := VBoxContainer.new()
-	hv.add_child(UiTheme.label("AST_FOUND", UiTheme.SIZE_TITLE - 16, "serif", UiTheme.SUCCESS))
+	hv.add_child(UiTheme.label("AST_REVEALED_TITLE" if _revealed else "AST_FOUND", UiTheme.SIZE_TITLE - 16, "serif",
+		UiTheme.SCIENCE if _revealed else UiTheme.SUCCESS))
 	hv.add_child(_text(tr("AST_FOUND_TEXT") % [_ch.scenario.display_name(), _ch.motion_arcsec()],
 		UiTheme.SIZE_H2 - 12, "medium", UiTheme.TEXT))
 	head.add_child(hv)

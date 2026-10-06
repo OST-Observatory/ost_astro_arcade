@@ -36,20 +36,35 @@ static func load_by_id(id: String) -> AsteroidScenario:
 	return s
 
 
-## Picks a random scenario suitable for the difficulty (falls back to any).
-static func pick(difficulty: String, rng: RandomNumberGenerator) -> AsteroidScenario:
-	var all := load_index()
-	var fitting := all.filter(func(e): return e.difficulty == difficulty)
-	var pool := fitting if not fitting.is_empty() else all
+## Picks a random scenario playable at the difficulty (see BlinkChallenge.is_eligible).
+## Scenarios needing less exposure correction are more likely. Avoids `exclude` ids.
+static func pick(difficulty: String, rng: RandomNumberGenerator, exclude: Array = []) -> AsteroidScenario:
+	var pool := BlinkChallenge.eligible(load_index(), difficulty)
+	var fresh := pool.filter(func(e): return not exclude.has(e.id))
+	if not fresh.is_empty():
+		pool = fresh
+	if pool.is_empty():
+		pool = load_index()
 	if pool.is_empty():
 		return null
-	return load_by_id(pool[rng.randi() % pool.size()].id)
+	var target: float = BlinkChallenge.RULES[difficulty].mag
+	var weights := pool.map(func(e): return 1.0 / (1.0 + absf(target - e.v)))
+	var r: float = rng.randf() * weights.reduce(func(a, b): return a + b, 0.0)
+	for i in pool.size():
+		r -= weights[i]
+		if r <= 0.0:
+			return load_by_id(pool[i].id)
+	return load_by_id(pool[-1].id)
 
 
 ## "(3) Juno" – the usual way to write a numbered minor planet.
 func display_name() -> String:
 	var n: String = data.facts.get("name", "")
-	return "(%d) %s" % [data.number, n] if n != "" else str(data.facts.get("fullname", data.number))
+	if n == "" or n.is_valid_int():
+		# Unnamed: SBDB gives "48438 (1989 WJ2)" -> use the provisional designation.
+		var full := str(data.facts.get("fullname", ""))
+		n = full.get_slice("(", 1).trim_suffix(")") if full.contains("(") else ""
+	return "(%d) %s" % [data.number, n] if n != "" else "(%d)" % data.number
 
 
 ## "Harding, K." -> "K. Harding"; several discoverers are kept as they are.

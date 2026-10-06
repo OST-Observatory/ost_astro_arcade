@@ -1,6 +1,6 @@
 keys,de,en,es
 HUB_TITLE,Sternwarten-Spiele,Observatory Games,Juegos del observatorio
-HUB_SUBTITLE,"OST · Universität Potsdam · Campus Golm","OST · University of Potsdam · Golm campus","OST · Universidad de Potsdam · Campus Golm"
+HUB_SUBTITLE,OST · Universität Potsdam · Campus Golm,OST · University of Potsdam · Golm campus,OST · Universidad de Potsdam · Campus Golm
 HUB_HINT,Tippe auf ein Spiel!,Tap a game to play!,¡Toca un juego!
 HUB_SOON,In Arbeit,Coming soon,Próximamente
 HUB_INFO,Info,Info,Info
@@ -15,7 +15,7 @@ IDLE_HINT,"Tippe irgendwo, um weiterzuspielen.",Tap anywhere to keep playing.,To
 ATTRACT_TITLE,Entdecke das Weltall!,Explore the universe!,¡Explora el universo!
 ATTRACT_TOUCH,Berühre den Bildschirm zum Starten,Touch the screen to start,Toca la pantalla para empezar
 ATTRACT_BEST_TODAY,Die Besten heute: %s,Today's best: %s,Los mejores de hoy: %s
-PLACEHOLDER_MSG,"Dieses Spiel entsteht gerade – schau bald wieder vorbei!","This game is being built – come back soon!","Este juego está en construcción. ¡Vuelve pronto!"
+PLACEHOLDER_MSG,Dieses Spiel entsteht gerade – schau bald wieder vorbei!,This game is being built – come back soon!,Este juego está en construcción. ¡Vuelve pronto!
 INFO_TITLE,Über diese Spiele,About these games,Sobre estos juegos
 INFO_BODY,"Die OST-Sternwarte („Overwhelmingly Small Telescope“) ist die Studierenden-Sternwarte der Universität Potsdam auf dem Dach des Instituts für Physik und Astronomie in Golm. Mit einem 50-cm-Teleskop beobachten Studierende dort Sterne, Galaxien, Kometen und Asteroiden. Diese Spiele zeigen dir, wie echte Astronomie funktioniert.","The OST observatory (“Overwhelmingly Small Telescope”) is the student observatory of the University of Potsdam, on the roof of the Institute of Physics and Astronomy in Golm. With a 50 cm telescope, students observe stars, galaxies, comets and asteroids. These games show you how real astronomy works.","El observatorio OST («Overwhelmingly Small Telescope») es el observatorio estudiantil de la Universidad de Potsdam, en el tejado del Instituto de Física y Astronomía en Golm. Con un telescopio de 50 cm, los estudiantes observan estrellas, galaxias, cometas y asteroides. Estos juegos te muestran cómo funciona la astronomía de verdad."
 INFO_CREDITS,Bildnachweise & Lizenzen,Credits & licences,Créditos y licencias
@@ -51,7 +51,7 @@ AST_INTRO_TEXT,Das OST-Teleskop hat dieselbe Himmelsgegend dreimal fotografiert 
 AST_INTRO_HOLD,Tipp: Halte den Finger auf das Bild – dann erscheint eine Lupe.,Tip: keep your finger on the image to get a magnifier.,Consejo: mantén el dedo sobre la imagen para ver una lupa.
 AST_GO,Los geht's!,Let's go!,¡Vamos!
 AST_TASK,"Die Bilder wechseln ständig. Finde den Punkt, der hin und her springt – und tippe darauf!",The images keep switching. Find the dot that jumps back and forth – and tap it!,Las imágenes cambian sin parar. Busca el punto que salta de un lado a otro y tócalo.
-AST_FRAME_TIMES,Bild 1: 0 min · Bild 2: 20 min · Bild 3: 40 min,Image 1: 0 min · Image 2: 20 min · Image 3: 40 min,Imagen 1: 0 min · Imagen 2: 20 min · Imagen 3: 40 min
+AST_FRAME_TIMES,Bild 1: 0 min · Bild 2: %d min · Bild 3: %d min,Image 1: 0 min · Image 2: %d min · Image 3: %d min,Imagen 1: 0 min · Imagen 2: %d min · Imagen 3: %d min
 AST_FIELD_INFO,Echte Sterne aus dem Gaia-Katalog · Nacht: %s · %s · Bildfeld %s,Real stars from the Gaia catalogue · Night: %s · %s · Field %s,Estrellas reales del catálogo Gaia · Noche: %s · %s · Campo %s
 AST_HINT_1,Tipp: Er versteckt sich irgendwo im großen Kreis.,Hint: it is hiding somewhere in the big circle.,Pista: se esconde en algún lugar del círculo grande.
 AST_HINT_2,Schau genau in den kleinen Kreis!,Look closely inside the small circle!,¡Mira bien dentro del círculo pequeño!
@@ -74,4 +74,5 @@ AST_FACT_NIGHT,Beobachtungsnacht: %s · Helligkeit: %s mag,Observing night: %s �
 AST_SCORE,%d Punkte,%d points,%d puntos
 AST_RANK,%s – Platz %d heute,%s – rank %d today,%s: puesto %d hoy
 AST_AGAIN,Noch ein Asteroid!,Another asteroid!,¡Otro asteroide!
-AST_WRONG_HOT_JUMP,"Ein „heißes Pixel“ – ein Kamerafehler! Das Teleskop wurde zwischen den Aufnahmen ein wenig verschoben, deshalb scheint es zu springen. Aber kreuz und quer – ein Asteroid wandert gleichmäßig auf einer Linie.","A “hot pixel” – a camera defect! The telescope was shifted a little between exposures, so it seems to jump. But it jumps randomly – an asteroid moves steadily along a line.","Un «píxel caliente», un defecto de la cámara. El telescopio se movió un poco entre las tomas, por eso parece saltar. Pero salta al azar: un asteroide avanza de forma regular en línea recta."
+AST_REVEALED,"Hier ist er! Ganz schön knifflig, oder? Beim nächsten Mal findest du ihn bestimmt selbst.","Here it is! Pretty tricky, right? Next time you'll surely find it yourself.","¡Aquí está! Bastante difícil, ¿verdad? La próxima vez seguro que lo encuentras tú."
+AST_REVEALED_TITLE,Aufgelöst,Solved for you,Resuelto

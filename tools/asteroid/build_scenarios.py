@@ -29,7 +29,7 @@ from astroquery.jplhorizons import Horizons
 from skyfield import almanac
 from skyfield.api import Loader, wgs84
 
-from candidates import CANDIDATES
+from candidates import AUTO_SAMPLE, AUTO_SEED, CANDIDATES
 
 TOOLS = Path(__file__).resolve().parents[1]
 REPO = TOOLS.parent
@@ -47,7 +47,7 @@ GAIA_TIMEOUT_S = 180
 
 # Night selection
 MIN_ALT = 35.0
-V_RANGE = (7.0, 17.5)
+V_RANGE = (7.0, 17.8)
 MIN_ELONG = 90.0
 MAX_SUN_ALT = -15.0
 
@@ -205,6 +205,24 @@ def parse_dt(s: str) -> datetime:
     raise ValueError(s)
 
 
+def auto_candidates() -> list[tuple[int, str]]:
+    """Reproducible random sample per orbit class from JPL SBDB (see candidates.AUTO_SAMPLE)."""
+    import random
+    rnd = random.Random(AUTO_SEED)
+    out = []
+    for cls, hmin, hmax, n in AUTO_SAMPLE:
+        def fetch(cls=cls, hmin=hmin, hmax=hmax):
+            r = requests.get("https://ssd-api.jpl.nasa.gov/sbdb_query.api", params={
+                "fields": "pdes,name,H,class", "sb-kind": "a", "sb-ns": "n", "sb-class": cls,
+                "sb-cdata": json.dumps({"AND": [f"H|RG|{hmin}|{hmax}"]}), "limit": 5000}, timeout=60)
+            r.raise_for_status()
+            return r.json()["data"]
+        rows = cached_json(f"sbdb_query/{cls}_{hmin}_{hmax}.json", fetch)
+        for row in rnd.sample(rows, min(n, len(rows))):
+            out.append((int(row[0]), f"{row[1] or row[0]} ({cls}, H={row[2]}) – auto"))
+    return out
+
+
 def survey(number: int, sky: SkyCalc) -> list[dict]:
     """Candidate nights (keyed by evening date): best dark sample every 2 h."""
     e = horizons_ephem(number, f"{SURVEY_START} 17:00", f"{SURVEY_END} 07:00", "2h", "1,4,9,20,23")
@@ -315,13 +333,15 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--max", type=int, default=40)
     ap.add_argument("--only", default="")
+    ap.add_argument("--auto", action="store_true", help="add the random SBDB sample")
     args = ap.parse_args()
     only = {int(x) for x in args.only.split(",") if x}
 
     sky = SkyCalc()
     (OUT / "scenarios").mkdir(parents=True, exist_ok=True)
     index = []
-    for number, note in CANDIDATES:
+    candidates = list(CANDIDATES) + (auto_candidates() if args.auto else [])
+    for number, note in candidates:
         if only and number not in only:
             continue
         if len(index) >= args.max:

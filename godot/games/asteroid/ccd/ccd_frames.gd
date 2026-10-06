@@ -22,7 +22,7 @@ var _psf: Texture2D
 ##   "hot": Array[Vector2 px], "variable": {"px": Vector2, "mag": float} or {},
 ##   "satellite": [Vector2 a, Vector2 b] or [] }
 ## stars_px: Array of [Vector2 px, float mag]
-func build(stars_px: Array, frames: Array, depth := 0.0) -> void:
+func build(stars_px: Array, frames: Array) -> void:
 	_psf = _make_psf_texture()
 	for c in get_children():
 		c.queue_free()
@@ -39,7 +39,6 @@ func build(stars_px: Array, frames: Array, depth := 0.0) -> void:
 		painter.psf = _psf
 		painter.stars = stars_px
 		painter.frame = f
-		painter.depth = depth
 		var mat := CanvasItemMaterial.new()
 		mat.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 		painter.material = mat
@@ -74,14 +73,12 @@ class _Painter:
 	var psf: Texture2D
 	var stars: Array
 	var frame: Dictionary
-	var depth := 0.0  # magnitude offset of this exposure
 
 	func _blob(p: Vector2, peak: float, fwhm: float) -> void:
 		var r := 3.0 * fwhm / 2.355
 		draw_texture_rect(psf, Rect2(p - Vector2(r, r), Vector2(2 * r, 2 * r)), false, Color(peak, peak, peak, 1.0))
 
 	func _star(p: Vector2, mag: float) -> void:
-		mag += depth
 		var peak := CcdFrames.peak_for_mag(mag)
 		_blob(p, peak, FWHM_PX)
 		if mag < 15.0:
@@ -102,7 +99,8 @@ class _Painter:
 			_star(s[0], s[1])
 		if not frame.get("variable", {}).is_empty():
 			_star(frame.variable.px, frame.variable.mag)
-		_star(frame.asteroid, frame.asteroid_mag)
+		# Asteroids: plain seeing disc, no halo or spikes (faint, and never bright enough here).
+		_blob(frame.asteroid, CcdFrames.peak_for_mag(frame.asteroid_mag), FWHM_PX)
 		for h in frame.get("hot", []):
 			draw_rect(Rect2(h, Vector2.ONE), Color(3, 3, 3))
 		for c in frame.get("cosmics", []):

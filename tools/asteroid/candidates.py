@@ -44,3 +44,16 @@ CANDIDATES = [
     (3200, "Phaethon – parent of the Geminids"),
     (4179, "Toutatis – NEO"),
 ]
+
+
+# Additional, randomly drawn objects so that every difficulty has enough targets of the
+# right brightness (V ~ 13-17 at opposition). Drawn reproducibly from JPL SBDB by
+# build_scenarios.py --auto: (class, H range, how many).
+AUTO_SAMPLE = [
+    ("MBA", 10.5, 12.5, 30),   # main belt, V ~ 14-16
+    ("OMB", 10.0, 12.0, 8),    # outer main belt incl. Hildas
+    ("TJN", 9.0, 11.0, 8),     # Jupiter Trojans, V ~ 15-16, slow
+    ("APO", 14.0, 17.5, 8),    # near-Earth (Apollo)
+    ("AMO", 14.0, 17.0, 8),    # near-Earth (Amor)
+]
+AUTO_SEED = 2026
