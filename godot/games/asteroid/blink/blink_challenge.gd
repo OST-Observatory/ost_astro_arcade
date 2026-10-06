@@ -22,9 +22,9 @@ const INTERVAL_MAX := 90.0
 const RULES := {
 	"explorer": {"mag": 12.3, "jitter": 0.3, "brighter": 3.0, "motion_px": 32.0, "cosmics": 1, "hot": 0,
 		"variable": false, "satellite": 0.0, "tol": 40.0, "hints": [12.0, 25.0, 40.0], "mult": 1.0},
-	"researcher": {"mag": 14.0, "jitter": 0.2, "brighter": 1.0, "motion_px": 26.0, "cosmics": 1, "hot": 2,
+	"researcher": {"mag": 13.7, "jitter": 0.2, "brighter": 1.0, "motion_px": 26.0, "cosmics": 1, "hot": 2,
 		"variable": true, "satellite": 0.0, "tol": 32.0, "hints": [15.0, 30.0, 50.0], "mult": 1.5},
-	"pro": {"mag": 14.8, "jitter": 0.2, "brighter": 0.4, "motion_px": 18.0, "cosmics": 3, "hot": 4,
+	"pro": {"mag": 14.2, "jitter": 0.2, "brighter": 0.4, "motion_px": 18.0, "cosmics": 3, "hot": 4,
 		"variable": true, "satellite": 0.5, "tol": 22.0, "hints": [30.0, 55.0, 85.0], "mult": 2.5},
 }
 
