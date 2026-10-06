@@ -80,6 +80,18 @@ func test_normalised_difficulty() -> void:
 			assert_almost(px, r.motion_px, r.motion_px * 0.3, "%s %s motion" % [diff, e.id])
 
 
+func test_crowding_bonus() -> void:
+	assert_true(BlinkChallenge.crowding_for(1000) > BlinkChallenge.crowding_for(250))
+	assert_almost(BlinkChallenge.crowding_for(250), 1.0, 0.001)
+	assert_almost(BlinkChallenge.crowding_for(10), 0.8, 0.001, "lower clamp")
+	assert_almost(BlinkChallenge.crowding_for(100000), 2.0, 0.001, "upper clamp")
+	var c := _challenge("researcher")
+	assert_true(c.visible_stars > 0)
+	var sparse := c.score(30, 0, 0)
+	c.crowding = 1.8
+	assert_true(c.score(30, 0, 0) > sparse, "dense field scores more")
+
+
 func test_same_seed_same_setup() -> void:
 	var a := _challenge("pro", 99)
 	var b := _challenge("pro", 99)

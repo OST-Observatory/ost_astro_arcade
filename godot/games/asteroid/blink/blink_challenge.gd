@@ -13,6 +13,8 @@ const MAX_DEPTH := 3.0                # longer exposure: up to 3 mag deeper (x16
 const MAX_SHORTEN := 1.0              # shorter exposure: at most 1 mag, so the star field stays rich
 const INTERVAL_MIN := 12.0            # minutes between exposures, allowed range
 const INTERVAL_MAX := 90.0
+const VISIBLE_MAG := 16.5             # stars brighter than this count as "visible"
+const CROWDING_REF := 250.0           # a field with this many visible stars scores x1.0
 
 ## mag: asteroid brightness in the image (it may be up to `brighter` mag brighter if the
 ## object is bright and the exposure cannot be shortened further); motion_px: path from
@@ -43,6 +45,8 @@ var variable := {}                  # {"px", "base_mag"} if used
 var hot_px: Array[Vector2] = []
 var cosmic_px: Array = []           # per frame: Array[Vector2]
 var satellite := []                 # [a, b] in frame 2 or []
+var visible_stars := 0              # stars clearly visible in the image (for the crowding bonus)
+var crowding := 1.0                 # score multiplier: dense fields are harder (playtest idea)
 
 
 static func create(sc: AsteroidScenario, diff: String, rng: RandomNumberGenerator) -> BlinkChallenge:
@@ -116,6 +120,9 @@ func _setup(rng: RandomNumberGenerator) -> void:
 				variable = {"px": stars_px[i][0], "base_mag": stars_px[i][1]}
 				stars_px.remove_at(i)
 				break
+
+	visible_stars = stars_px.filter(func(s): return s[1] < VISIBLE_MAG and _inside(s[0], 0.0)).size()
+	crowding = crowding_for(visible_stars)
 
 	for i in rules.hot:
 		hot_px.append(_random_px(rng, 40.0))
@@ -191,11 +198,17 @@ func classify(p: Vector2, frame_idx: int) -> String:
 	return "nothing"
 
 
-## Score for a solved round (>= 100 x multiplier): speed, accuracy and hints.
+## Crowded fields are harder to search: x0.8 for sparse fields up to x2.0 for very dense ones.
+static func crowding_for(n_visible: int) -> float:
+	return clampf(sqrt(n_visible / CROWDING_REF), 0.8, 2.0)
+
+
+## Score for a solved round (>= 100 x multipliers): speed, accuracy and hints, scaled by
+## difficulty and by how crowded the field is (the time allowance grows with crowding too).
 func score(seconds: float, wrong_taps: int, hints_used: int) -> int:
-	var base := 1000.0 + maxf(0.0, 600.0 - seconds * 6.0)
+	var base := 1000.0 + maxf(0.0, 600.0 - seconds / crowding * 6.0)
 	base -= wrong_taps * 80.0 + hints_used * 200.0
-	return int(maxf(100.0, base) * rules.mult)
+	return int(maxf(100.0, base) * rules.mult * crowding)
 
 
 static func stars_for(wrong_taps: int, hints_used: int) -> int:

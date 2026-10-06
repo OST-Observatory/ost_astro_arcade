@@ -66,6 +66,7 @@ func _ready() -> void:
 	if d.get("who") and d.get("date"):
 		facts.append(tr("AST_FACT_DISC") % [str(d.date).substr(0, 4), _ch.scenario.discoverer(), d.get("location", "") if d.get("location") else "?"])
 	facts.append(tr("AST_FACT_NIGHT") % [_date(_ch.scenario.data.night), _fmt(float(_ch.scenario.data.v_best), 1)])
+	facts.append(tr("AST_CROWDING") % [_ch.visible_stars, _fmt(_ch.crowding, 1)])
 	for line in facts:
 		var l := _text("•  " + line, UiTheme.SIZE_BODY, "regular", UiTheme.TEXT)
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

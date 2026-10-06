@@ -76,3 +76,4 @@ AST_RANK,%s – Platz %d heute,%s – rank %d today,%s: puesto %d hoy
 AST_AGAIN,Noch ein Asteroid!,Another asteroid!,¡Otro asteroide!
 AST_REVEALED,"Hier ist er! Ganz schön knifflig, oder? Beim nächsten Mal findest du ihn bestimmt selbst.","Here it is! Pretty tricky, right? Next time you'll surely find it yourself.","¡Aquí está! Bastante difícil, ¿verdad? La próxima vez seguro que lo encuentras tú."
 AST_REVEALED_TITLE,Aufgelöst,Solved for you,Resuelto
+AST_CROWDING,Sternfeld: %d sichtbare Sterne – Punkte ×%s,Star field: %d visible stars – points ×%s,Campo estelar: %d estrellas visibles – puntos ×%s
