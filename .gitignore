@@ -1,0 +1,19 @@
+# Godot
+godot/.godot/
+godot/export/
+*.translation
+
+# Python tooling
+tools/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Blender backups
+*.blend1
+*.blend2
+
+# Local outputs
+captures/
+build/
+*.log
