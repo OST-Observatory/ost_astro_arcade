@@ -1,0 +1,33 @@
+# OST Astro Arcade: Godot app fullscreen inside the cage Wayland kiosk compositor on tty1.
+# cage runs without "-s", so switching to other virtual terminals is disabled.
+[Unit]
+Description=OST Astro Arcade kiosk (cage + Godot)
+After=systemd-user-sessions.service plymouth-quit-wait.service dbus.socket systemd-logind.service
+Wants=dbus.socket systemd-logind.service
+Conflicts=getty@tty1.service
+After=getty@tty1.service
+ConditionPathExists=/dev/tty1
+
+[Service]
+Type=simple
+User=kiosk
+PAMName=cage
+WorkingDirectory=/opt/ost/current
+Environment=XKB_DEFAULT_OPTIONS=srvrkeys:none
+ExecStart=/usr/bin/cage -d -- /opt/ost/current/ost_astro_arcade.x86_64 \
+  --display-driver wayland --rendering-driver vulkan --fullscreen \
+  -- --data-dir=/var/lib/ost
+Restart=always
+RestartSec=2
+UtmpIdentifier=tty1
+UtmpMode=user
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+StandardInput=tty-fail
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=graphical.target
