@@ -46,3 +46,31 @@ GAME_CONSTELLATIONS,Sternbilder,Constellations,Constelaciones
 GAME_CONSTELLATIONS_DESC,Zeichne die Sternbilder nach,Trace the constellations,Dibuja las constelaciones
 GAME_NBODY,N-Körper-Labor,N-Body Lab,Laboratorio de N cuerpos
 GAME_NBODY_DESC,Spiele mit der Schwerkraft,Play with gravity,Juega con la gravedad
+AST_INTRO_TITLE,Der Blinkkomparator,The blink comparator,El comparador de parpadeo
+AST_INTRO_TEXT,Das OST-Teleskop hat dieselbe Himmelsgegend dreimal fotografiert – im Abstand von 20 Minuten. Die Sterne bleiben an ihrem Platz. Ein Asteroid aber wandert weiter. Finde ihn!,"The OST telescope photographed the same patch of sky three times, 20 minutes apart. The stars stay where they are. But an asteroid moves on. Find it!","El telescopio OST fotografió la misma zona del cielo tres veces, con 20 minutos de diferencia. Las estrellas se quedan en su sitio. Pero un asteroide se mueve. ¡Encuéntralo!"
+AST_INTRO_HOLD,Tipp: Halte den Finger auf das Bild – dann erscheint eine Lupe.,Tip: keep your finger on the image to get a magnifier.,Consejo: mantén el dedo sobre la imagen para ver una lupa.
+AST_GO,Los geht's!,Let's go!,¡Vamos!
+AST_TASK,"Die Bilder wechseln ständig. Finde den Punkt, der hin und her springt – und tippe darauf!",The images keep switching. Find the dot that jumps back and forth – and tap it!,Las imágenes cambian sin parar. Busca el punto que salta de un lado a otro y tócalo.
+AST_FRAME_TIMES,Bild 1: 0 min · Bild 2: 20 min · Bild 3: 40 min,Image 1: 0 min · Image 2: 20 min · Image 3: 40 min,Imagen 1: 0 min · Imagen 2: 20 min · Imagen 3: 40 min
+AST_FIELD_INFO,Echte Sterne aus dem Gaia-Katalog · Nacht: %s · %s · Bildfeld %s,Real stars from the Gaia catalogue · Night: %s · %s · Field %s,Estrellas reales del catálogo Gaia · Noche: %s · %s · Campo %s
+AST_HINT_1,Tipp: Er versteckt sich irgendwo im großen Kreis.,Hint: it is hiding somewhere in the big circle.,Pista: se esconde en algún lugar del círculo grande.
+AST_HINT_2,Schau genau in den kleinen Kreis!,Look closely inside the small circle!,¡Mira bien dentro del círculo pequeño!
+AST_WRONG_STAR,Das ist ein Stern. Er bleibt in allen drei Bildern an derselben Stelle.,That is a star. It stays in the same place in all three images.,Es una estrella. Se queda en el mismo sitio en las tres imágenes.
+AST_WRONG_COSMIC,Ein kosmischer Strahl! Ein Teilchen aus dem All hat die Kamera getroffen. Er ist nur in einem einzigen Bild zu sehen.,A cosmic ray! A particle from space hit the camera. It shows up in one image only.,¡Un rayo cósmico! Una partícula del espacio chocó con la cámara. Solo aparece en una imagen.
+AST_WRONG_HOT,Ein „heißes Pixel“ – ein winziger Fehler der Kamera. Es leuchtet immer an derselben Stelle.,A “hot pixel” – a tiny camera defect. It always glows in the same spot.,"Un «píxel caliente», un pequeño defecto de la cámara. Siempre brilla en el mismo lugar."
+AST_WRONG_VARIABLE,Ein veränderlicher Stern! Er wird heller und dunkler – aber er bleibt an seinem Platz.,A variable star! It gets brighter and fainter – but it stays in place.,"¡Una estrella variable! Se hace más brillante y más débil, pero no se mueve."
+AST_WRONG_SATELLITE,Die Spur eines Satelliten. Er flitzt in Sekunden durchs Bild – ein Asteroid ist viel langsamer.,A satellite trail. It zips across the image in seconds – an asteroid is much slower.,El rastro de un satélite. Cruza la imagen en segundos; un asteroide es mucho más lento.
+AST_WRONG_NOTHING,"Hier bewegt sich nichts. Achte auf einen Punkt, der springt!",Nothing moves here. Look for a dot that jumps!,Aquí no se mueve nada. ¡Busca un punto que salte!
+AST_FOUND,Gefunden!,Found it!,¡Encontrado!
+AST_FOUND_TEXT,Das war %s! In 40 Minuten ist er %.0f Bogensekunden weitergewandert.,That was %s! In 40 minutes it moved %.0f arcseconds.,¡Era %s! En 40 minutos se desplazó %.0f segundos de arco.
+AST_CLASS_MBA,Er kreist im Asteroiden-Hauptgürtel zwischen Mars und Jupiter um die Sonne.,It orbits the Sun in the main asteroid belt between Mars and Jupiter.,"Orbita alrededor del Sol en el cinturón principal de asteroides, entre Marte y Júpiter."
+AST_CLASS_MCA,Seine Bahn kreuzt die Bahn des Mars.,Its orbit crosses the orbit of Mars.,Su órbita cruza la órbita de Marte.
+AST_CLASS_NEO,Er ist ein erdnaher Asteroid: Seine Bahn kommt der Erdbahn nahe. Deshalb wird er besonders genau beobachtet.,It is a near-Earth asteroid: its orbit comes close to Earth's. That is why astronomers watch it closely.,Es un asteroide cercano a la Tierra: su órbita se acerca a la terrestre. Por eso se observa con especial atención.
+AST_CLASS_TJN,Er ist ein Jupiter-Trojaner und teilt sich die Bahn mit dem Riesenplaneten Jupiter.,It is a Jupiter Trojan and shares its orbit with the giant planet Jupiter.,Es un troyano de Júpiter y comparte su órbita con el planeta gigante.
+AST_FACT_DIST,Entfernung in dieser Nacht: %s Millionen km – das Licht braucht %s Minuten bis zu uns.,Distance that night: %s million km – its light takes %s minutes to reach us.,Distancia esa noche: %s millones de km; su luz tarda %s minutos en llegar.
+AST_FACT_SIZE,Durchmesser: etwa %s km,Diameter: about %s km,Diámetro: unos %s km
+AST_FACT_DISC,Entdeckt %s von %s (%s).,Discovered in %s by %s (%s).,Descubierto en %s por %s (%s).
+AST_FACT_NIGHT,Beobachtungsnacht: %s · Helligkeit: %s mag,Observing night: %s · Brightness: %s mag,Noche de observación: %s · Brillo: %s mag
+AST_SCORE,%d Punkte,%d points,%d puntos
+AST_RANK,%s – Platz %d heute,%s – rank %d today,%s: puesto %d hoy
+AST_AGAIN,Noch ein Asteroid!,Another asteroid!,¡Otro asteroide!

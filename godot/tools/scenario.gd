@@ -47,6 +47,24 @@ func _ready() -> void:
 			add_child(e)
 			for ch in ["S", "T", "E", "R", "N", "SPACE", "A"]:
 				e._kb._press(ch)
+		"blink", "blink_loupe", "blink_hint", "blink_wrong", "blink_found":
+			var g: Control = load("res://games/asteroid/blink/blink_game.tscn").instantiate()
+			g.skip_intro = true
+			g.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 7
+			add_child(g)
+			await get_tree().create_timer(0.5).timeout
+			var a: Vector2 = g.challenge.asteroid_px[1] / Vector2(AsteroidScenario.IMAGE_SIZE) * g.IMAGE_RECT.size
+			match scenario:
+				"blink_loupe":
+					g._paused = true
+					g._show_frame(1)
+					g._update_loupe(a + Vector2(40, 30))
+				"blink_hint":
+					g._elapsed = 50.0
+				"blink_wrong":
+					g._on_tap(Vector2(300, 300))
+				"blink_found":
+					g._on_tap(a)
 		"placeholder":
 			Router.current = GameRegistry.get_entry("asteroid")
 			add_child(load(GameRegistry.PLACEHOLDER).instantiate())
