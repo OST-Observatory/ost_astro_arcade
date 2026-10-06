@@ -1,6 +1,7 @@
 ## Puts the UI into a specific state for screenshots (used with tools/capture.gd).
 ##   OST_DATA_DIR=/tmp/ost_capture SCENARIO=attract godot --path godot -s res://tools/capture.gd -- res://tools/scenario.tscn captures/attract
-## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard
+## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
+## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -47,29 +48,33 @@ func _ready() -> void:
 			add_child(e)
 			for ch in ["S", "T", "E", "R", "N", "SPACE", "A"]:
 				e._kb._press(ch)
-		"blink", "blink_loupe", "blink_hint", "blink_wrong", "blink_found":
+		"plan", "align", "expose", "blink", "blink_loupe", "blink_hint", "blink_wrong", "measure", "orbit", "cert", "briefing":
 			var diff := OS.get_environment("DIFF")
 			if diff != "":
 				Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
-			var g: Control = load("res://games/asteroid/blink/blink_game.tscn").instantiate()
-			g.skip_intro = true
+			var g: Control = load("res://games/asteroid/mission/asteroid_mission.tscn").instantiate()
+			g.skip_intro = scenario != "briefing"
 			g.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 7
+			var step_for := {"blink_loupe": "blink", "blink_hint": "blink", "blink_wrong": "blink", "cert": "__cert"}
+			g.start_at = step_for.get(scenario, scenario) if scenario != "briefing" else ""
+			if scenario == "briefing":
+				g.skip_intro = false
 			add_child(g)
-			await get_tree().create_timer(0.5).timeout
-			var a: Vector2 = g.challenge.asteroid_px[1] / Vector2(AsteroidScenario.IMAGE_SIZE) * g.IMAGE_RECT.size
-			print("ASTEROID_VIEW ", g.IMAGE_RECT.position + a, " mag ", snappedf(g.challenge.asteroid_mag, 0.01),
-				" interval ", snappedf(g.challenge.interval_min, 0.1), " ", g.challenge.scenario.display_name())
-			match scenario:
-				"blink_loupe":
-					g._paused = true
-					g._show_frame(1)
-					g._update_loupe(a + Vector2(40, 30))
-				"blink_hint":
-					g._elapsed = 50.0
-				"blink_wrong":
-					g._on_tap(Vector2(300, 300))
-				"blink_found":
-					g._on_tap(a)
+			await get_tree().create_timer(0.6).timeout
+			if scenario.begins_with("blink"):
+				var b: BlinkStep = g._step
+				var a: Vector2 = b.challenge.asteroid_px[1] / Vector2(AsteroidScenario.IMAGE_SIZE) * b.IMAGE_RECT.size
+				print("ASTEROID_VIEW ", b.IMAGE_RECT.position + a, " mag ", snappedf(b.challenge.asteroid_mag, 0.01),
+					" interval ", snappedf(b.challenge.interval_min, 0.1), " ", b.challenge.scenario.display_name())
+				match scenario:
+					"blink_loupe":
+						b._paused = true
+						b._show_frame(1)
+						b._update_loupe(a + Vector2(40, 30))
+					"blink_hint":
+						b._elapsed = 50.0
+					"blink_wrong":
+						b._on_tap(Vector2(300, 300))
 		"psf":
 			# PSF test chart: stars from 3 to 15 mag in a row, through the real CCD display.
 			var stars := []

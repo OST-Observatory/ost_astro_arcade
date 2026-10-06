@@ -9,7 +9,7 @@ const PLACEHOLDER := "res://games/placeholder/placeholder.tscn"
 
 const GAMES := [
 	{"id": "asteroid", "title": "GAME_ASTEROID", "desc": "GAME_ASTEROID_DESC", "icon": "search",
-		"color": Color("ffb347"), "scene": "res://games/asteroid/blink/blink_game.tscn", "status": "soon"},
+		"color": Color("ffb347"), "scene": "res://games/asteroid/mission/asteroid_mission.tscn", "status": "soon"},
 	{"id": "quiz", "title": "GAME_QUIZ", "desc": "GAME_QUIZ_DESC", "icon": "quiz",
 		"color": Color("4dd0e1"), "scene": "", "status": "soon"},
 	{"id": "puzzle", "title": "GAME_PUZZLE", "desc": "GAME_PUZZLE_DESC", "icon": "extension",

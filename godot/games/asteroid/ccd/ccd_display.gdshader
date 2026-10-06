@@ -10,6 +10,7 @@ uniform vec2 image_size = vec2(1536.0, 1024.0);
 uniform vec2 view_center = vec2(0.5, 0.5);  // image uv shown at the centre
 uniform vec2 view_span = vec2(1.0, 1.0);     // fraction of the image shown
 uniform float seed = 1.0;
+uniform float signal_scale = 1.0;  // < 1 while an exposure is still building up
 uniform float bg = 0.003;          // sky background (signal units)
 uniform float gain = 4000.0;       // larger = less photon noise
 uniform float read_noise = 0.0008;
@@ -33,10 +34,11 @@ float gauss(vec2 px) {
 void fragment() {
 	vec2 uv = view_center + (UV - 0.5) * view_span;
 	vec2 px = floor(uv * image_size);
-	float s = texture(frame, (px + 0.5) / image_size).r;
-	float v = s + bg;
+	float s = texture(frame, (px + 0.5) / image_size).r * signal_scale;
+	float b = bg * max(signal_scale, 0.05);
+	float v = s + b;
 	float noisy = v + gauss(px) * sqrt(max(v, 0.0) / gain + read_noise * read_noise);
-	float y = asinh(max(noisy - bg, -soft) / soft) / asinh(white / soft);
+	float y = asinh(max(noisy - b, -soft) / soft) / asinh(white / soft);
 	vec3 col = vec3(clamp(y, 0.0, 1.0));
 	if (uv.x < 0.0 || uv.y < 0.0 || uv.x > 1.0 || uv.y > 1.0) {
 		col = vec3(0.0);

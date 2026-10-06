@@ -1,8 +1,9 @@
-## Asteroid hunt, core step: the blink comparator.
-## Three exposures of the same sky field, 20 minutes apart, are shown in turn. Stars
-## stay put, the asteroid jumps. Tap it! Holding a finger shows a loupe; wrong taps
-## get an explanation (cosmic ray, hot pixel, variable star, satellite, star).
-extends Control
+## Step 4 – the blink comparator (the core of the asteroid hunt).
+## The three exposures are shown in turn. Stars stay put, the asteroid jumps. Tap it!
+## Holding a finger shows a loupe; wrong taps get an explanation (cosmic ray, hot pixel,
+## variable star, satellite, star). Hints after a while, the third one reveals it.
+class_name BlinkStep
+extends MissionStep
 
 const IMAGE_RECT := Rect2(168, 150, 1680, 1120)
 const PANEL_X := 1904
@@ -13,7 +14,6 @@ const LOUPE_SIZE := 420.0
 const LOUPE_ZOOM := 3.5
 
 var challenge: BlinkChallenge
-var _rng := RandomNumberGenerator.new()
 var _frames: CcdFrames
 var _view: TextureRect
 var _loupe: TextureRect
@@ -31,81 +31,18 @@ var _hints := 0
 var _press_t := -1.0
 var _press_pos := Vector2.ZERO
 var _loupe_on := false
-var skip_intro := false  # screenshots/tests: go straight to the blink view
-var rng_seed := 0        # 0 = random
-var _played: Array = []  # scenario ids already used in this session
 var _revealed := false
 
 
 func _ready() -> void:
-	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	if rng_seed != 0:
-		_rng.seed = rng_seed
-	else:
-		_rng.randomize()
-	add_child(Starfield.new())
-	if skip_intro:
-		_new_round()
-		return
-	var start := GameStartScreen.make(Router.current if not Router.current.is_empty() else GameRegistry.get_entry("asteroid"))
-	add_child(start)
-	await start.start_pressed
-	start.queue_free()
-	Router.step("start")
-	await _intro()
-	_new_round()
-
-
-func _intro() -> void:
-	var v := VBoxContainer.new()
-	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	v.alignment = BoxContainer.ALIGNMENT_CENTER
-	v.add_theme_constant_override("separation", 34)
-	add_child(v)
-	for item in [["AST_INTRO_TITLE", UiTheme.SIZE_TITLE, "serif", UiTheme.TEXT],
-			["AST_INTRO_TEXT", UiTheme.SIZE_H2 - 6, "regular", UiTheme.TEXT],
-			["AST_INTRO_HOLD", UiTheme.SIZE_BODY + 4, "regular", UiTheme.SCIENCE]]:
-		var l := UiTheme.label(item[0], item[1], item[2], item[3])
-		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		l.custom_minimum_size = Vector2(1700, 0)
-		l.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		v.add_child(l)
-	var go := BigButton.make("AST_GO", "play_arrow", true, 520)
-	go.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	v.add_child(go)
-	await go.pressed
-	v.queue_free()
-
-
-# --- round setup -----------------------------------------------------------------------
-
-func _new_round() -> void:
-	for c in get_children():
-		if not (c is Starfield):
-			c.queue_free()
-	Session.ensure_name()
-	var diff := Session.difficulty_name()
-	var sc := AsteroidScenario.pick(diff, _rng, _played)
-	if sc == null:
-		push_error("No asteroid scenarios found – run tools/asteroid/build_scenarios.py")
-		return
-	_played.append(sc.data.id)
-	challenge = BlinkChallenge.create(sc, diff, _rng)
+	super._ready()
+	challenge = mission.challenge
 	_frames = CcdFrames.new()
 	add_child(_frames)
 	_frames.build(challenge.stars_px, challenge.frames)
 	_build_ui()
-	_frame = 0
-	_blink_t = 0.0
-	_elapsed = 0.0
-	_wrong = 0
-	_hints = 0
-	_revealed = false
-	_paused = false
 	_running = true
 	_show_frame(0)
-	Router.step("blink")
 
 
 func _build_ui() -> void:
@@ -193,7 +130,7 @@ func _build_ui() -> void:
 	date_info.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	date_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	date_info.custom_minimum_size = Vector2(PANEL_W, 0)
-	date_info.text = tr("AST_FIELD_INFO") % [BlinkResult._date(challenge.scenario.data.night), "CDK20 · QHY600", "35′ × 24′"]
+	date_info.text = tr("AST_FIELD_INFO") % [AstroFormat.date(challenge.scenario.data.night), "CDK20 · QHY600", "35′ × 24′"]
 	panel.add_child(date_info)
 
 
@@ -206,6 +143,7 @@ func _ccd_rect(is_loupe: bool) -> TextureRect:
 	m.shader = preload("res://games/asteroid/ccd/ccd_display.gdshader")
 	m.set_shader_parameter("image_size", Vector2(AsteroidScenario.IMAGE_SIZE))
 	m.set_shader_parameter("circle", is_loupe)
+	m.set_shader_parameter("bg", 0.003 * float(mission.sky.get("bg_factor", 1.0)))
 	r.material = m
 	return r
 
@@ -324,20 +262,19 @@ func _found() -> void:
 	_paused = true
 	Audio.play("tick" if _revealed else "success")
 	Router.step("revealed" if _revealed else "found")
-	var secs := _elapsed
-	var pts := challenge.score(secs, _wrong, _hints)
-	var stars := 1 if _revealed else BlinkChallenge.stars_for(_wrong, _hints)
-	var rank := Scores.submit("asteroid", Session.player_name, pts, stars,
-		{"object": challenge.scenario.display_name()})
-	Router.complete({"score": pts, "stars": stars, "wrong": _wrong, "hints": _hints,
-		"seconds": snappedf(secs, 0.1), "object": challenge.scenario.data.number})
+	# Half weight so the blink does not dwarf the other steps (already x difficulty x crowding).
+	var pts := int(challenge.score(_elapsed, _wrong, _hints) * mission.exposure_mult * 0.5)
+	if _revealed:
+		pts = int(pts * 0.3)
+	mission.blink = {"stars": 1 if _revealed else BlinkChallenge.stars_for(_wrong, _hints),
+		"revealed": _revealed, "wrong": _wrong, "hints": _hints, "seconds": snappedf(_elapsed, 0.1)}
+	mission.points["blink"] = pts
 	_marks.show_solution = true
 	_marks.queue_redraw()
-	await get_tree().create_timer(3.5 if _revealed else 1.6).timeout
-	var result := BlinkResult.new()
-	result.setup(challenge, pts, stars, rank, secs, _revealed)
-	result.again.connect(_new_round)
-	add_child(result)
+	if not _revealed:
+		_msg.text = tr("AST_FOUND") + "  +" + str(pts)
+	await get_tree().create_timer(3.0 if _revealed else 1.8).timeout
+	done()
 
 
 ## Markers drawn over the image: tap feedback, hint circles, the solution.

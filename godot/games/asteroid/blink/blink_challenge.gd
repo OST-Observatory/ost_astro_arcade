@@ -49,12 +49,16 @@ var visible_stars := 0              # stars clearly visible in the image (for th
 var crowding := 1.0                 # score multiplier: dense fields are harder (playtest idea)
 
 
-static func create(sc: AsteroidScenario, diff: String, rng: RandomNumberGenerator) -> BlinkChallenge:
+## opts (all optional, set by the mission steps):
+##   "obs_index": track index of the middle exposure (chosen in "plan the night")
+##   "center": pointing centre in arcsec (from "align the telescope")
+##   "exposure_offset": +0.75 short / -0.75 long exposure (mag), see "expose"
+static func create(sc: AsteroidScenario, diff: String, rng: RandomNumberGenerator, opts := {}) -> BlinkChallenge:
 	var c := BlinkChallenge.new()
 	c.scenario = sc
 	c.difficulty = diff
 	c.rules = RULES.get(diff, RULES.researcher)
-	c._setup(rng)
+	c._setup(rng, opts)
 	return c
 
 
@@ -89,19 +93,25 @@ static func eligible(index: Array, diff: String) -> Array:
 	return out
 
 
-func _setup(rng: RandomNumberGenerator) -> void:
+func _setup(rng: RandomNumberGenerator, opts: Dictionary) -> void:
 	var entry := {"v": scenario.data.v_best, "rate_arcsec_h": scenario.data.rate_arcsec_h}
 	interval_min = clampf(ideal_interval(entry, difficulty), INTERVAL_MIN, INTERVAL_MAX)
 	var target: float = rules.mag + rng.randf_range(-rules.jitter, rules.jitter)
-	depth = depth_for(float(scenario.data.v_best), target)
+	depth = depth_for(float(scenario.data.v_best), target) + float(opts.get("exposure_offset", 0.0))
 	asteroid_mag = float(scenario.data.v_best) + depth
 
 	var step := interval_min / 10.0  # track samples are 10 minutes apart
-	start_index = float(scenario.data.best_index) - step
+	start_index = float(opts.get("obs_index", scenario.data.best_index)) - step
 	var mid := scenario.position_at(start_index + step)
-	# Point so the asteroid is NOT in the middle: anywhere in the inner 70 % of the field.
 	var half := Vector2(AsteroidScenario.IMAGE_SIZE) * AsteroidScenario.ARCSEC_PER_PX / 2.0
-	center = mid + Vector2(rng.randf_range(-0.7, 0.7) * half.x, rng.randf_range(-0.7, 0.7) * half.y)
+	if opts.has("center"):
+		center = opts.center
+		# Keep the whole asteroid path inside the image even if the aiming was rough.
+		center.x = clampf(center.x, mid.x - 0.75 * half.x, mid.x + 0.75 * half.x)
+		center.y = clampf(center.y, mid.y - 0.75 * half.y, mid.y + 0.75 * half.y)
+	else:
+		# Point so the asteroid is NOT in the middle: anywhere in the inner 70 % of the field.
+		center = mid + Vector2(rng.randf_range(-0.7, 0.7) * half.x, rng.randf_range(-0.7, 0.7) * half.y)
 
 	var size := Vector2(AsteroidScenario.IMAGE_SIZE)
 	for s in scenario.stars:

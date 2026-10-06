@@ -44,6 +44,8 @@ SURVEY_END = date(2028, 3, 31)
 FIELD_HALF_DIAG_DEG = math.hypot(35.7 / 2, 23.8 / 2) / 60.0
 GAIA_G_LIMIT = 18.0
 GAIA_TIMEOUT_S = 180
+FINDER_RADIUS_DEG = 2.2   # finder chart for the "align the telescope" step
+FINDER_G_LIMIT = 11.5
 
 # Night selection
 MIN_ALT = 35.0
@@ -115,14 +117,14 @@ def _num(v):
         return None
 
 
-def gaia_field(ra0: float, dec0: float, radius: float) -> list:
-    key = f"gaia/{ra0:.4f}_{dec0:.4f}_{radius:.3f}_{GAIA_G_LIMIT}.json"
+def gaia_field(ra0: float, dec0: float, radius: float, g_limit: float = GAIA_G_LIMIT) -> list:
+    key = f"gaia/{ra0:.4f}_{dec0:.4f}_{radius:.3f}_{g_limit}.json"
 
     def fetch():
         q = f"""SELECT TOP 30000 ra, dec, phot_g_mean_mag, bp_rp, phot_variable_flag
                 FROM gaiadr3.gaia_source
                 WHERE 1 = CONTAINS(POINT(ra, dec), CIRCLE({ra0}, {dec0}, {radius}))
-                  AND phot_g_mean_mag < {GAIA_G_LIMIT}
+                  AND phot_g_mean_mag < {g_limit}
                 ORDER BY phot_g_mean_mag"""
         return _run_with_timeout(_gaia_query, (q,), GAIA_TIMEOUT_S)
     return cached_json(key, fetch)
@@ -276,6 +278,9 @@ def build_scenario(number: int, night: date, sky: SkyCalc) -> dict | None:
     xi, eta = gnomonic(s[:, 0], s[:, 1], ra0, dec0)
     txi, teta = gnomonic(ra, dec, ra0, dec0)
 
+    finder = np.array(gaia_field(round(ra0, 4), round(dec0, 4), FINDER_RADIUS_DEG, FINDER_G_LIMIT))
+    fxi, feta = gnomonic(finder[:, 0], finder[:, 1], ra0, dec0)
+
     facts = sbdb_facts(number)
     jd_mid = 2440587.5 + times[best].timestamp() / 86400.0
     elements = horizons_elements(number, round(jd_mid, 1))
@@ -309,6 +314,12 @@ def build_scenario(number: int, night: date, sky: SkyCalc) -> dict | None:
             # [xi_arcsec, eta_arcsec, G, bp_rp, variable]
             "stars": [[round(float(a), 1), round(float(b), 1), round(float(g), 2), round(float(c), 2), int(v)]
                       for a, b, g, c, v in zip(xi, eta, s[:, 2], s[:, 3], s[:, 4])],
+        },
+        "finder": {
+            "radius_deg": FINDER_RADIUS_DEG, "g_limit": FINDER_G_LIMIT,
+            # [xi_arcsec, eta_arcsec, G]
+            "stars": [[round(float(a), 1), round(float(b), 1), round(float(g), 2)]
+                      for a, b, g in zip(fxi, feta, finder[:, 2])],
         },
         "track": track,
     }

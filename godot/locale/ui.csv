@@ -77,3 +77,79 @@ AST_AGAIN,Noch ein Asteroid!,Another asteroid!,¡Otro asteroide!
 AST_REVEALED,"Hier ist er! Ganz schön knifflig, oder? Beim nächsten Mal findest du ihn bestimmt selbst.","Here it is! Pretty tricky, right? Next time you'll surely find it yourself.","¡Aquí está! Bastante difícil, ¿verdad? La próxima vez seguro que lo encuentras tú."
 AST_REVEALED_TITLE,Aufgelöst,Solved for you,Resuelto
 AST_CROWDING,Sternfeld: %d sichtbare Sterne – Punkte ×%s,Star field: %d visible stars – points ×%s,Campo estelar: %d estrellas visibles – puntos ×%s
+STEP_PLAN,Nacht planen,Plan the night,Planear la noche
+STEP_ALIGN,Ausrichten,Align,Apuntar
+STEP_EXPOSE,Belichten,Expose,Exponer
+STEP_BLINK,Blinken,Blink,Parpadeo
+STEP_MEASURE,Vermessen,Measure,Medir
+STEP_ORBIT,Bahn,Orbit,Órbita
+MISSION_TITLE,Deine Mission,Your mission,Tu misión
+MISSION_TEXT,"Heute Nacht arbeitest du am OST-Teleskop in Golm. Irgendwo zwischen den Sternen zieht ein Asteroid seine Bahn. Plane die Nacht, richte das Teleskop aus, finde ihn auf deinen Aufnahmen – und bestimme seine Bahn um die Sonne!","Tonight you are working at the OST telescope in Golm. Somewhere among the stars an asteroid is moving along its orbit. Plan the night, aim the telescope, find it in your images – and work out its orbit around the Sun!","Esta noche trabajas con el telescopio OST en Golm. En algún lugar entre las estrellas un asteroide recorre su órbita. Planifica la noche, apunta el telescopio, encuéntralo en tus imágenes… ¡y calcula su órbita alrededor del Sol!"
+PLAN_TITLE,Plane deine Beobachtungsnacht,Plan your observing night,Planifica tu noche de observación
+PLAN_TASK,Ziehe den Zeitregler. Wann steht der Asteroid hoch am dunklen Himmel – und wann stört der Mond am wenigsten?,Drag the time slider. When is the asteroid high in a dark sky – and when does the Moon disturb least?,Desliza el control de tiempo. ¿Cuándo está el asteroide alto en un cielo oscuro y cuándo molesta menos la Luna?
+PLAN_QUALITY,Beobachtungsqualität,Observing quality,Calidad de observación
+PLAN_INFO,"Uhrzeit: %s Uhr
+Höhe des Asteroiden: %d°
+Sonnenhöhe: %d°
+Mond: %s","Time: %s
+Asteroid altitude: %d°
+Sun altitude: %d°
+Moon: %s","Hora: %s
+Altura del asteroide: %d°
+Altura del Sol: %d°
+Luna: %s"
+PLAN_MOON_UP,über dem Horizont,above the horizon,sobre el horizonte
+PLAN_MOON_DOWN,untergegangen,below the horizon,bajo el horizonte
+PLAN_HINT_TWILIGHT,"Noch zu hell – warte, bis es richtig dunkel ist.",Still too bright – wait until it is really dark.,Aún hay demasiada luz: espera a que esté bien oscuro.
+PLAN_HINT_LOW,Der Asteroid steht hier zu tief.,The asteroid is too low here.,Aquí el asteroide está demasiado bajo.
+PLAN_HINT_HIGHER,"Gut! Noch besser, wenn er höher steht – dann blicken wir durch weniger Luft.",Good! Even better when it is higher – then we look through less air.,¡Bien! Mejor aún si está más alto: así miramos a través de menos aire.
+PLAN_HINT_MOON,"Der Mond hellt den Himmel auf. Findest du eine Zeit, in der er tiefer steht?",The Moon brightens the sky. Can you find a time when it is lower?,La Luna ilumina el cielo. ¿Encuentras un momento en que esté más baja?
+PLAN_HINT_GOOD,Hervorragende Bedingungen!,Excellent conditions!,¡Condiciones excelentes!
+PLAN_OK,Diese Zeit nehmen,Take this time,Elegir esta hora
+PLAN_LEGEND_TARGET,—— Höhe des Asteroiden,—— Altitude of the asteroid,—— Altura del asteroide
+PLAN_LEGEND_MOON,- - Mond (%d %% beleuchtet),- - Moon (%d %% illuminated),- - Luna (%d %% iluminada)
+ALIGN_TITLE,Richte das Teleskop aus,Aim the telescope,Apunta el telescopio
+ALIGN_TASK,"Verschiebe den Himmel mit dem Finger, bis der orange Kreis – dort sollte der Asteroid laut Bahnvorhersage stehen – im blauen Bildfeld der Kamera liegt.",Drag the sky with your finger until the orange circle – where the orbit says the asteroid should be – sits inside the blue camera field.,Arrastra el cielo con el dedo hasta que el círculo naranja (donde debería estar el asteroide según su órbita) quede dentro del campo azul de la cámara.
+ALIGN_LEGEND,Weiße Punkte: echte Sterne aus dem Gaia-Katalog. Blaues Rechteck: Bildfeld der Kamera (35′ × 24′).,White dots: real stars from the Gaia catalogue. Blue rectangle: the camera's field (35′ × 24′).,Puntos blancos: estrellas reales del catálogo Gaia. Rectángulo azul: campo de la cámara (35′ × 24′).
+ALIGN_NORTH,N,N,N
+ALIGN_EAST,O,E,E
+ALIGN_COLD,Kalt – das Ziel ist noch weit weg.,Cold – the target is still far away.,Frío: el objetivo aún está lejos.
+ALIGN_WARM,Wärmer!,Warmer!,¡Caliente!
+ALIGN_HOT,Heiß! Fast geschafft.,Hot! Almost there.,¡Muy caliente! Casi lo tienes.
+ALIGN_INSIDE,Ganz nah – noch ein kleines Stück!,Very close – just a little more!,"¡Muy cerca, un poquito más!"
+ALIGN_RELEASE,"Perfekt! Lass los, um das Teleskop dort zu parken.",Perfect! Let go to park the telescope there.,¡Perfecto! Suelta para fijar el telescopio ahí.
+ALIGN_DONE,Ausgerichtet! Die Kuppel dreht sich mit.,Aligned! The dome turns along.,¡Apuntado! La cúpula gira con él.
+EXPOSE_TITLE,Wähle die Belichtungszeit,Choose the exposure time,Elige el tiempo de exposición
+EXPOSE_TASK,"Je länger die Kamera Licht sammelt, desto mehr schwache Objekte werden sichtbar. Aber Zeit am Teleskop ist kostbar.","The longer the camera collects light, the more faint objects appear. But telescope time is precious.","Cuanto más tiempo recoge luz la cámara, más objetos débiles aparecen. Pero el tiempo de telescopio es valioso."
+EXPOSE_SHORT,Kurz,Short,Corta
+EXPOSE_SHORT_DESC,"Schnell, aber der Asteroid ist schwächer. Schwieriger – dafür ×1,2 Punkte.","Quick, but the asteroid is fainter. Harder – so ×1.2 points.","Rápida, pero el asteroide se ve más débil. Más difícil: ×1,2 puntos."
+EXPOSE_NORMAL,Normal,Normal,Normal
+EXPOSE_NORMAL_DESC,Die ausgewogene Wahl.,The balanced choice.,La opción equilibrada.
+EXPOSE_LONG,Lang,Long,Larga
+EXPOSE_LONG_DESC,"Tiefes Bild, der Asteroid ist leichter zu finden. Kostet Zeit: ×0,85 Punkte.","Deep image, the asteroid is easier to find. Costs time: ×0.85 points.","Imagen profunda, el asteroide es más fácil de encontrar. Cuesta tiempo: ×0,85 puntos."
+EXPOSE_FRAME,Bild %d · nach %d min,Image %d · after %d min,Imagen %d · tras %d min
+MEASURE_TITLE,Vermiss den Asteroiden,Measure the asteroid,Mide el asteroide
+MEASURE_TASK,Tippe in jedem Bild möglichst genau auf die Mitte des Asteroiden.,"In each image, tap the centre of the asteroid as precisely as you can.","En cada imagen, toca el centro del asteroide con la mayor precisión posible."
+MEASURE_WHY,"Aus genauen Positionen zu verschiedenen Zeiten berechnen Astronominnen und Astronomen die Bahn eines Asteroiden. Je genauer du misst, desto besser ist seine Bahn bekannt.","Astronomers compute an asteroid's orbit from precise positions at different times. The more precisely you measure, the better its orbit is known.","Los astrónomos calculan la órbita de un asteroide a partir de posiciones precisas en distintos momentos. Cuanto más precisa sea tu medida, mejor se conoce su órbita."
+MEASURE_COUNTER,Bild %d von %d,Image %d of %d,Imagen %d de %d
+MEASURE_MISS,Daneben – der Asteroid ist der Punkt nahe der Mitte.,Missed – the asteroid is the dot near the centre.,Fallaste: el asteroide es el punto cerca del centro.
+MEASURE_RESULT,Abweichung: %s Bogensekunden,Offset: %s arcseconds,Desviación: %s segundos de arco
+ORBIT_TITLE,Die Bahn deines Asteroiden,Your asteroid's orbit,La órbita de tu asteroide
+ORBIT_TASK,Aus deinen Messungen ergibt sich seine Bahn um die Sonne.,Your measurements reveal its path around the Sun.,Tus mediciones revelan su trayectoria alrededor del Sol.
+ORBIT_FACT_A,Mittlerer Abstand zur Sonne: %s AE (Erde: 1 AE),Mean distance from the Sun: %s AU (Earth: 1 AU),Distancia media al Sol: %s UA (Tierra: 1 UA)
+ORBIT_FACT_P,Ein Umlauf um die Sonne dauert %s Jahre.,One trip around the Sun takes %s years.,Una vuelta alrededor del Sol dura %s años.
+ORBIT_FACT_E,Bahnform (Exzentrizität): %s – 0 wäre ein perfekter Kreis.,Orbit shape (eccentricity): %s – 0 would be a perfect circle.,Forma de la órbita (excentricidad): %s; 0 sería un círculo perfecto.
+ORBIT_FACT_MOID,Engster möglicher Abstand zur Erdbahn: %s Millionen km,Closest possible distance to Earth's orbit: %s million km,Distancia mínima posible a la órbita terrestre: %s millones de km
+ORBIT_FACT_CLOSE,Er kann der Erde also recht nahe kommen – deshalb wird er besonders genau verfolgt.,So it can come quite close to Earth – that is why it is tracked carefully.,Así que puede acercarse bastante a la Tierra; por eso se sigue con especial cuidado.
+ORBIT_FACT_ACCURACY,Deine Messgenauigkeit: %s″ – die blassen Nachbarbahnen zeigen die Unsicherheit.,Your measurement accuracy: %s″ – the faint neighbouring orbits show the uncertainty.,Tu precisión de medida: %s″; las órbitas tenues muestran la incertidumbre.
+ORBIT_NEXT,Zur Urkunde,To the certificate,Al diploma
+PLANET_MERCURY,Merkur,Mercury,Mercurio
+PLANET_VENUS,Venus,Venus,Venus
+PLANET_EARTH,Erde,Earth,Tierra
+PLANET_MARS,Mars,Mars,Marte
+PLANET_JUPITER,Jupiter,Jupiter,Júpiter
+CERT_TITLE,Urkunde,Certificate,Diploma
+CERT_SUBTITLE,OST-Sternwarte · Universität Potsdam,OST Observatory · University of Potsdam,Observatorio OST · Universidad de Potsdam
+CERT_TEXT,%s hat in der Nacht vom %s mit dem OST-Teleskop in Golm den Asteroiden %s gefunden und vermessen.,%s – on the night of %s – found and measured the asteroid %s with the OST telescope in Golm.,"%s, en la noche del %s, encontró y midió el asteroide %s con el telescopio OST en Golm."
+CERT_INSTRUMENT,Planewave CDK20 · QHY600 · Belichtung %s · Aufnahme um %s Uhr,Planewave CDK20 · QHY600 · exposure %s · taken at %s,Planewave CDK20 · QHY600 · exposición %s · tomada a las %s
+CERT_AGAIN,Neue Mission,New mission,Nueva misión
