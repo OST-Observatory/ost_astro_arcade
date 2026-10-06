@@ -37,6 +37,11 @@ godot --headless --path godot -s res://tests/run_tests.gd
 # Screenshots at kiosk resolution (needs a GPU/window); prints average FPS
 godot --path godot -s res://tools/capture.gd -- res://spikes/galaxy_particles.tscn captures/galaxy 1500 3
 
+# UI states for review (hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder)
+OST_DATA_DIR=/tmp/ost_capture SCENARIO=attract godot --path godot -s res://tools/capture.gd -- res://tools/scenario.tscn captures/attract
+
+# After adding a new `class_name` script, re-run the import once so Godot registers it.
+
 # Rebuild logo textures from the T-shirt artwork
 cd tools && uv run brand/make_logo.py
 ```

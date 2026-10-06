@@ -1,0 +1,94 @@
+# Blocked name fragments for free-text player/asteroid names (de/en/es).
+# One entry per line, compared after normalisation (lower case, no accents,
+# leetspeak mapped, only a-z, repeated letters collapsed) as SUBSTRING.
+# Lines starting with "=" are matched as WHOLE WORDS against the raw text
+# (for short codes that would cause too many false positives as substrings).
+# Keep stems long enough to avoid blocking normal words. Admins can extend this file.
+
+# --- German ---
+arsch
+fotze
+fick
+ficken
+hure
+huren
+schlampe
+wichser
+wixer
+schwuchtel
+spast
+spasti
+missgeburt
+hurensohn
+scheis
+kacke
+pimmel
+schwanzlutsch
+nutte
+behindert
+=mongo
+neger
+kanake
+zigeuner
+judensau
+untermensch
+
+# --- English ---
+fuck
+shit
+bitch
+cunt
+=dick
+dickhead
+cocksuck
+pussy
+asshole
+bastard
+whore
+slut
+=fag
+faggot
+nigger
+nigga
+retard
+wanker
+twat
+porn
+=rape
+rapist
+penis
+vagina
+dildo
+
+# --- Spanish ---
+=puta
+hijodeputa
+=puto
+mierda
+cabron
+=coño
+=cono
+gilipolla
+pendejo
+maricon
+joder
+=polla
+=verga
+chinga
+culero
+zorra
+
+# --- Hate / extremism ---
+hitler
+nazi
+siegheil
+heilhitler
+holocaust
+=kkk
+=isis
+=88
+=1488
+=hh
+=ss
+=sa
+=afd

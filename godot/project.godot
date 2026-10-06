@@ -12,8 +12,19 @@ config_version=5
 
 config/name="OST Astro Arcade"
 config/description="Touch kiosk with astronomy games of the OST observatory, Universität Potsdam"
-run/main_scene="res://spikes/touch_test.tscn"
+run/main_scene="res://hub/hub.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
+
+[autoload]
+
+Settings="*res://core/settings.gd"
+I18n="*res://core/i18n.gd"
+Audio="*res://core/audio.gd"
+Session="*res://core/session.gd"
+Telemetry="*res://core/telemetry.gd"
+Scores="*res://core/scores.gd"
+Kiosk="*res://core/kiosk.gd"
+Router="*res://core/router.gd"
 
 [display]
 
@@ -28,6 +39,11 @@ window/stretch/aspect="expand"
 
 pointing/emulate_touch_from_mouse=true
 pointing/emulate_mouse_from_touch=true
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://locale/ui.de.translation", "res://locale/ui.en.translation", "res://locale/ui.es.translation")
+locale/fallback="en"
 
 [rendering]
 

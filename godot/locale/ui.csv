@@ -1,0 +1,47 @@
+keys,de,en,es
+HUB_TITLE,Sternwarten-Spiele,Observatory Games,Juegos del observatorio
+HUB_SUBTITLE,"OST · Universität Potsdam · Campus Golm","OST · University of Potsdam · Golm campus","OST · Universidad de Potsdam · Campus Golm"
+HUB_HINT,Tippe auf ein Spiel!,Tap a game to play!,¡Toca un juego!
+HUB_SOON,In Arbeit,Coming soon,Próximamente
+HUB_INFO,Info,Info,Info
+CLOSE,Schließen,Close,Cerrar
+BACK_TO_HUB,Zur Übersicht,Back to menu,Volver al menú
+HOME_CONFIRM,Spiel beenden und zur Übersicht?,Quit the game and go back to the menu?,¿Salir del juego y volver al menú?
+HOME_STAY,Weiterspielen,Keep playing,Seguir jugando
+HOME_LEAVE,Zur Übersicht,To the menu,Al menú
+IDLE_QUESTION,Bist du noch da?,Are you still there?,¿Sigues ahí?
+IDLE_HINT,"Tippe irgendwo, um weiterzuspielen.",Tap anywhere to keep playing.,Toca en cualquier lugar para seguir jugando.
+ATTRACT_TITLE,Entdecke das Weltall!,Explore the universe!,¡Explora el universo!
+ATTRACT_TOUCH,Berühre den Bildschirm zum Starten,Touch the screen to start,Toca la pantalla para empezar
+ATTRACT_BEST_TODAY,Die Besten heute: %s,Today's best: %s,Los mejores de hoy: %s
+PLACEHOLDER_MSG,"Dieses Spiel entsteht gerade – schau bald wieder vorbei!","This game is being built – come back soon!","Este juego está en construcción. ¡Vuelve pronto!"
+INFO_TITLE,Über diese Spiele,About these games,Sobre estos juegos
+INFO_BODY,"Die OST-Sternwarte („Overwhelmingly Small Telescope“) ist die Studierenden-Sternwarte der Universität Potsdam auf dem Dach des Instituts für Physik und Astronomie in Golm. Mit einem 50-cm-Teleskop beobachten Studierende dort Sterne, Galaxien, Kometen und Asteroiden. Diese Spiele zeigen dir, wie echte Astronomie funktioniert.","The OST observatory (“Overwhelmingly Small Telescope”) is the student observatory of the University of Potsdam, on the roof of the Institute of Physics and Astronomy in Golm. With a 50 cm telescope, students observe stars, galaxies, comets and asteroids. These games show you how real astronomy works.","El observatorio OST («Overwhelmingly Small Telescope») es el observatorio estudiantil de la Universidad de Potsdam, en el tejado del Instituto de Física y Astronomía en Golm. Con un telescopio de 50 cm, los estudiantes observan estrellas, galaxias, cometas y asteroides. Estos juegos te muestran cómo funciona la astronomía de verdad."
+INFO_CREDITS,Bildnachweise & Lizenzen,Credits & licences,Créditos y licencias
+NAME_TITLE,Wie sollen wir dich nennen?,What should we call you?,¿Cómo te llamamos?
+NAME_REROLL,Neuer Name,New name,Otro nombre
+NAME_OWN,Eigener Name,Own name,Nombre propio
+NAME_OK,Los geht's!,Let's go!,¡Vamos!
+NAME_REJECTED,Dieser Name geht leider nicht. Probier einen anderen!,"Sorry, that name doesn't work. Try another one!","Lo siento, ese nombre no vale. ¡Prueba otro!"
+NAME_TOO_SHORT,Mindestens 2 Zeichen bitte.,At least 2 characters please.,"Al menos 2 caracteres, por favor."
+DIFF_TITLE,Wie schwer soll es sein?,How hard should it be?,¿Qué dificultad quieres?
+DIFF_EXPLORER,Entdecker,Explorer,Explorador
+DIFF_EXPLORER_DESC,Für Kinder und Einsteiger,For kids and beginners,Para niños y principiantes
+DIFF_RESEARCHER,Forscher,Researcher,Investigador
+DIFF_RESEARCHER_DESC,Die normale Mission,The standard mission,La misión normal
+DIFF_PRO,Profi,Pro,Experto
+DIFF_PRO_DESC,Für alle mit Vorwissen,For those who know a bit,Para quien ya sabe algo
+GAME_ASTEROID,Asteroiden-Jagd,Asteroid Hunt,Caza de asteroides
+GAME_ASTEROID_DESC,Entdecke einen Asteroiden mit dem OST-Teleskop,Discover an asteroid with the OST telescope,Descubre un asteroide con el telescopio OST
+GAME_QUIZ,Astro-Quiz,Astro Quiz,Astro cuestionario
+GAME_QUIZ_DESC,Teste dein Wissen über das Weltall,Test your knowledge of the universe,Pon a prueba tus conocimientos del universo
+GAME_PUZZLE,Astro-Puzzle,Astro Puzzle,Astro rompecabezas
+GAME_PUZZLE_DESC,Setze echte Himmelsfotos zusammen,Piece together real sky images,Monta imágenes reales del cielo
+GAME_GALAXY,Galaxien-Baumeister,Galaxy Builder,Constructor de galaxias
+GAME_GALAXY_DESC,Lass Galaxien zusammenstoßen,Make galaxies collide,Haz chocar galaxias
+GAME_SOLAR,Sonnensystem,Solar System,Sistema solar
+GAME_SOLAR_DESC,Fliege mit einer Sonde zum Mars,Fly a probe to Mars,Vuela con una sonda a Marte
+GAME_CONSTELLATIONS,Sternbilder,Constellations,Constelaciones
+GAME_CONSTELLATIONS_DESC,Zeichne die Sternbilder nach,Trace the constellations,Dibuja las constelaciones
+GAME_NBODY,N-Körper-Labor,N-Body Lab,Laboratorio de N cuerpos
+GAME_NBODY_DESC,Spiele mit der Schwerkraft,Play with gravity,Juega con la gravedad

@@ -27,8 +27,15 @@ func _initialize() -> void:
 	vp.msaa_3d = ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d")
 	vp.own_world_3d = true
 	root.add_child(vp)
+	# A SubViewport does not inherit the window theme (set by the Router autoload),
+	# so wrap the scene in a Control that carries it.
+	var holder := Control.new()
+	holder.theme = root.theme if root.theme else UiTheme.build()
+	holder.size = Vector2(size)
+	holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vp.add_child(holder)
 	var packed: PackedScene = load(scene_path)
-	vp.add_child(packed.instantiate())
+	holder.add_child(packed.instantiate())
 
 	DirAccess.make_dir_recursive_absolute(out_prefix.get_base_dir())
 	var start_ms := Time.get_ticks_msec()
