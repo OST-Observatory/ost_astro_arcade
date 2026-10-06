@@ -1,6 +1,6 @@
 ## Puts the UI into a specific state for screenshots (used with tools/capture.gd).
 ##   OST_DATA_DIR=/tmp/ost_capture SCENARIO=attract godot --path godot -s res://tools/capture.gd -- res://tools/scenario.tscn captures/attract
-## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder
+## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -37,6 +37,16 @@ func _ready() -> void:
 			var o := IdleOverlay.new()
 			add_child(o)
 			o.show_countdown(7.2, 10.0)
+		"start":
+			add_child(Starfield.new())
+			add_child(GameStartScreen.make(GameRegistry.get_entry("asteroid")))
+		"keyboard":
+			add_child(Starfield.new())
+			add_child(GameStartScreen.make(GameRegistry.get_entry("asteroid")))
+			var e := NameEntry.new()
+			add_child(e)
+			for ch in ["S", "T", "E", "R", "N", "SPACE", "A"]:
+				e._kb._press(ch)
 		"placeholder":
 			Router.current = GameRegistry.get_entry("asteroid")
 			add_child(load(GameRegistry.PLACEHOLDER).instantiate())

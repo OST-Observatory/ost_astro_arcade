@@ -1,0 +1,16 @@
+// The kiosk user may shut down or reboot the machine from the admin menu. Nothing else.
+polkit.addRule(function (action, subject) {
+  if (subject.user !== "kiosk") {
+    return polkit.Result.NOT_HANDLED;
+  }
+  var allowed = [
+    "org.freedesktop.login1.power-off",
+    "org.freedesktop.login1.power-off-multiple-sessions",
+    "org.freedesktop.login1.reboot",
+    "org.freedesktop.login1.reboot-multiple-sessions",
+  ];
+  if (allowed.indexOf(action.id) >= 0) {
+    return polkit.Result.YES;
+  }
+  return polkit.Result.NOT_HANDLED;
+});

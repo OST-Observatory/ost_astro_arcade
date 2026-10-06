@@ -1,0 +1,6 @@
+[Unit]
+Description=Restart the OST Astro Arcade if it stopped writing its heartbeat
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ost-watchdog

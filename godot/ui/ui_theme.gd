@@ -99,6 +99,8 @@ static func build() -> Theme:
 ## Label helpers so every screen uses the same typography.
 static func label(text: String, size := SIZE_BODY, kind := "regular", color := TEXT) -> Label:
 	var l := Label.new()
+	# Explicit, because labels inside buttons would inherit the button's "disabled".
+	l.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_ALWAYS
 	l.text = text
 	l.add_theme_font_override("font", font(kind))
 	l.add_theme_font_size_override("font_size", size)

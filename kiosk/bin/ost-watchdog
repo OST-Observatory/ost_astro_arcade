@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Restarts ost-arcade.service when the app is "running" but hangs, i.e. it has not
+# refreshed /var/lib/ost/heartbeat for more than MAX_AGE seconds. The app writes the
+# heartbeat every 10 s (core/kiosk.gd), also while an external app (NBodyTouch) runs.
+set -euo pipefail
+HEARTBEAT=/var/lib/ost/heartbeat
+MAX_AGE=60
+UNIT=ost-arcade.service
+
+systemctl is-active --quiet "$UNIT" || exit 0
+# Give a freshly (re)started app time to come up.
+started=$(systemctl show -p ActiveEnterTimestampMonotonic --value "$UNIT")
+now=$(awk '{print int($1 * 1000000)}' /proc/uptime)
+(( (now - started) / 1000000 < 90 )) && exit 0
+
+if [[ ! -f "$HEARTBEAT" ]] || (( $(date +%s) - $(stat -c %Y "$HEARTBEAT") > MAX_AGE )); then
+  logger -t ost-watchdog "heartbeat older than ${MAX_AGE}s, restarting $UNIT"
+  systemctl restart "$UNIT"
+fi
