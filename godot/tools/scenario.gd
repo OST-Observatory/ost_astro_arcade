@@ -48,6 +48,9 @@ func _ready() -> void:
 			for ch in ["S", "T", "E", "R", "N", "SPACE", "A"]:
 				e._kb._press(ch)
 		"blink", "blink_loupe", "blink_hint", "blink_wrong", "blink_found":
+			var diff := OS.get_environment("DIFF")
+			if diff != "":
+				Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
 			var g: Control = load("res://games/asteroid/blink/blink_game.tscn").instantiate()
 			g.skip_intro = true
 			g.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 7

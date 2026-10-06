@@ -91,7 +91,7 @@ func _new_round() -> void:
 	challenge = BlinkChallenge.create(sc, diff, _rng)
 	_frames = CcdFrames.new()
 	add_child(_frames)
-	_frames.build(challenge.stars_px, challenge.frames)
+	_frames.build(challenge.stars_px, challenge.frames, challenge.rules.depth)
 	_build_ui()
 	_frame = 0
 	_blink_t = 0.0

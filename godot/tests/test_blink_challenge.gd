@@ -43,8 +43,8 @@ func test_tap_classification() -> void:
 				assert_eq(c.classify(p, f), "cosmic")
 	for h in c.hot_px:
 		if h.distance_to(c.asteroid_px[1]) > 60:
-			var k := c.classify(h, 0)
-			assert_true(k == "hot" or k == "cosmic", "hot pixel classified as %s" % k)
+			var k := c.classify(h + c.dither[0], 0)
+			assert_true(k.begins_with("hot") or k == "cosmic", "hot pixel classified as %s" % k)
 
 
 func test_difficulty_rules() -> void:

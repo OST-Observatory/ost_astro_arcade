@@ -1,0 +1,373 @@
+{
+ "generated": "2026-10-06T15:44:38",
+ "site": {
+  "lon": 12.9733,
+  "lat": 52.4092,
+  "elevation": 0.08
+ },
+ "scenarios": [
+  {
+   "id": "2_2028-03-30",
+   "number": 2,
+   "name": "Pallas",
+   "class_code": "MBA",
+   "night": "2028-03-30",
+   "v": 7.267,
+   "rate_arcsec_h": 55.88,
+   "stars": 522,
+   "difficulty": "explorer"
+  },
+  {
+   "id": "3_2028-03-21",
+   "number": 3,
+   "name": "Juno",
+   "class_code": "MBA",
+   "night": "2028-03-21",
+   "v": 9.243,
+   "rate_arcsec_h": 30.74,
+   "stars": 3986,
+   "difficulty": "explorer"
+  },
+  {
+   "id": "3_2027-11-10",
+   "number": 3,
+   "name": "Juno",
+   "class_code": "MBA",
+   "night": "2027-11-10",
+   "v": 8.688,
+   "rate_arcsec_h": 31.56,
+   "stars": 3238,
+   "difficulty": "explorer"
+  },
+  {
+   "id": "5_2028-02-01",
+   "number": 5,
+   "name": "Astraea",
+   "class_code": "MBA",
+   "night": "2028-02-01",
+   "v": 10.832,
+   "rate_arcsec_h": 17.91,
+   "stars": 1156,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "5_2027-10-10",
+   "number": 5,
+   "name": "Astraea",
+   "class_code": "MBA",
+   "night": "2027-10-10",
+   "v": 11.198,
+   "rate_arcsec_h": 14.25,
+   "stars": 3272,
+   "difficulty": "pro"
+  },
+  {
+   "id": "6_2027-03-31",
+   "number": 6,
+   "name": "Hebe",
+   "class_code": "MBA",
+   "night": "2027-03-31",
+   "v": 10.096,
+   "rate_arcsec_h": 10.43,
+   "stars": 526,
+   "difficulty": "pro"
+  },
+  {
+   "id": "6_2027-01-27",
+   "number": 6,
+   "name": "Hebe",
+   "class_code": "MBA",
+   "night": "2027-01-27",
+   "v": 9.464,
+   "rate_arcsec_h": 35.51,
+   "stars": 517,
+   "difficulty": "explorer"
+  },
+  {
+   "id": "8_2028-03-02",
+   "number": 8,
+   "name": "Flora",
+   "class_code": "MBA",
+   "night": "2028-03-02",
+   "v": 9.706,
+   "rate_arcsec_h": 24.03,
+   "stars": 782,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "8_2027-12-18",
+   "number": 8,
+   "name": "Flora",
+   "class_code": "MBA",
+   "night": "2027-12-18",
+   "v": 9.957,
+   "rate_arcsec_h": 9.51,
+   "stars": 548,
+   "difficulty": "pro"
+  },
+  {
+   "id": "9_2028-03-19",
+   "number": 9,
+   "name": "Metis",
+   "class_code": "MBA",
+   "night": "2028-03-19",
+   "v": 9.69,
+   "rate_arcsec_h": 13.55,
+   "stars": 542,
+   "difficulty": "pro"
+  },
+  {
+   "id": "9_2028-01-05",
+   "number": 9,
+   "name": "Metis",
+   "class_code": "MBA",
+   "night": "2028-01-05",
+   "v": 9.603,
+   "rate_arcsec_h": 12.16,
+   "stars": 449,
+   "difficulty": "pro"
+  },
+  {
+   "id": "12_2027-03-09",
+   "number": 12,
+   "name": "Victoria",
+   "class_code": "MBA",
+   "night": "2027-03-09",
+   "v": 11.711,
+   "rate_arcsec_h": 23.9,
+   "stars": 1351,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "12_2026-11-22",
+   "number": 12,
+   "name": "Victoria",
+   "class_code": "MBA",
+   "night": "2026-11-22",
+   "v": 12.534,
+   "rate_arcsec_h": 22.38,
+   "stars": 744,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "16_2027-04-05",
+   "number": 16,
+   "name": "Psyche",
+   "class_code": "MBA",
+   "night": "2027-04-05",
+   "v": 11.307,
+   "rate_arcsec_h": 17.29,
+   "stars": 480,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "16_2026-12-17",
+   "number": 16,
+   "name": "Psyche",
+   "class_code": "MBA",
+   "night": "2026-12-17",
+   "v": 11.851,
+   "rate_arcsec_h": 17.8,
+   "stars": 447,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "18_2028-03-19",
+   "number": 18,
+   "name": "Melpomene",
+   "class_code": "MBA",
+   "night": "2028-03-19",
+   "v": 10.404,
+   "rate_arcsec_h": 12.41,
+   "stars": 863,
+   "difficulty": "pro"
+  },
+  {
+   "id": "18_2028-01-16",
+   "number": 18,
+   "name": "Melpomene",
+   "class_code": "MBA",
+   "night": "2028-01-16",
+   "v": 9.737,
+   "rate_arcsec_h": 33.89,
+   "stars": 728,
+   "difficulty": "explorer"
+  },
+  {
+   "id": "21_2027-11-03",
+   "number": 21,
+   "name": "Lutetia",
+   "class_code": "MBA",
+   "night": "2027-11-03",
+   "v": 11.038,
+   "rate_arcsec_h": 24.97,
+   "stars": 3218,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "21_2028-01-17",
+   "number": 21,
+   "name": "Lutetia",
+   "class_code": "MBA",
+   "night": "2028-01-17",
+   "v": 11.779,
+   "rate_arcsec_h": 3.22,
+   "stars": 1222,
+   "difficulty": "pro"
+  },
+  {
+   "id": "29_2027-08-26",
+   "number": 29,
+   "name": "Amphitrite",
+   "class_code": "MBA",
+   "night": "2027-08-26",
+   "v": 9.544,
+   "rate_arcsec_h": 23.65,
+   "stars": 513,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "29_2027-12-18",
+   "number": 29,
+   "name": "Amphitrite",
+   "class_code": "MBA",
+   "night": "2027-12-18",
+   "v": 10.62,
+   "rate_arcsec_h": 38.84,
+   "stars": 604,
+   "difficulty": "explorer"
+  },
+  {
+   "id": "39_2027-05-09",
+   "number": 39,
+   "name": "Laetitia",
+   "class_code": "MBA",
+   "night": "2027-05-09",
+   "v": 10.685,
+   "rate_arcsec_h": 24.82,
+   "stars": 573,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "153_2026-10-09",
+   "number": 153,
+   "name": "Hilda",
+   "class_code": "OMB",
+   "night": "2026-10-09",
+   "v": 14.65,
+   "rate_arcsec_h": 4.5,
+   "stars": 2413,
+   "difficulty": "pro"
+  },
+  {
+   "id": "153_2026-12-28",
+   "number": 153,
+   "name": "Hilda",
+   "class_code": "OMB",
+   "night": "2026-12-28",
+   "v": 14.253,
+   "rate_arcsec_h": 19.37,
+   "stars": 1616,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "216_2027-09-24",
+   "number": 216,
+   "name": "Kleopatra",
+   "class_code": "MBA",
+   "night": "2027-09-24",
+   "v": 10.237,
+   "rate_arcsec_h": 22.35,
+   "stars": 1077,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "216_2027-12-07",
+   "number": 216,
+   "name": "Kleopatra",
+   "class_code": "MBA",
+   "night": "2027-12-07",
+   "v": 9.731,
+   "rate_arcsec_h": 24.03,
+   "stars": 541,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "253_2027-09-05",
+   "number": 253,
+   "name": "Mathilde",
+   "class_code": "MBA",
+   "night": "2027-09-05",
+   "v": 13.231,
+   "rate_arcsec_h": 12.68,
+   "stars": 456,
+   "difficulty": "pro"
+  },
+  {
+   "id": "253_2028-01-09",
+   "number": 253,
+   "name": "Mathilde",
+   "class_code": "MBA",
+   "night": "2028-01-09",
+   "v": 14.776,
+   "rate_arcsec_h": 42.48,
+   "stars": 520,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "1620_2026-10-06",
+   "number": 1620,
+   "name": "Geographos",
+   "class_code": "APO",
+   "night": "2026-10-06",
+   "v": 14.654,
+   "rate_arcsec_h": 74.94,
+   "stars": 1962,
+   "difficulty": "researcher"
+  },
+  {
+   "id": "1627_2027-02-07",
+   "number": 1627,
+   "name": "Ivar",
+   "class_code": "AMO",
+   "night": "2027-02-07",
+   "v": 16.636,
+   "rate_arcsec_h": 15.7,
+   "stars": 1265,
+   "difficulty": "pro"
+  },
+  {
+   "id": "1627_2026-10-22",
+   "number": 1627,
+   "name": "Ivar",
+   "class_code": "AMO",
+   "night": "2026-10-22",
+   "v": 15.723,
+   "rate_arcsec_h": 8.92,
+   "stars": 5948,
+   "difficulty": "pro"
+  },
+  {
+   "id": "1866_2027-12-21",
+   "number": 1866,
+   "name": "Sisyphus",
+   "class_code": "APO",
+   "night": "2027-12-21",
+   "v": 16.177,
+   "rate_arcsec_h": 59.43,
+   "stars": 879,
+   "difficulty": "pro"
+  },
+  {
+   "id": "1866_2028-03-16",
+   "number": 1866,
+   "name": "Sisyphus",
+   "class_code": "APO",
+   "night": "2028-03-16",
+   "v": 17.056,
+   "rate_arcsec_h": 38.24,
+   "stars": 969,
+   "difficulty": "pro"
+  }
+ ]
+}

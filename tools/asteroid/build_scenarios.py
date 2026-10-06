@@ -16,6 +16,7 @@ Raw query results are cached in tools/.cache/ so re-runs work offline.
 from __future__ import annotations
 
 import argparse
+import multiprocessing as mp
 import json
 import math
 from datetime import date, datetime, timedelta
@@ -42,6 +43,7 @@ SURVEY_END = date(2028, 3, 31)
 # Instrument: Planewave CDK20 + QHY600 -> 35.7' x 23.8' field.
 FIELD_HALF_DIAG_DEG = math.hypot(35.7 / 2, 23.8 / 2) / 60.0
 GAIA_G_LIMIT = 18.0
+GAIA_TIMEOUT_S = 180
 
 # Night selection
 MIN_ALT = 35.0
@@ -117,17 +119,44 @@ def gaia_field(ra0: float, dec0: float, radius: float) -> list:
     key = f"gaia/{ra0:.4f}_{dec0:.4f}_{radius:.3f}_{GAIA_G_LIMIT}.json"
 
     def fetch():
-        Gaia.ROW_LIMIT = -1
         q = f"""SELECT TOP 30000 ra, dec, phot_g_mean_mag, bp_rp, phot_variable_flag
                 FROM gaiadr3.gaia_source
                 WHERE 1 = CONTAINS(POINT(ra, dec), CIRCLE({ra0}, {dec0}, {radius}))
                   AND phot_g_mean_mag < {GAIA_G_LIMIT}
                 ORDER BY phot_g_mean_mag"""
-        t = Gaia.launch_job_async(q).get_results()
-        return [[float(r["ra"]), float(r["dec"]), float(r["phot_g_mean_mag"]),
-                 float(r["bp_rp"]) if r["bp_rp"] is not np.ma.masked else 0.8,
-                 1 if r["phot_variable_flag"] == "VARIABLE" else 0] for r in t]
+        return _run_with_timeout(_gaia_query, (q,), GAIA_TIMEOUT_S)
     return cached_json(key, fetch)
+
+
+def _gaia_query(q: str) -> list:
+    Gaia.ROW_LIMIT = -1
+    t = Gaia.launch_job_async(q).get_results()
+    return [[float(r["ra"]), float(r["dec"]), float(r["phot_g_mean_mag"]),
+             float(r["bp_rp"]) if r["bp_rp"] is not np.ma.masked else 0.8,
+             1 if r["phot_variable_flag"] == "VARIABLE" else 0] for r in t]
+
+
+def _worker(fn, args, queue):
+    try:
+        queue.put(("ok", fn(*args)))
+    except Exception as ex:  # report to the parent instead of dying silently
+        queue.put(("err", repr(ex)))
+
+
+def _run_with_timeout(fn, args, timeout_s: float):
+    """Runs fn in a child process and kills it if it hangs (the Gaia archive sometimes does)."""
+    queue = mp.Queue()
+    proc = mp.Process(target=_worker, args=(fn, args, queue), daemon=True)
+    proc.start()
+    try:
+        status, value = queue.get(timeout=timeout_s)
+    except Exception:
+        proc.kill()
+        raise TimeoutError(f"{fn.__name__} took longer than {timeout_s}s")
+    proc.join(5)
+    if status != "ok":
+        raise RuntimeError(value)
+    return value
 
 
 def gnomonic(ra, dec, ra0, dec0):
@@ -277,6 +306,11 @@ def difficulty_hint(sc: dict) -> str:
     return "researcher"
 
 
+def _write_index(index: list) -> None:
+    (OUT / "index.json").write_text(json.dumps({"generated": datetime.now().isoformat(timespec="seconds"),
+                                                "site": SITE, "scenarios": index}, indent=1))
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--max", type=int, default=40)
@@ -316,10 +350,10 @@ def main() -> None:
                 "v": sc["v_best"], "rate_arcsec_h": sc["rate_arcsec_h"],
                 "stars": len(sc["field"]["stars"]), "difficulty": sc["difficulty"],
             })
+            _write_index(index)
             print(f"  {sc['id']}: V={sc['v_best']:.1f} rate={sc['rate_arcsec_h']:.0f}\"/h "
                   f"stars={len(sc['field']['stars'])} -> {sc['difficulty']}")
-    (OUT / "index.json").write_text(json.dumps({"generated": datetime.now().isoformat(timespec="seconds"),
-                                                "site": SITE, "scenarios": index}, indent=1))
+    _write_index(index)
     print(f"{len(index)} scenarios written to {OUT}")
 
 
