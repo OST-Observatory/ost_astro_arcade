@@ -153,3 +153,14 @@ CERT_SUBTITLE,OST-Sternwarte · Universität Potsdam,OST Observatory · Universi
 CERT_TEXT,%s hat in der Nacht vom %s mit dem OST-Teleskop in Golm den Asteroiden %s gefunden und vermessen.,%s – on the night of %s – found and measured the asteroid %s with the OST telescope in Golm.,"%s, en la noche del %s, encontró y midió el asteroide %s con el telescopio OST en Golm."
 CERT_INSTRUMENT,Planewave CDK20 · QHY600 · Belichtung %s · Aufnahme um %s Uhr,Planewave CDK20 · QHY600 · exposure %s · taken at %s,Planewave CDK20 · QHY600 · exposición %s · tomada a las %s
 CERT_AGAIN,Neue Mission,New mission,Nueva misión
+QUIZ_JOKER_FIFTY,50:50,50:50,50:50
+QUIZ_JOKER_TIME,+15 s,+15 s,+15 s
+QUIZ_RIGHT,Richtig! +%d Punkte,Correct! +%d points,¡Correcto! +%d puntos
+QUIZ_WRONG,Leider falsch.,"Sorry, that's wrong.","Lo siento, no es correcto."
+QUIZ_TIMEOUT,Die Zeit ist um!,Time's up!,¡Se acabó el tiempo!
+QUIZ_NEXT,Weiter,Next,Siguiente
+QUIZ_RESULT,Ergebnis,Result,Resultado
+QUIZ_CORRECT_OF,%d von %d richtig,%d of %d correct,%d de %d correctas
+QUIZ_BEST_STREAK,Längste Serie: %d,Longest streak: %d,Racha más larga: %d
+QUIZ_AGAIN,Neue Runde,New round,Nueva ronda
+QUIZ_STREAK,· Serie ×%d,· streak ×%d,· racha ×%d

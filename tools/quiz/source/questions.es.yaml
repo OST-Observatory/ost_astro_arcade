@@ -1,0 +1,1150 @@
+# Question schema: id, text, answers, correct (Index 0-3), category, difficulty
+# difficulty: laie | amateur | astronom (or 1|2|3 for backward compatibility)
+# Categories sonnensystem, sternbilder, allgemein have per-question difficulty.
+# Other categories have fixed level (see config category_difficulty_map).
+# Optional: image - path relative to apps/quiz/, e.g. "data/images/jupiter.jpg"
+# Optional: image_credit - credit/source below image, e.g. "NASA/JPL"
+
+categories:
+  - id: sonnensystem
+    name: "Sistema Solar"
+  - id: sternbilder
+    name: "Constelaciones"
+  - id: allgemein
+    name: "General"
+  - id: astronomische_phanomene
+    name: "Fenómenos Astronómicos"
+  - id: raumsonden_teleskope
+    name: "Sondas Espaciales & Telescopios"
+  - id: nebel_galaxien
+    name: "Nebulosas & Galaxias"
+  - id: himmelsmechanik
+    name: "Mecánica Celeste"
+  - id: kosmologie
+    name: "Cosmología"
+  - id: entfernungsbestimmung_helligkeit
+    name: "Determinación de Distancias & Brillo"
+  - id: exotische_objekte
+    name: "Objetos Exóticos"
+  - id: sterne
+    name: "Estrellas"
+
+questions:
+  - id: q1
+    text: "¿Cuál es el planeta más grande?"
+    answers: ["Júpiter", "Saturno", "Neptuno", "Marte"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Jupiter_and_its_shrunken_Great_Red_Spot.jpg"
+    image_credit: "NASA, ESA, and A. Simon (Goddard Space Flight Center), Public domain, via Wikimedia Commons"
+
+  - id: q2
+    text: "¿Cuál es el planeta con los anillos más prominentes?"
+    answers: ["Urano", "Júpiter", "Saturno", "Neptuno"]
+    correct: 2
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Saturn_on_October_1998.jpg"
+    image_credit: "ESA/Hubble, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q3
+    text: "¿Cuál es el planeta más cercano al Sol?"
+    answers: ["Venus", "Mercurio", "Tierra", "Marte"]
+    correct: 1
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Solar_System_collage_background.png"
+    image_credit: "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q4
+    text: "¿Cuántos planetas tiene nuestro sistema solar?"
+    answers: ["7", "8", "9", "10"]
+    correct: 1
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Solar_System_collage_background.png"
+    image_credit: "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q5
+    text: "¿Qué planeta se conoce a menudo como el 'Planeta Rojo'?"
+    answers: ["Venus", "Marte", "Júpiter", "Saturno"]
+    correct: 1
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/OSIRIS_Mars_true_color.jpg"
+    image_credit: "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+
+  - id: q6
+    text: "¿Qué constelación contiene la Nebulosa de Orión?"
+    answers: ["Casiopea", "Orión", "Osa Mayor", "Cruz del Sur"]
+    correct: 1
+    category: sternbilder
+    difficulty: laie
+    image: "data/images/m42SHO.png"
+    image_credit: "Florian Rünger, CC BY-NC-SA 3.0"
+
+  - id: q7
+    text: "¿Qué constelación tiene forma de W?"
+    answers: ["Orión", "Casiopea", "Pegaso", "Cisne"]
+    correct: 1
+    category: sternbilder
+    difficulty: laie
+    image: "data/images/Cassiopeia_constellation.jpg"
+    image_credit: "4shadoww, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q8
+    text: "¿A qué constelación pertenece la Estrella Polar?"
+    answers: ["Osa Mayor", "Osa Menor", "Dragón", "Casiopea"]
+    correct: 1
+    category: sternbilder
+    difficulty: amateur
+    image: "data/images/Polaris_comp_s_(25006858485).jpg"
+    image_credit: "Giuseppe Donatiello, CC0, via Wikimedia Commons"
+
+  - id: q9
+    text: "¿Qué es una galaxia?"
+    answers: ["Una estrella individual", "Una enorme concentración de estrellas, gas, polvo y materia oscura", "Un planeta", "Un cometa"]
+    correct: 1
+    category: allgemein
+    difficulty: laie
+    image: "data/images/m81_LRGBcomposite.png"
+    image_credit: "Florian Rünger, CC BY-NC-SA 3.0"
+
+  - id: q10
+    text: "¿Cuánto tarda la luz del Sol en llegar a la Tierra?"
+    answers: ["8 minutos", "8 segundos", "8 horas", "1 segundo"]
+    correct: 0
+    category: allgemein
+    difficulty: amateur
+    image: "data/images/sunearthpanel_sts129_big.jpg"
+    image_credit: "STS-129 Crew, NASA"
+
+  - id: q11
+    text: "¿Cuál de las siguientes estrellas es la más brillante en el cielo nocturno?"
+    answers: ["Sirio", "Canopus", "Betelgeuse", "Próxima Centauri"]
+    correct: 0
+    category: sternbilder
+    difficulty: amateur
+    image: "data/images/Sirius_A_and_B_Hubble_photo.jpg"
+    image_credit: "NASA, ESA, H. Bond (STScI), and M. Barstow (University of Leicester), Public domain, via Wikimedia Commons"
+
+  - id: q12
+    text: "¿Qué planeta tiene más lunas?"
+    answers: ["Júpiter", "Saturno", "Neptuno", "Marte"]
+    correct: 1
+    category: sonnensystem
+    difficulty: amateur
+    image: "data/images/Solar_System_collage_background.png"
+    image_credit: "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q13
+    text: "¿Dónde se encuentra el cinturón de asteroides en el sistema solar?"
+    answers: ["Entre Marte y Júpiter", "Entre la Tierra y Marte", "Entre Venus y la Tierra", "Entre Neptuno y Urano"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Webb_Detects_Extremely_Small_Main_Belt_Asteroid_(52672254127).jpg"
+    image_credit: "NASA's James Webb Space Telescope from Greenbelt, MD, USA, CC BY 2.0, via Wikimedia Commons"
+
+  - id: q14
+    text: "¿Cuánto dura aproximadamente un año en Marte?"
+    answers: ["687 días", "365 días", "182 días", "910 días"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/OSIRIS_Mars_true_color.jpg"
+    image_credit: "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+
+  - id: q15
+    text: "¿Cuál es el planeta más pequeño?"
+    answers: ["Mercurio", "Venus", "Tierra", "Marte"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Mercury_in_color_-_Prockter07_centered.jpg"
+    image_credit: "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington. Edited version of Image: Prockter07.jpg by Papa Lima Whiskey., Public domain, via Wikimedia Commons"
+
+  - id: q16
+    text: "¿Cómo se llama un objeto de hielo y polvo que forma una cola al acercarse al Sol?"
+    answers: ["Cometa", "Planeta", "Estrella", "Galaxia"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/C2022E3ZTF.jpg"
+    image_credit: "Florian Rünger, CC BY-NC-SA 3.0"
+
+  - id: q17
+    text: "¿Qué son las estrellas fugaces?"
+    answers: ["Un asteroide que entra en la atmósfera terrestre", "Un breve destello de una estrella lejana", "Un planeta que cruza el cielo rápidamente", "Un cometa que cruza el cielo rápidamente"]
+    correct: 0
+    category: allgemein
+    difficulty: laie
+    image: "data/images/2014_Meteor.jpg"
+    image_credit: "Jacek Halicki, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q18
+    text: "¿Qué es una supernova?"
+    answers: ['Una estrella recién formada',
+              'Una explosión al final de la vida de estrellas masivas',
+              'Un enjambre de cometas',
+              'Una colisión de galaxias']
+    correct: 1
+    category: sterne
+    difficulty: amateur
+    image: "data/images/SN1994D.jpg"
+    image_credit: "NASA/ESA, The Hubble Key Project Team and The High-Z Supernova Search Team, Public domain, via Wikimedia Commons"
+
+  - id: q19
+    text: "¿Qué es un planeta?"
+    answers: ["Un objeto esférico que orbita una estrella y ha despejado su órbita de otros objetos",
+              "Una bola de plasma en cuyo interior se produce fusión nuclear",
+              "Un objeto que orbita el Sol",
+              "Un objeto que orbita una estrella y ha despejado su órbita de otros objetos"]
+    correct: 0
+    category: allgemein
+    difficulty: amateur
+    image: "data/images/Solar_System_collage_background.png"
+    image_credit: "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q20
+    text: "¿Qué es una estrella?"
+    answers: ["Un objeto esférico compuesto de gas (plasma) en cuyo interior se produce fusión nuclear",
+              "Un objeto esférico compuesto de gas y polvo que se calienta por el impacto de meteoritos",
+              "Un objeto esférico que orbita el Sol",
+              "Un objeto esférico que orbita la Tierra y nos suministra energía"]
+    correct: 0
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Star-sizes.jpg"
+    image_credit: "Dave Jarvis (https://dave.autonoma.ca/), CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q21
+    text: "¿Cómo se llama también la trayectoria de un planeta alrededor de una estrella?"
+    answers: ["Órbita", "Parábola", "Hipérbola", "Trayectoria"]
+    correct: 0
+    category: himmelsmechanik
+    difficulty: amateur
+    image: "data/images/Ceres_Orbit_de.svg"
+    image_credit: "File:Ceres Orbit.svg: Orionist / *derivative work Sebastian Wallroth, CC BY-SA 2.5, via Wikimedia Commons"
+
+  - id: q22
+    text: "¿Qué rodea constantemente la Tierra y nos protege del viento solar?"
+    answers: ["Campo magnético", "Atmósfera", "Ozono", "Óxido"]
+    correct: 0
+    category: allgemein
+    difficulty: laie
+    image: "data/images/ISS046-E-26820_-_View_of_Earth.jpg"
+    image_credit: "Earth Science and Remote Sensing Unit, Lyndon B. Johnson Space Center, Public domain, via Wikimedia Commons"
+
+  - id: q23
+    text: "¿Cómo se llama el más pequeño de los ocho planetas?"
+    answers: ["Mercurio", "Venus", "Tierra", "Marte"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Mercury_in_color_-_Prockter07_centered.jpg"
+    image_credit: "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington. Edited version of Image: Prockter07.jpg by Papa Lima Whiskey., Public domain, via Wikimedia Commons"
+
+  - id: q24
+    text: "¿De qué color es principalmente el planeta Neptuno?"
+    answers: ["Azul", "Verde", "Morado", "Naranja"]
+    correct: 0
+    category: sonnensystem
+    difficulty: amateur
+    image: "data/images/Neptune_Voyager2_color_calibrated.png"
+    image_credit: "NASA / Voyager 2 / PDS / OPUS / Ardenau4, CC0, via Wikimedia Commons"
+
+  - id: q25
+    text: "¿Qué es la banda luminosa en el cielo nocturno en la que se encuentra nuestro Sol?"
+    answers: ["Una galaxia", "Una estrella", "Un planeta", "Una constelación"]
+    correct: 0
+    category: allgemein
+    difficulty: laie
+    image: "data/images/360-degree_Panorama_of_the_Southern_Sky.jpg"
+    image_credit: "ESO/H.H. Heyer, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q26
+    text: "¿Cómo se llama la galaxia en la que se encuentran nuestro Sol y la Tierra?"
+    answers: ["Vía Láctea", "Andrómeda", "Galaxia del Triángulo", "Galaxia natal"]
+    correct: 0
+    category: allgemein
+    difficulty: laie
+    image: "data/images/Bontecou_Lake_Milky_Way_panorama.jpg"
+    image_credit: "Juliancolton, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q27
+    text: "¿Qué planeta tiene la luna más grande del sistema solar?"
+    answers: ["Júpiter", "Saturno", "Neptuno", "Marte"]
+    correct: 0
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Jupiter_and_its_shrunken_Great_Red_Spot.jpg"
+    image_credit: "NASA, ESA, and A. Simon (Goddard Space Flight Center), Public domain, via Wikimedia Commons"
+
+  - id: q28
+    text: "¿Cómo se llama la luna más grande del sistema solar?"
+    answers: ["Luna", "Europa", "Ganímedes", "Ío"]
+    correct: 2
+    category: sonnensystem
+    difficulty: amateur
+    image: "data/images/Ganymede_-_Perijove_34_Composite.png"
+    image_credit: "Kevin Gill, CC BY 2.0, via Wikimedia Commons"
+
+  - id: q29
+    text: "¿Qué planeta rota más lentamente?"
+    answers: ["Mercurio", "Venus", "Tierra", "Marte"]
+    correct: 1
+    category: sonnensystem
+    difficulty: amateur
+    image: "data/images/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_(cropped).jpg"
+    image_credit: "NASA/JPL-Caltech, Public domain, via Wikimedia Commons"
+
+  - id: q30
+    text: "¿Qué es el Sol?"
+    answers: ["Una estrella", "Un planeta", "Una luna", "Un asteroide"]
+    correct: 0
+    category: allgemein
+    difficulty: laie
+    image: "data/images/sun_full_disk.jpg"
+    image_credit: "Martin Sparre, CC BY-NC-SA 3.0"
+
+  - id: q31
+    text: "¿Cuánto dura un año en Neptuno?"
+    answers: ["165 años terrestres", "84 años terrestres", "12 años terrestres", "29 años terrestres"]
+    correct: 0
+    category: sonnensystem
+    difficulty: amateur
+    image: "data/images/Neptune_Voyager2_color_calibrated.png"
+    image_credit: "NASA / Voyager 2 / PDS / OPUS / Ardenau4, CC0, via Wikimedia Commons"
+
+  - id: q32
+    text: "¿Cuánto dura un día en Marte?"
+    answers: ["24,6 horas", "22,4 horas", "26,3 horas", "28,1 horas"]
+    correct: 0
+    category: sonnensystem
+    difficulty: amateur
+    image: "data/images/OSIRIS_Mars_true_color.jpg"
+    image_credit: "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+
+  - id: q33
+    text: "¿Qué es Plutón?"
+    answers: ["Un planeta", "Un planeta enano", "Una luna", "Un asteroide"]
+    correct: 1
+    category: sonnensystem
+    difficulty: laie
+    image: "data/images/Pluto.jpg"
+    image_credit: "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute, Public domain, via Wikimedia Commons"
+
+  - id: q34
+    text: "¿Cuántos planetas enanos reconocidos existen?"
+    answers: ["5", "2", "7", "10"]
+    correct: 0
+    category: sonnensystem
+    difficulty: astronom
+    image: "data/images/Zwergplaneten.jpg"
+    image_credit: "NASA, Public domain, via Wikimedia Commons"
+
+  - id: q35
+    text: "¿Qué es Eris?"
+    answers: ["Un planeta", "Un planeta enano", "Una luna", "Un asteroide"]
+    correct: 1
+    category: sonnensystem
+    difficulty: astronom
+    image: "data/images/225088_Gonggong_(2007_OR10)_and_Eris_orbits,_Jan2018,_top_view.png"
+    image_credit: "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+
+  - id: q36
+    text: "¿Qué es Makemake?"
+    answers: ["Un planeta", "Un planeta enano", "Una luna", "Un asteroide"]
+    correct: 1
+    category: sonnensystem
+    difficulty: astronom
+    image: "data/images/Makemake_New_Horizons.gif"
+    image_credit: "NASA, JHUAPL, SwRI, Daniel Bamberger, Public domain, via Wikimedia Commons"
+
+  - id: q37
+    text: "¿Qué es Sedna?"
+    answers: ["Un planeta", "Un planeta enano", "Una luna", "Un asteroide"]
+    correct: 1
+    category: sonnensystem
+    difficulty: astronom
+    image: "data/images/Sedna_Discovery_(geminiann05005c).jpg"
+    image_credit: "International Gemini Observatory/NOIRLab/NSF/AURA, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q38
+    text: "¿Qué son los objetos transneptunianos?"
+    answers: ['Cuerpos celestes cuya órbita se encuentra más allá del planeta gaseoso exterior Neptuno',
+               'Cuerpos celestes cuya órbita se encuentra dentro de la órbita de Neptuno',
+               'Cuerpos celestes que se mueven alrededor de Neptuno',
+               'Cuerpos celestes capturados por Neptuno']
+    correct: 0
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Planet_nine-etnos_now-new3.png"
+    image_credit: "Tomruen, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q39
+    text: "¿Qué forma tiene la órbita de un planeta alrededor del Sol?"
+    answers: ["Elipse", "Parábola", "Hipérbola", "Círculo"]
+    correct: 0
+    category: himmelsmechanik
+    difficulty: amateur
+    image: "data/images/Conic_Sections.svg.png"
+    image_credit: "Original: Magister Mathematicae; Derivative work: Phancy; Übersetzung: Glrx, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q40
+    text: "¿Qué son los troyanos de Júpiter?"
+    answers: ['Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L4 y L5 con una separación media de 60°',
+              'Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L2 y L3 con una separación media de 45°',
+              'Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L4 y L5 con una separación media de 75°',
+              'Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L5 y L6 con una separación media de 50°']
+    correct: 0
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Orbita_aquiles.jpg"
+    image_credit: "Fer31416, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q41
+    text: "¿Qué son los cúmulos estelares?"
+    answers: ['Un grupo de estrellas que se formaron a partir de la misma nube de gas y polvo',
+              'Un grupo de estrellas que se encuentran casualmente en la misma región del espacio y están en la misma fase de desarrollo',
+              'Un grupo de estrellas que se encuentran en la misma fase de desarrollo',
+              'Un grupo de estrellas que se formaron juntas y se encuentran en la misma fase de desarrollo']
+    correct: 0
+    category: sterne
+    difficulty: astronom
+    image: "data/images/Messier92_LRGB.jpg"
+    image_credit: "Jeremias Siehr, CC BY-NC-SA 3.0"
+
+  - id: q42
+    text: "¿Qué es el cinturón de Kuiper?"
+    answers: ['Un cinturón de asteroides en nuestro sistema solar más allá de la órbita de Neptuno',
+              'Un cinturón de asteroides alrededor de Próxima Centauri',
+              'Un cinturón de asteroides entre Júpiter y Saturno',
+              'Un cinturón de asteroides entre Saturno y Urano']
+    correct: 0
+    category: sonnensystem
+    difficulty: astronom
+    image: "data/images/Kuiper_belt_-_Oort_cloud-de.svg.png"
+    image_credit: "NASA, Medium69.Cette & William Crochot, Public domain, via Wikimedia Commons"
+
+  - id: q43
+    text: "¿Qué es la Nube de Oort?"
+    answers: ['Una nube de estrellas en la misma fase de desarrollo',
+              'Una región de formación estelar en la Nebulosa de Orión',
+              'Una acumulación de asteroides y cometas en la región más externa del sistema solar',
+              'Una prominente capa de nubes en la atmósfera de Júpiter']
+    correct: 2
+    category: sonnensystem
+    difficulty: astronom
+    image: "data/images/Kuiper_belt_-_Oort_cloud-de.svg.png"
+    image_credit: "NASA, Medium69.Cette & William Crochot, Public domain, via Wikimedia Commons"
+
+  - id: q44
+    text: "¿Qué es una transferencia de Hohmann?"
+    answers: ['Un cambio de órbita que traslada una órbita planetaria a otra',
+              'Una transición energéticamente favorable entre dos órbitas alrededor de un cuerpo celeste',
+              'Un mecanismo para transferir masa de una estrella a otra en un sistema binario',
+              'Una transición especial de una fase de evolución estelar a la siguiente']
+    correct: 1
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Hohmann_transfer_orbit2.svg.png"
+    image_credit: "Waterced, CC0, via Wikimedia Commons"
+
+  - id: q45
+    text: "¿Qué es un púlsar?"
+    answers: ['Una joven protoestrella',
+              'Una estrella de neutrones de rotación rápida con radiación colimada',
+              'Un núcleo cometario activo',
+              'Un sistema binario con transferencia de masa']
+    correct: 1
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/Lightsmall-optimised.gif"
+    image_credit: "Michael Kramer, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q46
+    text: "¿Qué proceso impulsa la enorme emisión de energía de un cuásar?"
+    answers: ['Fusión nuclear en una estrella gigante',
+              'Acreción de materia sobre un agujero negro supermasivo',
+              'Colisión de dos galaxias',
+              'Desintegración de materia oscura']
+    correct: 1
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/NASAs_Chandra_Finds_Black_Hole_With_Tremendous_Growth_(supermassive-black-hole-2).jpg"
+    image_credit: "X-ray: NASA/CXC/INAF-Brera/L. Ighina et al.; Illustration: NASA/CXC/SAO/M. Weiss; Image Processing: NASA/CXC/SAO/N. Wolk, Public domain, via Wikimedia Commons"
+
+  - id: q47
+    text: "¿Qué distingue a un magnetar de otras estrellas de neutrones?"
+    answers: ['Su velocidad de rotación especialmente alta',
+              'Su campo magnético extremadamente intenso',
+              'Su masa doble',
+              'Su color azul']
+    correct: 1
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/Artists_impression_of_the_magnetar_in_the_star_cluster_Westerlund_1.jpg"
+    image_credit: "ESO/L. Calçada, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q48
+    text: "¿Qué describe el horizonte de eventos de un agujero negro?"
+    answers: ['El borde visible del disco de acreción',
+              'El límite a partir del cual ninguna información puede escapar',
+              'La región de máxima radiación de rayos X',
+              'El radio de la esfera de fotones']
+    correct: 1
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/Black_hole_-_Messier_87.jpg"
+    image_credit: "Event Horizon Telescope, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q49
+    text: "¿Qué objeto se encuentra en el centro de la Vía Láctea?"
+    answers: ['Un cúmulo globular',
+              'Un púlsar',
+              'Un agujero negro supermasivo',
+              'Una nube de materia oscura']
+    correct: 2
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/Orbits_of_stars_around_black_hole_at_the_heart_of_the_Milky_Way_(eso1825d).jpg"
+    image_credit: "ESO/L. Calçada/spaceengine.org, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q50
+    text: "¿Qué es un blásar?"
+    answers: ['Una estrella variable',
+              'Un cuásar con un chorro apuntando hacia la Tierra',
+              'Una región de formación estelar',
+              'Un sistema binario en colisión']
+    correct: 1
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/Blazar-illustration.jpg"
+    image_credit: "NASA/JPL-Caltech/GSFC, Public domain, via Wikimedia Commons"
+
+  - id: q51
+    text: "¿Qué radiación se observa típicamente en los núcleos galácticos activos?"
+    answers: ['Solo luz visible',
+              'Solo radiación de radio',
+              'A lo largo de todo el espectro electromagnético',
+              'Exclusivamente rayos gamma']
+    correct: 2
+    category: exotische_objekte
+    difficulty: astronom
+    image: "data/images/Artists_impression_of_quasar_J0313-1806.jpg"
+    image_credit: "NASA/ESA/C.Maraston (STScI), Public domain, via Wikimedia Commons"
+
+  - id: q52
+    text: "¿Qué describe la tercera ley de Kepler?"
+    answers: ['La forma de las órbitas planetarias',
+              'La relación entre el período orbital y el radio de la órbita',
+              'La velocidad de rotación del Sol',
+              'La inclinación orbital de los cometas']
+    correct: 1
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Ellipitical_orbit_of_planet_with_an_eccentricty_of_0.8.gif"
+    image_credit: "Mkwadee, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q53
+    text: "¿Qué es un punto de Lagrange?"
+    answers: ['Un punto de máxima gravedad',
+              'Una posición de equilibrio estable en un sistema de dos cuerpos',
+              'El centro de una galaxia',
+              'Un punto de máximo efecto de marea']
+    correct: 1
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Lagrange_points2.svg.png"
+    image_credit: "Xander89, CC BY 3.0, via Wikimedia Commons"
+
+  - id: q54
+    text: '¿Qué significa "rotación sincrónica"?'
+    answers: ['Un planeta no rota',
+              'El período orbital y el período de rotación son idénticos',
+              'Dos planetas comparten una órbita',
+              'Un planeta rota en sentido inverso']
+    correct: 1
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Tidal_locking_of_the_Moon_with_the_Earth.gif"
+    image_credit: "Stigmatella aurantiaca, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q55
+    text: "¿Por qué las galaxias espirales muestran curvas de rotación planas?"
+    answers: ['Por la alta densidad estelar en el centro',
+              'Debido a la materia oscura',
+              'Por fricción intergaláctica',
+              'Por campos magnéticos']
+    correct: 1
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Comparison_of_rotating_disc_galaxies_in_the_distant_Universe_and_the_present_day.jpg"
+    image_credit: "ESO/L. Calçada, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q56
+    text: "¿Qué se entiende por precesión del eje terrestre?"
+    answers: ['Cambio en la rotación de la Tierra por día',
+              'Movimiento de bamboleo del eje de rotación',
+              'Desplazamiento de la órbita terrestre',
+              'Cambio de los polos magnéticos']
+    correct: 1
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Gyroscope_precession.gif"
+    image_credit: "Lucas Vieira, Public domain, via Wikimedia Commons"
+
+  - id: q57
+    text: "¿Qué es un movimiento retrógrado?"
+    answers: ['El movimiento opuesto de un cuerpo celeste en comparación con el sentido de rotación del sistema',
+              'El movimiento de un cuerpo celeste en un sistema rotante que sigue la dirección de rotación principal',
+              'El movimiento de un cuerpo celeste en una órbita fuera de la eclíptica',
+              'La desaceleración gravitatoria del movimiento de un cuerpo celeste en su órbita']
+    correct: 0
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/RetrogradeBaan.gif"
+    image_credit: "Silver Spoon, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q58
+    text: "¿Qué forma orbital tiene un objeto con excentricidad e = 1?"
+    answers: ['Parábola',
+              'Hipérbola',
+              'Elipse',
+              'Círculo']
+    correct: 0
+    category: himmelsmechanik
+    difficulty: astronom
+    image: "data/images/Conic_Sections.svg.png"
+    image_credit: "Original: Magister Mathematicae; Derivative work: Phancy; Übersetzung: Glrx, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q59
+    text: "¿Qué describe la constante de Hubble?"
+    answers: ['La masa de la Vía Láctea',
+              'La tasa de expansión del universo',
+              'La temperatura de la radiación de fondo',
+              'El número de galaxias']
+    correct: 1
+    category: kosmologie
+    difficulty: astronom
+    image: "data/images/Expansion_des_Universums.png"
+    image_credit: "NASA / WMAP Science Team simple retouch by Yikrazuul, Public domain, via Wikimedia Commons"
+
+  - id: q60
+    text: "¿Qué es la radiación de fondo cósmico de microondas?"
+    answers: ['Radiación de radio de los pulsares',
+              'Radiación residual del Big Bang',
+              'Luz infrarroja de galaxias',
+              'Emisión de materia oscura']
+    correct: 1
+    category: kosmologie
+    difficulty: astronom
+    image: "data/images/BigBangNoise.jpg"
+    image_credit: "NASA, Public domain, via Wikimedia Commons"
+
+  - id: q61
+    text: "¿Qué proporción de la energía total del universo corresponde aproximadamente a la energía oscura?"
+    answers: ['~5 %',
+              '~27 %',
+              '~72 %',
+              '~90 %']
+    correct: 2
+    category: kosmologie
+    difficulty: astronom
+    image: "data/images/CMB_universe_expansion.png"
+    image_credit: "NASA/WMAP Science Team/ Art by Dana Berry, Public domain, via Wikimedia Commons"
+
+  - id: q62
+    text: '¿Qué significa "corrimiento al rojo" en galaxias lejanas?'
+    answers: ['Se están acercando a nosotros',
+              'Su luz se desplaza hacia el azul',
+              'Su luz se estira por la expansión del universo',
+              'Contienen especialmente muchas estrellas rojas']
+    correct: 2
+    category: kosmologie
+    difficulty: astronom
+    image: "data/images/HUDF_large.jpg"
+    image_credit: "NASA, ESA, Hubble; Sonification: G. Salvesen (UCSB); Data: M. Rafelski et al."
+
+  - id: q63
+    text: "¿Qué es un modelo de inflación?"
+    answers: ['Modelo de evolución estelar',
+              'Teoría de una expansión extremadamente rápida justo después del Big Bang',
+              'Modelo de colisión de galaxias',
+              'Teoría sobre la formación de agujeros negros']
+    correct: 1
+    category: kosmologie
+    difficulty: astronom
+    image: "data/images/Expansion_des_Universums.png"
+    image_credit: "NASA / WMAP Science Team simple retouch by Yikrazuul, Public domain, via Wikimedia Commons"
+
+  - id: q64
+    text: "¿Qué es el efecto de lente gravitacional?"
+    answers: ['Refracción de la luz por campos magnéticos',
+              'Desviación de la luz por la masa',
+              'Reflexión en polvo interestelar',
+              'Interferencia por energía oscura']
+    correct: 1
+    category: kosmologie
+    difficulty: astronom
+    image: "data/images/Gravitational_lens-full.jpg"
+    image_credit: "NASA, Public domain, via Wikimedia Commons"
+
+  - id: q65
+    text: "¿De qué color son las estrellas calientes?"
+    answers: ['Rojo',
+              'Amarillo',
+              'Azul',
+              'Naranja']
+    correct: 2
+    category: sterne
+    difficulty: amateur
+    image: "data/images/eagle_nebula.jpg"
+    image_credit: "Jonas Brinkmann, CC-BY-NC-SA 3.0"
+
+  - id: q66
+    text: "¿Qué describe principalmente la clase espectral de una estrella?"
+    answers: ['Su tamaño',
+              'Su composición química',
+              'Su temperatura superficial',
+              'Su edad']
+    correct: 2
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Morgan-Keenan_spectral_classification.svg.png"
+    image_credit: "Rursus, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q67
+    text: "¿Qué se forma al final de la vida de una estrella similar al Sol?"
+    answers: ['Una enana blanca',
+              'Una estrella de neutrones',
+              'Un agujero negro',
+              'Un púlsar']
+    correct: 0
+    category: sterne
+    difficulty: amateur
+    image: "data/images/m97.jpg"
+    image_credit: "Florian Rünger, CC BY-NC-SA 3.0"
+
+  - id: q68
+    text: "¿Qué es una gigante roja?"
+    answers: ['Una estrella especialmente masiva',
+              'Una estrella vieja con envoltura expandida',
+              'Una estrella justo antes de la supernova',
+              'Un sistema binario']
+    correct: 1
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Red_giant_simulation_4_(cropped).jpg"
+    image_credit: "A. Chiavassa, R. Kudritzki, B. Davies, B. Freytag and S. E. de Mink, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q69
+    text: "¿Qué es un sistema de estrellas dobles?"
+    answers: ['Dos estrellas que se superponen casualmente',
+              'Dos estrellas gravitacionalmente ligadas',
+              'Una estrella con campo magnético intenso',
+              'Una estrella con dos planetas']
+    correct: 1
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Menkalinan.png"
+    image_credit: "Pablo Carlos Budassi, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q70
+    text: "¿Qué fuente de energía impulsa a las estrellas de la secuencia principal?"
+    answers: ['Combustión química',
+              'Colapso gravitacional',
+              'Fusión nuclear del hidrógeno',
+              'Desintegración radiactiva']
+    correct: 2
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Sun_poster.svg.png"
+    image_credit: "Kelvinsong, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q71
+    text: "¿Qué es una enana marrón?"
+    answers: ['Una estrella especialmente antigua',
+              'Un objeto entre planeta y estrella',
+              'Una estrella de neutrones',
+              'Una enana blanca extinta']
+    correct: 1
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Brown_Dwarf_Comparison_2020.png"
+    image_credit: "Planetkid32, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q72
+    text: "¿Qué se entiende por metalicidad de una estrella?"
+    answers: ['Su contenido de hierro',
+              'Su campo magnético',
+              'Proporción de elementos pesados',
+              'Su densidad']
+    correct: 2
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Messier92_LRGB.png"
+    image_credit: "Jeremias Siehr, CC BY-NC-SA 3.0"
+
+  - id: q73
+    text: "¿Por qué algunas estrellas parecen variables?"
+    answers: ['Debido a la rotación de la Tierra',
+              'Por fluctuaciones de brillo o eclipses',
+              'Por cambios de color',
+              'Debido a la radiación cósmica']
+    correct: 1
+    category: sterne
+    difficulty: amateur
+    image: "data/images/Eso2003c.jpg"
+    image_credit: "ESO/M. Montargès et al., CC BY 4.0, via Wikimedia Commons"
+
+  - id: q74
+    text: "¿Qué es una nebulosa de emisión?"
+    answers: ['Una nebulosa de polvo reflectante',
+              'Una nube de gas excitada para brillar por las estrellas',
+              'Una nube oscura',
+              'Una nebulosa planetaria']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/m42SHO.png"
+    image_credit: "Florian Rünger, CC BY-NC-SA 3.0"
+
+  - id: q75
+    text: "¿Qué es una nebulosa planetaria?"
+    answers: ['Lugar de nacimiento de un planeta',
+              'Resto de una estrella similar al Sol',
+              'Resto de supernova',
+              'Gas alrededor de un planeta gigante']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/M57.jpg"
+    image_credit: "Florian Rünger & Moritz Itzerott, CC BY-NC-SA 3.0"
+
+  - id: q76
+    text: "¿Qué forma tiene típicamente una galaxia espiral?"
+    answers: ['Esférica',
+              'En forma de disco con brazos espirales',
+              'Irregular',
+              'En forma de anillo']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: laie
+    image: "data/images/ngc891.jpg"
+    image_credit: "Nadine Giese, CC BY-NC-SA 3.0"
+
+  - id: q77
+    text: "¿Qué suele encontrarse en el centro de las grandes galaxias?"
+    answers: ['Cúmulos globulares',
+              'Agujero negro supermasivo',
+              'Núcleo de materia oscura',
+              'Estrella cuásar']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/A_view_of_the_Milky_Way_supermassive_black_hole_Sagittarius_A__in_polarised_light_(eso2406a).jpg"
+    image_credit: "EHT Collaboration, CC BY 4.0, via Wikimedia Commons"
+
+  - id: q78
+    text: "¿Qué es un resto de supernova?"
+    answers: ['Una protoestrella',
+              'Una extensa nube de gas tras una explosión estelar',
+              'Una enana blanca',
+              'Un agujero negro']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/Tycho-supernova-xray.jpg"
+    image_credit: "NASA/CXC/Rutgers/J.Warren & J.Hughes et al., Public domain, via Wikimedia Commons"
+
+  - id: q79
+    text: "¿Qué es el Grupo Local?"
+    answers: ['Un cúmulo estelar',
+              'Un grupo de galaxias vecinas',
+              'Un cúmulo abierto',
+              'Una región nebulosa']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/Lokale_Gruppe_3D_Nachbarschaft.svg.png"
+    image_credit: "CWitte, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q80
+    text: "¿Por qué muchas nebulosas de emisión parecen rojizas?"
+    answers: ['Debido al hierro',
+              'Debido a la emisión de hidrógeno',
+              'Debido a la reflexión del polvo',
+              'Debido al corrimiento al rojo']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/NGC2264_2022_03_07.png"
+    image_credit: "Florian Rünger, CC BY-NC-SA 3.0"
+
+  - id: q81
+    text: "¿Qué es una galaxia irregular?"
+    answers: ['Una galaxia esférica',
+              'Una galaxia espiral sin núcleo',
+              'Una galaxia sin estructura clara',
+              'Una galaxia anular']
+    correct: 2
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/NGC_4038_NGC_4039_HaRGB.jpg"
+    image_credit: "Jonas Brinkmann, CC BY-NC-SA 3.0"
+
+  - id: q82
+    text: "¿Qué se mide frecuentemente en las galaxias para determinar su distancia?"
+    answers: ['Temperatura',
+              'Corrimiento al rojo',
+              'Color',
+              'Número de estrellas']
+    correct: 1
+    category: nebel_galaxien
+    difficulty: amateur
+    image: "data/images/Redshift_horizontal.png"
+    image_credit: "Georg Wiora (Dr. Schorsch), CC BY-SA 2.5, via Wikimedia Commons"
+
+  - id: q83
+    text: "¿Qué ocurre durante un eclipse solar?"
+    answers: ['La Luna tapa al Sol',
+              'La Tierra tapa a la Luna',
+              'Marte tapa al Sol',
+              'El Sol se apaga']
+    correct: 0
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/solar_eclipse_c.jpg"
+    image_credit: "Rainer Hainich & Marcel Pietschmann, CC BY-NC-SA 3.0"
+
+  - id: q84
+    text: "¿Qué es un eclipse lunar?"
+    answers: ['El Sol tapa a la Luna',
+              'La Tierra proyecta una sombra sobre la Luna',
+              'La Luna desaparece',
+              'Júpiter tapa a la Luna']
+    correct: 1
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/Lunar_eclipse_March_2007.jpg"
+    image_credit: "U.S. Navy photos by Mass Communication Specialist Seaman Joshua Valcarcel, Public domain, via Wikimedia Commons"
+
+  - id: q85
+    text: "¿Qué provoca las mareas en la Tierra?"
+    answers: ['El viento solar',
+              'La gravedad de la Luna y el Sol',
+              'La rotación de la Tierra',
+              'El campo magnético']
+    correct: 1
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/00_3536_Auswirkung_der_Gezeiten_(Niedrigwasser).jpg"
+    image_credit: "W. Bulach, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q86
+    text: "¿Qué es una lluvia de meteoros?"
+    answers: ['Un meteoro individual',
+              'Muchos meteoros procedentes del polvo de cometas',
+              'El impacto de un asteroide',
+              'Una aurora polar']
+    correct: 1
+    category: astronomische_phanomene
+    difficulty: laie
+    image: "data/images/Leonids-1833.jpg"
+    image_credit: "Engraving: Adolf Vollmy; Original Art: Karl Jauslin "
+
+  - id: q87
+    text: "¿Qué son las auroras polares?"
+    answers: ['Explosiones estelares',
+              'Interacción del viento solar con el campo magnético',
+              'Meteoros',
+              'Nebulosas']
+    correct: 1
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/aurora_borealis_next_to_dome.jpg"
+    image_credit: "Jonas Brinkmann, CC BY-NC-SA 3.0"
+
+  - id: q88
+    text: "¿Qué es un tránsito?"
+    answers: ['Un planeta tapa completamente a una estrella',
+              'Un planeta pasa por delante de una estrella',
+              'Una estrella explota',
+              'Un cometa se desintegra durante un vuelo cercano a una estrella']
+    correct: 1
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/SDO's_Ultra-high_Definition_View_of_2012_Venus_Transit_--_Path_Sequence.jpg"
+    image_credit: "NASA/SDO, AIA, CC BY 2.0, via Wikimedia Commons"
+
+  - id: q89
+    text: "¿Qué es un exoplaneta?"
+    answers: ['Un planeta fuera de nuestro sistema solar',
+              'Un planeta que orbita otro planeta',
+              'Un planeta que orbita el Sol',
+              'Un planeta que se desintegra']
+    correct: 0
+    category: astronomische_phanomene
+    difficulty: laie
+    image: "data/images/Kepler-62f_with_62e_as_Morning_Star.jpg"
+    image_credit: "NASA Ames/JPL-Caltech, Public domain, via Wikimedia Commons"
+
+  - id: q90
+    text: "¿Qué es el perihelio?"
+    answers: ['El punto de la órbita más cercano al Sol',
+              'El punto más alejado del Sol',
+              'Un cinturón planetario',
+              'Una mancha solar']
+    correct: 0
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/Closed_orbits.gif"
+    image_credit: "Jacopo Bertolotti, CC0, via Wikimedia Commons"
+
+  - id: q91
+    text: "¿Qué se denomina oposición de un planeta?"
+    answers: ['El planeta está detrás del Sol visto desde nosotros',
+              'El planeta está frente al Sol visto desde nosotros',
+              'El planeta abandona su órbita',
+              'El planeta rota en sentido inverso']
+    correct: 1
+    category: astronomische_phanomene
+    difficulty: amateur
+    image: "data/images/Close_encounter-_Mars_at_opposition_(opo0534l).jpg"
+    image_credit: "NASA, ESA, and Z. Levay (STScI), Public domain, via Wikimedia Commons"
+
+  - id: q92
+    text: "¿Por qué muchos telescopios operan en el espacio?"
+    answers: ['Más cerca de las estrellas',
+              'Ninguna atmósfera interfiere en las observaciones',
+              'Menor gravedad',
+              'Más luz']
+    correct: 1
+    category: raumsonden_teleskope
+    difficulty: amateur
+    image: "data/images/Hubble_Space_Telescope_(27946391011).jpg"
+    image_credit: "NASA Hubble Space Telescope, Public domain, via Wikimedia Commons"
+
+  - id: q93
+    text: "¿Qué mide un radiotelescopio?"
+    answers: ['Luz visible',
+              'Ondas de radio',
+              'Radiación ultravioleta',
+              'Rayos X']
+    correct: 1
+    category: raumsonden_teleskope
+    difficulty: laie
+    image: "data/images/Very_Large_Array,_2012.jpg"
+    image_credit: "John Fowler, CC BY 2.0, via Wikimedia Commons"
+
+  - id: q94
+    text: "¿Qué es la óptica adaptativa?"
+    answers: ['Un ocular móvil',
+              'Un sistema para compensar la distorsión atmosférica',
+              'Una función de zoom',
+              'Un filtro de color']
+    correct: 1
+    category: raumsonden_teleskope
+    difficulty: amateur
+    image: "data/images/Laser_Towards_Milky_Ways_Centre.jpg"
+    image_credit: "ESO/Yuri Beletsky (ybialets at eso.org), CC BY 4.0, via Wikimedia Commons"
+
+  - id: q95
+    text: "¿Qué es una sonda espacial?"
+    answers: ['Una nave espacial tripulada',
+              'Un dispositivo de investigación no tripulado',
+              'Un satélite tripulado',
+              'Un telescopio espacial']
+    correct: 1
+    category: raumsonden_teleskope
+    difficulty: amateur
+    image: "data/images/Galileo_Preparations_-_GPN-2000-000672.jpg"
+    image_credit: "NASA, Public domain, via Wikimedia Commons"
+
+  - id: q96
+    text: "¿Por qué los telescopios infrarrojos suelen estar refrigerados?"
+    answers: ['Para su estabilización',
+              'Para evitar emitir su propia radiación térmica',
+              'Debido al vacío',
+              'Debido al polvo']
+    correct: 1
+    category: raumsonden_teleskope
+    difficulty: amateur
+    image: "data/images/James_Webb_Space_Telescope_2009_top.jpg"
+    image_credit: "NASA, Public domain, via Wikimedia Commons"
+
+  - id: q97
+    text: "¿Qué es un pársec?"
+    answers: ['Una unidad de tiempo',
+              'Una unidad de distancia',
+              'Una unidad de brillo',
+              'Una unidad de masa']
+    correct: 1
+    category: entfernungsbestimmung_helligkeit
+    difficulty: amateur
+    image: "data/images/Parsec-fr.svg.png"
+    image_credit: "jd, Public domain, via Wikimedia Commons"
+
+  - id: q98
+    text: "¿Qué es un año luz?"
+    answers: ['Una unidad de distancia',
+              'Una unidad de brillo',
+              'Una unidad de masa',
+              'Una unidad de tiempo']
+    correct: 0
+    category: entfernungsbestimmung_helligkeit
+    difficulty: laie
+    image: "data/images/Light-year-scale-Bob-King.jpg"
+    image_credit: "Bob King, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q99
+    text: "¿Qué mide la magnitud aparente?"
+    answers: ['La luminosidad real de un objeto',
+              'El brillo de un objeto visto desde la Tierra',
+              'La distancia de un objeto',
+              'La temperatura de un objeto']
+    correct: 1
+    category: entfernungsbestimmung_helligkeit
+    difficulty: amateur
+    image: "data/images/65Cyb-LB3-apmag.jpg"
+    image_credit: "I, Kevin Heider, CC BY-SA 3.0, via Wikimedia Commons"
+
+  - id: q100
+    text: "¿Qué mide la magnitud absoluta?"
+    answers: ['El brillo de un objeto a una distancia de 10 pársecs',
+              'El brillo máximo de un objeto',
+              'El brillo de un objeto a una distancia de una unidad astronómica',
+              'La masa de un objeto']
+    correct: 0
+    category: entfernungsbestimmung_helligkeit
+    difficulty: amateur
+    image: "data/images/Abell_1367_with_Manually_added_Galaxy_distances.jpg"
+    image_credit: "Keesscherer, CC BY-SA 4.0, via Wikimedia Commons"
+
+  - id: q101
+    text: "¿En qué efecto se basa la medición de paralaje?"
+    answers: ['Corrimiento al rojo de galaxias lejanas',
+              'Desplazamiento angular de un objeto durante la órbita de la Tierra alrededor del Sol',
+              'Brillo similar de supernovas de tipo 1a',
+              'Períodos de pulsares']
+    correct: 1
+    category: entfernungsbestimmung_helligkeit
+    difficulty: amateur
+    image: "data/images/Stellarparallax_parsec_de.svg.png"
+    image_credit: "AaronDewes, CC0, via Wikimedia Commons"
+
+  - id: q102
+    text: "¿Para qué son importantes las cefeidas?"
+    answers: ['Búsqueda de planetas',
+              'Medición de distancias',
+              'Análisis de campos magnéticos',
+              'Rotación galáctica']
+    correct: 1
+    category: entfernungsbestimmung_helligkeit
+    difficulty: amateur
+    image: "data/images/Comparison_of_Hubble_and_Webb_views_of_a_Cepheid_variable_star_(weic2408b).jpg"
+    image_credit: "NASA, ESA, CSA, STScI, A. Riess (JHU/STScI), CC BY 4.0, via Wikimedia Commons"

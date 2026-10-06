@@ -75,6 +75,20 @@ func _ready() -> void:
 						b._elapsed = 50.0
 					"blink_wrong":
 						b._on_tap(Vector2(300, 300))
+		"quiz", "quiz_answer", "quiz_result":
+			var qg: Control = load("res://games/quiz/quiz_game.tscn").instantiate()
+			qg.skip_intro = true
+			qg.rng_seed = 11
+			add_child(qg)
+			await get_tree().create_timer(0.4).timeout
+			if scenario == "quiz_answer":
+				qg._on_answer((int(qg.logic.current().correct) + 1) % 4)
+			elif scenario == "quiz_result":
+				for k in QuizLogic.ROUND:
+					qg.logic.answer(int(qg.logic.current().correct) if k % 3 != 0 else -1, 8.0)
+				qg._layer.queue_free()
+				qg._layer = null
+				qg._show_result()
 		"psf":
 			# PSF test chart: stars from 3 to 15 mag in a row, through the real CCD display.
 			var stars := []

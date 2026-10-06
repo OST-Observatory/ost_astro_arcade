@@ -1,0 +1,3933 @@
+{
+ "categories": {
+  "sonnensystem": {
+   "de": "Sonnensystem",
+   "en": "The Solar System",
+   "es": "Sistema Solar"
+  },
+  "sternbilder": {
+   "de": "Sternbilder",
+   "en": "Constellations",
+   "es": "Constelaciones"
+  },
+  "allgemein": {
+   "de": "Allgemein",
+   "en": "General information",
+   "es": "General"
+  },
+  "astronomische_phanomene": {
+   "de": "Astronomische Phänomene",
+   "en": "Astronomic Concept",
+   "es": "Fenómenos Astronómicos"
+  },
+  "raumsonden_teleskope": {
+   "de": "Raumsonden & Teleskope",
+   "en": "Space Probes & Telescopes",
+   "es": "Sondas Espaciales & Telescopios"
+  },
+  "nebel_galaxien": {
+   "de": "Nebel & Galaxien",
+   "en": "Nebulae & Galaxies",
+   "es": "Nebulosas & Galaxias"
+  },
+  "himmelsmechanik": {
+   "de": "Himmelsmechanik",
+   "en": "Celestial mechanics.",
+   "es": "Mecánica Celeste"
+  },
+  "kosmologie": {
+   "de": "Kosmologie",
+   "en": "Cosmology",
+   "es": "Cosmología"
+  },
+  "entfernungsbestimmung_helligkeit": {
+   "de": "Entfernungsbestimmung & Helligkeit",
+   "en": "Distance Determination & Brightness",
+   "es": "Determinación de Distancias & Brillo"
+  },
+  "exotische_objekte": {
+   "de": "Exotische Objekte",
+   "en": "Exotic objects",
+   "es": "Objetos Exóticos"
+  },
+  "sterne": {
+   "de": "Sterne",
+   "en": "Stars",
+   "es": "Estrellas"
+  }
+ },
+ "questions": [
+  {
+   "id": "q1",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Welcher Planet ist der größte?",
+    "en": "Which planet is the largest?",
+    "es": "¿Cuál es el planeta más grande?"
+   },
+   "answers": {
+    "de": [
+     "Jupiter",
+     "Saturn",
+     "Neptun",
+     "Mars"
+    ],
+    "en": [
+     "Jupiter",
+     "Saturn",
+     "Neptune",
+     "Mars"
+    ],
+    "es": [
+     "Júpiter",
+     "Saturno",
+     "Neptuno",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Jupiter ist so groß, dass alle anderen Planeten zusammen in ihn hineinpassen würden.",
+    "en": "Jupiter is so big that all the other planets together would fit inside it.",
+    "es": "Júpiter es tan grande que todos los demás planetas juntos cabrían dentro de él."
+   },
+   "image": "res://assets/quiz/images/Jupiter_and_its_shrunken_Great_Red_Spot.jpg",
+   "credit": "NASA, ESA, and A. Simon (Goddard Space Flight Center), Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q2",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 2,
+   "text": {
+    "de": "Welcher Planet hat die prominentesten Ringe?",
+    "en": "Which planet has the most prominent rings?",
+    "es": "¿Cuál es el planeta con los anillos más prominentes?"
+   },
+   "answers": {
+    "de": [
+     "Uranus",
+     "Jupiter",
+     "Saturn",
+     "Neptun"
+    ],
+    "en": [
+     "Uranus",
+     "Jupiter",
+     "Saturn",
+     "Neptune"
+    ],
+    "es": [
+     "Urano",
+     "Júpiter",
+     "Saturno",
+     "Neptuno"
+    ]
+   },
+   "explain": {
+    "de": "Saturns Ringe bestehen aus unzähligen Eis- und Gesteinsbrocken – schon im kleinen Teleskop sichtbar.",
+    "en": "Saturn's rings are made of countless chunks of ice and rock – visible even in a small telescope.",
+    "es": "Los anillos de Saturno están formados por innumerables trozos de hielo y roca; se ven incluso con un telescopio pequeño."
+   },
+   "image": "res://assets/quiz/images/Saturn_on_October_1998.jpg",
+   "credit": "ESA/Hubble, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q3",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Welcher Planet ist der Sonne am nächsten?",
+    "en": "Which planet is nearest the sun?",
+    "es": "¿Cuál es el planeta más cercano al Sol?"
+   },
+   "answers": {
+    "de": [
+     "Venus",
+     "Merkur",
+     "Erde",
+     "Mars"
+    ],
+    "en": [
+     "Venus",
+     "Mercury",
+     "Earth",
+     "Mars"
+    ],
+    "es": [
+     "Venus",
+     "Mercurio",
+     "Tierra",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Merkur umkreist die Sonne in nur 88 Tagen – auf seiner Tagseite wird es über 400 °C heiß.",
+    "en": "Mercury circles the Sun in only 88 days – its day side gets hotter than 400 °C.",
+    "es": "Mercurio da la vuelta al Sol en solo 88 días; en su lado diurno se superan los 400 °C."
+   },
+   "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
+   "credit": "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q4",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Wie viele Planeten hat unser Sonnensystem?",
+    "en": "How many planets does our solar system have?",
+    "es": "¿Cuántos planetas tiene nuestro sistema solar?"
+   },
+   "answers": {
+    "de": [
+     "7",
+     "8",
+     "9",
+     "10"
+    ],
+    "en": [
+     "7",
+     "8",
+     "9",
+     "10"
+    ],
+    "es": [
+     "7",
+     "8",
+     "9",
+     "10"
+    ]
+   },
+   "explain": {
+    "de": "Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus und Neptun – Pluto zählt seit 2006 zu den Zwergplaneten.",
+    "en": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune – since 2006 Pluto counts as a dwarf planet.",
+    "es": "Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno; desde 2006 Plutón es un planeta enano."
+   },
+   "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
+   "credit": "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q5",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Welcher Planet wird oft als 'Roter Planet' bezeichnet?",
+    "en": "Which planet is often referred to as the 'Red Planet'?",
+    "es": "¿Qué planeta se conoce a menudo como el 'Planeta Rojo'?"
+   },
+   "answers": {
+    "de": [
+     "Venus",
+     "Mars",
+     "Jupiter",
+     "Saturn"
+    ],
+    "en": [
+     "Venus",
+     "Mars",
+     "Jupiter",
+     "Saturn"
+    ],
+    "es": [
+     "Venus",
+     "Marte",
+     "Júpiter",
+     "Saturno"
+    ]
+   },
+   "explain": {
+    "de": "Eisenoxid – also Rost – im Staub färbt die Marsoberfläche rötlich.",
+    "en": "Iron oxide – rust – in its dust gives Mars its reddish colour.",
+    "es": "El óxido de hierro (herrumbre) del polvo da a Marte su color rojizo."
+   },
+   "image": "res://assets/quiz/images/OSIRIS_Mars_true_color.jpg",
+   "credit": "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+  },
+  {
+   "id": "q6",
+   "category": "sternbilder",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Welches Sternbild enthält den Orion-Nebel?",
+    "en": "Which constellation contains the Orion Nebula?",
+    "es": "¿Qué constelación contiene la Nebulosa de Orión?"
+   },
+   "answers": {
+    "de": [
+     "Kassiopeia",
+     "Orion",
+     "Großer Wagen",
+     "Kreuz des Südens"
+    ],
+    "en": [
+     "Cassiopeia",
+     "Orion",
+     "The Big Dipper",
+     "Southern Cross"
+    ],
+    "es": [
+     "Casiopea",
+     "Orión",
+     "Osa Mayor",
+     "Cruz del Sur"
+    ]
+   },
+   "explain": {
+    "de": "Der Orionnebel ist eine Sternentstehungsregion im „Schwert“ des Orion, mit bloßem Auge als Nebelfleck sichtbar.",
+    "en": "The Orion Nebula is a star-forming region in Orion's 'sword', visible to the naked eye as a fuzzy patch.",
+    "es": "La nebulosa de Orión es una región de formación estelar en la «espada» de Orión, visible a simple vista."
+   },
+   "image": "res://assets/quiz/images/m42SHO.jpg",
+   "credit": "Florian Rünger, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q7",
+   "category": "sternbilder",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Welches Sternbild ähnelt einem W?",
+    "en": "Which constellation resembles a W?",
+    "es": "¿Qué constelación tiene forma de W?"
+   },
+   "answers": {
+    "de": [
+     "Orion",
+     "Kassiopeia",
+     "Pegasus",
+     "Schwan"
+    ],
+    "en": [
+     "Orion",
+     "Cassiopeia",
+     "Mira",
+     "Swan"
+    ],
+    "es": [
+     "Orión",
+     "Casiopea",
+     "Pegaso",
+     "Cisne"
+    ]
+   },
+   "explain": {
+    "de": "Die fünf hellsten Sterne der Kassiopeia bilden ein auffälliges W (oder M) am Himmel.",
+    "en": "The five brightest stars of Cassiopeia form a striking W (or M) in the sky.",
+    "es": "Las cinco estrellas más brillantes de Casiopea forman una llamativa W (o M) en el cielo."
+   },
+   "image": "res://assets/quiz/images/Cassiopeia_constellation.jpg",
+   "credit": "4shadoww, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q8",
+   "category": "sternbilder",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Der Polarstern gehört zu welchem Sternbild?",
+    "en": "The North Star belongs to which constellation?",
+    "es": "¿A qué constelación pertenece la Estrella Polar?"
+   },
+   "answers": {
+    "de": [
+     "Große Bärin",
+     "Kleine Bärin",
+     "Drache",
+     "Kassiopeia"
+    ],
+    "en": [
+     "Great Bear",
+     "Lesser Bear",
+     "Draco",
+     "Cassiopeia"
+    ],
+    "es": [
+     "Osa Mayor",
+     "Osa Menor",
+     "Dragón",
+     "Casiopea"
+    ]
+   },
+   "explain": {
+    "de": "Der Polarstern ist der hellste Stern im Kleinen Bären und steht fast genau über dem Nordpol der Erde.",
+    "en": "Polaris is the brightest star in the Little Bear and sits almost exactly above Earth's North Pole.",
+    "es": "La Estrella Polar es la más brillante de la Osa Menor y está casi justo sobre el polo norte terrestre."
+   },
+   "image": "res://assets/quiz/images/Polaris_comp_s_(25006858485).jpg",
+   "credit": "Giuseppe Donatiello, CC0, via Wikimedia Commons"
+  },
+  {
+   "id": "q9",
+   "category": "allgemein",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Was ist eine Galaxie?",
+    "en": "What is a galaxy?",
+    "es": "¿Qué es una galaxia?"
+   },
+   "answers": {
+    "de": [
+     "Ein einzelner Stern",
+     "Eine gewaltige Ansammlung von Sternen, Gas, Staub und Dunkler Materie",
+     "Ein Planet",
+     "Ein Komet"
+    ],
+    "en": [
+     "A single star",
+     "A vast collection of stars, gas, dust and dark matter",
+     "A planet",
+     "A comet"
+    ],
+    "es": [
+     "Una estrella individual",
+     "Una enorme concentración de estrellas, gas, polvo y materia oscura",
+     "Un planeta",
+     "Un cometa"
+    ]
+   },
+   "explain": {
+    "de": "Galaxien enthalten Milliarden von Sternen, zusammengehalten von der Schwerkraft – und von viel Dunkler Materie.",
+    "en": "Galaxies contain billions of stars held together by gravity – and by a lot of dark matter.",
+    "es": "Las galaxias contienen miles de millones de estrellas unidas por la gravedad y por mucha materia oscura."
+   },
+   "image": "res://assets/quiz/images/m81_LRGBcomposite.jpg",
+   "credit": "Florian Rünger, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q10",
+   "category": "allgemein",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Wie lange braucht das Licht von der Sonne zur Erde?",
+    "en": "How long does the light of the sun take to reach the earth?",
+    "es": "¿Cuánto tarda la luz del Sol en llegar a la Tierra?"
+   },
+   "answers": {
+    "de": [
+     "8 Minuten",
+     "8 Sekunden",
+     "8 Stunden ",
+     "1 Sekunde"
+    ],
+    "en": [
+     "8 minutes",
+     "8 seconds",
+     "8 hours",
+     "1 second"
+    ],
+    "es": [
+     "8 minutos",
+     "8 segundos",
+     "8 horas",
+     "1 segundo"
+    ]
+   },
+   "explain": {
+    "de": "Das Licht legt die 150 Millionen km zur Erde in gut 8 Minuten zurück – wir sehen die Sonne also so, wie sie vor 8 Minuten war.",
+    "en": "Light covers the 150 million km to Earth in just over 8 minutes – we see the Sun as it was 8 minutes ago.",
+    "es": "La luz recorre los 150 millones de km hasta la Tierra en algo más de 8 minutos: vemos el Sol como era hace 8 minutos."
+   },
+   "image": "res://assets/quiz/images/sunearthpanel_sts129_big.jpg",
+   "credit": "STS-129 Crew, NASA"
+  },
+  {
+   "id": "q11",
+   "category": "sternbilder",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Welche der folgenden Sterne ist am hellsten am Nachthimmel?",
+    "en": "Which of the following stars is the brightest in the night sky?",
+    "es": "¿Cuál de las siguientes estrellas es la más brillante en el cielo nocturno?"
+   },
+   "answers": {
+    "de": [
+     "Sirius",
+     "Canopus",
+     "Betelgeuse",
+     "Proxima Centauri"
+    ],
+    "en": [
+     "Sirius",
+     "Canopus",
+     "Betelgeuse",
+     "Proxima Centauri"
+    ],
+    "es": [
+     "Sirio",
+     "Canopus",
+     "Betelgeuse",
+     "Próxima Centauri"
+    ]
+   },
+   "explain": {
+    "de": "Sirius ist der hellste Stern am Nachthimmel – er ist nur 8,6 Lichtjahre entfernt.",
+    "en": "Sirius is the brightest star in the night sky – only 8.6 light-years away.",
+    "es": "Sirio es la estrella más brillante del cielo nocturno; está a solo 8,6 años luz."
+   },
+   "image": "res://assets/quiz/images/Sirius_A_and_B_Hubble_photo.jpg",
+   "credit": "NASA, ESA, H. Bond (STScI), and M. Barstow (University of Leicester), Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q12",
+   "category": "sonnensystem",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Welcher Planet hat die meisten Monde?",
+    "en": "Which planet has the most moons?",
+    "es": "¿Qué planeta tiene más lunas?"
+   },
+   "answers": {
+    "de": [
+     "Jupiter",
+     "Saturn",
+     "Neptun",
+     "Mars"
+    ],
+    "en": [
+     "Jupiter",
+     "Saturn",
+     "Neptune",
+     "Mars"
+    ],
+    "es": [
+     "Júpiter",
+     "Saturno",
+     "Neptuno",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Saturn hat inzwischen mehr als 270 bekannte Monde – die meisten sind nur wenige Kilometer groß.",
+    "en": "Saturn now has more than 270 known moons – most of them only a few kilometres across.",
+    "es": "Saturno tiene ya más de 270 lunas conocidas; la mayoría miden solo unos pocos kilómetros."
+   },
+   "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
+   "credit": "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q13",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Wo im Sonnensystem findet man einen Asteroidengürtel?",
+    "en": "Where in the solar system can you find an asteroid belt?",
+    "es": "¿Dónde se encuentra el cinturón de asteroides en el sistema solar?"
+   },
+   "answers": {
+    "de": [
+     "Zwischen Mars und Jupiter",
+     "Zwischen Erde und Mars",
+     "Zwischen Venus und Erde",
+     "Zwischen Neptun und Uranus"
+    ],
+    "en": [
+     "Between Mars and Jupiter",
+     "Between Earth and Mars",
+     "Between Venus and Earth",
+     "Between Neptune and Uranus"
+    ],
+    "es": [
+     "Entre Marte y Júpiter",
+     "Entre la Tierra y Marte",
+     "Entre Venus y la Tierra",
+     "Entre Neptuno y Urano"
+    ]
+   },
+   "explain": {
+    "de": "Im Hauptgürtel zwischen Mars und Jupiter kreisen über eine Million Asteroiden größer als 1 km.",
+    "en": "More than a million asteroids larger than 1 km orbit in the main belt between Mars and Jupiter.",
+    "es": "Más de un millón de asteroides mayores de 1 km orbitan en el cinturón principal entre Marte y Júpiter."
+   },
+   "image": "res://assets/quiz/images/Webb_Detects_Extremely_Small_Main_Belt_Asteroid_(52672254127).jpg",
+   "credit": "NASA's James Webb Space Telescope from Greenbelt, MD, USA, CC BY 2.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q14",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Wie lange dauert ungefähr ein Jahr auf dem Mars?",
+    "en": "How long is about a year on Mars?",
+    "es": "¿Cuánto dura aproximadamente un año en Marte?"
+   },
+   "answers": {
+    "de": [
+     "687 Tage",
+     "365 Tage",
+     "182 Tage",
+     "910 Tage"
+    ],
+    "en": [
+     "687 days",
+     "365 days",
+     "182 days",
+     "910 days"
+    ],
+    "es": [
+     "687 días",
+     "365 días",
+     "182 días",
+     "910 días"
+    ]
+   },
+   "explain": {
+    "de": "Mars ist weiter von der Sonne entfernt und braucht 687 Erdtage für einen Umlauf.",
+    "en": "Mars is farther from the Sun and needs 687 Earth days for one orbit.",
+    "es": "Marte está más lejos del Sol y necesita 687 días terrestres para una vuelta."
+   },
+   "image": "res://assets/quiz/images/OSIRIS_Mars_true_color.jpg",
+   "credit": "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+  },
+  {
+   "id": "q15",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Welcher Planet ist der kleinste?",
+    "en": "Which planet is the smallest?",
+    "es": "¿Cuál es el planeta más pequeño?"
+   },
+   "answers": {
+    "de": [
+     "Merkur",
+     "Venus",
+     "Erde",
+     "Mars"
+    ],
+    "en": [
+     "Mercury",
+     "Venus",
+     "Earth",
+     "Mars"
+    ],
+    "es": [
+     "Mercurio",
+     "Venus",
+     "Tierra",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Merkur ist mit 4.880 km Durchmesser kaum größer als unser Mond.",
+    "en": "At 4,880 km across, Mercury is barely larger than our Moon.",
+    "es": "Con 4.880 km de diámetro, Mercurio es apenas mayor que nuestra Luna."
+   },
+   "image": "res://assets/quiz/images/Mercury_in_color_-_Prockter07_centered.jpg",
+   "credit": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington. Edited version of Image: Prockter07.jpg by Papa Lima Whiskey., Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q16",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Wie nennt man ein Objekt aus Eis und Staub, das einen Schweif bildet, wenn es der Sonne nahekommt?",
+    "en": "What do you call an object of ice and dust that forms a tail when it comes close to the sun?",
+    "es": "¿Cómo se llama un objeto de hielo y polvo que forma una cola al acercarse al Sol?"
+   },
+   "answers": {
+    "de": [
+     "Komet",
+     "Planet",
+     "Stern",
+     "Galaxie"
+    ],
+    "en": [
+     "Comet",
+     "Planet",
+     "Star",
+     "Galaxy"
+    ],
+    "es": [
+     "Cometa",
+     "Planeta",
+     "Estrella",
+     "Galaxia"
+    ]
+   },
+   "explain": {
+    "de": "Nahe der Sonne verdampft das Eis eines Kometen – Gas und Staub bilden dann den leuchtenden Schweif.",
+    "en": "Near the Sun a comet's ice evaporates – gas and dust then form the glowing tail.",
+    "es": "Cerca del Sol el hielo de un cometa se evapora; el gas y el polvo forman entonces la cola brillante."
+   },
+   "image": "res://assets/quiz/images/C2022E3ZTF.jpg",
+   "credit": "Florian Rünger, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q17",
+   "category": "allgemein",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Was sind Sternschnuppen?",
+    "en": "What are shooting stars?",
+    "es": "¿Qué son las estrellas fugaces?"
+   },
+   "answers": {
+    "de": [
+     "Ein Asteroid, der in die Erdatmosphäre eintritt",
+     "Ein kurzes Aufleuchten eines weit entfernten Sterns",
+     "Ein Planet der schnell über den Himmel zieht",
+     "Ein Komet, der schnell über den Himmel zieht"
+    ],
+    "en": [
+     "An asteroid entering the Earth's atmosphere",
+     "A brief glow of a distant star",
+     "A planet that moves quickly across the sky",
+     "A comet moving quickly across the sky"
+    ],
+    "es": [
+     "Un asteroide que entra en la atmósfera terrestre",
+     "Un breve destello de una estrella lejana",
+     "Un planeta que cruza el cielo rápidamente",
+     "Un cometa que cruza el cielo rápidamente"
+    ]
+   },
+   "explain": {
+    "de": "Meist sind es winzige Staubkörnchen, die in der Atmosphäre verglühen – größere Brocken nennt man Meteoroiden.",
+    "en": "Most are tiny dust grains burning up in the atmosphere – larger pieces are called meteoroids.",
+    "es": "Casi siempre son diminutos granos de polvo que arden en la atmósfera; los trozos mayores se llaman meteoroides."
+   },
+   "image": "res://assets/quiz/images/2014_Meteor.jpg",
+   "credit": "Jacek Halicki, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q18",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist eine Supernova?",
+    "en": "What is a supernova?",
+    "es": "¿Qué es una supernova?"
+   },
+   "answers": {
+    "de": [
+     "Ein neu entstandener Stern",
+     "Eine Explosion am Lebensende massereicher Sterne",
+     "Ein Kometenschwarm",
+     "Eine Galaxienkollision"
+    ],
+    "en": [
+     "A newly created star",
+     "An explosion at the end of life of massive stars",
+     "A comet swarm",
+     "A galaxy collision"
+    ],
+    "es": [
+     "Una estrella recién formada",
+     "Una explosión al final de la vida de estrellas masivas",
+     "Un enjambre de cometas",
+     "Una colisión de galaxias"
+    ]
+   },
+   "explain": {
+    "de": "Bei einer Supernova leuchtet ein einzelner Stern kurzzeitig heller als seine ganze Galaxie.",
+    "en": "In a supernova a single star briefly outshines its entire galaxy.",
+    "es": "En una supernova una sola estrella brilla brevemente más que toda su galaxia."
+   },
+   "image": "res://assets/quiz/images/SN1994D.jpg",
+   "credit": "NASA/ESA, The Hubble Key Project Team and The High-Z Supernova Search Team, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q19",
+   "category": "allgemein",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Was ist ein Planet?",
+    "en": "What is a planet?",
+    "es": "¿Qué es un planeta?"
+   },
+   "answers": {
+    "de": [
+     "Ein kugelförmiges Objekt, das um einen Stern kreist und seine Bahn um diesen Stern von anderen Objekten freigeräumt hat",
+     "Ein Plasmaball in dessen innerem Kernsfusion stattfindet",
+     "Ein Object das um die Sonne kreist",
+     "Ein Object das um einen Stern kreist und seine Bahn um diesen Stern von anderen Objekten freigeräumt hat"
+    ],
+    "en": [
+     "A spherical object orbiting a star and having cleared its orbit around that star from other objects",
+     "A plasma ball in whose inner nuclear fusion takes place",
+     "An object orbiting the sun",
+     "An object that orbits a star and has cleared its orbit around that star from other objects"
+    ],
+    "es": [
+     "Un objeto esférico que orbita una estrella y ha despejado su órbita de otros objetos",
+     "Una bola de plasma en cuyo interior se produce fusión nuclear",
+     "Un objeto que orbita el Sol",
+     "Un objeto que orbita una estrella y ha despejado su órbita de otros objetos"
+    ]
+   },
+   "explain": {
+    "de": "Diese Definition stammt von 2006 – Pluto erfüllt den dritten Punkt nicht und ist deshalb ein Zwergplanet.",
+    "en": "This definition dates from 2006 – Pluto fails the third point and is therefore a dwarf planet.",
+    "es": "Esta definición es de 2006; Plutón no cumple el tercer punto y por eso es un planeta enano."
+   },
+   "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
+   "credit": "CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q20",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Was ist ein Stern?",
+    "en": "What is a Star?",
+    "es": "¿Qué es una estrella?"
+   },
+   "answers": {
+    "de": [
+     "Ein kugelförmiges Objekt, das aus Gas (Plasma) besteht und in dessen innerem Kernfusion stattfindet",
+     "Ein kugelförmiges Objekt, das aus Gas und Staub besteht und sich durch den Einschlag von Meteoriten aufheizt",
+     "Ein kugelförmiges Objekt, das um die Sonne kreist",
+     "Ein kugelförmiges Objekt, das um die Erde kreist und uns alle mit Energie versorgt"
+    ],
+    "en": [
+     "A spherical object consisting of gas (plasma) in which nuclear fusion takes place",
+     "A spherical object consisting of gas and dust that heats up due to the impact of meteorites",
+     "A spherical object orbiting the sun",
+     "A spherical object orbiting the Earth and providing us all with energy"
+    ],
+    "es": [
+     "Un objeto esférico compuesto de gas (plasma) en cuyo interior se produce fusión nuclear",
+     "Un objeto esférico compuesto de gas y polvo que se calienta por el impacto de meteoritos",
+     "Un objeto esférico que orbita el Sol",
+     "Un objeto esférico que orbita la Tierra y nos suministra energía"
+    ]
+   },
+   "explain": {
+    "de": "In Sternen verschmelzen Atomkerne – bei der Sonne Wasserstoff zu Helium – und setzen dabei riesige Energie frei.",
+    "en": "In stars atomic nuclei fuse – in the Sun hydrogen into helium – releasing enormous energy.",
+    "es": "En las estrellas se fusionan núcleos atómicos (en el Sol, hidrógeno en helio) liberando una enorme energía."
+   },
+   "image": "res://assets/quiz/images/Star-sizes.jpg",
+   "credit": "Dave Jarvis (https://dave.autonoma.ca/), CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q21",
+   "category": "himmelsmechanik",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Wie nennt man die Bahn eines Planeten um einen Stern auch?",
+    "en": "What is the orbit of a planet around a star also called?",
+    "es": "¿Cómo se llama también la trayectoria de un planeta alrededor de una estrella?"
+   },
+   "answers": {
+    "de": [
+     "Orbit",
+     "Parabel",
+     "Hyperbel",
+     "Trajektorie"
+    ],
+    "en": [
+     "Orbit",
+     "Parable",
+     "Hyperbola",
+     "Trajectories"
+    ],
+    "es": [
+     "Órbita",
+     "Parábola",
+     "Hipérbola",
+     "Trayectoria"
+    ]
+   },
+   "explain": {
+    "de": "Orbit kommt vom lateinischen „orbis“ – Kreis, Bahn.",
+    "en": "'Orbit' comes from the Latin 'orbis' – circle, track.",
+    "es": "«Órbita» viene del latín «orbis»: círculo, camino."
+   }
+  },
+  {
+   "id": "q22",
+   "category": "allgemein",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Was umgibt die Erde ständig und schützt uns vor dem Sonnenwind?",
+    "en": "What constantly surrounds the earth and protects us from the solar wind?",
+    "es": "¿Qué rodea constantemente la Tierra y nos protege del viento solar?"
+   },
+   "answers": {
+    "de": [
+     "Magnetfeld",
+     "Atmosphäre",
+     "Ozon",
+     "Oxid"
+    ],
+    "en": [
+     "Magnetic field",
+     "Atmosphere",
+     "Ozone",
+     "Oxid"
+    ],
+    "es": [
+     "Campo magnético",
+     "Atmósfera",
+     "Ozono",
+     "Óxido"
+    ]
+   },
+   "explain": {
+    "de": "Das Magnetfeld lenkt die geladenen Teilchen des Sonnenwinds ab – an den Polen erzeugen sie Polarlichter.",
+    "en": "The magnetic field deflects the charged particles of the solar wind – near the poles they create auroras.",
+    "es": "El campo magnético desvía las partículas cargadas del viento solar; cerca de los polos producen auroras."
+   },
+   "image": "res://assets/quiz/images/ISS046-E-26820_-_View_of_Earth.jpg",
+   "credit": "Earth Science and Remote Sensing Unit, Lyndon B. Johnson Space Center, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q23",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Wie heißt der kleinste der acht Planeten?",
+    "en": "What is the name of the smallest of the eight planets?",
+    "es": "¿Cómo se llama el más pequeño de los ocho planetas?"
+   },
+   "answers": {
+    "de": [
+     "Merkur",
+     "Venus",
+     "Erde",
+     "Mars"
+    ],
+    "en": [
+     "Mercury",
+     "Venus",
+     "Earth",
+     "Mars"
+    ],
+    "es": [
+     "Mercurio",
+     "Venus",
+     "Tierra",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Merkur ist der kleinste Planet – sogar kleiner als der Jupitermond Ganymed.",
+    "en": "Mercury is the smallest planet – even smaller than Jupiter's moon Ganymede.",
+    "es": "Mercurio es el planeta más pequeño, incluso menor que Ganímedes, la luna de Júpiter."
+   },
+   "image": "res://assets/quiz/images/Mercury_in_color_-_Prockter07_centered.jpg",
+   "credit": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington. Edited version of Image: Prockter07.jpg by Papa Lima Whiskey., Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q24",
+   "category": "sonnensystem",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Welche Farbe hat der Planet Neptun hauptsächlich?",
+    "en": "What color has the planet Neptune mostly?",
+    "es": "¿De qué color es principalmente el planeta Neptuno?"
+   },
+   "answers": {
+    "de": [
+     "Blau",
+     "Grün",
+     "Lila",
+     "Orange"
+    ],
+    "en": [
+     "Blue",
+     "Green",
+     "Purple",
+     "Orange"
+    ],
+    "es": [
+     "Azul",
+     "Verde",
+     "Morado",
+     "Naranja"
+    ]
+   },
+   "explain": {
+    "de": "Methan in Neptuns Atmosphäre verschluckt rotes Licht – deshalb erscheint er blau.",
+    "en": "Methane in Neptune's atmosphere absorbs red light – so it looks blue.",
+    "es": "El metano de la atmósfera de Neptuno absorbe la luz roja; por eso se ve azul."
+   },
+   "image": "res://assets/quiz/images/Neptune_Voyager2_color_calibrated.jpg",
+   "credit": "NASA / Voyager 2 / PDS / OPUS / Ardenau4, CC0, via Wikimedia Commons"
+  },
+  {
+   "id": "q25",
+   "category": "allgemein",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Was ist das helle Band am Nachthimmel, in dem unsere Sonne liegt?",
+    "en": "What is the bright band in the night sky in which our sun lies?",
+    "es": "¿Qué es la banda luminosa en el cielo nocturno en la que se encuentra nuestro Sol?"
+   },
+   "answers": {
+    "de": [
+     "Eine Galaxie",
+     "Ein Stern",
+     "Ein Planet",
+     "Ein Sternbild"
+    ],
+    "en": [
+     "A galaxy",
+     "A star",
+     "A planet",
+     "A constellation"
+    ],
+    "es": [
+     "Una galaxia",
+     "Una estrella",
+     "Un planeta",
+     "Una constelación"
+    ]
+   },
+   "explain": {
+    "de": "Das Band ist unsere Milchstraße von innen gesehen: Wir blicken in die Scheibe aus Milliarden Sternen.",
+    "en": "The band is our Milky Way seen from inside: we look into its disc of billions of stars.",
+    "es": "La banda es nuestra Vía Láctea vista desde dentro: miramos hacia su disco de miles de millones de estrellas."
+   },
+   "image": "res://assets/quiz/images/360-degree_Panorama_of_the_Southern_Sky.jpg",
+   "credit": "ESO/H.H. Heyer, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q26",
+   "category": "allgemein",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Wie heißt die Galaxie, in der unsere Sonne und die Erde liegen?",
+    "en": "What is the name of the galaxy in which our Sun and Earth lie?",
+    "es": "¿Cómo se llama la galaxia en la que se encuentran nuestro Sol y la Tierra?"
+   },
+   "answers": {
+    "de": [
+     "Milchstraße",
+     "Andromeda",
+     "Dreiecksgalaxie",
+     "Heimatgalaxie"
+    ],
+    "en": [
+     "Milky Way",
+     "Andromeda",
+     "Triangular Galaxy",
+     "Home Galaxy"
+    ],
+    "es": [
+     "Vía Láctea",
+     "Andrómeda",
+     "Galaxia del Triángulo",
+     "Galaxia natal"
+    ]
+   },
+   "explain": {
+    "de": "Die Milchstraße ist eine Balkenspiralgalaxie mit 100 bis 400 Milliarden Sternen.",
+    "en": "The Milky Way is a barred spiral galaxy with 100 to 400 billion stars.",
+    "es": "La Vía Láctea es una galaxia espiral barrada con entre 100.000 y 400.000 millones de estrellas."
+   },
+   "image": "res://assets/quiz/images/Bontecou_Lake_Milky_Way_panorama.jpg",
+   "credit": "Juliancolton, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q27",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Welcher Planet hat den größten Mond im Sonnensystem?",
+    "en": "Which planet has the largest moon in the solar system?",
+    "es": "¿Qué planeta tiene la luna más grande del sistema solar?"
+   },
+   "answers": {
+    "de": [
+     "Jupiter",
+     "Saturn",
+     "Neptun",
+     "Mars"
+    ],
+    "en": [
+     "Jupiter",
+     "Saturn",
+     "Neptune",
+     "Mars"
+    ],
+    "es": [
+     "Júpiter",
+     "Saturno",
+     "Neptuno",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Jupiters Mond Ganymed ist der größte Mond im Sonnensystem.",
+    "en": "Jupiter's moon Ganymede is the largest moon in the solar system.",
+    "es": "Ganímedes, luna de Júpiter, es la luna más grande del sistema solar."
+   },
+   "image": "res://assets/quiz/images/Jupiter_and_its_shrunken_Great_Red_Spot.jpg",
+   "credit": "NASA, ESA, and A. Simon (Goddard Space Flight Center), Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q28",
+   "category": "sonnensystem",
+   "difficulty": 2,
+   "correct": 2,
+   "text": {
+    "de": "Wie heißt der größte Mond im Sonnensystem?",
+    "en": "What is the name of the largest moon in the solar system?",
+    "es": "¿Cómo se llama la luna más grande del sistema solar?"
+   },
+   "answers": {
+    "de": [
+     "Mond",
+     "Europa",
+     "Ganymed",
+     "Io"
+    ],
+    "en": [
+     "Moon",
+     "Europe",
+     "Ganymed",
+     "Io"
+    ],
+    "es": [
+     "Luna",
+     "Europa",
+     "Ganímedes",
+     "Ío"
+    ]
+   },
+   "explain": {
+    "de": "Ganymed ist mit 5.268 km Durchmesser sogar größer als der Planet Merkur.",
+    "en": "At 5,268 km across, Ganymede is even larger than the planet Mercury.",
+    "es": "Con 5.268 km de diámetro, Ganímedes es incluso mayor que el planeta Mercurio."
+   },
+   "image": "res://assets/quiz/images/Ganymede_-_Perijove_34_Composite.jpg",
+   "credit": "Kevin Gill, CC BY 2.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q29",
+   "category": "sonnensystem",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Welcher Planet dreht sich am langsamsten?",
+    "en": "Which planet is spinning the slowest?",
+    "es": "¿Qué planeta rota más lentamente?"
+   },
+   "answers": {
+    "de": [
+     "Merkur",
+     "Venus",
+     "Erde",
+     "Mars"
+    ],
+    "en": [
+     "Mercury",
+     "Venus",
+     "Earth",
+     "Mars"
+    ],
+    "es": [
+     "Mercurio",
+     "Venus",
+     "Tierra",
+     "Marte"
+    ]
+   },
+   "explain": {
+    "de": "Ein Venustag dauert 243 Erdtage – länger als ihr Jahr mit 225 Tagen! Außerdem dreht sie sich rückwärts.",
+    "en": "A day on Venus lasts 243 Earth days – longer than its 225-day year! It also spins backwards.",
+    "es": "Un día en Venus dura 243 días terrestres, ¡más que su año de 225 días! Además gira al revés."
+   },
+   "image": "res://assets/quiz/images/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_(cropped).jpg",
+   "credit": "NASA/JPL-Caltech, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q30",
+   "category": "allgemein",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Was ist die Sonne?",
+    "en": "What is the sun?",
+    "es": "¿Qué es el Sol?"
+   },
+   "answers": {
+    "de": [
+     "Ein Stern",
+     "Ein Planet",
+     "Ein Mond",
+     "Ein Asteroid"
+    ],
+    "en": [
+     "A star",
+     "A planet",
+     "A moon",
+     "An asteroid"
+    ],
+    "es": [
+     "Una estrella",
+     "Un planeta",
+     "Una luna",
+     "Un asteroide"
+    ]
+   },
+   "explain": {
+    "de": "Die Sonne ist ein ganz normaler Stern – ein gelber Zwerg, rund 4,6 Milliarden Jahre alt.",
+    "en": "The Sun is a perfectly ordinary star – a yellow dwarf about 4.6 billion years old.",
+    "es": "El Sol es una estrella normal: una enana amarilla de unos 4.600 millones de años."
+   },
+   "image": "res://assets/quiz/images/sun_full_disk.jpg",
+   "credit": "Martin Sparre, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q31",
+   "category": "sonnensystem",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Wie lange dauert ein Jahr auf dem Neptun?",
+    "en": "How long does a year on Neptune last?",
+    "es": "¿Cuánto dura un año en Neptuno?"
+   },
+   "answers": {
+    "de": [
+     "165 Erdjahre",
+     "84 Erdjahre",
+     "12 Erdjahre",
+     "29 Erdjahre"
+    ],
+    "en": [
+     "165 Earth years",
+     "84 Earth years",
+     "12 Earth years",
+     "29 Earth years"
+    ],
+    "es": [
+     "165 años terrestres",
+     "84 años terrestres",
+     "12 años terrestres",
+     "29 años terrestres"
+    ]
+   },
+   "explain": {
+    "de": "Seit seiner Entdeckung 1846 hat Neptun die Sonne erst einmal umrundet – 2011 war es so weit.",
+    "en": "Since its discovery in 1846 Neptune has orbited the Sun only once – completed in 2011.",
+    "es": "Desde su descubrimiento en 1846, Neptuno ha dado una sola vuelta al Sol, completada en 2011."
+   },
+   "image": "res://assets/quiz/images/Neptune_Voyager2_color_calibrated.jpg",
+   "credit": "NASA / Voyager 2 / PDS / OPUS / Ardenau4, CC0, via Wikimedia Commons"
+  },
+  {
+   "id": "q32",
+   "category": "sonnensystem",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Wie lange dauert ein Tag auf dem Mars?",
+    "en": "How long is a day on Mars?",
+    "es": "¿Cuánto dura un día en Marte?"
+   },
+   "answers": {
+    "de": [
+     "24,6 Stunden",
+     "22.4 Stunden",
+     "26.3 Stunden",
+     "28.1 Stunden"
+    ],
+    "en": [
+     "24.6 hours",
+     "22.4 hours",
+     "26.3 hours",
+     "28.1 hours"
+    ],
+    "es": [
+     "24,6 horas",
+     "22,4 horas",
+     "26,3 horas",
+     "28,1 horas"
+    ]
+   },
+   "explain": {
+    "de": "Ein Marstag (Sol) ist mit 24 Stunden 37 Minuten fast so lang wie ein Erdentag.",
+    "en": "A Martian day (sol) lasts 24 hours 37 minutes – almost as long as an Earth day.",
+    "es": "Un día marciano (sol) dura 24 horas y 37 minutos, casi lo mismo que un día terrestre."
+   },
+   "image": "res://assets/quiz/images/OSIRIS_Mars_true_color.jpg",
+   "credit": "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+  },
+  {
+   "id": "q33",
+   "category": "sonnensystem",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Was ist Pluto?",
+    "en": "What is Pluto?",
+    "es": "¿Qué es Plutón?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet",
+     "Ein Zwergplanet",
+     "Ein Mond",
+     "Ein Asteroid"
+    ],
+    "en": [
+     "A planet",
+     "A dwarf planet",
+     "A moon",
+     "An asteroid"
+    ],
+    "es": [
+     "Un planeta",
+     "Un planeta enano",
+     "Una luna",
+     "Un asteroide"
+    ]
+   },
+   "explain": {
+    "de": "Pluto teilt seine Bahn mit vielen anderen Objekten im Kuipergürtel – deshalb gilt er seit 2006 als Zwergplanet.",
+    "en": "Pluto shares its orbit with many other Kuiper-belt objects – so since 2006 it counts as a dwarf planet.",
+    "es": "Plutón comparte su órbita con muchos objetos del cinturón de Kuiper; por eso desde 2006 es un planeta enano."
+   },
+   "image": "res://assets/quiz/images/Pluto.jpg",
+   "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q34",
+   "category": "sonnensystem",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Wie viele anerkannte Zwergplaneten gibt es?",
+    "en": "How many recognized dwarf planets are there?",
+    "es": "¿Cuántos planetas enanos reconocidos existen?"
+   },
+   "answers": {
+    "de": [
+     "5",
+     "2",
+     "7",
+     "10"
+    ],
+    "en": [
+     "5",
+     "2",
+     "7",
+     "10"
+    ],
+    "es": [
+     "5",
+     "2",
+     "7",
+     "10"
+    ]
+   },
+   "explain": {
+    "de": "Offiziell anerkannt sind Ceres, Pluto, Haumea, Makemake und Eris – es gibt aber viele weitere Kandidaten.",
+    "en": "Officially recognised are Ceres, Pluto, Haumea, Makemake and Eris – but there are many more candidates.",
+    "es": "Están reconocidos oficialmente Ceres, Plutón, Haumea, Makemake y Eris, pero hay muchos más candidatos."
+   },
+   "image": "res://assets/quiz/images/Zwergplaneten.jpg",
+   "credit": "NASA, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q35",
+   "category": "sonnensystem",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist Eris?",
+    "en": "What is Eris?",
+    "es": "¿Qué es Eris?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet",
+     "Ein Zwergplanet",
+     "Ein Mond",
+     "Ein Asteroid"
+    ],
+    "en": [
+     "A planet",
+     "A dwarf planet",
+     "A moon",
+     "An asteroid"
+    ],
+    "es": [
+     "Un planeta",
+     "Un planeta enano",
+     "Una luna",
+     "Un asteroide"
+    ]
+   },
+   "explain": {
+    "de": "Eris ist fast genauso groß wie Pluto – ihre Entdeckung 2005 löste die Debatte um Plutos Status aus.",
+    "en": "Eris is almost as large as Pluto – its discovery in 2005 started the debate about Pluto's status.",
+    "es": "Eris es casi tan grande como Plutón; su descubrimiento en 2005 desató el debate sobre Plutón."
+   },
+   "image": "res://assets/quiz/images/225088_Gonggong_(2007_OR10)_and_Eris_orbits,_Jan2018,_top_view.jpg",
+   "credit": "ESA & MPS for OSIRIS Team MPS/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA, CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons"
+  },
+  {
+   "id": "q36",
+   "category": "sonnensystem",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist Makemake?",
+    "en": "What is Makemake?",
+    "es": "¿Qué es Makemake?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet",
+     "Ein Zwergplanet",
+     "Ein Mond",
+     "Ein Asteroid"
+    ],
+    "en": [
+     "A planet",
+     "A dwarf planet",
+     "A moon",
+     "An asteroid"
+    ],
+    "es": [
+     "Un planeta",
+     "Un planeta enano",
+     "Una luna",
+     "Un asteroide"
+    ]
+   },
+   "explain": {
+    "de": "Makemake ist ein Zwergplanet im Kuipergürtel, benannt nach einem Schöpfergott der Osterinsel.",
+    "en": "Makemake is a dwarf planet in the Kuiper belt, named after a creator god of Easter Island.",
+    "es": "Makemake es un planeta enano del cinturón de Kuiper, llamado como un dios creador de la isla de Pascua."
+   },
+   "image": "res://assets/quiz/images/Makemake_New_Horizons.jpg",
+   "credit": "NASA, JHUAPL, SwRI, Daniel Bamberger, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q37",
+   "category": "sonnensystem",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist Sedna?",
+    "en": "What is Sedna?",
+    "es": "¿Qué es Sedna?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet",
+     "Ein Zwergplanet",
+     "Ein Mond",
+     "Ein Asteroid"
+    ],
+    "en": [
+     "A planet",
+     "A dwarf planet",
+     "A moon",
+     "An asteroid"
+    ],
+    "es": [
+     "Un planeta",
+     "Un planeta enano",
+     "Una luna",
+     "Un asteroide"
+    ]
+   },
+   "explain": {
+    "de": "Sedna ist eines der fernsten bekannten Objekte; ein Umlauf dauert rund 11.000 Jahre.",
+    "en": "Sedna is one of the most distant known objects; one orbit takes about 11,000 years.",
+    "es": "Sedna es uno de los objetos conocidos más lejanos; una órbita dura unos 11.000 años."
+   },
+   "image": "res://assets/quiz/images/Sedna_Discovery_(geminiann05005c).jpg",
+   "credit": "International Gemini Observatory/NOIRLab/NSF/AURA, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q38",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Was sind transneptunische Objekte?",
+    "en": "What are trans-Neptunian objects?",
+    "es": "¿Qué son los objetos transneptunianos?"
+   },
+   "answers": {
+    "de": [
+     "Himmelskörper deren Bahn jenseits des äußersten Gasplaneten Neptun liegt",
+     "Himmelskörper deren Bahn innerhalb des äußersten Gasplaneten Neptun liegt",
+     "Himmelskörper die sich um Neptun bewegen",
+     "Himmelskörper die von Neptun eingefangen wurden"
+    ],
+    "en": [
+     "Celestial body whose orbit lies beyond the outermost gas planet Neptune",
+     "Celestial bodies orbiting within the outermost gas planet Neptune",
+     "Celestial bodies moving around Neptune",
+     "Celestial bodies captured by Neptune"
+    ],
+    "es": [
+     "Cuerpos celestes cuya órbita se encuentra más allá del planeta gaseoso exterior Neptuno",
+     "Cuerpos celestes cuya órbita se encuentra dentro de la órbita de Neptuno",
+     "Cuerpos celestes que se mueven alrededor de Neptuno",
+     "Cuerpos celestes capturados por Neptuno"
+    ]
+   },
+   "explain": {
+    "de": "Transneptunische Objekte wie Pluto oder Eris sind eisige Überbleibsel aus der Entstehungszeit des Sonnensystems.",
+    "en": "Trans-Neptunian objects such as Pluto or Eris are icy leftovers from the birth of the solar system.",
+    "es": "Los objetos transneptunianos como Plutón o Eris son restos helados del nacimiento del sistema solar."
+   },
+   "image": "res://assets/quiz/images/Planet_nine-etnos_now-new3.jpg",
+   "credit": "Tomruen, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q39",
+   "category": "himmelsmechanik",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Welche Bahnform hat ein Planet, der um die Sonne kreist?",
+    "en": "What is the orbital shape of a planet orbiting the Sun?",
+    "es": "¿Qué forma tiene la órbita de un planeta alrededor del Sol?"
+   },
+   "answers": {
+    "de": [
+     "Ellipse",
+     "Parabel",
+     "Hyperbel",
+     "Kreis"
+    ],
+    "en": [
+     "Ellipse",
+     "Parable",
+     "Hyperbola",
+     "Circle"
+    ],
+    "es": [
+     "Elipse",
+     "Parábola",
+     "Hipérbola",
+     "Círculo"
+    ]
+   },
+   "explain": {
+    "de": "Das hat Johannes Kepler 1609 herausgefunden: Planetenbahnen sind Ellipsen mit der Sonne in einem Brennpunkt.",
+    "en": "Johannes Kepler found this in 1609: planetary orbits are ellipses with the Sun at one focus.",
+    "es": "Johannes Kepler lo descubrió en 1609: las órbitas son elipses con el Sol en uno de los focos."
+   },
+   "image": "res://assets/quiz/images/Conic_Sections.svg.jpg",
+   "credit": "Original: Magister Mathematicae; Derivative work: Phancy; Übersetzung: Glrx, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q40",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Was sind Jupiter-Trojaner?",
+    "en": "What are Jupiter Trojans?",
+    "es": "¿Qué son los troyanos de Júpiter?"
+   },
+   "answers": {
+    "de": [
+     "Asteroiden welche die Sonne auf der gleichen Bahn wie der Jupiter umkreisen, ihm jedoch auf den Lagrange-Punkten L4 und L5 mit einem mittleren Abstand von 60° vorauseilen beziehungsweise nachfolgen",
+     "Asteroiden welche die Sonne auf der gleichen Bahn wie der Jupiter umkreisen, ihm jedoch auf den Lagrange-Punkten L2 und L3 mit einem mittleren Abstand von 45° vorauseilen beziehungsweise nachfolgen",
+     "Asteroiden welche die Sonne auf der gleichen Bahn wie der Jupiter umkreisen, ihm jedoch auf den Lagrange-Punkten L4 und L5 mit einem mittleren Abstand von 75° vorauseilen beziehungsweise nachfolgen",
+     "Asteroiden welche die Sonne auf der gleichen Bahn wie der Jupiter umkreisen, ihm jedoch auf den Lagrange-Punkten L5 und L6 mit einem mittleren Abstand von 50° vorauseilen beziehungsweise nachfolgen"
+    ],
+    "en": [
+     "Asteroids that orbit the Sun in the same orbit as Jupiter, but precede or follow it at Lagrange points L4 and L5 with an average distance of 60°",
+     "Asteroids that orbit the Sun in the same orbit as Jupiter, but lead or follow it at an average distance of 45° from Lagrange points L2 and L3",
+     "Asteroids that orbit the Sun in the same orbit as Jupiter, but lead or follow it at an average distance of 75° from Lagrange points L4 and L5",
+     "Asteroids that orbit the Sun in the same orbit as Jupiter, but precede or follow it at Lagrange points L5 and L6 with an average distance of 50°"
+    ],
+    "es": [
+     "Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L4 y L5 con una separación media de 60°",
+     "Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L2 y L3 con una separación media de 45°",
+     "Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L4 y L5 con una separación media de 75°",
+     "Asteroides que orbitan el Sol en la misma trayectoria que Júpiter, pero que le preceden o siguen en los puntos de Lagrange L5 y L6 con una separación media de 50°"
+    ]
+   },
+   "explain": {
+    "de": "Die ersten Trojaner wurden ab 1906 in Heidelberg entdeckt – die NASA-Sonde Lucy fliegt gerade zu ihnen.",
+    "en": "The first Trojans were discovered from 1906 in Heidelberg – NASA's Lucy probe is on its way to them.",
+    "es": "Los primeros troyanos se descubrieron a partir de 1906 en Heidelberg; la sonda Lucy de la NASA viaja hacia ellos."
+   },
+   "image": "res://assets/quiz/images/Orbita_aquiles.jpg",
+   "credit": "Fer31416, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q41",
+   "category": "sterne",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Was sind Sternhaufen?",
+    "en": "What are star clusters?",
+    "es": "¿Qué son los cúmulos estelares?"
+   },
+   "answers": {
+    "de": [
+     "Eine Gruppe von Sternen, die sich aus der gleichen Gas- und Staubwolke gebildet haben",
+     "Eine Gruppe von Sternen, die sich zufällig in der gleichen Region des Raums befinden und in der gleichen Entwicklungsphase sind",
+     "Eine Gruppe von Sternen, die sich in der gleichen Entwicklungsphase befinden",
+     "Eine Gruppe von Sternen, die gemeinsam entstanden sind und in der gleichen Entwicklungsphase befinden"
+    ],
+    "en": [
+     "A group of stars formed from the same cloud of gas and dust",
+     "A group of stars that happen to be in the same region of space and are in the same stage of development",
+     "A group of stars in the same evolutionary stage",
+     "A group of stars that have formed together and are in the same phase of development"
+    ],
+    "es": [
+     "Un grupo de estrellas que se formaron a partir de la misma nube de gas y polvo",
+     "Un grupo de estrellas que se encuentran casualmente en la misma región del espacio y están en la misma fase de desarrollo",
+     "Un grupo de estrellas que se encuentran en la misma fase de desarrollo",
+     "Un grupo de estrellas que se formaron juntas y se encuentran en la misma fase de desarrollo"
+    ]
+   },
+   "explain": {
+    "de": "Sterne eines Haufens sind gleich alt – die Plejaden sind ein bekanntes Beispiel.",
+    "en": "The stars in a cluster are the same age – the Pleiades are a well-known example.",
+    "es": "Las estrellas de un cúmulo tienen la misma edad; las Pléyades son un ejemplo conocido."
+   },
+   "image": "res://assets/quiz/images/Messier92_LRGB.jpg",
+   "credit": "Jeremias Siehr, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q42",
+   "category": "sonnensystem",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Was ist der Kuipergürtel?",
+    "en": "What is the Kuiper Belt?",
+    "es": "¿Qué es el cinturón de Kuiper?"
+   },
+   "answers": {
+    "de": [
+     "Ein Asteroidengürtel in unserem Sonnensystem außerhalb der Neptunbahn",
+     "Ein Asteroidengürtel um Proxima Centauri",
+     "Ein Asteroidengürtel zwischen Jupiter und Saturn",
+     "Ein Asteroidengürtel zwischen Saturn und Uranus"
+    ],
+    "en": [
+     "An asteroid belt in our solar system outside the orbit of Neptune",
+     "An asteroid belt around Proxima Centauri",
+     "An asteroid belt between Jupiter and Saturn",
+     "An asteroid belt between Saturn and Uranus"
+    ],
+    "es": [
+     "Un cinturón de asteroides en nuestro sistema solar más allá de la órbita de Neptuno",
+     "Un cinturón de asteroides alrededor de Próxima Centauri",
+     "Un cinturón de asteroides entre Júpiter y Saturno",
+     "Un cinturón de asteroides entre Saturno y Urano"
+    ]
+   },
+   "explain": {
+    "de": "Der Kuipergürtel ist ein Ring aus eisigen Körpern jenseits des Neptun – Pluto ist sein bekanntestes Mitglied.",
+    "en": "The Kuiper belt is a ring of icy bodies beyond Neptune – Pluto is its best-known member.",
+    "es": "El cinturón de Kuiper es un anillo de cuerpos helados más allá de Neptuno; Plutón es su miembro más conocido."
+   },
+   "image": "res://assets/quiz/images/Kuiper_belt_-_Oort_cloud-de.svg.jpg",
+   "credit": "NASA, Medium69.Cette & William Crochot, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q43",
+   "category": "sonnensystem",
+   "difficulty": 3,
+   "correct": 2,
+   "text": {
+    "de": "Was ist die Oortsche Wolke?",
+    "en": "What is the Oort cloud?",
+    "es": "¿Qué es la Nube de Oort?"
+   },
+   "answers": {
+    "de": [
+     "Eine Wolke von Sternen, die sich in der gleichen Entwicklungsphase befinden",
+     "Eine Sternentstehungsregion im Orionnebel",
+     "Eine Ansammlung von Asteroiden und Kometen im äußersten Bereich des Sonnensystems ",
+     "Eine prominente Wolkenschicht in der Atmosphäre von Jupiter"
+    ],
+    "en": [
+     "A cloud of stars in the same evolutionary stage",
+     "A star-forming region in the Orion Nebula",
+     "A collection of asteroids and comets in the outermost part of the solar system",
+     "A prominent cloud layer in Jupiter's atmosphere"
+    ],
+    "es": [
+     "Una nube de estrellas en la misma fase de desarrollo",
+     "Una región de formación estelar en la Nebulosa de Orión",
+     "Una acumulación de asteroides y cometas en la región más externa del sistema solar",
+     "Una prominente capa de nubes en la atmósfera de Júpiter"
+    ]
+   },
+   "explain": {
+    "de": "Die Oortsche Wolke reicht vermutlich bis zu einem Lichtjahr weit – von dort kommen langperiodische Kometen.",
+    "en": "The Oort cloud probably extends up to a light-year away – long-period comets come from there.",
+    "es": "La nube de Oort probablemente se extiende hasta un año luz; de allí vienen los cometas de periodo largo."
+   },
+   "image": "res://assets/quiz/images/Kuiper_belt_-_Oort_cloud-de.svg.jpg",
+   "credit": "NASA, Medium69.Cette & William Crochot, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q44",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Hohmann-Transfer?",
+    "en": "What is a Hohmann transfer?",
+    "es": "¿Qué es una transferencia de Hohmann?"
+   },
+   "answers": {
+    "de": [
+     "Eine Bahnänderung, die eine Planetenbahn in eine andere Planetenbahn überführt",
+     "Ein energetisch günstiger Übergang zwischen zwei Bahnen um einen Himmelskörper",
+     "Ein Mechanismus um Masse von einem Stern zu einem anderen Stern in einem Doppelsternsystem zu übertragen",
+     "Ein spezieller Übergang von einer Sternentwicklungsphase zur nächsten"
+    ],
+    "en": [
+     "A change in orbit that transfers a planetary orbit to another planetary orbit",
+     "An energetically favorable transition between two orbits around a celestial body",
+     "A mechanism to transfer mass from one star to another star in a binary system",
+     "A special transition from one stellar evolution phase to the next"
+    ],
+    "es": [
+     "Un cambio de órbita que traslada una órbita planetaria a otra",
+     "Una transición energéticamente favorable entre dos órbitas alrededor de un cuerpo celeste",
+     "Un mecanismo para transferir masa de una estrella a otra en un sistema binario",
+     "Una transición especial de una fase de evolución estelar a la siguiente"
+    ]
+   },
+   "explain": {
+    "de": "Mit einem Hohmann-Transfer fliegen Raumsonden mit wenig Treibstoff, z. B. von der Erde zum Mars.",
+    "en": "Space probes use a Hohmann transfer to travel with little fuel, e.g. from Earth to Mars.",
+    "es": "Las sondas usan una transferencia de Hohmann para viajar con poco combustible, por ejemplo de la Tierra a Marte."
+   },
+   "image": "res://assets/quiz/images/Hohmann_transfer_orbit2.svg.jpg",
+   "credit": "Waterced, CC0, via Wikimedia Commons"
+  },
+  {
+   "id": "q45",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Pulsar?",
+    "en": "What is a pulsar?",
+    "es": "¿Qué es un púlsar?"
+   },
+   "answers": {
+    "de": [
+     "Ein junger Protostern",
+     "Ein schnell rotierender Neutronenstern mit gebündelter Strahlung",
+     "Ein aktiver Kometenkern",
+     "Ein Doppelsternsystem mit Massenaustausch"
+    ],
+    "en": [
+     "A young protostar",
+     "A fast rotating neutron star with focused radiation",
+     "An active comet nucleus",
+     "A binary star system with mass exchange"
+    ],
+    "es": [
+     "Una joven protoestrella",
+     "Una estrella de neutrones de rotación rápida con radiación colimada",
+     "Un núcleo cometario activo",
+     "Un sistema binario con transferencia de masa"
+    ]
+   },
+   "explain": {
+    "de": "Pulsare drehen sich bis zu hunderte Male pro Sekunde – ihr Strahl streift die Erde wie ein Leuchtturm.",
+    "en": "Pulsars spin up to hundreds of times per second – their beam sweeps past Earth like a lighthouse.",
+    "es": "Los púlsares giran hasta cientos de veces por segundo; su haz barre la Tierra como un faro."
+   },
+   "image": "res://assets/quiz/images/Lightsmall-optimised.jpg",
+   "credit": "Michael Kramer, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q46",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Welcher Prozess treibt die enorme Energieabgabe eines Quasars an?",
+    "en": "Which process drives the enormous energy output of a quasar?",
+    "es": "¿Qué proceso impulsa la enorme emisión de energía de un cuásar?"
+   },
+   "answers": {
+    "de": [
+     "Kernfusion in einem Riesenstern",
+     "Materieakkretion auf ein supermassereiches Schwarzes Loch",
+     "Kollision zweier Galaxien",
+     "Dunkle Materie-Zerfall"
+    ],
+    "en": [
+     "Nuclear fusion in a giant star",
+     "Matter accretion to a supermassive black hole",
+     "Collision of two galaxies",
+     "Dark matter decay"
+    ],
+    "es": [
+     "Fusión nuclear en una estrella gigante",
+     "Acreción de materia sobre un agujero negro supermasivo",
+     "Colisión de dos galaxias",
+     "Desintegración de materia oscura"
+    ]
+   },
+   "explain": {
+    "de": "Gas, das in ein riesiges Schwarzes Loch stürzt, heizt sich extrem auf und leuchtet heller als ganze Galaxien.",
+    "en": "Gas falling into a giant black hole heats up enormously and outshines entire galaxies.",
+    "es": "El gas que cae en un agujero negro gigante se calienta muchísimo y brilla más que galaxias enteras."
+   },
+   "image": "res://assets/quiz/images/NASAs_Chandra_Finds_Black_Hole_With_Tremendous_Growth_(supermassive-black-hole-2).jpg",
+   "credit": "X-ray: NASA/CXC/INAF-Brera/L. Ighina et al.; Illustration: NASA/CXC/SAO/M. Weiss; Image Processing: NASA/CXC/SAO/N. Wolk, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q47",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was unterscheidet einen Magnetar von anderen Neutronensternen?",
+    "en": "What distinguishes a magnetar from other neutron stars?",
+    "es": "¿Qué distingue a un magnetar de otras estrellas de neutrones?"
+   },
+   "answers": {
+    "de": [
+     "Seine besonders hohe Rotationsgeschwindigkeit",
+     "Sein extrem starkes Magnetfeld",
+     "Seine doppelte Masse",
+     "Seine blaue Farbe"
+    ],
+    "en": [
+     "Its particularly high rotational speed",
+     "Its extremely strong magnetic field",
+     "Its double mass",
+     "Its blue colour"
+    ],
+    "es": [
+     "Su velocidad de rotación especialmente alta",
+     "Su campo magnético extremadamente intenso",
+     "Su masa doble",
+     "Su color azul"
+    ]
+   },
+   "explain": {
+    "de": "Magnetare haben die stärksten bekannten Magnetfelder – billiardenfach stärker als das der Erde.",
+    "en": "Magnetars have the strongest known magnetic fields – a million billion times stronger than Earth's.",
+    "es": "Los magnetares tienen los campos magnéticos más intensos conocidos: miles de billones de veces el terrestre."
+   },
+   "image": "res://assets/quiz/images/Artists_impression_of_the_magnetar_in_the_star_cluster_Westerlund_1.jpg",
+   "credit": "ESO/L. Calçada, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q48",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was beschreibt der Ereignishorizont eines Schwarzen Lochs?",
+    "en": "What does the event horizon of a black hole describe?",
+    "es": "¿Qué describe el horizonte de eventos de un agujero negro?"
+   },
+   "answers": {
+    "de": [
+     "Den sichtbaren Rand der Akkretionsscheibe",
+     "Die Grenze, ab der keine Information mehr entkommen kann",
+     "Die Region maximaler Röntgenstrahlung",
+     "Den Radius des Photonengürtels"
+    ],
+    "en": [
+     "The visible edge of the accretion disc",
+     "The limit beyond which no more information can escape",
+     "The region of maximum X-rays",
+     "The radius of the photon belt"
+    ],
+    "es": [
+     "El borde visible del disco de acreción",
+     "El límite a partir del cual ninguna información puede escapar",
+     "La región de máxima radiación de rayos X",
+     "El radio de la esfera de fotones"
+    ]
+   },
+   "explain": {
+    "de": "Innerhalb des Ereignishorizonts müsste etwas schneller als Licht sein, um zu entkommen – also kann nichts heraus.",
+    "en": "Inside the event horizon you would need to move faster than light to escape – so nothing gets out.",
+    "es": "Dentro del horizonte de sucesos habría que ir más rápido que la luz para escapar, así que nada sale."
+   },
+   "image": "res://assets/quiz/images/Black_hole_-_Messier_87.jpg",
+   "credit": "Event Horizon Telescope, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q49",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 2,
+   "text": {
+    "de": "Welches Objekt befindet sich im Zentrum der Milchstraße?",
+    "en": "Which object is located in the center of the Milky Way?",
+    "es": "¿Qué objeto se encuentra en el centro de la Vía Láctea?"
+   },
+   "answers": {
+    "de": [
+     "Ein Kugelsternhaufen",
+     "Ein Pulsar",
+     "Ein supermassereiches Schwarzes Loch",
+     "Eine Dunkle-Materie-Wolke"
+    ],
+    "en": [
+     "A globular cluster",
+     "A pulsar",
+     "A supermassive black hole",
+     "A dark matter cloud"
+    ],
+    "es": [
+     "Un cúmulo globular",
+     "Un púlsar",
+     "Un agujero negro supermasivo",
+     "Una nube de materia oscura"
+    ]
+   },
+   "explain": {
+    "de": "Sagittarius A* hat rund 4 Millionen Sonnenmassen – 2022 wurde sein „Schatten“ erstmals abgebildet.",
+    "en": "Sagittarius A* has about 4 million solar masses – its 'shadow' was first imaged in 2022.",
+    "es": "Sagitario A* tiene unos 4 millones de masas solares; su «sombra» se fotografió por primera vez en 2022."
+   },
+   "image": "res://assets/quiz/images/Orbits_of_stars_around_black_hole_at_the_heart_of_the_Milky_Way_(eso1825d).jpg",
+   "credit": "ESO/L. Calçada/spaceengine.org, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q50",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Blazar?",
+    "en": "What is a blazar?",
+    "es": "¿Qué es un blásar?"
+   },
+   "answers": {
+    "de": [
+     "Ein veränderlicher Stern",
+     "Ein Quasar mit Jet in Richtung Erde",
+     "Eine Sternentstehungsregion",
+     "Ein kollidierendes Doppelsternsystem"
+    ],
+    "en": [
+     "A Variable Star",
+     "A quasar with a jet towards Earth",
+     "A star-forming region",
+     "A colliding binary system"
+    ],
+    "es": [
+     "Una estrella variable",
+     "Un cuásar con un chorro apuntando hacia la Tierra",
+     "Una región de formación estelar",
+     "Un sistema binario en colisión"
+    ]
+   },
+   "explain": {
+    "de": "Bei einem Blazar schauen wir genau in den Teilchenstrahl – deshalb wirkt er besonders hell und veränderlich.",
+    "en": "With a blazar we look straight down the jet – so it appears especially bright and variable.",
+    "es": "En un blazar miramos directamente al chorro; por eso parece especialmente brillante y variable."
+   },
+   "image": "res://assets/quiz/images/Blazar-illustration.jpg",
+   "credit": "NASA/JPL-Caltech/GSFC, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q51",
+   "category": "exotische_objekte",
+   "difficulty": 3,
+   "correct": 2,
+   "text": {
+    "de": "Welche Strahlung wird typischerweise bei aktiven Galaxienkernen beobachtet?",
+    "en": "What radiation is typically observed in active galaxy nuclei?",
+    "es": "¿Qué radiación se observa típicamente en los núcleos galácticos activos?"
+   },
+   "answers": {
+    "de": [
+     "Nur sichtbares Licht",
+     "Nur Radiostrahlung",
+     "Über das gesamte elektromagnetische Spektrum",
+     "Ausschließlich Gammastrahlung"
+    ],
+    "en": [
+     "Visible light",
+     "Radio radiation only",
+     "Across the entire electromagnetic spectrum",
+     "Gamma rays only"
+    ],
+    "es": [
+     "Solo luz visible",
+     "Solo radiación de radio",
+     "A lo largo de todo el espectro electromagnético",
+     "Exclusivamente rayos gamma"
+    ]
+   },
+   "explain": {
+    "de": "Aktive Galaxienkerne strahlen von Radiowellen bis zu Gammastrahlung – im gesamten Spektrum.",
+    "en": "Active galactic nuclei shine from radio waves to gamma rays – across the whole spectrum.",
+    "es": "Los núcleos galácticos activos emiten desde ondas de radio hasta rayos gamma, en todo el espectro."
+   },
+   "image": "res://assets/quiz/images/Artists_impression_of_quasar_J0313-1806.jpg",
+   "credit": "NASA/ESA/C.Maraston (STScI), Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q52",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was beschreibt das 3. Keplersche Gesetz?",
+    "en": "What does Kepler's Third Law describe?",
+    "es": "¿Qué describe la tercera ley de Kepler?"
+   },
+   "answers": {
+    "de": [
+     "Die Form der Planetenbahnen",
+     "Den Zusammenhang zwischen Umlaufzeit und Bahnradius",
+     "Die Rotationsgeschwindigkeit der Sonne",
+     "Die Bahnneigung von Kometen"
+    ],
+    "en": [
+     "The shape of planetary orbits",
+     "The relationship between orbit time and orbit radius",
+     "The rotation speed of the sun",
+     "The orbital tilt of comets"
+    ],
+    "es": [
+     "La forma de las órbitas planetarias",
+     "La relación entre el período orbital y el radio de la órbita",
+     "La velocidad de rotación del Sol",
+     "La inclinación orbital de los cometas"
+    ]
+   },
+   "explain": {
+    "de": "Das Quadrat der Umlaufzeit ist proportional zur dritten Potenz der großen Halbachse: Ferne Planeten brauchen viel länger.",
+    "en": "The square of the period is proportional to the cube of the semi-major axis: distant planets take much longer.",
+    "es": "El cuadrado del periodo es proporcional al cubo del semieje mayor: los planetas lejanos tardan mucho más."
+   },
+   "image": "res://assets/quiz/images/Ellipitical_orbit_of_planet_with_an_eccentricty_of_0.8.jpg",
+   "credit": "Mkwadee, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q53",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Lagrange-Punkt?",
+    "en": "What is a Lagrange point?",
+    "es": "¿Qué es un punto de Lagrange?"
+   },
+   "answers": {
+    "de": [
+     "Ein Punkt maximaler Gravitation",
+     "Ein Ort stabiler Gleichgewichtsposition in einem Zwei-Körper-System",
+     "Das Zentrum einer Galaxie",
+     "Ein Punkt maximaler Gezeitenwirkung"
+    ],
+    "en": [
+     "A point of maximum gravity",
+     "A place of stable equilibrium position in a two-body system",
+     "The centre of a galaxy",
+     "A point of maximum tidal effect"
+    ],
+    "es": [
+     "Un punto de máxima gravedad",
+     "Una posición de equilibrio estable en un sistema de dos cuerpos",
+     "El centro de una galaxia",
+     "Un punto de máximo efecto de marea"
+    ]
+   },
+   "explain": {
+    "de": "An den fünf Lagrange-Punkten heben sich Schwerkraft und Fliehkraft auf – das James-Webb-Teleskop sitzt bei L2.",
+    "en": "At the five Lagrange points gravity and centrifugal force balance – the James Webb telescope sits at L2.",
+    "es": "En los cinco puntos de Lagrange se equilibran la gravedad y la fuerza centrífuga; el telescopio James Webb está en L2."
+   },
+   "image": "res://assets/quiz/images/Lagrange_points2.svg.jpg",
+   "credit": "Xander89, CC BY 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q54",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was bedeutet „gebundene Rotation\"?",
+    "en": "What does \"tied rotation\" mean?",
+    "es": "¿Qué significa \"rotación sincrónica\"?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet dreht sich nicht",
+     "Umlaufzeit und Rotationszeit sind identisch",
+     "Zwei Planeten teilen sich eine Bahn",
+     "Ein Planet rotiert rückwärts"
+    ],
+    "en": [
+     "A planet does not rotate",
+     "Circulation time and rotation time are identical",
+     "Two planets share an orbit",
+     "A planet rotates backwards"
+    ],
+    "es": [
+     "Un planeta no rota",
+     "El período orbital y el período de rotación son idénticos",
+     "Dos planetas comparten una órbita",
+     "Un planeta rota en sentido inverso"
+    ]
+   },
+   "explain": {
+    "de": "Deshalb sehen wir vom Mond immer dieselbe Seite.",
+    "en": "That is why we always see the same side of the Moon.",
+    "es": "Por eso siempre vemos la misma cara de la Luna."
+   },
+   "image": "res://assets/quiz/images/Tidal_locking_of_the_Moon_with_the_Earth.jpg",
+   "credit": "Stigmatella aurantiaca, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q55",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Warum zeigen Spiralgalaxien flache Rotationskurven?",
+    "en": "Why do spiral galaxies show flat rotation curves?",
+    "es": "¿Por qué las galaxias espirales muestran curvas de rotación planas?"
+   },
+   "answers": {
+    "de": [
+     "Wegen hoher Sternendichte im Zentrum",
+     "Aufgrund Dunkler Materie",
+     "Wegen intergalaktischer Reibung",
+     "Durch Magnetfelder"
+    ],
+    "en": [
+     "Due to high star density in the center",
+     "Due to dark matter",
+     "Because of intergalactic friction",
+     "Through magnetic fields"
+    ],
+    "es": [
+     "Por la alta densidad estelar en el centro",
+     "Debido a la materia oscura",
+     "Por fricción intergaláctica",
+     "Por campos magnéticos"
+    ]
+   },
+   "explain": {
+    "de": "Die äußeren Sterne kreisen zu schnell für die sichtbare Masse – unsichtbare Dunkle Materie liefert zusätzliche Schwerkraft.",
+    "en": "The outer stars orbit too fast for the visible mass – invisible dark matter adds extra gravity.",
+    "es": "Las estrellas exteriores giran demasiado rápido para la masa visible; la materia oscura aporta gravedad extra."
+   },
+   "image": "res://assets/quiz/images/Comparison_of_rotating_disc_galaxies_in_the_distant_Universe_and_the_present_day.jpg",
+   "credit": "ESO/L. Calçada, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q56",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was versteht man unter Präzession der Erdachse?",
+    "en": "What is meant by precession of the earth's axis?",
+    "es": "¿Qué se entiende por precesión del eje terrestre?"
+   },
+   "answers": {
+    "de": [
+     "Änderung der Erdrotation pro Tag",
+     "Taumelbewegung der Rotationsachse",
+     "Verschiebung der Erdumlaufbahn",
+     "Veränderung der Magnetpole"
+    ],
+    "en": [
+     "Change in Earth's rotation per day",
+     "Wobbling motion of the axis of rotation",
+     "Displacement of Earth's orbit",
+     "Change in magnetic poles"
+    ],
+    "es": [
+     "Cambio en la rotación de la Tierra por día",
+     "Movimiento de bamboleo del eje de rotación",
+     "Desplazamiento de la órbita terrestre",
+     "Cambio de los polos magnéticos"
+    ]
+   },
+   "explain": {
+    "de": "Die Erdachse beschreibt in rund 26.000 Jahren einen Kreis – in ferner Zukunft wird Wega unser Polarstern sein.",
+    "en": "Earth's axis traces a circle every 26,000 years – one day Vega will be our pole star.",
+    "es": "El eje terrestre describe un círculo cada 26.000 años; algún día Vega será nuestra estrella polar."
+   },
+   "image": "res://assets/quiz/images/Gyroscope_precession.jpg",
+   "credit": "Lucas Vieira, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q57",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Was ist eine retrograde Bewegung?",
+    "en": "What is a retrograde movement?",
+    "es": "¿Qué es un movimiento retrógrado?"
+   },
+   "answers": {
+    "de": [
+     "Die entgegengesetzte Bewegung eines Himmelskörpers im Vergleich zum Rotationssinn des Gesamtsystems",
+     "Die Bewegung eines Himmelskörpers in einem rotierenden System, das der Hauptrotationsrichtung folgt",
+     "Die Bewegung eines Himmelskörpers auf einer Bahn außerhalb der Ekliptik",
+     "Die gravitative Abbremsung der Bewegung eines Himmelskörpers auf seiner Bahn"
+    ],
+    "en": [
+     "The opposite movement of a celestial body compared to the direction of rotation of the entire system",
+     "The movement of a celestial body in a rotating system following the main direction of rotation",
+     "The movement of a celestial body on an orbit outside the ecliptic",
+     "The gravitational deceleration of the movement of a celestial body in its orbit"
+    ],
+    "es": [
+     "El movimiento opuesto de un cuerpo celeste en comparación con el sentido de rotación del sistema",
+     "El movimiento de un cuerpo celeste en un sistema rotante que sigue la dirección de rotación principal",
+     "El movimiento de un cuerpo celeste en una órbita fuera de la eclíptica",
+     "La desaceleración gravitatoria del movimiento de un cuerpo celeste en su órbita"
+    ]
+   },
+   "explain": {
+    "de": "Ein Beispiel ist die Venus, die sich entgegen den meisten Planeten dreht – oder Monde, die „rückwärts“ kreisen.",
+    "en": "Examples are Venus, which spins the other way round from most planets, or moons orbiting 'backwards'.",
+    "es": "Ejemplos son Venus, que gira al revés que la mayoría de planetas, o lunas que orbitan «hacia atrás»."
+   },
+   "image": "res://assets/quiz/images/RetrogradeBaan.jpg",
+   "credit": "Silver Spoon, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q58",
+   "category": "himmelsmechanik",
+   "difficulty": 3,
+   "correct": 0,
+   "text": {
+    "de": "Welche Bahnform hat ein Objekt mit Exzentrizität e = 1?",
+    "en": "What is the path shape of an object with eccentricity e = 1?",
+    "es": "¿Qué forma orbital tiene un objeto con excentricidad e = 1?"
+   },
+   "answers": {
+    "de": [
+     "Parabel",
+     "Hyperbel",
+     "Ellipse",
+     "Kreis"
+    ],
+    "en": [
+     "Parable",
+     "Hyperbola",
+     "Ellipse",
+     "Circle"
+    ],
+    "es": [
+     "Parábola",
+     "Hipérbola",
+     "Elipse",
+     "Círculo"
+    ]
+   },
+   "explain": {
+    "de": "Bei e = 0 ist die Bahn ein Kreis, unter 1 eine Ellipse, genau 1 eine Parabel, darüber eine Hyperbel.",
+    "en": "With e = 0 the orbit is a circle, below 1 an ellipse, exactly 1 a parabola, above 1 a hyperbola.",
+    "es": "Con e = 0 la órbita es un círculo, por debajo de 1 una elipse, exactamente 1 una parábola y por encima, una hipérbola."
+   },
+   "image": "res://assets/quiz/images/Conic_Sections.svg.jpg",
+   "credit": "Original: Magister Mathematicae; Derivative work: Phancy; Übersetzung: Glrx, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q59",
+   "category": "kosmologie",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was beschreibt die Hubble-Konstante?",
+    "en": "What does the Hubble constant describe?",
+    "es": "¿Qué describe la constante de Hubble?"
+   },
+   "answers": {
+    "de": [
+     "Die Masse der Milchstraße",
+     "Die Expansionsrate des Universums",
+     "Die Temperatur der Hintergrundstrahlung",
+     "Die Anzahl der Galaxien"
+    ],
+    "en": [
+     "The mass of the Milky Way galaxy",
+     "The expansion rate of the universe",
+     "The temperature of the background radiation",
+     "The number of galaxies"
+    ],
+    "es": [
+     "La masa de la Vía Láctea",
+     "La tasa de expansión del universo",
+     "La temperatura de la radiación de fondo",
+     "El número de galaxias"
+    ]
+   },
+   "explain": {
+    "de": "Sie beträgt rund 70 km/s pro Megaparsec: Jede Galaxie entfernt sich umso schneller, je weiter sie weg ist.",
+    "en": "It is about 70 km/s per megaparsec: the farther a galaxy is, the faster it recedes.",
+    "es": "Vale unos 70 km/s por megapársec: cuanto más lejos está una galaxia, más rápido se aleja."
+   },
+   "image": "res://assets/quiz/images/Expansion_des_Universums.jpg",
+   "credit": "NASA / WMAP Science Team simple retouch by Yikrazuul, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q60",
+   "category": "kosmologie",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist die kosmische Hintergrundstrahlung?",
+    "en": "What is Cosmic Background Radiation?",
+    "es": "¿Qué es la radiación de fondo cósmico de microondas?"
+   },
+   "answers": {
+    "de": [
+     "Radiostrahlung aus Pulsaren",
+     "Reststrahlung des Urknalls",
+     "Infrarotlicht von Galaxien",
+     "Emission aus Dunkler Materie"
+    ],
+    "en": [
+     "Radio radiation from pulsars",
+     "Residual radiation from the Big Bang",
+     "Infrared light from galaxies",
+     "Emission from dark matter"
+    ],
+    "es": [
+     "Radiación de radio de los pulsares",
+     "Radiación residual del Big Bang",
+     "Luz infrarroja de galaxias",
+     "Emisión de materia oscura"
+    ]
+   },
+   "explain": {
+    "de": "Dieses Licht wurde etwa 380.000 Jahre nach dem Urknall frei und ist heute auf knapp 3 Kelvin abgekühlt.",
+    "en": "This light was released about 380,000 years after the Big Bang and has cooled to under 3 kelvin today.",
+    "es": "Esta luz se liberó unos 380.000 años después del Big Bang y hoy se ha enfriado a menos de 3 kelvin."
+   },
+   "image": "res://assets/quiz/images/BigBangNoise.jpg",
+   "credit": "NASA, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q61",
+   "category": "kosmologie",
+   "difficulty": 3,
+   "correct": 2,
+   "text": {
+    "de": "Welcher Anteil der Gesamtenergie des Universums entfällt ungefähr auf Dunkle Energie?",
+    "en": "Approximately what proportion of the universe's total energy is dark energy?",
+    "es": "¿Qué proporción de la energía total del universo corresponde aproximadamente a la energía oscura?"
+   },
+   "answers": {
+    "de": [
+     "~5 %",
+     "~27 %",
+     "~72 %",
+     "~90 %"
+    ],
+    "en": [
+     "5",
+     "27",
+     "72",
+     "90%"
+    ],
+    "es": [
+     "~5 %",
+     "~27 %",
+     "~72 %",
+     "~90 %"
+    ]
+   },
+   "explain": {
+    "de": "Dunkle Energie treibt die beschleunigte Ausdehnung des Universums an – was sie ist, weiß noch niemand.",
+    "en": "Dark energy drives the accelerating expansion of the universe – nobody yet knows what it is.",
+    "es": "La energía oscura impulsa la expansión acelerada del universo; nadie sabe aún qué es."
+   },
+   "image": "res://assets/quiz/images/CMB_universe_expansion.jpg",
+   "credit": "NASA/WMAP Science Team/ Art by Dana Berry, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q62",
+   "category": "kosmologie",
+   "difficulty": 3,
+   "correct": 2,
+   "text": {
+    "de": "Was bedeutet „Rotverschiebung“ bei fernen Galaxien?",
+    "en": "What does “redshift” mean for distant galaxies?",
+    "es": "¿Qué significa \"corrimiento al rojo\" en galaxias lejanas?"
+   },
+   "answers": {
+    "de": [
+     "Sie bewegen sich auf uns zu",
+     "Ihr Licht wird ins Blaue verschoben",
+     "Ihr Licht wird durch Expansion des Universums gedehnt",
+     "Sie enthalten besonders viele rote Sterne"
+    ],
+    "en": [
+     "They are moving towards us",
+     "Your light is shifted to blue",
+     "Their light is stretched by expansion of the universe",
+     "They contain a particularly large number of red stars"
+    ],
+    "es": [
+     "Se están acercando a nosotros",
+     "Su luz se desplaza hacia el azul",
+     "Su luz se estira por la expansión del universo",
+     "Contienen especialmente muchas estrellas rojas"
+    ]
+   },
+   "explain": {
+    "de": "Je weiter eine Galaxie entfernt ist, desto stärker ist ihr Licht zum Roten hin gedehnt.",
+    "en": "The farther away a galaxy is, the more its light is stretched towards red.",
+    "es": "Cuanto más lejos está una galaxia, más se estira su luz hacia el rojo."
+   },
+   "image": "res://assets/quiz/images/HUDF_large.jpg",
+   "credit": "NASA, ESA, Hubble; Sonification: G. Salvesen (UCSB); Data: M. Rafelski et al."
+  },
+  {
+   "id": "q63",
+   "category": "kosmologie",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Inflationsmodell?",
+    "en": "What is an inflation model?",
+    "es": "¿Qué es un modelo de inflación?"
+   },
+   "answers": {
+    "de": [
+     "Modell der Sternentwicklung",
+     "Theorie einer extrem schnellen Expansion kurz nach dem Urknall",
+     "Galaxienkollisionsmodell",
+     "Theorie zur Entstehung Schwarzer Löcher"
+    ],
+    "en": [
+     "Model of star evolution",
+     "Theory of an extremely rapid expansion shortly after the Big Bang",
+     "Galaxy Collision Model",
+     "Theory of Black Hole Formation"
+    ],
+    "es": [
+     "Modelo de evolución estelar",
+     "Teoría de una expansión extremadamente rápida justo después del Big Bang",
+     "Modelo de colisión de galaxias",
+     "Teoría sobre la formación de agujeros negros"
+    ]
+   },
+   "explain": {
+    "de": "In winzigen Sekundenbruchteilen soll sich das Universum um ein Vielfaches vergrößert haben.",
+    "en": "In a tiny fraction of a second the universe is thought to have grown enormously.",
+    "es": "Se cree que en una minúscula fracción de segundo el universo creció enormemente."
+   },
+   "image": "res://assets/quiz/images/Expansion_des_Universums.jpg",
+   "credit": "NASA / WMAP Science Team simple retouch by Yikrazuul, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q64",
+   "category": "kosmologie",
+   "difficulty": 3,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Gravitationslinseneffekt?",
+    "en": "What is a gravitational lens effect?",
+    "es": "¿Qué es el efecto de lente gravitacional?"
+   },
+   "answers": {
+    "de": [
+     "Brechung von Licht durch Magnetfelder",
+     "Ablenkung von Licht durch Masse",
+     "Spiegelung an interstellarem Staub",
+     "Interferenz durch Dunkle Energie"
+    ],
+    "en": [
+     "Refraction of light by magnetic fields",
+     "Deflection of light by mass",
+     "Reflection on interstellar dust",
+     "Interference by dark energy"
+    ],
+    "es": [
+     "Refracción de la luz por campos magnéticos",
+     "Desviación de la luz por la masa",
+     "Reflexión en polvo interestelar",
+     "Interferencia por energía oscura"
+    ]
+   },
+   "explain": {
+    "de": "Große Massen wie Galaxienhaufen krümmen den Raum – das Licht dahinterliegender Galaxien wird zu Bögen verzerrt.",
+    "en": "Large masses such as galaxy clusters curve space – light from galaxies behind them is bent into arcs.",
+    "es": "Grandes masas como los cúmulos de galaxias curvan el espacio; la luz de galaxias más lejanas se deforma en arcos."
+   },
+   "image": "res://assets/quiz/images/Gravitational_lens-full.jpg",
+   "credit": "NASA, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q65",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 2,
+   "text": {
+    "de": "Welche Farbe haben heiße Sterne?",
+    "en": "What color are hot stars?",
+    "es": "¿De qué color son las estrellas calientes?"
+   },
+   "answers": {
+    "de": [
+     "Rot",
+     "Gelb",
+     "Blau",
+     "Orange"
+    ],
+    "en": [
+     "Red",
+     "Yellow",
+     "Blue",
+     "Orange"
+    ],
+    "es": [
+     "Rojo",
+     "Amarillo",
+     "Azul",
+     "Naranja"
+    ]
+   },
+   "explain": {
+    "de": "Wie bei einer Flamme: Heiße Sterne leuchten bläulich-weiß, kühlere gelb, orange oder rot.",
+    "en": "Like a flame: hot stars glow bluish-white, cooler ones yellow, orange or red.",
+    "es": "Como una llama: las estrellas calientes brillan blanco-azuladas; las más frías, amarillas, naranjas o rojas."
+   },
+   "image": "res://assets/quiz/images/eagle_nebula.jpg",
+   "credit": "Jonas Brinkmann, CC-BY-NC-SA 3.0"
+  },
+  {
+   "id": "q66",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 2,
+   "text": {
+    "de": "Was beschreibt die Spektralklasse eines Sterns hauptsächlich?",
+    "en": "What mainly describes the spectral class of a star?",
+    "es": "¿Qué describe principalmente la clase espectral de una estrella?"
+   },
+   "answers": {
+    "de": [
+     "Seine Größe",
+     "Seine chemische Zusammensetzung",
+     "Seine Oberflächentemperatur",
+     "Sein Alter"
+    ],
+    "en": [
+     "Its size",
+     "Its chemical composition",
+     "Its surface temperature",
+     "Its age"
+    ],
+    "es": [
+     "Su tamaño",
+     "Su composición química",
+     "Su temperatura superficial",
+     "Su edad"
+    ]
+   },
+   "explain": {
+    "de": "Die Klassen O, B, A, F, G, K, M reichen von heiß bis kühl – unsere Sonne ist ein G-Stern.",
+    "en": "The classes O, B, A, F, G, K, M run from hot to cool – our Sun is a G star.",
+    "es": "Las clases O, B, A, F, G, K, M van de calientes a frías; nuestro Sol es una estrella de tipo G."
+   },
+   "image": "res://assets/quiz/images/Morgan-Keenan_spectral_classification.svg.jpg",
+   "credit": "Rursus, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q67",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Was entsteht am Ende des Lebens eines sonnenähnlichen Sterns?",
+    "en": "What forms at the end of a sun-like star's life?",
+    "es": "¿Qué se forma al final de la vida de una estrella similar al Sol?"
+   },
+   "answers": {
+    "de": [
+     "Ein weißer Zwerg",
+     "Ein Neutronenstern",
+     "Ein Schwarzes Loch",
+     "Ein Pulsar"
+    ],
+    "en": [
+     "A white dwarf",
+     "A neutron star",
+     "A black hole",
+     "A pulsar"
+    ],
+    "es": [
+     "Una enana blanca",
+     "Una estrella de neutrones",
+     "Un agujero negro",
+     "Un púlsar"
+    ]
+   },
+   "explain": {
+    "de": "Ein Weißer Zwerg ist so groß wie die Erde, aber so schwer wie die Sonne – ein Teelöffel wiegt Tonnen.",
+    "en": "A white dwarf is the size of Earth but as heavy as the Sun – a teaspoon of it weighs tonnes.",
+    "es": "Una enana blanca tiene el tamaño de la Tierra pero la masa del Sol: una cucharadita pesa toneladas."
+   },
+   "image": "res://assets/quiz/images/m97.jpg",
+   "credit": "Florian Rünger, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q68",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Roter Riese?",
+    "en": "What is a red giant?",
+    "es": "¿Qué es una gigante roja?"
+   },
+   "answers": {
+    "de": [
+     "Ein besonders massereicher Stern",
+     "Ein alter Stern mit aufgeblähter Hülle",
+     "Ein Stern kurz vor der Supernova",
+     "Ein Doppelsternsystem"
+    ],
+    "en": [
+     "A particularly massive star",
+     "An old star with an inflated shell",
+     "A star just before the supernova",
+     "A binary star system"
+    ],
+    "es": [
+     "Una estrella especialmente masiva",
+     "Una estrella vieja con envoltura expandida",
+     "Una estrella justo antes de la supernova",
+     "Un sistema binario"
+    ]
+   },
+   "explain": {
+    "de": "Wenn der Wasserstoff im Kern verbraucht ist, bläht sich ein Stern auf – auch unsere Sonne in etwa 5 Milliarden Jahren.",
+    "en": "When the hydrogen in its core runs out, a star swells up – our Sun will too in about 5 billion years.",
+    "es": "Cuando se agota el hidrógeno del núcleo, la estrella se hincha; nuestro Sol lo hará en unos 5.000 millones de años."
+   },
+   "image": "res://assets/quiz/images/Red_giant_simulation_4_(cropped).jpg",
+   "credit": "A. Chiavassa, R. Kudritzki, B. Davies, B. Freytag and S. E. de Mink, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q69",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Doppelsternsystem?",
+    "en": "What is a binary star system?",
+    "es": "¿Qué es un sistema de estrellas dobles?"
+   },
+   "answers": {
+    "de": [
+     "Zwei Sterne, die sich zufällig überlagern",
+     "Zwei gravitativ gebundene Sterne",
+     "Ein Stern mit starkem Magnetfeld",
+     "Ein Stern mit zwei Planeten"
+    ],
+    "en": [
+     "Two stars that overlap randomly",
+     "Two gravitationally bound stars",
+     "A star with a strong magnetic field",
+     "A star with two planets"
+    ],
+    "es": [
+     "Dos estrellas que se superponen casualmente",
+     "Dos estrellas gravitacionalmente ligadas",
+     "Una estrella con campo magnético intenso",
+     "Una estrella con dos planetas"
+    ]
+   },
+   "explain": {
+    "de": "Rund die Hälfte aller sonnenähnlichen Sterne hat mindestens einen Begleitstern.",
+    "en": "About half of all Sun-like stars have at least one companion star.",
+    "es": "Aproximadamente la mitad de las estrellas parecidas al Sol tienen al menos una compañera."
+   },
+   "image": "res://assets/quiz/images/Menkalinan.jpg",
+   "credit": "Pablo Carlos Budassi, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q70",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 2,
+   "text": {
+    "de": "Welche Energiequelle treibt Hauptreihensterne an?",
+    "en": "What energy source drives main sequence stars?",
+    "es": "¿Qué fuente de energía impulsa a las estrellas de la secuencia principal?"
+   },
+   "answers": {
+    "de": [
+     "Chemische Verbrennung",
+     "Gravitationskollaps",
+     "Kernfusion von Wasserstoff",
+     "Radioaktiver Zerfall"
+    ],
+    "en": [
+     "Chemical combustion",
+     "Gravitational collapse",
+     "Hydrogen fusion",
+     "Radioactive decay"
+    ],
+    "es": [
+     "Combustión química",
+     "Colapso gravitacional",
+     "Fusión nuclear del hidrógeno",
+     "Desintegración radiactiva"
+    ]
+   },
+   "explain": {
+    "de": "Im Kern der Sonne werden jede Sekunde rund 600 Millionen Tonnen Wasserstoff zu Helium verschmolzen.",
+    "en": "In the Sun's core about 600 million tonnes of hydrogen fuse into helium every second.",
+    "es": "En el núcleo del Sol se fusionan unos 600 millones de toneladas de hidrógeno en helio cada segundo."
+   },
+   "image": "res://assets/quiz/images/Sun_poster.svg.jpg",
+   "credit": "Kelvinsong, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q71",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Brauner Zwerg?",
+    "en": "What is a Brown Dwarf?",
+    "es": "¿Qué es una enana marrón?"
+   },
+   "answers": {
+    "de": [
+     "Ein besonders alter Stern",
+     "Ein Objekt zwischen Planet und Stern",
+     "Ein Neutronenstern",
+     "Ein erloschener Weißer Zwerg"
+    ],
+    "en": [
+     "A particularly old star",
+     "An object between a planet and a star",
+     "A neutron star",
+     "An extinct white dwarf"
+    ],
+    "es": [
+     "Una estrella especialmente antigua",
+     "Un objeto entre planeta y estrella",
+     "Una estrella de neutrones",
+     "Una enana blanca extinta"
+    ]
+   },
+   "explain": {
+    "de": "Braune Zwerge sind zu leicht für dauerhafte Wasserstofffusion – „gescheiterte Sterne“.",
+    "en": "Brown dwarfs are too light for lasting hydrogen fusion – 'failed stars'.",
+    "es": "Las enanas marrones son demasiado ligeras para fusionar hidrógeno de forma estable: «estrellas fallidas»."
+   },
+   "image": "res://assets/quiz/images/Brown_Dwarf_Comparison_2020.jpg",
+   "credit": "Planetkid32, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q72",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 2,
+   "text": {
+    "de": "Was versteht man unter Metallizität eines Sterns?",
+    "en": "What is meant by the metallicity of a star?",
+    "es": "¿Qué se entiende por metalicidad de una estrella?"
+   },
+   "answers": {
+    "de": [
+     "Sein Eisenanteil",
+     "Sein Magnetfeld",
+     "Anteil schwerer Elemente",
+     "Seine Dichte"
+    ],
+    "en": [
+     "Its iron content",
+     "Its magnetic field",
+     "Fraction of heavy elements",
+     "Its density"
+    ],
+    "es": [
+     "Su contenido de hierro",
+     "Su campo magnético",
+     "Proporción de elementos pesados",
+     "Su densidad"
+    ]
+   },
+   "explain": {
+    "de": "Für Astronominnen und Astronomen ist alles schwerer als Helium ein „Metall“ – auch Sauerstoff oder Kohlenstoff.",
+    "en": "For astronomers, everything heavier than helium is a 'metal' – even oxygen or carbon.",
+    "es": "Para los astrónomos todo lo más pesado que el helio es un «metal», incluso el oxígeno o el carbono."
+   }
+  },
+  {
+   "id": "q73",
+   "category": "sterne",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Warum erscheinen manche Sterne als veränderlich?",
+    "en": "Why do some stars appear to be variable?",
+    "es": "¿Por qué algunas estrellas parecen variables?"
+   },
+   "answers": {
+    "de": [
+     "Aufgrund der Erdrotation",
+     "Durch Helligkeitsschwankungen oder Bedeckungen",
+     "Durch Farbwechsel",
+     "Aufgrund kosmischer Strahlung"
+    ],
+    "en": [
+     "Due to Earth's rotation",
+     "Due to brightness fluctuations or eclipses",
+     "Due to color changes",
+     "Due to cosmic radiation"
+    ],
+    "es": [
+     "Debido a la rotación de la Tierra",
+     "Por fluctuaciones de brillo o eclipses",
+     "Por cambios de color",
+     "Debido a la radiación cósmica"
+    ]
+   },
+   "explain": {
+    "de": "Manche Sterne pulsieren, andere werden von einem Begleiter verdeckt – beides kann man mit dem OST-Teleskop messen.",
+    "en": "Some stars pulsate, others are eclipsed by a companion – both can be measured with the OST telescope.",
+    "es": "Algunas estrellas pulsan y otras son eclipsadas por una compañera; ambas cosas se miden con el telescopio OST."
+   },
+   "image": "res://assets/quiz/images/Eso2003c.jpg",
+   "credit": "ESO/M. Montargès et al., CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q74",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Emissionsnebel?",
+    "en": "What is an emission nebula?",
+    "es": "¿Qué es una nebulosa de emisión?"
+   },
+   "answers": {
+    "de": [
+     "Ein reflektierender Staubnebel",
+     "Eine Gaswolke die durch Sterne zum Leuchten angeregt wird",
+     "Eine Dunkelwolke",
+     "Ein Planetarischer Nebel"
+    ],
+    "en": [
+     "A reflective dust nebula",
+     "A gas cloud excited to glow by stars",
+     "A dark cloud",
+     "A planetary nebula"
+    ],
+    "es": [
+     "Una nebulosa de polvo reflectante",
+     "Una nube de gas excitada para brillar por las estrellas",
+     "Una nube oscura",
+     "Una nebulosa planetaria"
+    ]
+   },
+   "explain": {
+    "de": "Junge heiße Sterne regen das Gas zum Leuchten an – wie in einer Leuchtstoffröhre.",
+    "en": "Young hot stars make the gas glow – like in a fluorescent tube.",
+    "es": "Las estrellas jóvenes y calientes hacen brillar el gas, como en un tubo fluorescente."
+   },
+   "image": "res://assets/quiz/images/m42SHO.jpg",
+   "credit": "Florian Rünger, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q75",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Planetarischer Nebel?",
+    "en": "What is a planetary nebula?",
+    "es": "¿Qué es una nebulosa planetaria?"
+   },
+   "answers": {
+    "de": [
+     "Geburtsort eines Planeten",
+     "Überrest eines sonnenähnlichen Sterns",
+     "Supernova-Überrest",
+     "Gas um einen Riesenplaneten"
+    ],
+    "en": [
+     "Birthplace of a planet",
+     "Remnant of a sun-like star",
+     "Supernova remnant",
+     "Gas surrounding a giant planet"
+    ],
+    "es": [
+     "Lugar de nacimiento de un planeta",
+     "Resto de una estrella similar al Sol",
+     "Resto de supernova",
+     "Gas alrededor de un planeta gigante"
+    ]
+   },
+   "explain": {
+    "de": "Trotz des Namens hat er nichts mit Planeten zu tun – er ist die abgestoßene Hülle eines sterbenden Sterns.",
+    "en": "Despite the name it has nothing to do with planets – it is the ejected shell of a dying star.",
+    "es": "Pese al nombre no tiene nada que ver con planetas: es la envoltura expulsada de una estrella moribunda."
+   },
+   "image": "res://assets/quiz/images/M57.jpg",
+   "credit": "Florian Rünger & Moritz Itzerott, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q76",
+   "category": "nebel_galaxien",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Welche Form hat eine Spiralgalaxie typischerweise?",
+    "en": "What shape does a spiral galaxy typically have?",
+    "es": "¿Qué forma tiene típicamente una galaxia espiral?"
+   },
+   "answers": {
+    "de": [
+     "Kugelförmig",
+     "Scheibenförmig mit Spiralarmen",
+     "Unregelmäßig",
+     "Ringförmig"
+    ],
+    "en": [
+     "Spherical",
+     "Disk-shaped with spiral arms",
+     "Irregular",
+     "Ring-shaped"
+    ],
+    "es": [
+     "Esférica",
+     "En forma de disco con brazos espirales",
+     "Irregular",
+     "En forma de anillo"
+    ]
+   },
+   "explain": {
+    "de": "In den Spiralarmen entstehen besonders viele junge, helle Sterne – deshalb leuchten sie so deutlich.",
+    "en": "Many young, bright stars form in the spiral arms – that is why they stand out.",
+    "es": "En los brazos espirales se forman muchas estrellas jóvenes y brillantes; por eso destacan tanto."
+   },
+   "image": "res://assets/quiz/images/ngc891.jpg",
+   "credit": "Nadine Giese, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q77",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was befindet sich meist im Zentrum großer Galaxien?",
+    "en": "What is usually found at the center of large galaxies?",
+    "es": "¿Qué suele encontrarse en el centro de las grandes galaxias?"
+   },
+   "answers": {
+    "de": [
+     "Kugelsternhaufen",
+     "Supermassereiches Schwarzes Loch",
+     "Dunkle-Materie-Kern",
+     "Quasar-Stern"
+    ],
+    "en": [
+     "Globular clusters",
+     "Supermassive black hole",
+     "Dark matter core",
+     "Quasar star"
+    ],
+    "es": [
+     "Cúmulos globulares",
+     "Agujero negro supermasivo",
+     "Núcleo de materia oscura",
+     "Estrella cuásar"
+    ]
+   },
+   "explain": {
+    "de": "Fast jede große Galaxie hat ein supermassereiches Schwarzes Loch – auch unsere Milchstraße.",
+    "en": "Almost every large galaxy has a supermassive black hole – our Milky Way too.",
+    "es": "Casi todas las grandes galaxias tienen un agujero negro supermasivo, también nuestra Vía Láctea."
+   },
+   "image": "res://assets/quiz/images/A_view_of_the_Milky_Way_supermassive_black_hole_Sagittarius_A__in_polarised_light_(eso2406a).jpg",
+   "credit": "EHT Collaboration, CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q78",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Supernova-Überrest?",
+    "en": "What is a supernova remnant?",
+    "es": "¿Qué es un resto de supernova?"
+   },
+   "answers": {
+    "de": [
+     "Ein Protostern",
+     "Ausgedehnte Gaswolke nach einer Sternenexplosion",
+     "Ein Weißer Zwerg",
+     "Ein Schwarzes Loch"
+    ],
+    "en": [
+     "A protostar",
+     "An extended gas cloud after a stellar explosion",
+     "A white dwarf",
+     "A black hole"
+    ],
+    "es": [
+     "Una protoestrella",
+     "Una extensa nube de gas tras una explosión estelar",
+     "Una enana blanca",
+     "Un agujero negro"
+    ]
+   },
+   "explain": {
+    "de": "Der Krebsnebel ist der Überrest einer Supernova, die im Jahr 1054 beobachtet wurde.",
+    "en": "The Crab Nebula is the remnant of a supernova observed in the year 1054.",
+    "es": "La nebulosa del Cangrejo es el resto de una supernova observada en el año 1054."
+   },
+   "image": "res://assets/quiz/images/Tycho-supernova-xray.jpg",
+   "credit": "NASA/CXC/Rutgers/J.Warren & J.Hughes et al., Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q79",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist die Lokale Gruppe?",
+    "en": "What is the Local Group?",
+    "es": "¿Qué es el Grupo Local?"
+   },
+   "answers": {
+    "de": [
+     "Sternhaufen",
+     "Gruppe benachbarter Galaxien",
+     "Offener Sternhaufen",
+     "Nebelregion"
+    ],
+    "en": [
+     "A star cluster",
+     "A group of neighboring galaxies",
+     "An open star cluster",
+     "A nebula region"
+    ],
+    "es": [
+     "Un cúmulo estelar",
+     "Un grupo de galaxias vecinas",
+     "Un cúmulo abierto",
+     "Una región nebulosa"
+    ]
+   },
+   "explain": {
+    "de": "Zur Lokalen Gruppe gehören über 80 Galaxien – die größten sind Andromeda und unsere Milchstraße.",
+    "en": "The Local Group contains more than 80 galaxies – the largest are Andromeda and our Milky Way.",
+    "es": "El Grupo Local tiene más de 80 galaxias; las mayores son Andrómeda y nuestra Vía Láctea."
+   },
+   "image": "res://assets/quiz/images/Lokale_Gruppe_3D_Nachbarschaft.svg.jpg",
+   "credit": "CWitte, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q80",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Warum erscheinen viele Emissionsnebel rötlich?",
+    "en": "Why do many emission nebulae appear reddish?",
+    "es": "¿Por qué muchas nebulosas de emisión parecen rojizas?"
+   },
+   "answers": {
+    "de": [
+     "Aufgrund von Eisen",
+     "Aufgrund von Wasserstoff-Emission",
+     "Aufgrund von Staubreflexion",
+     "Aufgrund von Rotverschiebung"
+    ],
+    "en": [
+     "Due to iron",
+     "Due to hydrogen emission",
+     "Due to dust reflection",
+     "Due to redshift"
+    ],
+    "es": [
+     "Debido al hierro",
+     "Debido a la emisión de hidrógeno",
+     "Debido a la reflexión del polvo",
+     "Debido al corrimiento al rojo"
+    ]
+   },
+   "explain": {
+    "de": "Angeregter Wasserstoff leuchtet bei der „H-alpha“-Linie tiefrot – daher die rote Farbe vieler Nebel.",
+    "en": "Excited hydrogen glows deep red at the 'H-alpha' line – hence the red colour of many nebulae.",
+    "es": "El hidrógeno excitado brilla en rojo intenso en la línea «H-alfa»; de ahí el color de muchas nebulosas."
+   },
+   "image": "res://assets/quiz/images/NGC2264_2022_03_07.jpg",
+   "credit": "Florian Rünger, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q81",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 2,
+   "text": {
+    "de": "Was ist eine irreguläre Galaxie?",
+    "en": "What is an irregular galaxy?",
+    "es": "¿Qué es una galaxia irregular?"
+   },
+   "answers": {
+    "de": [
+     "Kugelförmige Galaxie",
+     "Spiralgalaxie ohne Kern",
+     "Galaxie ohne klare Struktur",
+     "Ringgalaxie"
+    ],
+    "en": [
+     "A spherical galaxy",
+     "A spiral galaxy without a core",
+     "A galaxy without a clear structure",
+     "A ring galaxy"
+    ],
+    "es": [
+     "Una galaxia esférica",
+     "Una galaxia espiral sin núcleo",
+     "Una galaxia sin estructura clara",
+     "Una galaxia anular"
+    ]
+   },
+   "explain": {
+    "de": "Irreguläre Galaxien wie die Magellanschen Wolken wurden oft durch Nachbargalaxien verformt.",
+    "en": "Irregular galaxies such as the Magellanic Clouds have often been distorted by neighbouring galaxies.",
+    "es": "Las galaxias irregulares como las Nubes de Magallanes suelen estar deformadas por galaxias vecinas."
+   },
+   "image": "res://assets/quiz/images/NGC_4038_NGC_4039_HaRGB.jpg",
+   "credit": "Jonas Brinkmann, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q82",
+   "category": "nebel_galaxien",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was misst man bei Galaxien zur Bestimmung ihrer Entfernung häufig?",
+    "en": "What is often measured in galaxies to determine their distance?",
+    "es": "¿Qué se mide frecuentemente en las galaxias para determinar su distancia?"
+   },
+   "answers": {
+    "de": [
+     "Temperatur",
+     "Rotverschiebung",
+     "Farbe",
+     "Anzahl Sterne"
+    ],
+    "en": [
+     "Temperature",
+     "Redshift",
+     "Color",
+     "Number of stars"
+    ],
+    "es": [
+     "Temperatura",
+     "Corrimiento al rojo",
+     "Color",
+     "Número de estrellas"
+    ]
+   },
+   "explain": {
+    "de": "Aus der Rotverschiebung und der Hubble-Konstante lässt sich die Entfernung ferner Galaxien berechnen.",
+    "en": "From the redshift and the Hubble constant you can work out the distance of far-away galaxies.",
+    "es": "Con el corrimiento al rojo y la constante de Hubble se calcula la distancia de galaxias lejanas."
+   },
+   "image": "res://assets/quiz/images/Redshift_horizontal.jpg",
+   "credit": "Georg Wiora (Dr. Schorsch), CC BY-SA 2.5, via Wikimedia Commons"
+  },
+  {
+   "id": "q83",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Was passiert bei einer Sonnenfinsternis?",
+    "en": "What happens during a solar eclipse?",
+    "es": "¿Qué ocurre durante un eclipse solar?"
+   },
+   "answers": {
+    "de": [
+     "Mond verdeckt Sonne",
+     "Erde verdeckt Mond",
+     "Mars verdeckt Sonne",
+     "Sonne erlischt"
+    ],
+    "en": [
+     "Moon covers the Sun",
+     "Earth covers the Moon",
+     "Mars covers the Sun",
+     "Sun extinguishes"
+    ],
+    "es": [
+     "La Luna tapa al Sol",
+     "La Tierra tapa a la Luna",
+     "Marte tapa al Sol",
+     "El Sol se apaga"
+    ]
+   },
+   "explain": {
+    "de": "Die Sonne ist 400-mal größer als der Mond, aber auch 400-mal weiter weg – deshalb passt er genau davor.",
+    "en": "The Sun is 400 times larger than the Moon but also 400 times farther away – so the Moon fits right in front.",
+    "es": "El Sol es 400 veces mayor que la Luna, pero está 400 veces más lejos; por eso la Luna lo tapa justo."
+   },
+   "image": "res://assets/quiz/images/solar_eclipse_c.jpg",
+   "credit": "Rainer Hainich & Marcel Pietschmann, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q84",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist eine Mondfinsternis?",
+    "en": "What is a lunar eclipse?",
+    "es": "¿Qué es un eclipse lunar?"
+   },
+   "answers": {
+    "de": [
+     "Sonne verdeckt Mond",
+     "Erde wirft Schatten auf Mond",
+     "Mond verschwindet",
+     "Jupiter bedeckt Mond"
+    ],
+    "en": [
+     "The Sun covers the Moon",
+     "The Earth casts a shadow on the Moon",
+     "The Moon disappears",
+     "Jupiter covers the Moon"
+    ],
+    "es": [
+     "El Sol tapa a la Luna",
+     "La Tierra proyecta una sombra sobre la Luna",
+     "La Luna desaparece",
+     "Júpiter tapa a la Luna"
+    ]
+   },
+   "explain": {
+    "de": "Bei einer Mondfinsternis färbt sich der Mond oft kupferrot – durch Sonnenlicht, das die Erdatmosphäre umlenkt.",
+    "en": "During a lunar eclipse the Moon often turns copper-red – from sunlight bent by Earth's atmosphere.",
+    "es": "En un eclipse lunar la Luna suele volverse rojiza, por la luz solar desviada por la atmósfera terrestre."
+   },
+   "image": "res://assets/quiz/images/Lunar_eclipse_March_2007.jpg",
+   "credit": "U.S. Navy photos by Mass Communication Specialist Seaman Joshua Valcarcel, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q85",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was verursacht die Gezeiten auf der Erde?",
+    "en": "What causes the tides on Earth?",
+    "es": "¿Qué provoca las mareas en la Tierra?"
+   },
+   "answers": {
+    "de": [
+     "Sonnenwind",
+     "Gravitation von Mond und Sonne",
+     "Erdrotation",
+     "Magnetfeld"
+    ],
+    "en": [
+     "Solar wind",
+     "Gravitational pull of the Moon and Sun",
+     "Earth's rotation",
+     "Magnetic field"
+    ],
+    "es": [
+     "El viento solar",
+     "La gravedad de la Luna y el Sol",
+     "La rotación de la Tierra",
+     "El campo magnético"
+    ]
+   },
+   "explain": {
+    "de": "Mond und Sonne ziehen unterschiedlich stark an den Ozeanen – das Wasser türmt sich zu Ebbe und Flut.",
+    "en": "The Moon and the Sun pull differently on the oceans – the water piles up into tides.",
+    "es": "La Luna y el Sol atraen de forma distinta a los océanos; el agua se acumula en mareas."
+   },
+   "image": "res://assets/quiz/images/00_3536_Auswirkung_der_Gezeiten_(Niedrigwasser).jpg",
+   "credit": "W. Bulach, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q86",
+   "category": "astronomische_phanomene",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Meteorschauer?",
+    "en": "What is a meteor shower?",
+    "es": "¿Qué es una lluvia de meteoros?"
+   },
+   "answers": {
+    "de": [
+     "Einzelner Meteor",
+     "Viele Meteore aus Kometenstaub",
+     "Asteroideneinschlag",
+     "Polarlicht"
+    ],
+    "en": [
+     "A single meteor",
+     "Many meteors from comet dust",
+     "An asteroid impact",
+     "Northern lights"
+    ],
+    "es": [
+     "Un meteoro individual",
+     "Muchos meteoros procedentes del polvo de cometas",
+     "El impacto de un asteroide",
+     "Una aurora polar"
+    ]
+   },
+   "explain": {
+    "de": "Die Erde kreuzt jedes Jahr die Staubspur eines Kometen – z. B. im August bei den Perseiden.",
+    "en": "Each year Earth crosses a comet's dust trail – e.g. in August during the Perseids.",
+    "es": "Cada año la Tierra cruza el rastro de polvo de un cometa, por ejemplo en agosto con las Perseidas."
+   },
+   "image": "res://assets/quiz/images/Leonids-1833.jpg",
+   "credit": "Engraving: Adolf Vollmy; Original Art: Karl Jauslin "
+  },
+  {
+   "id": "q87",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was sind Polarlichter?",
+    "en": "What are auroras?",
+    "es": "¿Qué son las auroras polares?"
+   },
+   "answers": {
+    "de": [
+     "Sternexplosionen",
+     "Wechselwirkung des Sonnenwindes mit dem Magnetfeld",
+     "Meteore",
+     "Nebel"
+    ],
+    "en": [
+     "Stellar explosions",
+     "Interaction of the solar wind with the magnetic field",
+     "Meteors",
+     "Nebulae"
+    ],
+    "es": [
+     "Explosiones estelares",
+     "Interacción del viento solar con el campo magnético",
+     "Meteoros",
+     "Nebulosas"
+    ]
+   },
+   "explain": {
+    "de": "Teilchen von der Sonne bringen Sauerstoff und Stickstoff in der Hochatmosphäre zum Leuchten – grün und rot.",
+    "en": "Particles from the Sun make oxygen and nitrogen in the upper atmosphere glow – green and red.",
+    "es": "Partículas del Sol hacen brillar el oxígeno y el nitrógeno de la alta atmósfera, en verde y rojo."
+   },
+   "image": "res://assets/quiz/images/aurora_borealis_next_to_dome.jpg",
+   "credit": "Jonas Brinkmann, CC BY-NC-SA 3.0"
+  },
+  {
+   "id": "q88",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Transit?",
+    "en": "What is a transit?",
+    "es": "¿Qué es un tránsito?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet bedeckt einen Stern vollständig",
+     "Ein Planet zieht vor einem Stern vorbei",
+     "Ein Stern explodiert",
+     "Komet löst sich bei einem nahen Vorbeiflug an einem Stern auf"
+    ],
+    "en": [
+     "A planet fully covers a star",
+     "A planet passes in front of a star",
+     "A star explodes",
+     "A comet disintegrates during a close flyby of a star"
+    ],
+    "es": [
+     "Un planeta tapa completamente a una estrella",
+     "Un planeta pasa por delante de una estrella",
+     "Una estrella explota",
+     "Un cometa se desintegra durante un vuelo cercano a una estrella"
+    ]
+   },
+   "explain": {
+    "de": "Beim Transit wird der Stern ein winziges bisschen dunkler – so wurden Tausende Exoplaneten entdeckt.",
+    "en": "During a transit the star dims very slightly – that is how thousands of exoplanets were found.",
+    "es": "Durante un tránsito la estrella se oscurece muy levemente; así se han descubierto miles de exoplanetas."
+   },
+   "image": "res://assets/quiz/images/SDO's_Ultra-high_Definition_View_of_2012_Venus_Transit_--_Path_Sequence.jpg",
+   "credit": "NASA/SDO, AIA, CC BY 2.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q89",
+   "category": "astronomische_phanomene",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Was ist ein Exoplanet?",
+    "en": "What is an exoplanet?",
+    "es": "¿Qué es un exoplaneta?"
+   },
+   "answers": {
+    "de": [
+     "Ein Planet, außerhalb unseres Sonnensystems",
+     "Ein Planet, der um einen anderen Planeten kreist",
+     "Ein Planet, der um die Sonne kreist",
+     "Ein Planet, der sich auflöst"
+    ],
+    "en": [
+     "A planet outside our solar system",
+     "A planet that orbits another planet",
+     "A planet that orbits the Sun",
+     "A planet that disintegrates"
+    ],
+    "es": [
+     "Un planeta fuera de nuestro sistema solar",
+     "Un planeta que orbita otro planeta",
+     "Un planeta que orbita el Sol",
+     "Un planeta que se desintegra"
+    ]
+   },
+   "explain": {
+    "de": "Bis heute sind über 5.000 Exoplaneten bekannt – der erste um einen sonnenähnlichen Stern wurde 1995 entdeckt.",
+    "en": "More than 5,000 exoplanets are known today – the first around a Sun-like star was found in 1995.",
+    "es": "Hoy se conocen más de 5.000 exoplanetas; el primero alrededor de una estrella como el Sol se halló en 1995."
+   },
+   "image": "res://assets/quiz/images/Kepler-62f_with_62e_as_Morning_Star.jpg",
+   "credit": "NASA Ames/JPL-Caltech, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q90",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Was ist ein Perihel?",
+    "en": "What is a perihelion?",
+    "es": "¿Qué es el perihelio?"
+   },
+   "answers": {
+    "de": [
+     "Sonnennächster Bahnpunkt",
+     "Sonnenfernster Punkt",
+     "Planetengürtel",
+     "Sonnenfleck"
+    ],
+    "en": [
+     "The point in an orbit closest to the Sun",
+     "The point in an orbit farthest from the Sun",
+     "A planetary belt",
+     "A sunspot"
+    ],
+    "es": [
+     "El punto de la órbita más cercano al Sol",
+     "El punto más alejado del Sol",
+     "Un cinturón planetario",
+     "Una mancha solar"
+    ]
+   },
+   "explain": {
+    "de": "Die Erde erreicht ihr Perihel Anfang Januar – im Nordwinter sind wir der Sonne am nächsten.",
+    "en": "Earth reaches perihelion in early January – we are closest to the Sun in northern winter.",
+    "es": "La Tierra llega al perihelio a principios de enero: estamos más cerca del Sol en el invierno boreal."
+   },
+   "image": "res://assets/quiz/images/Closed_orbits.jpg",
+   "credit": "Jacopo Bertolotti, CC0, via Wikimedia Commons"
+  },
+  {
+   "id": "q91",
+   "category": "astronomische_phanomene",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was bezeichnet man als Opposition bei einem Planeten?",
+    "en": "What is referred to as opposition for a planet?",
+    "es": "¿Qué se denomina oposición de un planeta?"
+   },
+   "answers": {
+    "de": [
+     "Planet steht von uns aus gesehen hinter Sonne",
+     "Planet steht von uns aus gesehen gegenüber der Sonne",
+     "Planet verlässt Umlaufbahn",
+     "Planet rotiert rückwärts"
+    ],
+    "en": [
+     "The planet is behind the Sun as seen from us",
+     "The planet is opposite the Sun as seen from us",
+     "The planet leaves its orbit",
+     "The planet rotates backwards"
+    ],
+    "es": [
+     "El planeta está detrás del Sol visto desde nosotros",
+     "El planeta está frente al Sol visto desde nosotros",
+     "El planeta abandona su órbita",
+     "El planeta rota en sentido inverso"
+    ]
+   },
+   "explain": {
+    "de": "In Opposition steht ein Planet die ganze Nacht am Himmel und ist besonders hell – ideal zum Beobachten.",
+    "en": "At opposition a planet is up all night and especially bright – ideal for observing.",
+    "es": "En oposición un planeta está toda la noche en el cielo y muy brillante: ideal para observar."
+   },
+   "image": "res://assets/quiz/images/Close_encounter-_Mars_at_opposition_(opo0534l).jpg",
+   "credit": "NASA, ESA, and Z. Levay (STScI), Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q92",
+   "category": "raumsonden_teleskope",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Warum werden viele Teleskope im Weltraum betrieben?",
+    "en": "Why are many telescopes operated in space?",
+    "es": "¿Por qué muchos telescopios operan en el espacio?"
+   },
+   "answers": {
+    "de": [
+     "Näher an den Sternen",
+     "Keine Atmosphäre stört die Beobachtungen",
+     "Geringere Gravitation",
+     "Mehr Licht"
+    ],
+    "en": [
+     "Closer to the stars",
+     "No atmosphere interferes with observations",
+     "Lower gravity",
+     "More light"
+    ],
+    "es": [
+     "Más cerca de las estrellas",
+     "Ninguna atmósfera interfiere en las observaciones",
+     "Menor gravedad",
+     "Más luz"
+    ]
+   },
+   "explain": {
+    "de": "Im All gibt es kein Luftflimmern, keine Wolken – und man sieht auch Licht, das die Atmosphäre verschluckt.",
+    "en": "In space there is no air shimmer, no clouds – and you can see light that the atmosphere absorbs.",
+    "es": "En el espacio no hay turbulencia ni nubes, y se ve luz que la atmósfera absorbe."
+   },
+   "image": "res://assets/quiz/images/Hubble_Space_Telescope_(27946391011).jpg",
+   "credit": "NASA Hubble Space Telescope, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q93",
+   "category": "raumsonden_teleskope",
+   "difficulty": 1,
+   "correct": 1,
+   "text": {
+    "de": "Was misst ein Radioteleskop?",
+    "en": "What does a radio telescope measure?",
+    "es": "¿Qué mide un radiotelescopio?"
+   },
+   "answers": {
+    "de": [
+     "Sichtbares Licht",
+     "Radiowellen",
+     "UV-Strahlung",
+     "Röntgenlicht"
+    ],
+    "en": [
+     "Visible light",
+     "Radio waves",
+     "UV radiation",
+     "X-ray light"
+    ],
+    "es": [
+     "Luz visible",
+     "Ondas de radio",
+     "Radiación ultravioleta",
+     "Rayos X"
+    ]
+   },
+   "explain": {
+    "de": "Radioteleskope empfangen Radiowellen von Gaswolken, Pulsaren oder Galaxien – sogar tagsüber.",
+    "en": "Radio telescopes pick up radio waves from gas clouds, pulsars or galaxies – even in daytime.",
+    "es": "Los radiotelescopios captan ondas de radio de nubes de gas, púlsares o galaxias, incluso de día."
+   },
+   "image": "res://assets/quiz/images/Very_Large_Array,_2012.jpg",
+   "credit": "John Fowler, CC BY 2.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q94",
+   "category": "raumsonden_teleskope",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist adaptive Optik?",
+    "en": "What is adaptive optics?",
+    "es": "¿Qué es la óptica adaptativa?"
+   },
+   "answers": {
+    "de": [
+     "Bewegliches Okular",
+     "System zum Ausgleich atmosphärischer Verzerrung",
+     "Zoomfunktion",
+     "Farbfilter"
+    ],
+    "en": [
+     "A movable eyepiece",
+     "A system to compensate for atmospheric distortion",
+     "A zoom function",
+     "A color filter"
+    ],
+    "es": [
+     "Un ocular móvil",
+     "Un sistema para compensar la distorsión atmosférica",
+     "Una función de zoom",
+     "Un filtro de color"
+    ]
+   },
+   "explain": {
+    "de": "Ein verformbarer Spiegel gleicht das Luftflimmern hunderte Male pro Sekunde aus.",
+    "en": "A deformable mirror corrects the air shimmer hundreds of times per second.",
+    "es": "Un espejo deformable corrige la turbulencia del aire cientos de veces por segundo."
+   },
+   "image": "res://assets/quiz/images/Laser_Towards_Milky_Ways_Centre.jpg",
+   "credit": "ESO/Yuri Beletsky (ybialets at eso.org), CC BY 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q95",
+   "category": "raumsonden_teleskope",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist eine Raumsonde?",
+    "en": "What is a space probe?",
+    "es": "¿Qué es una sonda espacial?"
+   },
+   "answers": {
+    "de": [
+     "Ein Raumschiff mit Besatzung",
+     "Ein unbemanntes Forschungsgerät",
+     "Ein Satellit mit Besatzung",
+     "Ein Weltraumteleskop"
+    ],
+    "en": [
+     "A crewed spacecraft",
+     "An unmanned research device",
+     "A crewed satellite",
+     "A space telescope"
+    ],
+    "es": [
+     "Una nave espacial tripulada",
+     "Un dispositivo de investigación no tripulado",
+     "Un satélite tripulado",
+     "Un telescopio espacial"
+    ]
+   },
+   "explain": {
+    "de": "Raumsonden wie Voyager 1 sind schon über 24 Milliarden Kilometer von der Erde entfernt.",
+    "en": "Probes like Voyager 1 are already more than 24 billion kilometres from Earth.",
+    "es": "Sondas como la Voyager 1 están ya a más de 24.000 millones de kilómetros de la Tierra."
+   },
+   "image": "res://assets/quiz/images/Galileo_Preparations_-_GPN-2000-000672.jpg",
+   "credit": "NASA, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q96",
+   "category": "raumsonden_teleskope",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Warum sind Infrarot-Teleskope oft gekühlt?",
+    "en": "Why are infrared telescopes often cooled?",
+    "es": "¿Por qué los telescopios infrarrojos suelen estar refrigerados?"
+   },
+   "answers": {
+    "de": [
+     "Zur Stabilisierung",
+     "Zur Vermeidung eigener Wärmestrahlung",
+     "Aufgrund des Vakuums",
+     "Aufgrund von Staub"
+    ],
+    "en": [
+     "For stabilization",
+     "To avoid emitting their own thermal radiation",
+     "Due to the vacuum",
+     "Due to dust"
+    ],
+    "es": [
+     "Para su estabilización",
+     "Para evitar emitir su propia radiación térmica",
+     "Debido al vacío",
+     "Debido al polvo"
+    ]
+   },
+   "explain": {
+    "de": "Alles Warme strahlt Infrarot ab – ein ungekühltes Teleskop würde sich selbst „sehen“.",
+    "en": "Everything warm emits infrared – an uncooled telescope would 'see' itself.",
+    "es": "Todo lo que está caliente emite infrarrojo; un telescopio sin enfriar «se vería» a sí mismo."
+   },
+   "image": "res://assets/quiz/images/James_Webb_Space_Telescope_2009_top.jpg",
+   "credit": "NASA, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q97",
+   "category": "entfernungsbestimmung_helligkeit",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was ist ein Parsec?",
+    "en": "What is a parsec?",
+    "es": "¿Qué es un pársec?"
+   },
+   "answers": {
+    "de": [
+     "Eine Zeiteinheit",
+     "Eine Entfernungseinheit",
+     "Eine Helligkeitseinheit",
+     "Eine Masseeinheit"
+    ],
+    "en": [
+     "A unit of time",
+     "A unit of distance",
+     "A unit of brightness",
+     "A unit of mass"
+    ],
+    "es": [
+     "Una unidad de tiempo",
+     "Una unidad de distancia",
+     "Una unidad de brillo",
+     "Una unidad de masa"
+    ]
+   },
+   "explain": {
+    "de": "Ein Parsec sind 3,26 Lichtjahre – die Entfernung, bei der die Parallaxe genau eine Bogensekunde beträgt.",
+    "en": "One parsec is 3.26 light-years – the distance at which the parallax is exactly one arcsecond.",
+    "es": "Un pársec son 3,26 años luz: la distancia a la que la paralaje es exactamente un segundo de arco."
+   },
+   "image": "res://assets/quiz/images/Parsec-fr.svg.jpg",
+   "credit": "jd, Public domain, via Wikimedia Commons"
+  },
+  {
+   "id": "q98",
+   "category": "entfernungsbestimmung_helligkeit",
+   "difficulty": 1,
+   "correct": 0,
+   "text": {
+    "de": "Was ist ein Lichtjahr?",
+    "en": "What is a light-year?",
+    "es": "¿Qué es un año luz?"
+   },
+   "answers": {
+    "de": [
+     "Eine Entfernungseinheit",
+     "Eine Helligkeitseinheit",
+     "Eine Masseeinheit",
+     "Eine Zeiteinheit"
+    ],
+    "en": [
+     "A unit of distance",
+     "A unit of brightness",
+     "A unit of mass",
+     "A unit of time"
+    ],
+    "es": [
+     "Una unidad de distancia",
+     "Una unidad de brillo",
+     "Una unidad de masa",
+     "Una unidad de tiempo"
+    ]
+   },
+   "explain": {
+    "de": "Ein Lichtjahr ist eine Strecke, keine Zeit: rund 9,5 Billionen Kilometer.",
+    "en": "A light-year is a distance, not a time: about 9.5 trillion kilometres.",
+    "es": "Un año luz es una distancia, no un tiempo: unos 9,5 billones de kilómetros."
+   },
+   "image": "res://assets/quiz/images/Light-year-scale-Bob-King.jpg",
+   "credit": "Bob King, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q99",
+   "category": "entfernungsbestimmung_helligkeit",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was misst man mit der scheinbaren Magnitude?",
+    "en": "What does apparent magnitude measure?",
+    "es": "¿Qué mide la magnitud aparente?"
+   },
+   "answers": {
+    "de": [
+     "Tatsächliche Leuchtkraft eines Objektes",
+     "Helligkeit eines Objektes von der Erde aus",
+     "Entfernung eines Objektes",
+     "Temperatur eines Objektes"
+    ],
+    "en": [
+     "The actual luminosity of an object",
+     "The brightness of an object as seen from Earth",
+     "The distance of an object",
+     "The temperature of an object"
+    ],
+    "es": [
+     "La luminosidad real de un objeto",
+     "El brillo de un objeto visto desde la Tierra",
+     "La distancia de un objeto",
+     "La temperatura de un objeto"
+    ]
+   },
+   "explain": {
+    "de": "Je kleiner die Magnitude, desto heller – Sirius hat −1,5 mag, die schwächsten Sterne im OST-Bild etwa 18 mag.",
+    "en": "The smaller the magnitude, the brighter – Sirius is −1.5 mag, the faintest stars in an OST image about 18 mag.",
+    "es": "Cuanto menor es la magnitud, más brillo: Sirio tiene −1,5 mag y las estrellas más débiles de una imagen OST, unas 18 mag."
+   },
+   "image": "res://assets/quiz/images/65Cyb-LB3-apmag.jpg",
+   "credit": "I, Kevin Heider, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q100",
+   "category": "entfernungsbestimmung_helligkeit",
+   "difficulty": 2,
+   "correct": 0,
+   "text": {
+    "de": "Was misst man mit der absoluten Magnitude?",
+    "en": "What does absolute magnitude measure?",
+    "es": "¿Qué mide la magnitud absoluta?"
+   },
+   "answers": {
+    "de": [
+     "Helligkeit eines Objektes bei 10 Parsec Entfernung",
+     "Maximale Helligkeit eines Objektes",
+     "Helligkeit eines Objektes bei einem Entfernung von einer Astronomischen Einheit",
+     "Die Masse eines Objektes"
+    ],
+    "en": [
+     "The brightness of an object at a distance of 10 parsecs",
+     "The maximum brightness of an object",
+     "The brightness of an object at a distance of one astronomical unit",
+     "The mass of an object"
+    ],
+    "es": [
+     "El brillo de un objeto a una distancia de 10 pársecs",
+     "El brillo máximo de un objeto",
+     "El brillo de un objeto a una distancia de una unidad astronómica",
+     "La masa de un objeto"
+    ]
+   },
+   "explain": {
+    "de": "So lassen sich Sterne fair vergleichen – als stünden alle in derselben Entfernung von 10 Parsec.",
+    "en": "This lets us compare stars fairly – as if they were all at the same distance of 10 parsecs.",
+    "es": "Así se comparan las estrellas de forma justa, como si todas estuvieran a la misma distancia de 10 pársecs."
+   },
+   "image": "res://assets/quiz/images/Abell_1367_with_Manually_added_Galaxy_distances.jpg",
+   "credit": "Keesscherer, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "id": "q101",
+   "category": "entfernungsbestimmung_helligkeit",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Auf welchem Effekt beruht die Parallaxen-Messung?",
+    "en": "What effect is parallax measurement based on?",
+    "es": "¿En qué efecto se basa la medición de paralaje?"
+   },
+   "answers": {
+    "de": [
+     "Rotverschiebung von entfernten Galaxien",
+     "Winkelverschiebung eines Objektes während eines Erdumlaufs um die Sonne",
+     "Ähnliche Helligkeit von Supernova des Typs 1a",
+     "Pulsarperioden von Pulsaren"
+    ],
+    "en": [
+     "Redshift of distant galaxies",
+     "Angular shift of an object during Earth's orbit around the Sun",
+     "Similar brightness of Type 1a supernovae",
+     "Pulsar periods of pulsars"
+    ],
+    "es": [
+     "Corrimiento al rojo de galaxias lejanas",
+     "Desplazamiento angular de un objeto durante la órbita de la Tierra alrededor del Sol",
+     "Brillo similar de supernovas de tipo 1a",
+     "Períodos de pulsares"
+    ]
+   },
+   "explain": {
+    "de": "Halte einen Daumen vor das Gesicht und schließe abwechselnd die Augen – so funktioniert Parallaxe.",
+    "en": "Hold up a thumb and close each eye in turn – that is how parallax works.",
+    "es": "Pon un pulgar delante de la cara y cierra un ojo y luego el otro: así funciona la paralaje."
+   },
+   "image": "res://assets/quiz/images/Stellarparallax_parsec_de.svg.jpg",
+   "credit": "AaronDewes, CC0, via Wikimedia Commons"
+  },
+  {
+   "id": "q102",
+   "category": "entfernungsbestimmung_helligkeit",
+   "difficulty": 2,
+   "correct": 1,
+   "text": {
+    "de": "Was sind Cepheiden wichtig für?",
+    "en": "What are Cepheids important for?",
+    "es": "¿Para qué son importantes las cefeidas?"
+   },
+   "answers": {
+    "de": [
+     "Planetensuche",
+     "Entfernungsmessung",
+     "Magnetfeldanalyse",
+     "Galaxienrotation"
+    ],
+    "en": [
+     "Planet searches",
+     "Distance measurement",
+     "Magnetic field analysis",
+     "Galaxy rotation"
+    ],
+    "es": [
+     "Búsqueda de planetas",
+     "Medición de distancias",
+     "Análisis de campos magnéticos",
+     "Rotación galáctica"
+    ]
+   },
+   "explain": {
+    "de": "Cepheiden pulsieren umso langsamer, je heller sie sind – damit werden sie zu kosmischen Maßbändern.",
+    "en": "The brighter a Cepheid, the slower it pulsates – which turns them into cosmic measuring tapes.",
+    "es": "Cuanto más brillante es una cefeida, más lento pulsa; eso las convierte en cintas métricas cósmicas."
+   },
+   "image": "res://assets/quiz/images/Comparison_of_Hubble_and_Webb_views_of_a_Cepheid_variable_star_(weic2408b).jpg",
+   "credit": "NASA, ESA, CSA, STScI, A. Riess (JHU/STScI), CC BY 4.0, via Wikimedia Commons"
+  }
+ ]
+}

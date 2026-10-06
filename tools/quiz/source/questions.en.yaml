@@ -1,0 +1,1291 @@
+categories:
+- id: sonnensystem
+  name: The Solar System
+- id: sternbilder
+  name: Constellations
+- id: allgemein
+  name: General information
+- id: astronomische_phanomene
+  name: Astronomic Concept
+- id: raumsonden_teleskope
+  name: Space Probes & Telescopes
+- id: nebel_galaxien
+  name: Nebulae & Galaxies
+- id: himmelsmechanik
+  name: Celestial mechanics.
+- id: kosmologie
+  name: Cosmology
+- id: entfernungsbestimmung_helligkeit
+  name: Distance Determination & Brightness
+- id: exotische_objekte
+  name: Exotic objects
+- id: sterne
+  name: Stars
+questions:
+- id: q1
+  text: Which planet is the largest?
+  answers:
+  - Jupiter
+  - Saturn
+  - Neptune
+  - Mars
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Jupiter_and_its_shrunken_Great_Red_Spot.jpg
+  image_credit: NASA, ESA, and A. Simon (Goddard Space Flight Center), Public domain,
+    via Wikimedia Commons
+- id: q2
+  text: Which planet has the most prominent rings?
+  answers:
+  - Uranus
+  - Jupiter
+  - Saturn
+  - Neptune
+  correct: 2
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Saturn_on_October_1998.jpg
+  image_credit: ESA/Hubble, CC BY 4.0, via Wikimedia Commons
+- id: q3
+  text: Which planet is nearest the sun?
+  answers:
+  - Venus
+  - Mercury
+  - Earth
+  - Mars
+  correct: 1
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Solar_System_collage_background.png
+  image_credit: CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons
+- id: q4
+  text: How many planets does our solar system have?
+  answers:
+  - '7'
+  - '8'
+  - '9'
+  - '10'
+  correct: 1
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Solar_System_collage_background.png
+  image_credit: CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons
+- id: q5
+  text: Which planet is often referred to as the 'Red Planet'?
+  answers:
+  - Venus
+  - Mars
+  - Jupiter
+  - Saturn
+  correct: 1
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/OSIRIS_Mars_true_color.jpg
+  image_credit: ESA & MPs for OSIRIS Team MPs/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA,
+    CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons
+- id: q6
+  text: Which constellation contains the Orion Nebula?
+  answers:
+  - Cassiopeia
+  - Orion
+  - The Big Dipper
+  - Southern Cross
+  correct: 1
+  category: sternbilder
+  difficulty: laie
+  image: data/images/m42SHO.png
+  image_credit: Florian Rünger, CC BY-NC-SA 3.0
+- id: q7
+  text: Which constellation resembles a W?
+  answers:
+  - Orion
+  - Cassiopeia
+  - Mira
+  - Swan
+  correct: 1
+  category: sternbilder
+  difficulty: laie
+  image: data/images/Cassiopeia_constellation.jpg
+  image_credit: 4shadoww, CC BY-SA 4.0, via Wikimedia Commons
+- id: q8
+  text: The North Star belongs to which constellation?
+  answers:
+  - Great Bear
+  - Lesser Bear
+  - Draco
+  - Cassiopeia
+  correct: 1
+  category: sternbilder
+  difficulty: amateur
+  image: data/images/Polaris_comp_s_(25006858485).jpg
+  image_credit: Giuseppe Donatiello, CC0, via Wikimedia Commons
+- id: q9
+  text: What is a galaxy?
+  answers:
+  - A single star
+  - A vast collection of stars, gas, dust and dark matter
+  - A planet
+  - A comet
+  correct: 1
+  category: allgemein
+  difficulty: laie
+  image: data/images/m81_LRGBcomposite.png
+  image_credit: Florian Rünger, CC BY-NC-SA 3.0
+- id: q10
+  text: How long does the light of the sun take to reach the earth?
+  answers:
+  - 8 minutes
+  - 8 seconds
+  - 8 hours
+  - 1 second
+  correct: 0
+  category: allgemein
+  difficulty: amateur
+  image: data/images/sunearthpanel_sts129_big.jpg
+  image_credit: STS-129 Crew, NASA
+- id: q11
+  text: Which of the following stars is the brightest in the night sky?
+  answers:
+  - Sirius
+  - Canopus
+  - Betelgeuse
+  - Proxima Centauri
+  correct: 0
+  category: sternbilder
+  difficulty: amateur
+  image: data/images/Sirius_A_and_B_Hubble_photo.jpg
+  image_credit: NASA, ESA, H. Bond (STScI), and M. Barstow (University of Leicester),
+    Public domain, via Wikimedia Commons
+- id: q12
+  text: Which planet has the most moons?
+  answers:
+  - Jupiter
+  - Saturn
+  - Neptune
+  - Mars
+  correct: 1
+  category: sonnensystem
+  difficulty: amateur
+  image: data/images/Solar_System_collage_background.png
+  image_credit: CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons
+- id: q13
+  text: Where in the solar system can you find an asteroid belt?
+  answers:
+  - Between Mars and Jupiter
+  - Between Earth and Mars
+  - Between Venus and Earth
+  - Between Neptune and Uranus
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Webb_Detects_Extremely_Small_Main_Belt_Asteroid_(52672254127).jpg
+  image_credit: NASA's James Webb Space Telescope from Greenbelt, MD, USA, CC BY 2.0,
+    via Wikimedia Commons
+- id: q14
+  text: How long is about a year on Mars?
+  answers:
+  - 687 days
+  - 365 days
+  - 182 days
+  - 910 days
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/OSIRIS_Mars_true_color.jpg
+  image_credit: ESA & MPs for OSIRIS Team MPs/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA,
+    CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons
+- id: q15
+  text: Which planet is the smallest?
+  answers:
+  - Mercury
+  - Venus
+  - Earth
+  - Mars
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Mercury_in_color_-_Prockter07_centered.jpg
+  image_credit: 'NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie
+    Institution of Washington. Edited version of Image: Prockter07.jpg by Papa Lima
+    Whiskey., Public domain, via Wikimedia Commons'
+- id: q16
+  text: What do you call an object of ice and dust that forms a tail when it comes
+    close to the sun?
+  answers:
+  - Comet
+  - Planet
+  - Star
+  - Galaxy
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/C2022E3ZTF.jpg
+  image_credit: Florian Rünger, CC BY-NC-SA 3.0
+- id: q17
+  text: What are shooting stars?
+  answers:
+  - An asteroid entering the Earth's atmosphere
+  - A brief glow of a distant star
+  - A planet that moves quickly across the sky
+  - A comet moving quickly across the sky
+  correct: 0
+  category: allgemein
+  difficulty: laie
+  image: data/images/2014_Meteor.jpg
+  image_credit: Jacek Halicki, CC BY-SA 4.0, via Wikimedia Commons
+- id: q18
+  text: What is a supernova?
+  answers:
+  - A newly created star
+  - An explosion at the end of life of massive stars
+  - A comet swarm
+  - A galaxy collision
+  correct: 1
+  category: sterne
+  difficulty: amateur
+  image: data/images/SN1994D.jpg
+  image_credit: NASA/ESA, The Hubble Key Project Team and The High-Z Supernova Search
+    Team, Public domain, via Wikimedia Commons
+- id: q19
+  text: What is a planet?
+  answers:
+  - A spherical object orbiting a star and having cleared its orbit around that star
+    from other objects
+  - A plasma ball in whose inner nuclear fusion takes place
+  - An object orbiting the sun
+  - An object that orbits a star and has cleared its orbit around that star from other
+    objects
+  correct: 0
+  category: allgemein
+  difficulty: amateur
+  image: data/images/Solar_System_collage_background.png
+  image_credit: CactiStaccingCrane, CC BY-SA 4.0, via Wikimedia Commons
+- id: q20
+  text: What is a Star?
+  answers:
+  - A spherical object consisting of gas (plasma) in which nuclear fusion takes place
+  - A spherical object consisting of gas and dust that heats up due to the impact
+    of meteorites
+  - A spherical object orbiting the sun
+  - A spherical object orbiting the Earth and providing us all with energy
+  correct: 0
+  category: sterne
+  difficulty: amateur
+  image: data/images/Star-sizes.jpg
+  image_credit: Dave Jarvis (https://dave.autonoma.ca/), CC BY-SA 3.0, via Wikimedia
+    Commons
+- id: q21
+  text: What is the orbit of a planet around a star also called?
+  answers:
+  - Orbit
+  - Parable
+  - Hyperbola
+  - Trajectories
+  correct: 0
+  category: himmelsmechanik
+  difficulty: amateur
+  image: data/images/Ceres_Orbit_de.svg
+  image_credit: 'File:Ceres Orbit.svg: Orionist / *derivative work Sebastian Wallroth,
+    CC BY-SA 2.5, via Wikimedia Commons'
+- id: q22
+  text: What constantly surrounds the earth and protects us from the solar wind?
+  answers:
+  - Magnetic field
+  - Atmosphere
+  - Ozone
+  - Oxid
+  correct: 0
+  category: allgemein
+  difficulty: laie
+  image: data/images/ISS046-E-26820_-_View_of_Earth.jpg
+  image_credit: Earth Science and Remote Sensing Unit, Lyndon B. Johnson Space Center,
+    Public domain, via Wikimedia Commons
+- id: q23
+  text: What is the name of the smallest of the eight planets?
+  answers:
+  - Mercury
+  - Venus
+  - Earth
+  - Mars
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Mercury_in_color_-_Prockter07_centered.jpg
+  image_credit: 'NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie
+    Institution of Washington. Edited version of Image: Prockter07.jpg by Papa Lima
+    Whiskey., Public domain, via Wikimedia Commons'
+- id: q24
+  text: What color has the planet Neptune mostly?
+  answers:
+  - Blue
+  - Green
+  - Purple
+  - Orange
+  correct: 0
+  category: sonnensystem
+  difficulty: amateur
+  image: data/images/Neptune_Voyager2_color_calibrated.png
+  image_credit: NASA / Voyager 2 / PDS / OPUS / Ardenau4, CC0, via Wikimedia Commons
+- id: q25
+  text: What is the bright band in the night sky in which our sun lies?
+  answers:
+  - A galaxy
+  - A star
+  - A planet
+  - A constellation
+  correct: 0
+  category: allgemein
+  difficulty: laie
+  image: data/images/360-degree_Panorama_of_the_Southern_Sky.jpg
+  image_credit: ESO/H.H. Heyer, CC BY 4.0, via Wikimedia Commons
+- id: q26
+  text: What is the name of the galaxy in which our Sun and Earth lie?
+  answers:
+  - Milky Way
+  - Andromeda
+  - Triangular Galaxy
+  - Home Galaxy
+  correct: 0
+  category: allgemein
+  difficulty: laie
+  image: data/images/Bontecou_Lake_Milky_Way_panorama.jpg
+  image_credit: Juliancolton, CC BY-SA 4.0, via Wikimedia Commons
+- id: q27
+  text: Which planet has the largest moon in the solar system?
+  answers:
+  - Jupiter
+  - Saturn
+  - Neptune
+  - Mars
+  correct: 0
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Jupiter_and_its_shrunken_Great_Red_Spot.jpg
+  image_credit: NASA, ESA, and A. Simon (Goddard Space Flight Center), Public domain,
+    via Wikimedia Commons
+- id: q28
+  text: What is the name of the largest moon in the solar system?
+  answers:
+  - Moon
+  - Europe
+  - Ganymed
+  - Io
+  correct: 2
+  category: sonnensystem
+  difficulty: amateur
+  image: data/images/Ganymede_-_Perijove_34_Composite.png
+  image_credit: Kevin Gill, CC BY 2.0, via Wikimedia Commons
+- id: q29
+  text: Which planet is spinning the slowest?
+  answers:
+  - Mercury
+  - Venus
+  - Earth
+  - Mars
+  correct: 1
+  category: sonnensystem
+  difficulty: amateur
+  image: data/images/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_(cropped).jpg
+  image_credit: NASA/JPL-Caltech, Public domain, via Wikimedia Commons
+- id: q30
+  text: What is the sun?
+  answers:
+  - A star
+  - A planet
+  - A moon
+  - An asteroid
+  correct: 0
+  category: allgemein
+  difficulty: laie
+  image: data/images/sun_full_disk.jpg
+  image_credit: Martin Sparre, CC BY-NC-SA 3.0
+- id: q31
+  text: How long does a year on Neptune last?
+  answers:
+  - 165 Earth years
+  - 84 Earth years
+  - 12 Earth years
+  - 29 Earth years
+  correct: 0
+  category: sonnensystem
+  difficulty: amateur
+  image: data/images/Neptune_Voyager2_color_calibrated.png
+  image_credit: NASA / Voyager 2 / PDS / OPUS / Ardenau4, CC0, via Wikimedia Commons
+- id: q32
+  text: How long is a day on Mars?
+  answers:
+  - 24.6 hours
+  - 22.4 hours
+  - 26.3 hours
+  - 28.1 hours
+  correct: 0
+  category: sonnensystem
+  difficulty: amateur
+  image: data/images/OSIRIS_Mars_true_color.jpg
+  image_credit: ESA & MPs for OSIRIS Team MPs/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA,
+    CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons
+- id: q33
+  text: What is Pluto?
+  answers:
+  - A planet
+  - A dwarf planet
+  - A moon
+  - An asteroid
+  correct: 1
+  category: sonnensystem
+  difficulty: laie
+  image: data/images/Pluto.jpg
+  image_credit: NASA / Johns Hopkins University Applied Physics Laboratory / Southwest
+    Research Institute, Public domain, via Wikimedia Commons
+- id: q34
+  text: How many recognized dwarf planets are there?
+  answers:
+  - '5'
+  - '2'
+  - '7'
+  - '10'
+  correct: 0
+  category: sonnensystem
+  difficulty: astronom
+  image: data/images/Zwergplaneten.jpg
+  image_credit: NASA, public domain, via Wikimedia Commons
+- id: q35
+  text: What is Eris?
+  answers:
+  - A planet
+  - A dwarf planet
+  - A moon
+  - An asteroid
+  correct: 1
+  category: sonnensystem
+  difficulty: astronom
+  image: data/images/225088_Gonggong_(2007_OR10)_and_Eris_orbits,_Jan2018,_top_view.png
+  image_credit: ESA & MPs for OSIRIS Team MPs/UPD/LAM/IAA/RSSD/INTA/UPM/DASP/IDA,
+    CC BY-SA IGO 3.0, CC BY-SA 3.0 IGO, via Wikimedia Commons
+- id: q36
+  text: What is Makemake?
+  answers:
+  - A planet
+  - A dwarf planet
+  - A moon
+  - An asteroid
+  correct: 1
+  category: sonnensystem
+  difficulty: astronom
+  image: data/images/Makemake_New_Horizons.gif
+  image_credit: NASA, JHUAPL, SwRI, Daniel Bamberger, Public domain, via Wikimedia
+    Commons
+- id: q37
+  text: What is Sedna?
+  answers:
+  - A planet
+  - A dwarf planet
+  - A moon
+  - An asteroid
+  correct: 1
+  category: sonnensystem
+  difficulty: astronom
+  image: data/images/Sedna_Discovery_(geminiann05005c).jpg
+  image_credit: International Gemini Observatory/NOIRLab/NSF/AURA, CC BY 4.0, via
+    Wikimedia Commons
+- id: q38
+  text: What are trans-Neptunian objects?
+  answers:
+  - Celestial body whose orbit lies beyond the outermost gas planet Neptune
+  - Celestial bodies orbiting within the outermost gas planet Neptune
+  - Celestial bodies moving around Neptune
+  - Celestial bodies captured by Neptune
+  correct: 0
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Planet_nine-etnos_now-new3.png
+  image_credit: Tomruen, CC BY-SA 4.0, via Wikimedia Commons
+- id: q39
+  text: What is the orbital shape of a planet orbiting the Sun?
+  answers:
+  - Ellipse
+  - Parable
+  - Hyperbola
+  - Circle
+  correct: 0
+  category: himmelsmechanik
+  difficulty: amateur
+  image: data/images/Conic_Sections.svg.png
+  image_credit: 'Original: Magister Mathematicae; Derivative work: Phancy; Translation:
+    Glrx, CC BY-SA 3.0, via Wikimedia Commons'
+- id: q40
+  text: What are Jupiter Trojans?
+  answers:
+  - Asteroids that orbit the Sun in the same orbit as Jupiter, but precede or follow
+    it at Lagrange points L4 and L5 with an average distance of 60°
+  - Asteroids that orbit the Sun in the same orbit as Jupiter, but lead or follow
+    it at an average distance of 45° from Lagrange points L2 and L3
+  - Asteroids that orbit the Sun in the same orbit as Jupiter, but lead or follow
+    it at an average distance of 75° from Lagrange points L4 and L5
+  - Asteroids that orbit the Sun in the same orbit as Jupiter, but precede or follow
+    it at Lagrange points L5 and L6 with an average distance of 50°
+  correct: 0
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Orbita_aquiles.jpg
+  image_credit: Fer31416, CC BY-SA 4.0, via Wikimedia Commons
+- id: q41
+  text: What are star clusters?
+  answers:
+  - A group of stars formed from the same cloud of gas and dust
+  - A group of stars that happen to be in the same region of space and are in the
+    same stage of development
+  - A group of stars in the same evolutionary stage
+  - A group of stars that have formed together and are in the same phase of development
+  correct: 0
+  category: sterne
+  difficulty: astronom
+  image: data/images/Messier92_LRGB.jpg
+  image_credit: Jeremias Siehr, CC BY-NC-SA 3.0
+- id: q42
+  text: What is the Kuiper Belt?
+  answers:
+  - An asteroid belt in our solar system outside the orbit of Neptune
+  - An asteroid belt around Proxima Centauri
+  - An asteroid belt between Jupiter and Saturn
+  - An asteroid belt between Saturn and Uranus
+  correct: 0
+  category: sonnensystem
+  difficulty: astronom
+  image: data/images/Kuiper_belt_-_Oort_cloud-de.svg.png
+  image_credit: NASA, Medium69.Cette & William Crochot, Public domain, via Wikimedia
+    Commons
+- id: q43
+  text: What is the Oort cloud?
+  answers:
+  - A cloud of stars in the same evolutionary stage
+  - A star-forming region in the Orion Nebula
+  - A collection of asteroids and comets in the outermost part of the solar system
+  - A prominent cloud layer in Jupiter's atmosphere
+  correct: 2
+  category: sonnensystem
+  difficulty: astronom
+  image: data/images/Kuiper_belt_-_Oort_cloud-de.svg.png
+  image_credit: NASA, Medium69.Cette & William Crochot, Public domain, via Wikimedia
+    Commons
+- id: q44
+  text: What is a Hohmann transfer?
+  answers:
+  - A change in orbit that transfers a planetary orbit to another planetary orbit
+  - An energetically favorable transition between two orbits around a celestial body
+  - A mechanism to transfer mass from one star to another star in a binary system
+  - A special transition from one stellar evolution phase to the next
+  correct: 1
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Hohmann_transfer_orbit2.svg.png
+  image_credit: Waterced, CC0, via Wikimedia Commons
+- id: q45
+  text: What is a pulsar?
+  answers:
+  - A young protostar
+  - A fast rotating neutron star with focused radiation
+  - An active comet nucleus
+  - A binary star system with mass exchange
+  correct: 1
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/Lightsmall-optimised.gif
+  image_credit: Michael Kramer, CC BY-SA 3.0, via Wikimedia Commons
+- id: q46
+  text: Which process drives the enormous energy output of a quasar?
+  answers:
+  - Nuclear fusion in a giant star
+  - Matter accretion to a supermassive black hole
+  - Collision of two galaxies
+  - Dark matter decay
+  correct: 1
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/NASAs_Chandra_Finds_Black_Hole_With_Tremendous_Growth_(supermassive-black-hole-2).jpg
+  image_credit: 'X-ray: NASA/CXC/INAF-Brera/L. Ighina et al.; Illustration: NASA/CXC/SAO/M.
+    Weiss; Image Processing: NASA/CXC/SAO/N. Wolk, Public domain, via Wikimedia Commons'
+- id: q47
+  text: What distinguishes a magnetar from other neutron stars?
+  answers:
+  - Its particularly high rotational speed
+  - Its extremely strong magnetic field
+  - Its double mass
+  - Its blue colour
+  correct: 1
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/Artists_impression_of_the_magnetar_in_the_star_cluster_Westerlund_1.jpg
+  image_credit: ESO/L. Calçada, CC BY 4.0, via Wikimedia Commons
+- id: q48
+  text: What does the event horizon of a black hole describe?
+  answers:
+  - The visible edge of the accretion disc
+  - The limit beyond which no more information can escape
+  - The region of maximum X-rays
+  - The radius of the photon belt
+  correct: 1
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/Black_hole_-_Messier_87.jpg
+  image_credit: Event Horizon Telescope, CC BY 4.0, via Wikimedia Commons
+- id: q49
+  text: Which object is located in the center of the Milky Way?
+  answers:
+  - A globular cluster
+  - A pulsar
+  - A supermassive black hole
+  - A dark matter cloud
+  correct: 2
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/Orbits_of_stars_around_black_hole_at_the_heart_of_the_Milky_Way_(eso1825d).jpg
+  image_credit: ESO/L. Calçada/spaceengine.org, CC BY 4.0, via Wikimedia Commons
+- id: q50
+  text: What is a blazar?
+  answers:
+  - A Variable Star
+  - A quasar with a jet towards Earth
+  - A star-forming region
+  - A colliding binary system
+  correct: 1
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/Blazar-illustration.jpg
+  image_credit: NASA/JPL-Caltech/GSFC, Public domain, via Wikimedia Commons
+- id: q51
+  text: What radiation is typically observed in active galaxy nuclei?
+  answers:
+  - Visible light
+  - Radio radiation only
+  - Across the entire electromagnetic spectrum
+  - Gamma rays only
+  correct: 2
+  category: exotische_objekte
+  difficulty: astronom
+  image: data/images/Artists_impression_of_quasar_J0313-1806.jpg
+  image_credit: NASA/ESA/C.Maraston (STScI), Public domain, via Wikimedia Commons
+- id: q52
+  text: What does Kepler's Third Law describe?
+  answers:
+  - The shape of planetary orbits
+  - The relationship between orbit time and orbit radius
+  - The rotation speed of the sun
+  - The orbital tilt of comets
+  correct: 1
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Ellipitical_orbit_of_planet_with_an_eccentricty_of_0.8.gif
+  image_credit: Mkwadee, CC BY-SA 4.0, via Wikimedia Commons
+- id: q53
+  text: What is a Lagrange point?
+  answers:
+  - A point of maximum gravity
+  - A place of stable equilibrium position in a two-body system
+  - The centre of a galaxy
+  - A point of maximum tidal effect
+  correct: 1
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Lagrange_points2.svg.png
+  image_credit: Xander89, CC BY 3.0, via Wikimedia Commons
+- id: q54
+  text: What does "tied rotation" mean?
+  answers:
+  - A planet does not rotate
+  - Circulation time and rotation time are identical
+  - Two planets share an orbit
+  - A planet rotates backwards
+  correct: 1
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Tidal_locking_of_the_Moon_with_the_Earth.gif
+  image_credit: Stigmatella aurantiaca, CC BY-SA 3.0, via Wikimedia Commons
+- id: q55
+  text: Why do spiral galaxies show flat rotation curves?
+  answers:
+  - Due to high star density in the center
+  - Due to dark matter
+  - Because of intergalactic friction
+  - Through magnetic fields
+  correct: 1
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Comparison_of_rotating_disc_galaxies_in_the_distant_Universe_and_the_present_day.jpg
+  image_credit: ESO/L. Calçada, CC BY 4.0, via Wikimedia Commons
+- id: q56
+  text: What is meant by precession of the earth's axis?
+  answers:
+  - Change in Earth's rotation per day
+  - Wobbling motion of the axis of rotation
+  - Displacement of Earth's orbit
+  - Change in magnetic poles
+  correct: 1
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Gyroscope_precession.gif
+  image_credit: Lucas Vieira, Public domain, via Wikimedia Commons
+- id: q57
+  text: What is a retrograde movement?
+  answers:
+  - The opposite movement of a celestial body compared to the direction of rotation
+    of the entire system
+  - The movement of a celestial body in a rotating system following the main direction
+    of rotation
+  - The movement of a celestial body on an orbit outside the ecliptic
+  - The gravitational deceleration of the movement of a celestial body in its orbit
+  correct: 0
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/RetrogradeBaan.gif
+  image_credit: Silver Spoon, CC BY-SA 3.0, via Wikimedia Commons
+- id: q58
+  text: What is the path shape of an object with eccentricity e = 1?
+  answers:
+  - Parable
+  - Hyperbola
+  - Ellipse
+  - Circle
+  correct: 0
+  category: himmelsmechanik
+  difficulty: astronom
+  image: data/images/Conic_Sections.svg.png
+  image_credit: 'Original: Magister Mathematicae; Derivative work: Phancy; Translation:
+    Glrx, CC BY-SA 3.0, via Wikimedia Commons'
+- id: q59
+  text: What does the Hubble constant describe?
+  answers:
+  - The mass of the Milky Way galaxy
+  - The expansion rate of the universe
+  - The temperature of the background radiation
+  - The number of galaxies
+  correct: 1
+  category: kosmologie
+  difficulty: astronom
+  image: data/images/Expansion_des_Universums.png
+  image_credit: NASA / WMAP Science Team simple retouch by Yikrazuul, Public domain,
+    via Wikimedia Commons
+- id: q60
+  text: What is Cosmic Background Radiation?
+  answers:
+  - Radio radiation from pulsars
+  - Residual radiation from the Big Bang
+  - Infrared light from galaxies
+  - Emission from dark matter
+  correct: 1
+  category: kosmologie
+  difficulty: astronom
+  image: data/images/BigBangNoise.jpg
+  image_credit: NASA, public domain, via Wikimedia Commons
+- id: q61
+  text: Approximately what proportion of the universe's total energy is dark energy?
+  answers:
+  - '5'
+  - '27'
+  - '72'
+  - 90%
+  correct: 2
+  category: kosmologie
+  difficulty: astronom
+  image: data/images/CMB_universe_expansion.png
+  image_credit: NASA/WMAP Science Team/ Art by Dana Berry, Public domain, via Wikimedia
+    Commons
+- id: q62
+  text: What does “redshift” mean for distant galaxies?
+  answers:
+  - They are moving towards us
+  - Your light is shifted to blue
+  - Their light is stretched by expansion of the universe
+  - They contain a particularly large number of red stars
+  correct: 2
+  category: kosmologie
+  difficulty: astronom
+  image: data/images/HUDF_large.jpg
+  image_credit: 'NASA, ESA, Hubble; Sonification: G. Salvesen (UCSB); Data: M. Rafelski
+    et al.'
+- id: q63
+  text: What is an inflation model?
+  answers:
+  - Model of star evolution
+  - Theory of an extremely rapid expansion shortly after the Big Bang
+  - Galaxy Collision Model
+  - Theory of Black Hole Formation
+  correct: 1
+  category: kosmologie
+  difficulty: astronom
+  image: data/images/Expansion_des_Universums.png
+  image_credit: NASA / WMAP Science Team simple retouch by Yikrazuul, Public domain,
+    via Wikimedia Commons
+- id: q64
+  text: What is a gravitational lens effect?
+  answers:
+  - Refraction of light by magnetic fields
+  - Deflection of light by mass
+  - Reflection on interstellar dust
+  - Interference by dark energy
+  correct: 1
+  category: kosmologie
+  difficulty: astronom
+  image: data/images/Gravitational_lens-full.jpg
+  image_credit: NASA, public domain, via Wikimedia Commons
+- id: q65
+  text: What color are hot stars?
+  answers:
+  - Red
+  - Yellow
+  - Blue
+  - Orange
+  correct: 2
+  category: sterne
+  difficulty: amateur
+  image: data/images/eagle_nebula.jpg
+  image_credit: Jonas Brinkmann, CC-BY-NC-SA 3.0
+- id: q66
+  text: What mainly describes the spectral class of a star?
+  answers:
+  - Its size
+  - Its chemical composition
+  - Its surface temperature
+  - Its age
+  correct: 2
+  category: sterne
+  difficulty: amateur
+  image: data/images/Morgan-Keenan_spectral_classification.svg.png
+  image_credit: Rursus, CC BY-SA 3.0, via Wikimedia Commons
+- id: q67
+  text: What forms at the end of a sun-like star's life?
+  answers:
+  - A white dwarf
+  - A neutron star
+  - A black hole
+  - A pulsar
+  correct: 0
+  category: sterne
+  difficulty: amateur
+  image: data/images/m97.jpg
+  image_credit: Florian Rünger, CC BY-NC-SA 3.0
+- id: q68
+  text: What is a red giant?
+  answers:
+  - A particularly massive star
+  - An old star with an inflated shell
+  - A star just before the supernova
+  - A binary star system
+  correct: 1
+  category: sterne
+  difficulty: amateur
+  image: data/images/Red_giant_simulation_4_(cropped).jpg
+  image_credit: A. Chiavassa, R. Kudritzki, B. Davies, B. Freytag and S. E. de Mink,
+    CC BY 4.0, via Wikimedia Commons
+- id: q69
+  text: What is a binary star system?
+  answers:
+  - Two stars that overlap randomly
+  - Two gravitationally bound stars
+  - A star with a strong magnetic field
+  - A star with two planets
+  correct: 1
+  category: sterne
+  difficulty: amateur
+  image: data/images/Menkalinan.png
+  image_credit: Pablo Carlos Budassi, CC BY-SA 4.0, via Wikimedia Commons
+- id: q70
+  text: What energy source drives main sequence stars?
+  answers:
+  - Chemical combustion
+  - Gravitational collapse
+  - Hydrogen fusion
+  - Radioactive decay
+  correct: 2
+  category: sterne
+  difficulty: amateur
+  image: data/images/Sun_poster.svg.png
+  image_credit: Kelvinsong, CC BY-SA 3.0, via Wikimedia Commons
+- id: q71
+  text: What is a Brown Dwarf?
+  answers:
+  - A particularly old star
+  - An object between a planet and a star
+  - A neutron star
+  - An extinct white dwarf
+  correct: 1
+  category: sterne
+  difficulty: amateur
+  image: data/images/Brown_Dwarf_Comparison_2020.png
+  image_credit: Planetkid32, CC BY-SA 4.0, via Wikimedia Commons
+- id: q72
+  text: What is meant by the metallicity of a star?
+  answers:
+  - Its iron content
+  - Its magnetic field
+  - Fraction of heavy elements
+  - Its density
+  correct: 2
+  category: sterne
+  difficulty: amateur
+  image: data/images/Messier92_LRGB.png
+  image_credit: Jeremias Siehr, CC BY-NC-SA 3.0
+- id: q73
+  text: Why do some stars appear to be variable?
+  answers:
+  - Due to Earth's rotation
+  - Due to brightness fluctuations or eclipses
+  - Due to color changes
+  - Due to cosmic radiation
+  correct: 1
+  category: sterne
+  difficulty: amateur
+  image: data/images/Eso2003c.jpg
+  image_credit: ESO/M. Montargès et al., CC BY 4.0, via Wikimedia Commons
+- id: q74
+  text: What is an emission nebula?
+  answers:
+  - A reflective dust nebula
+  - A gas cloud excited to glow by stars
+  - A dark cloud
+  - A planetary nebula
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/m42SHO.png
+  image_credit: Florian Rünger, CC BY-NC-SA 3.0
+- id: q75
+  text: What is a planetary nebula?
+  answers:
+  - Birthplace of a planet
+  - Remnant of a sun-like star
+  - Supernova remnant
+  - Gas surrounding a giant planet
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/M57.jpg
+  image_credit: Florian Rünger & Moritz Itzerott, CC BY-NC-SA 3.0
+- id: q76
+  text: What shape does a spiral galaxy typically have?
+  answers:
+  - Spherical
+  - Disk-shaped with spiral arms
+  - Irregular
+  - Ring-shaped
+  correct: 1
+  category: nebel_galaxien
+  difficulty: laie
+  image: data/images/ngc891.jpg
+  image_credit: Nadine Giese, CC BY-NC-SA 3.0
+- id: q77
+  text: What is usually found at the center of large galaxies?
+  answers:
+  - Globular clusters
+  - Supermassive black hole
+  - Dark matter core
+  - Quasar star
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/A_view_of_the_Milky_Way_supermassive_black_hole_Sagittarius_A__in_polarised_light_(eso2406a).jpg
+  image_credit: EHT Collaboration, CC BY 4.0, via Wikimedia Commons
+- id: q78
+  text: What is a supernova remnant?
+  answers:
+  - A protostar
+  - An extended gas cloud after a stellar explosion
+  - A white dwarf
+  - A black hole
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/Tycho-supernova-xray.jpg
+  image_credit: NASA/CXC/Rutgers/J.Warren & J.Hughes et al., Public domain, via Wikimedia
+    Commons
+- id: q79
+  text: What is the Local Group?
+  answers:
+  - A star cluster
+  - A group of neighboring galaxies
+  - An open star cluster
+  - A nebula region
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/Lokale_Gruppe_3D_Nachbarschaft.svg.png
+  image_credit: CWitte, CC BY-SA 3.0, via Wikimedia Commons
+- id: q80
+  text: Why do many emission nebulae appear reddish?
+  answers:
+  - Due to iron
+  - Due to hydrogen emission
+  - Due to dust reflection
+  - Due to redshift
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/NGC2264_2022_03_07.png
+  image_credit: Florian Rünger, CC BY-NC-SA 3.0
+- id: q81
+  text: What is an irregular galaxy?
+  answers:
+  - A spherical galaxy
+  - A spiral galaxy without a core
+  - A galaxy without a clear structure
+  - A ring galaxy
+  correct: 2
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/NGC_4038_NGC_4039_HaRGB.jpg
+  image_credit: Jonas Brinkmann, CC BY-NC-SA 3.0
+- id: q82
+  text: What is often measured in galaxies to determine their distance?
+  answers:
+  - Temperature
+  - Redshift
+  - Color
+  - Number of stars
+  correct: 1
+  category: nebel_galaxien
+  difficulty: amateur
+  image: data/images/Redshift_horizontal.png
+  image_credit: Georg Wiora (Dr. Schorsch), CC BY-SA 2.5, via Wikimedia Commons
+- id: q83
+  text: What happens during a solar eclipse?
+  answers:
+  - Moon covers the Sun
+  - Earth covers the Moon
+  - Mars covers the Sun
+  - Sun extinguishes
+  correct: 0
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/solar_eclipse_c.jpg
+  image_credit: Rainer Hainich & Marcel Pietschmann, CC BY-NC-SA 3.0
+- id: q84
+  text: What is a lunar eclipse?
+  answers:
+  - The Sun covers the Moon
+  - The Earth casts a shadow on the Moon
+  - The Moon disappears
+  - Jupiter covers the Moon
+  correct: 1
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/Lunar_eclipse_March_2007.jpg
+  image_credit: U.S. Navy photos by Mass Communication Specialist Seaman Joshua Valcarcel,
+    Public domain, via Wikimedia Commons
+- id: q85
+  text: What causes the tides on Earth?
+  answers:
+  - Solar wind
+  - Gravitational pull of the Moon and Sun
+  - Earth's rotation
+  - Magnetic field
+  correct: 1
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/00_3536_Auswirkung_der_Gezeiten_(Niedrigwasser).jpg
+  image_credit: W. Bulach, CC BY-SA 4.0, via Wikimedia Commons
+- id: q86
+  text: What is a meteor shower?
+  answers:
+  - A single meteor
+  - Many meteors from comet dust
+  - An asteroid impact
+  - Northern lights
+  correct: 1
+  category: astronomische_phanomene
+  difficulty: laie
+  image: data/images/Leonids-1833.jpg
+  image_credit: 'Engraving: Adolf Vollmy; Original Art: Karl Jauslin '
+- id: q87
+  text: What are auroras?
+  answers:
+  - Stellar explosions
+  - Interaction of the solar wind with the magnetic field
+  - Meteors
+  - Nebulae
+  correct: 1
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/aurora_borealis_next_to_dome.jpg
+  image_credit: Jonas Brinkmann, CC BY-NC-SA 3.0
+- id: q88
+  text: What is a transit?
+  answers:
+  - A planet fully covers a star
+  - A planet passes in front of a star
+  - A star explodes
+  - A comet disintegrates during a close flyby of a star
+  correct: 1
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/SDO's_Ultra-high_Definition_View_of_2012_Venus_Transit_--_Path_Sequence.jpg
+  image_credit: NASA/SDO, AIA, CC BY 2.0, via Wikimedia Commons
+- id: q89
+  text: What is an exoplanet?
+  answers:
+  - A planet outside our solar system
+  - A planet that orbits another planet
+  - A planet that orbits the Sun
+  - A planet that disintegrates
+  correct: 0
+  category: astronomische_phanomene
+  difficulty: laie
+  image: data/images/Kepler-62f_with_62e_as_Morning_Star.jpg
+  image_credit: NASA Ames/JPL-Caltech, Public domain, via Wikimedia Commons
+- id: q90
+  text: What is a perihelion?
+  answers:
+  - The point in an orbit closest to the Sun
+  - The point in an orbit farthest from the Sun
+  - A planetary belt
+  - A sunspot
+  correct: 0
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/Closed_orbits.gif
+  image_credit: Jacopo Bertolotti, CC0, via Wikimedia Commons
+- id: q91
+  text: What is referred to as opposition for a planet?
+  answers:
+  - The planet is behind the Sun as seen from us
+  - The planet is opposite the Sun as seen from us
+  - The planet leaves its orbit
+  - The planet rotates backwards
+  correct: 1
+  category: astronomische_phanomene
+  difficulty: amateur
+  image: data/images/Close_encounter-_Mars_at_opposition_(opo0534l).jpg
+  image_credit: NASA, ESA, and Z. Levay (STScI), Public domain, via Wikimedia Commons
+- id: q92
+  text: Why are many telescopes operated in space?
+  answers:
+  - Closer to the stars
+  - No atmosphere interferes with observations
+  - Lower gravity
+  - More light
+  correct: 1
+  category: raumsonden_teleskope
+  difficulty: amateur
+  image: data/images/Hubble_Space_Telescope_(27946391011).jpg
+  image_credit: NASA Hubble Space Telescope, Public domain, via Wikimedia Commons
+- id: q93
+  text: What does a radio telescope measure?
+  answers:
+  - Visible light
+  - Radio waves
+  - UV radiation
+  - X-ray light
+  correct: 1
+  category: raumsonden_teleskope
+  difficulty: laie
+  image: data/images/Very_Large_Array,_2012.jpg
+  image_credit: John Fowler, CC BY 2.0, via Wikimedia Commons
+- id: q94
+  text: What is adaptive optics?
+  answers:
+  - A movable eyepiece
+  - A system to compensate for atmospheric distortion
+  - A zoom function
+  - A color filter
+  correct: 1
+  category: raumsonden_teleskope
+  difficulty: amateur
+  image: data/images/Laser_Towards_Milky_Ways_Centre.jpg
+  image_credit: ESO/Yuri Beletsky (ybialets at eso.org), CC BY 4.0, via Wikimedia
+    Commons
+- id: q95
+  text: What is a space probe?
+  answers:
+  - A crewed spacecraft
+  - An unmanned research device
+  - A crewed satellite
+  - A space telescope
+  correct: 1
+  category: raumsonden_teleskope
+  difficulty: amateur
+  image: data/images/Galileo_Preparations_-_GPN-2000-000672.jpg
+  image_credit: NASA, Public domain, via Wikimedia Commons
+- id: q96
+  text: Why are infrared telescopes often cooled?
+  answers:
+  - For stabilization
+  - To avoid emitting their own thermal radiation
+  - Due to the vacuum
+  - Due to dust
+  correct: 1
+  category: raumsonden_teleskope
+  difficulty: amateur
+  image: data/images/James_Webb_Space_Telescope_2009_top.jpg
+  image_credit: NASA, Public domain, via Wikimedia Commons
+- id: q97
+  text: What is a parsec?
+  answers:
+  - A unit of time
+  - A unit of distance
+  - A unit of brightness
+  - A unit of mass
+  correct: 1
+  category: entfernungsbestimmung_helligkeit
+  difficulty: amateur
+  image: data/images/Parsec-fr.svg.png
+  image_credit: jd, Public domain, via Wikimedia Commons
+- id: q98
+  text: What is a light-year?
+  answers:
+  - A unit of distance
+  - A unit of brightness
+  - A unit of mass
+  - A unit of time
+  correct: 0
+  category: entfernungsbestimmung_helligkeit
+  difficulty: laie
+  image: data/images/Light-year-scale-Bob-King.jpg
+  image_credit: Bob King, CC BY-SA 4.0, via Wikimedia Commons
+- id: q99
+  text: What does apparent magnitude measure?
+  answers:
+  - The actual luminosity of an object
+  - The brightness of an object as seen from Earth
+  - The distance of an object
+  - The temperature of an object
+  correct: 1
+  category: entfernungsbestimmung_helligkeit
+  difficulty: amateur
+  image: data/images/65Cyb-LB3-apmag.jpg
+  image_credit: I, Kevin Heider, CC BY-SA 3.0, via Wikimedia Commons
+- id: q100
+  text: What does absolute magnitude measure?
+  answers:
+  - The brightness of an object at a distance of 10 parsecs
+  - The maximum brightness of an object
+  - The brightness of an object at a distance of one astronomical unit
+  - The mass of an object
+  correct: 0
+  category: entfernungsbestimmung_helligkeit
+  difficulty: amateur
+  image: data/images/Abell_1367_with_Manually_added_Galaxy_distances.jpg
+  image_credit: Keesscherer, CC BY-SA 4.0, via Wikimedia Commons
+- id: q101
+  text: What effect is parallax measurement based on?
+  answers:
+  - Redshift of distant galaxies
+  - Angular shift of an object during Earth's orbit around the Sun
+  - Similar brightness of Type 1a supernovae
+  - Pulsar periods of pulsars
+  correct: 1
+  category: entfernungsbestimmung_helligkeit
+  difficulty: amateur
+  image: data/images/Stellarparallax_parsec_de.svg.png
+  image_credit: AaronDewes, CC0, via Wikimedia Commons
+- id: q102
+  text: What are Cepheids important for?
+  answers:
+  - Planet searches
+  - Distance measurement
+  - Magnetic field analysis
+  - Galaxy rotation
+  correct: 1
+  category: entfernungsbestimmung_helligkeit
+  difficulty: amateur
+  image: data/images/Comparison_of_Hubble_and_Webb_views_of_a_Cepheid_variable_star_(weic2408b).jpg
+  image_credit: NASA, ESA, CSA, STScI, A. Riess (JHU/STScI), CC BY 4.0, via Wikimedia Commons
