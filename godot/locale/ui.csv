@@ -164,3 +164,9 @@ QUIZ_CORRECT_OF,%d von %d richtig,%d of %d correct,%d de %d correctas
 QUIZ_BEST_STREAK,Längste Serie: %d,Longest streak: %d,Racha más larga: %d
 QUIZ_AGAIN,Neue Runde,New round,Nueva ronda
 QUIZ_STREAK,· Serie ×%d,· streak ×%d,· racha ×%d
+PUZZLE_PICK,Welches Himmelsfoto möchtest du puzzeln?,Which sky photo do you want to puzzle?,¿Qué foto del cielo quieres montar?
+PUZZLE_PLACED,%d / %d Teile,%d / %d pieces,%d / %d piezas
+PUZZLE_DONE,Geschafft!,Done!,¡Conseguido!
+PUZZLE_CREDIT,"Aufnahme: OST-Sternwarte, Universität Potsdam","Image: OST observatory, University of Potsdam","Imagen: observatorio OST, Universidad de Potsdam"
+PUZZLE_RESULT,%d Teile in %d:%02d min,%d pieces in %d:%02d min,%d piezas en %d:%02d min
+PUZZLE_AGAIN,Neues Bild,New picture,Nueva imagen

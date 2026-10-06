@@ -13,7 +13,7 @@ const GAMES := [
 	{"id": "quiz", "title": "GAME_QUIZ", "desc": "GAME_QUIZ_DESC", "icon": "quiz",
 		"color": Color("4dd0e1"), "scene": "res://games/quiz/quiz_game.tscn", "status": "ready"},
 	{"id": "puzzle", "title": "GAME_PUZZLE", "desc": "GAME_PUZZLE_DESC", "icon": "extension",
-		"color": Color("ff8a80"), "scene": "", "status": "soon"},
+		"color": Color("ff8a80"), "scene": "res://games/puzzle/puzzle_game.tscn", "status": "ready"},
 	{"id": "galaxy", "title": "GAME_GALAXY", "desc": "GAME_GALAXY_DESC", "icon": "blur_on",
 		"color": Color("b39ddb"), "scene": "", "status": "soon"},
 	{"id": "solar", "title": "GAME_SOLAR", "desc": "GAME_SOLAR_DESC", "icon": "public",

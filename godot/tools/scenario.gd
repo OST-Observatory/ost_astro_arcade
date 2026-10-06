@@ -89,6 +89,22 @@ func _ready() -> void:
 				qg._layer.queue_free()
 				qg._layer = null
 				qg._show_result()
+		"puzzle", "puzzle_half", "puzzle_done", "puzzle_pick":
+			var pg: Control = load("res://games/puzzle/puzzle_game.tscn").instantiate()
+			pg.skip_intro = scenario != "puzzle_pick"
+			pg.rng_seed = 5
+			if scenario == "puzzle_pick":
+				pg.set_meta("pick_only", true)
+			add_child(pg)
+			await get_tree().create_timer(0.5).timeout
+			if scenario == "puzzle_pick":
+				pg._pick_image()
+			elif scenario != "puzzle":
+				var n: int = pg._pieces.size() if scenario == "puzzle_done" else pg._pieces.size() / 2
+				for k in n:
+					var p = pg._pieces[k]
+					p.position = p.target
+					pg._try_snap(p)
 		"psf":
 			# PSF test chart: stars from 3 to 15 mag in a row, through the real CCD display.
 			var stars := []

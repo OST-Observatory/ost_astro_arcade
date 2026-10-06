@@ -1,0 +1,194 @@
+{
+ "images": [
+  {
+   "id": "Abell_1656_RGB",
+   "image": "res://assets/puzzle/images/Abell_1656_RGB.jpg",
+   "thumb": "res://assets/puzzle/images/Abell_1656_RGB_thumb.jpg",
+   "size": [
+    2400,
+    1580
+   ],
+   "name": {
+    "de": "Abell 1656 (Coma-Galaxienhaufen)",
+    "en": "Abell 1656 (Coma Galaxy Cluster)",
+    "es": "Abell 1656 (Cúmulo de Galaxias de Coma)"
+   },
+   "description": {
+    "de": "Riesiger Galaxienhaufen im Sternbild Haar der Berenike, über 300 Mio. Lichtjahre entfernt. Enthält über 1000 Galaxien. Hier deutete Fritz Zwicky 1933 erstmals Dunkle Materie an.",
+    "en": "Enormous galaxy cluster in the constellation Coma Berenices, over 300 million light-years away. Contains more than 1000 galaxies. Here, Fritz Zwicky first suggested the existence of dark matter in 1933.",
+    "es": "Enorme cúmulo de galaxias en la constelación Cabellera de Berenice, a más de 300 millones de años luz de distancia. Contiene más de 1000 galaxias. Aquí, Fritz Zwicky sugirió por primera vez la existencia de materia oscura en 1933."
+   }
+  },
+  {
+   "id": "C2022E3ZTF",
+   "image": "res://assets/puzzle/images/C2022E3ZTF.jpg",
+   "thumb": "res://assets/puzzle/images/C2022E3ZTF_thumb.jpg",
+   "size": [
+    2400,
+    1606
+   ],
+   "name": {
+    "de": "C/2022 E3 (ZTF)",
+    "en": "C/2022 E3 (ZTF)",
+    "es": "C/2022 E3 (ZTF)"
+   },
+   "description": {
+    "de": "Dieser Komet ist ein langperiodischer Komet aus der Oortschen Wolke, der Anfang 2023 von der Erde aus sichtbar war. Entdeckt wurde er 2022 vom Zwicky Transient Facility-Projekt am Palomar-Observatorium. Besonders bemerkenswert war sein grünlich leuchtender Schweif, der durch fluoreszierende Kohlenstoffmoleküle in seiner Koma entstand.",
+    "en": "This comet is a long-period comet from the Oort Cloud that was visible from Earth in early 2023. It was discovered in 2022 by the Zwicky Transient Facility project at Palomar Observatory. Particularly remarkable was its greenish glowing tail, caused by fluorescing carbon molecules in its coma.",
+    "es": "Este cometa es un cometa de largo período procedente de la Nube de Oort, visible desde la Tierra a principios de 2023. Fue descubierto en 2022 por el proyecto Zwicky Transient Facility en el Observatorio Palomar. Especialmente notable fue su cola de brillo verdoso, causada por moléculas de carbono fluorescentes en su coma."
+   }
+  },
+  {
+   "id": "M101_HaLRGB",
+   "image": "res://assets/puzzle/images/M101_HaLRGB.jpg",
+   "thumb": "res://assets/puzzle/images/M101_HaLRGB_thumb.jpg",
+   "size": [
+    2400,
+    1494
+   ],
+   "name": {
+    "de": "M101 (Feuerrad-Galaxie)",
+    "en": "M101 (Pinwheel Galaxy)",
+    "es": "M101 (Galaxia del Molinete)"
+   },
+   "description": {
+    "de": "Große Spiralgalaxie im Großen Bären, etwa 25 Mio. Lichtjahre entfernt. Fast doppelt so groß wie die Milchstraße. Die Spiralarme zeigen intensive Sternentstehung.",
+    "en": "Large spiral galaxy in Ursa Major, approximately 25 million light-years away. Nearly twice the size of the Milky Way. The spiral arms show intense star formation.",
+    "es": "Gran galaxia espiral en la Osa Mayor, a aproximadamente 25 millones de años luz de distancia. Casi el doble de grande que la Vía Láctea. Los brazos espirales muestran una intensa formación estelar."
+   }
+  },
+  {
+   "id": "Messier92_LRGB",
+   "image": "res://assets/puzzle/images/Messier92_LRGB.jpg",
+   "thumb": "res://assets/puzzle/images/Messier92_LRGB_thumb.jpg",
+   "size": [
+    2400,
+    1532
+   ],
+   "name": {
+    "de": "Messier 92",
+    "en": "Messier 92",
+    "es": "Messier 92"
+   },
+   "description": {
+    "de": "Einer der ältesten Kugelsternhaufen der Milchstraße. Sie bestehen vorwiegend aus alten Sternen und befinden sich in den Außenbereichen von Galaxien, den sogenannten Halos.",
+    "en": "One of the oldest globular clusters in the Milky Way. They consist predominantly of old stars and are found in the outer regions of galaxies, known as halos.",
+    "es": "Uno de los cúmulos globulares más antiguos de la Vía Láctea. Están compuestos principalmente por estrellas antiguas y se encuentran en las regiones exteriores de las galaxias, denominadas halos."
+   }
+  },
+  {
+   "id": "NGC_4038_NGC_4039_HaRGB",
+   "image": "res://assets/puzzle/images/NGC_4038_NGC_4039_HaRGB.jpg",
+   "thumb": "res://assets/puzzle/images/NGC_4038_NGC_4039_HaRGB_thumb.jpg",
+   "size": [
+    2400,
+    1512
+   ],
+   "name": {
+    "de": "NGC 4038/4039 (Antennen-Galaxien)",
+    "en": "NGC 4038/4039 (Antennae Galaxies)",
+    "es": "NGC 4038/4039 (Galaxias de las Antenas)"
+   },
+   "description": {
+    "de": "Zwei kollidierende Galaxien im Sternbild Rabe. Die langen Schweife aus Gas und Sternen entstanden durch die Gezeitenkräfte bei der Verschmelzung.",
+    "en": "Two colliding galaxies in the constellation Corvus. The long tails of gas and stars were formed by the tidal forces during the merger.",
+    "es": "Dos galaxias en colisión en la constelación del Cuervo. Las largas colas de gas y estrellas se formaron por las fuerzas de marea durante la fusión."
+   }
+  },
+  {
+   "id": "m42SHO",
+   "image": "res://assets/puzzle/images/m42SHO.jpg",
+   "thumb": "res://assets/puzzle/images/m42SHO_thumb.jpg",
+   "size": [
+    2400,
+    1601
+   ],
+   "name": {
+    "de": "Orionnebel (Messier 42)",
+    "en": "Orion Nebula (Messier 42)",
+    "es": "Nebulosa de Orión (Messier 42)"
+   },
+   "description": {
+    "de": "Der Orionnebel ist eine der bekanntesten Sternentstehungsregionen am Nachthimmel und befindet sich im Sternbild Orion. Er liegt etwa 1.350 Lichtjahre von der Erde entfernt und ist mit bloßem Auge als 'Schwert' des Orion sichtbar. In seinem Inneren entstehen ständig neue Sterne aus gewaltigen Gas- und Staubwolken.",
+    "en": "The Orion Nebula is one of the most well-known star-forming regions in the night sky, located in the constellation Orion. It lies approximately 1,350 light-years from Earth and is visible to the naked eye as the 'sword' of Orion. Within it, new stars are constantly forming from enormous clouds of gas and dust.",
+    "es": "La Nebulosa de Orión es una de las regiones de formación estelar más conocidas del cielo nocturno, situada en la constelación de Orión. Se encuentra a aproximadamente 1.350 años luz de la Tierra y es visible a simple vista como la 'espada' de Orión. En su interior, nuevas estrellas se forman continuamente a partir de enormes nubes de gas y polvo."
+   }
+  },
+  {
+   "id": "m81_LRGBcomposite",
+   "image": "res://assets/puzzle/images/m81_LRGBcomposite.jpg",
+   "thumb": "res://assets/puzzle/images/m81_LRGBcomposite_thumb.jpg",
+   "size": [
+    2400,
+    1687
+   ],
+   "name": {
+    "de": "Bodes Galaxie (Messier 81)",
+    "en": "Bode's Galaxy (Messier 81)",
+    "es": "Galaxia de Bode (Messier 81)"
+   },
+   "description": {
+    "de": "Die Bodes Galaxie ist eine große Spiralgalaxie im Sternbild Großer Bär, etwa 12 Millionen Lichtjahre von der Erde entfernt. Sie wurde 1774 vom Astronomen Johann Elert Bode beschrieben und zählt zu den hellsten Galaxien am Nachthimmel. Aufgrund ihrer ausgeprägten Spiralstruktur ist sie ein beliebtes Beobachtungsobjekt für Amateurastronomen.",
+    "en": "Bode's Galaxy is a large spiral galaxy in the constellation Ursa Major, approximately 12 million light-years from Earth. It was described in 1774 by astronomer Johann Elert Bode and is one of the brightest galaxies in the night sky. Its well-defined spiral structure makes it a popular observation target for amateur astronomers.",
+    "es": "La Galaxia de Bode es una gran galaxia espiral en la constelación de la Osa Mayor, a aproximadamente 12 millones de años luz de la Tierra. Fue descrita en 1774 por el astrónomo Johann Elert Bode y es una de las galaxias más brillantes del cielo nocturno. Su pronunciada estructura espiral la convierte en un objeto de observación muy popular entre los astrónomos aficionados."
+   }
+  },
+  {
+   "id": "ost_and_stars",
+   "image": "res://assets/puzzle/images/ost_and_stars.jpg",
+   "thumb": "res://assets/puzzle/images/ost_and_stars_thumb.jpg",
+   "size": [
+    2400,
+    1597
+   ],
+   "name": {
+    "de": "Das OST",
+    "en": "The OST",
+    "es": "El OST"
+   },
+   "description": {
+    "de": "Die Aufnahme zeigt das 'Our Small Telescope' (OST) bzw. 'Overwhelmingly Small Telescope' der Universität Potsdam bei Nacht.",
+    "en": "The image shows the 'Our Small Telescope' (OST), also known as the 'Overwhelmingly Small Telescope', of the University of Potsdam at night.",
+    "es": "La imagen muestra el 'Our Small Telescope' (OST), también conocido como 'Overwhelmingly Small Telescope', de la Universidad de Potsdam de noche."
+   }
+  },
+  {
+   "id": "sun_halpha",
+   "image": "res://assets/puzzle/images/sun_halpha.jpg",
+   "thumb": "res://assets/puzzle/images/sun_halpha_thumb.jpg",
+   "size": [
+    2184,
+    1336
+   ],
+   "name": {
+    "de": "Sonne im H-alpha-Licht",
+    "en": "Sun in H-alpha Light",
+    "es": "Sol en Luz H-alfa"
+   },
+   "description": {
+    "de": "Detailaufnahme der Sonnenoberfläche in H-alpha. Zeigt Protuberanzen und Filamente – Strukturen aus ionisiertem Wasserstoff in der Chromosphäre.",
+    "en": "Detailed image of the solar surface in H-alpha. Shows prominences and filaments – structures of ionised hydrogen in the chromosphere.",
+    "es": "Imagen detallada de la superficie solar en H-alfa. Muestra protuberancias y filamentos, estructuras de hidrógeno ionizado en la cromosfera."
+   }
+  },
+  {
+   "id": "sunspot_3413",
+   "image": "res://assets/puzzle/images/sunspot_3413.jpg",
+   "thumb": "res://assets/puzzle/images/sunspot_3413_thumb.jpg",
+   "size": [
+    1211,
+    925
+   ],
+   "name": {
+    "de": "Nahaufnahme eines Sonnenflecks",
+    "en": "Close-up of a Sunspot",
+    "es": "Primer plano de una Mancha Solar"
+   },
+   "description": {
+    "de": "Nahaufnahme des Sonnenflecks 3413 vom 24.08.2023: Die Umbra und die Penumbra des Sonnenflecks sind deutlich zu erkennen. Ersteres bezeichnet den dunkleren Kernbereich, Letzteres den etwas helleren Rand. Wir blicken hier auf den Teil der Sonnenatmosphäre, aus dem das meiste Licht stammt, das uns auf der Erde erreicht: die sogenannte Photosphäre. Sie ist geprägt durch die hier klar erkennbare granulare Struktur, die in Verbindung mit den Konvektionsströmen im Inneren der Sonne steht.",
+    "en": "Close-up of sunspot 3413 from 24 August 2023: the umbra and penumbra of the sunspot are clearly visible. The former refers to the darker central region, the latter to the slightly brighter outer edge. We are looking at the part of the solar atmosphere from which most of the light reaching us on Earth originates: the so-called photosphere. It is characterised by the clearly visible granular structure, which is connected to the convection currents inside the Sun.",
+    "es": "Primer plano de la mancha solar 3413 del 24 de agosto de 2023: la umbra y la penumbra de la mancha solar son claramente visibles. La primera designa la región central más oscura, la segunda el borde algo más brillante. Estamos observando la parte de la atmósfera solar de la que procede la mayor parte de la luz que nos llega a la Tierra: la denominada fotosfera. Se caracteriza por la estructura granular claramente visible, relacionada con las corrientes de convección en el interior del Sol."
+   }
+  }
+ ]
+}
