@@ -6,7 +6,6 @@ extends Node3D
 
 signal finished
 
-const STARS := 200000
 ## Simulated time units per second of animation.
 const SPEED := 9.0
 const FOV := 30.0
@@ -61,7 +60,7 @@ func _ready() -> void:
 	_quad.material = draw_mat
 
 	_particles = GPUParticles3D.new()
-	_particles.amount = STARS
+	_particles.amount = int(Settings.quality_3d()[2])
 	_particles.lifetime = 100000.0
 	_particles.explosiveness = 1.0
 	_particles.one_shot = true
@@ -105,7 +104,7 @@ func setup(p: Dictionary, map_extent: float) -> void:
 	t = 0.0
 	playing = false
 	var f2 := GalaxyModel.fraction2(params)
-	_mat.set_shader_parameter("n_first", int(STARS * (1.0 - f2)))
+	_mat.set_shader_parameter("n_first", int(_particles.amount * (1.0 - f2)))
 	_mat.set_shader_parameter("core_mass", PackedFloat32Array([1.0, float(params.m2)]))
 	_mat.set_shader_parameter("disk_scale", PackedFloat32Array([GalaxyModel.disk_scale(params, 0), GalaxyModel.disk_scale(params, 1)]))
 	_mat.set_shader_parameter("disk_basis", [GalaxyModel.disk_basis(params, 0), GalaxyModel.disk_basis(params, 1)])

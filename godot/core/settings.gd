@@ -18,6 +18,7 @@ const DEFAULTS := {
 	"audio/muted": true,
 	"audio/master_db": -6.0,
 	"display/show_fps": false,
+	"display/quality_3d": "high",   # high | medium | low (FSR upscaling, MSAA, effects)
 	"games/disabled": [],
 	"external/nbody_path": "/opt/ost/external/nbody/nbody_dynamics",
 	"site/name": "OST, Universität Potsdam (Golm)",
@@ -82,3 +83,24 @@ func uses_default_pin() -> bool:
 
 func set_pin(pin: String) -> void:
 	set_value("kiosk/admin_pin_sha256", pin.sha256_text())
+
+
+## 3D quality preset: [render scale (FSR below 1), MSAA, galaxy stars, SSAO].
+const QUALITY_3D := {
+	"high": [1.0, Viewport.MSAA_4X, 200000, true],
+	"medium": [0.77, Viewport.MSAA_2X, 150000, true],
+	"low": [0.59, Viewport.MSAA_DISABLED, 100000, false],
+}
+
+
+func quality_3d() -> Array:
+	return QUALITY_3D.get(str(get_value("display/quality_3d")), QUALITY_3D.high)
+
+
+## Applies the 3D quality preset to a viewport that renders a 3D scene.
+func apply_3d(vp: Viewport) -> void:
+	var q := quality_3d()
+	vp.msaa_3d = q[1]
+	vp.scaling_3d_scale = q[0]
+	vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if q[0] < 1.0 else Viewport.SCALING_3D_MODE_BILINEAR
+

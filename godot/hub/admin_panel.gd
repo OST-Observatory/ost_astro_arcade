@@ -11,6 +11,9 @@ var _msg: Label
 var _new_pin_mode := false
 
 
+const _QUALITY_NAMES := {"high": "hoch", "medium": "mittel", "low": "niedrig"}
+
+
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -156,6 +159,11 @@ func _show_main(message := "") -> void:
 	_section("Anzeige & Test")
 	_row([
 		_toggle("FPS anzeigen", Settings.get_value("display/show_fps"), func(on): Settings.set_value("display/show_fps", on)),
+		_action("3D-Qualität: " + _QUALITY_NAMES[str(Settings.get_value("display/quality_3d"))], func():
+			var order := ["high", "medium", "low"]
+			var i := order.find(str(Settings.get_value("display/quality_3d")))
+			Settings.set_value("display/quality_3d", order[(i + 1) % order.size()])
+			_show_main("3D-Qualität geändert (gilt ab dem nächsten Spielstart).")),
 		_action("Touch-Test", func(): get_tree().change_scene_to_file("res://spikes/touch_test.tscn")),
 		_action("PIN ändern", func():
 			_new_pin_mode = true

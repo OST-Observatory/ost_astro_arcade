@@ -51,7 +51,7 @@ func _ready() -> void:
 	_env.glow_enabled = true
 	_env.glow_intensity = 0.7
 	_env.glow_hdr_threshold = 1.0
-	_env.ssao_enabled = true
+	_env.ssao_enabled = bool(Settings.quality_3d()[3])
 	_env.ssao_intensity = 1.5
 	var we := WorldEnvironment.new()
 	we.environment = _env

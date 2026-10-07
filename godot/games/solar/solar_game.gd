@@ -75,7 +75,7 @@ func _build_3d() -> void:
 	add_child(container)
 	var vp := SubViewport.new()
 	vp.own_world_3d = true
-	vp.msaa_3d = Viewport.MSAA_4X
+	Settings.apply_3d(vp)
 	container.add_child(vp)
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR

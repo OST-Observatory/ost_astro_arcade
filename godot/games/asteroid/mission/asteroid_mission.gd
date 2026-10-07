@@ -36,7 +36,7 @@ func _briefing() -> void:
 	add_child(vp)
 	var sv := SubViewport.new()
 	sv.own_world_3d = true
-	sv.msaa_3d = Viewport.MSAA_4X
+	Settings.apply_3d(sv)
 	vp.add_child(sv)
 	var obs := ObservatoryScene.new()
 	sv.add_child(obs)

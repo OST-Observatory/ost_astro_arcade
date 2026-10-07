@@ -146,6 +146,7 @@ func _start() -> void:
 	add_child(vp)
 	var sv := SubViewport.new()
 	sv.own_world_3d = true
+	Settings.apply_3d(sv)
 	vp.add_child(sv)
 	_view = GalaxyView.new()
 	sv.add_child(_view)
