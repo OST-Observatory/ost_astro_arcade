@@ -39,7 +39,7 @@ GAME_QUIZ_DESC,Teste dein Wissen über das Weltall,Test your knowledge of the un
 GAME_PUZZLE,Astro-Puzzle,Astro Puzzle,Astro rompecabezas
 GAME_PUZZLE_DESC,Setze echte Himmelsfotos zusammen,Piece together real sky images,Monta imágenes reales del cielo
 GAME_GALAXY,Galaxien-Baumeister,Galaxy Builder,Constructor de galaxias
-GAME_GALAXY_DESC,Lass Galaxien zusammenstoßen,Make galaxies collide,Haz chocar galaxias
+GAME_GALAXY_DESC,Baue echte Galaxien-Zusammenstöße nach,Rebuild real galaxy collisions,Reconstruye choques reales de galaxias
 GAME_SOLAR,Sonnensystem,Solar System,Sistema solar
 GAME_SOLAR_DESC,Fliege mit einer Sonde zum Mars,Fly a probe to Mars,Vuela con una sonda a Marte
 GAME_CONSTELLATIONS,Sternbilder,Constellations,Constelaciones
@@ -177,3 +177,51 @@ DOME_OPEN,Kuppel öffnen,Open the dome,Abrir la cúpula
 DOME_OPENING,Der Spalt öffnet sich …,The slit is opening …,La rendija se abre…
 DOME_SLEWING,"Das Teleskop fährt zum Asteroiden, die Kuppel dreht sich mit …","The telescope is moving to the asteroid, the dome turns along …",El telescopio se mueve hacia el asteroide y la cúpula gira con él…
 DOME_READY,"Bereit! Höhe %d°, Richtung %d° (Süden = 180°)","Ready! Altitude %d°, direction %d° (south = 180°)","¡Listo! Altura %d°, dirección %d° (sur = 180°)"
+GAL_PICK,Welche Galaxien-Kollision baust du nach?,Which galaxy collision will you rebuild?,¿Qué choque de galaxias vas a reconstruir?
+GAL_PICK_SUB,"Echte Fotos – finde heraus, wie sie entstanden sind.",Real photos – find out how they formed.,Fotos reales: descubre cómo se formaron.
+GAL_T_ANTENNAE,Antennen-Galaxien,Antennae Galaxies,Galaxias Antenas
+GAL_T_MICE,Mäuse-Galaxien,Mice Galaxies,Galaxias Ratones
+GAL_T_WHIRLPOOL,Whirlpool-Galaxie,Whirlpool Galaxy,Galaxia Remolino
+GAL_D_ANTENNAE,"Die Antennen-Galaxien NGC 4038 und 4039 im Sternbild Rabe sind rund 45 bis 65 Millionen Lichtjahre entfernt und mitten im Verschmelzen. Die langen „Fühler“ sind Sterne, die bei ihrer ersten Begegnung vor einigen hundert Millionen Jahren herausgeschleudert wurden. Dieses Foto hat die OST-Sternwarte aufgenommen.",The Antennae Galaxies NGC 4038 and 4039 in the constellation Corvus are about 45 to 65 million light-years away and in the middle of merging. The long “antennae” are stars flung out during their first encounter a few hundred million years ago. This photo was taken at the OST observatory.,"Las galaxias Antenas NGC 4038 y 4039, en la constelación del Cuervo, están a unos 45 a 65 millones de años luz y en plena fusión. Las largas «antenas» son estrellas lanzadas en su primer encuentro hace unos cientos de millones de años. Esta foto se tomó en el observatorio OST."
+GAL_D_MICE,Die Mäuse-Galaxien NGC 4676 im Sternbild Haar der Berenike sind etwa 300 Millionen Lichtjahre entfernt. Ihre langen Gezeitenschweife aus Sternen und Gas erinnern an Mäuseschwänze. Irgendwann werden die beiden zu einer einzigen Galaxie verschmelzen.,The Mice Galaxies NGC 4676 in the constellation Coma Berenices are about 300 million light-years away. Their long tidal tails of stars and gas look like mouse tails. One day the two will merge into a single galaxy.,"Las galaxias Ratones NGC 4676, en la constelación Cabellera de Berenice, están a unos 300 millones de años luz. Sus largas colas de marea de estrellas y gas parecen colas de ratón. Algún día las dos se fusionarán en una sola galaxia."
+GAL_D_WHIRLPOOL,"Die Whirlpool-Galaxie M51 im Sternbild Jagdhunde ist rund 25 bis 30 Millionen Lichtjahre entfernt. Ihre prächtigen Spiralarme wurden vermutlich durch die kleine Begleitgalaxie NGC 5195 verstärkt, die an ihr vorbeigezogen ist und jetzt am Ende eines Arms steht.","The Whirlpool Galaxy M51 in the constellation Canes Venatici is about 25 to 30 million light-years away. Its splendid spiral arms were probably strengthened by the small companion galaxy NGC 5195, which passed by and now sits at the end of one arm.","La galaxia Remolino M51, en la constelación de los Perros de Caza, está a unos 25 a 30 millones de años luz. Sus espléndidos brazos espirales probablemente se reforzaron con el paso de la pequeña galaxia compañera NGC 5195, que ahora está al final de un brazo."
+GAL_CREDIT,Foto: %s,Photo: %s,Foto: %s
+GAL_TASK,"Stell die Regler so ein, dass deine Simulation aussieht wie das echte Foto. Dann starte den Zusammenstoß!",Set the knobs so your simulation looks like the real photo. Then start the collision!,Ajusta los controles para que tu simulación se parezca a la foto real. ¡Después inicia el choque!
+GAL_SIM,DEINE SIMULATION,YOUR SIMULATION,TU SIMULACIÓN
+GAL_TRUE_SIM,SO KÖNNTE ES PASSIERT SEIN,HOW IT MAY HAVE HAPPENED,ASÍ PUDO HABER OCURRIDO
+GAL_REAL,DAS ECHTE FOTO,THE REAL PHOTO,LA FOTO REAL
+GAL_K_T_AFTER,Zeit seit der Begegnung,Time since the encounter,Tiempo desde el encuentro
+GAL_K_M2,Masse der zweiten Galaxie,Mass of the second galaxy,Masa de la segunda galaxia
+GAL_K_Q,Abstand beim Vorbeiflug,Distance when passing,Distancia al pasar
+GAL_K_INCL2,Neigung der zweiten Galaxie,Tilt of the second galaxy,Inclinación de la segunda galaxia
+GAL_K_SPIN1,Drehsinn der großen Galaxie,Spin of the big galaxy,Giro de la galaxia grande
+GAL_SPIN_WITH,mit der Bahn,with the orbit,con la órbita
+GAL_SPIN_AGAINST,gegen die Bahn,against the orbit,contra la órbita
+GAL_V_MYR,%d Mio. Jahre,%d million years,%d millones de años
+GAL_V_MASS,%d %% der ersten,%d %% of the first,%d %% de la primera
+GAL_V_LY,%d.000 Lichtjahre,"%d,000 light-years",%d.000 años luz
+GAL_RUN,Zusammenstoß starten,Start the collision,Iniciar el choque
+GAL_DONE,Fertig,Done,Listo
+GAL_RUNNING,Die Galaxien ziehen sich gegenseitig an …,The galaxies pull on each other …,Las galaxias se atraen mutuamente …
+GAL_BEFORE,Vor der Begegnung,Before the encounter,Antes del encuentro
+GAL_T_TO_ENCOUNTER,noch %d Mio. Jahre bis zur Begegnung,%d million years until the encounter,faltan %d millones de años para el encuentro
+GAL_T_SINCE,%d Mio. Jahre nach der Begegnung,%d million years after the encounter,%d millones de años después del encuentro
+GAL_T_NOW,Heute – so sehen wir sie,Today – this is how we see them,Hoy: así las vemos
+GAL_ATTEMPT,Versuch %d von %d,Attempt %d of %d,Intento %d de %d
+GAL_BEST,Bestwert %d %%,Best %d %%,Mejor %d %%
+GAL_SIMILARITY,Ähnlichkeit: %d %%,Similarity: %d %%,Parecido: %d %%
+GAL_HINT_CLOSE,"Super, schon ganz nah dran!","Great, very close!","¡Genial, ya casi!"
+GAL_TRY_AGAIN,Ändere die Regler und probier es noch einmal.,Change the knobs and try again.,Cambia los controles y vuelve a intentarlo.
+GAL_HINT_SPIN,Tipp: Probier den anderen Drehsinn.,Tip: try the other spin.,Pista: prueba el otro sentido de giro.
+GAL_HINT_T_AFTER_UP,Tipp: Lass mehr Zeit vergehen.,Tip: let more time pass.,Pista: deja pasar más tiempo.
+GAL_HINT_T_AFTER_DOWN,Tipp: Weniger Zeit – schau früher hin.,Tip: less time – look earlier.,"Pista: menos tiempo, mira antes."
+GAL_HINT_M2_UP,Tipp: Die zweite Galaxie ist schwerer.,Tip: the second galaxy is heavier.,Pista: la segunda galaxia es más pesada.
+GAL_HINT_M2_DOWN,Tipp: Die zweite Galaxie ist leichter.,Tip: the second galaxy is lighter.,Pista: la segunda galaxia es más ligera.
+GAL_HINT_Q_UP,Tipp: Lass sie weiter voneinander entfernt vorbeifliegen.,Tip: let them pass further apart.,Pista: haz que pasen más lejos.
+GAL_HINT_Q_DOWN,Tipp: Lass sie näher aneinander vorbeifliegen.,Tip: let them pass closer.,Pista: haz que pasen más cerca.
+GAL_HINT_INCL2_UP,Tipp: Größerer Neigungswinkel.,Tip: a larger tilt angle.,Pista: un ángulo de inclinación mayor.
+GAL_HINT_INCL2_DOWN,Tipp: Kleinerer Neigungswinkel.,Tip: a smaller tilt angle.,Pista: un ángulo de inclinación menor.
+GAL_RESULT_TITLE,Galaxie nachgebaut!,Galaxy rebuilt!,¡Galaxia reconstruida!
+GAL_RESULT,Bestwert: %d %% Ähnlichkeit (Versuche: %d),Best: %d %% similarity (attempts: %d),Mejor: %d %% de parecido (intentos: %d)
+GAL_ANSWER,So entsteht das Bild in unserem Modell:,This is how the picture forms in our model:,Así se forma la imagen en nuestro modelo:
+GAL_AGAIN,Andere Galaxie,Another galaxy,Otra galaxia

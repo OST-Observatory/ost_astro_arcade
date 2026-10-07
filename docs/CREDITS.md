@@ -12,6 +12,8 @@ entry.
 | `godot/assets/quiz/images/*.jpg` | Quiz images (scaled copies) | various – per image in `questions.json` field `credit`, shown under each image in the game | as stated per image (mostly public domain / CC BY / CC BY-SA) |
 | `godot/assets/data/asteroid/` | Asteroid orbits/ephemerides, star fields | JPL Horizons & SBDB (NASA/JPL-Caltech); ESA Gaia DR3 | public domain (JPL); Gaia: CC BY-SA 3.0 IGO, ESA/Gaia/DPAC |
 | `godot/assets/puzzle/images/`, `godot/assets/data/puzzle/` | 10 puzzle images with de/en/es texts (from astro_mini_games, scaled) | OST, Universität Potsdam (to be confirmed per image) | © OST |
+| `godot/assets/galaxy/images/mice.jpg` | The Mice, NGC 4676 (heic0206h, scaled) | NASA, H. Ford (JHU), G. Illingworth (UCSC/LO), M. Clampin (STScI), G. Hartig (STScI), the ACS Science Team, and ESA | CC BY 4.0 (ESA/Hubble) |
+| `godot/assets/galaxy/images/whirlpool.jpg` | Whirlpool Galaxy M51 and NGC 5195 (heic0506a, scaled) | NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA) | CC BY 4.0 (ESA/Hubble) |
 | `godot/assets/fonts/` | Inter, CMU Serif, Material Icons | rsms/inter; Computer Modern Unicode; Google | SIL OFL 1.1; SIL OFL 1.1; Apache 2.0 |
 
 ## Planned (not yet in the repo)

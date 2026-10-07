@@ -111,6 +111,35 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+		"galaxy", "galaxy_pick", "galaxy_run", "galaxy_result":
+			var gg: Control = load("res://games/galaxy/galaxy_game.tscn").instantiate()
+			gg.skip_intro = true
+			if scenario != "galaxy_pick":
+				gg.target_id = OS.get_environment("GAL") if OS.get_environment("GAL") != "" else "antennae"
+			add_child(gg)
+			if scenario in ["galaxy_run", "galaxy_result"]:
+				await get_tree().process_frame
+				await get_tree().process_frame
+				gg._view.fixed_step = 1.0 / 30.0
+				gg._run()
+				if scenario == "galaxy_result":
+					await gg._view.finished
+					await get_tree().create_timer(2.5).timeout
+					gg._finish()
+		"galaxy_view":
+			var vp := SubViewportContainer.new()
+			vp.stretch = true
+			vp.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			add_child(vp)
+			var sv := SubViewport.new()
+			sv.own_world_3d = true
+			vp.add_child(sv)
+			var gv := GalaxyView.new()
+			sv.add_child(gv)
+			var t := GalaxyLogic.target(OS.get_environment("GAL") if OS.get_environment("GAL") != "" else "antennae")
+			gv.fixed_step = 1.0 / 30.0
+			gv.setup(t.params, t.extent)
+			gv.play()
 		"obs_day", "obs_dusk", "obs_night", "obs_inside", "obs_street":
 			var vp := SubViewportContainer.new()
 			vp.stretch = true

@@ -4,6 +4,10 @@ class_name Icons
 extends RefCounted
 
 const MAP := {
+	"add": 0xe145,
+	"remove": 0xe15b,
+	"rotate_left": 0xe419,
+	"rotate_right": 0xe41a,
 	"home": 0xe88a,
 	"close": 0xe5cd,
 	"check": 0xe5ca,
