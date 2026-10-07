@@ -17,7 +17,7 @@ const GAMES := [
 	{"id": "galaxy", "title": "GAME_GALAXY", "desc": "GAME_GALAXY_DESC", "icon": "blur_on",
 		"color": Color("b39ddb"), "scene": "res://games/galaxy/galaxy_game.tscn", "status": "ready"},
 	{"id": "solar", "title": "GAME_SOLAR", "desc": "GAME_SOLAR_DESC", "icon": "public",
-		"color": Color("81c784"), "scene": "", "status": "soon"},
+		"color": Color("81c784"), "scene": "res://games/solar/solar_game.tscn", "status": "ready"},
 	{"id": "constellations", "title": "GAME_CONSTELLATIONS", "desc": "GAME_CONSTELLATIONS_DESC",
 		"icon": "stars", "color": Color("90caf9"), "scene": "res://games/constellations/constellation_game.tscn", "status": "ready"},
 	{"id": "nbody", "title": "GAME_NBODY", "desc": "GAME_NBODY_DESC", "icon": "hub",

@@ -237,3 +237,25 @@ CON_FINISH,Zum Ergebnis,See the result,Ver el resultado
 CON_RESULT_TITLE,Himmel erkundet!,Sky explored!,¡Cielo explorado!
 CON_RESULT,Gefunden: %s. Daneben: %d.,Found: %s. Misses: %d.,Encontradas: %s. Fallos: %d.
 CON_AGAIN,Neue Sternbilder,New constellations,Nuevas constelaciones
+SOL_TITLE,Ab zum Mars!,Off to Mars!,¡Rumbo a Marte!
+SOL_TASK,"Wähle den Starttag so, dass deine Sonde auf ihrer Bahn um die Sonne genau dann bei der Marsbahn ankommt, wenn auch der Mars dort ist.",Pick the launch day so that your probe reaches Mars' orbit exactly when Mars is there too.,Elige el día de lanzamiento para que tu sonda llegue a la órbita de Marte justo cuando Marte también esté allí.
+SOL_LAUNCH,Starttag,Launch day,Día de lanzamiento
+SOL_FLIGHT,Flugzeit: %d Tage,Flight time: %d days,Tiempo de vuelo: %d días
+SOL_PHASE,Mars steht beim Start %d° vor der Erde.,"At launch, Mars is %d° ahead of Earth.","Al despegar, Marte va %d° por delante de la Tierra."
+SOL_GO,Rakete starten!,Launch the rocket!,¡Lanzar el cohete!
+SOL_ATTEMPT,Versuch %d von %d,Attempt %d of %d,Intento %d de %d
+SOL_DATE,Start: %s,Launch: %s,Lanzamiento: %s
+SOL_DAY,Flugtag %d von %d  ·  %s,Flight day %d of %d  ·  %s,Día de vuelo %d de %d  ·  %s
+SOL_HIT,Treffer! Deine Sonde erreicht den Mars.,Hit! Your probe reaches Mars.,¡Acierto! Tu sonda llega a Marte.
+SOL_MISS,Knapp daneben: Mars war %s Millionen km entfernt.,Missed: Mars was %s million km away.,Fallaste: Marte estaba a %s millones de km.
+SOL_DAYS_LATER,Tipp: Starte etwa %d Tage später.,Tip: launch about %d days later.,Pista: lanza unos %d días más tarde.
+SOL_DAYS_EARLIER,Tipp: Starte etwa %d Tage früher.,Tip: launch about %d days earlier.,Pista: lanza unos %d días antes.
+SOL_LATER,Du warst zu früh dran.,You launched too early.,Lanzaste demasiado pronto.
+SOL_EARLIER,Du warst zu spät dran.,You launched too late.,Lanzaste demasiado tarde.
+SOL_FAR,Mars war ganz woanders – probier einen ganz anderen Starttag.,Mars was far away – try a very different launch day.,Marte estaba muy lejos: prueba un día de lanzamiento muy distinto.
+SOL_RESULT_TITLE,Mission geglückt!,Mission accomplished!,¡Misión cumplida!
+SOL_RESULT_TITLE_MISS,Mission beendet,Mission over,Misión terminada
+SOL_FACT,"Weil Erde und Mars unterschiedlich schnell um die Sonne laufen, passt der Starttag nur etwa alle 26 Monate. Der Rover Perseverance startete am 30. Juli 2020 genau in so einem Startfenster. Das nächste Startfenster nach unserem Modell: %s.","Because Earth and Mars orbit the Sun at different speeds, a good launch day only comes about every 26 months. The rover Perseverance launched on 30 July 2020 in exactly such a window. The next launch window according to our model: %s.","Como la Tierra y Marte giran alrededor del Sol a distinta velocidad, un buen día de lanzamiento solo llega cada 26 meses aproximadamente. El rover Perseverance despegó el 30 de julio de 2020 justo en una de esas ventanas. La próxima ventana de lanzamiento según nuestro modelo: %s."
+SOL_NOTE,"Vereinfacht: Bahnen in einer Ebene, Start genau entlang der Erdbahn (Hohmann-Bahn). Echte Missionen fliegen etwas schnellere Bahnen.","Simplified: orbits in one plane, launch exactly along Earth's orbit (Hohmann transfer). Real missions fly slightly faster paths.",Simplificado: órbitas en un plano y lanzamiento justo a lo largo de la órbita terrestre (transferencia de Hohmann). Las misiones reales vuelan trayectorias algo más rápidas.
+SOL_AGAIN,Noch ein Start,Another launch,Otro lanzamiento
+SOL_ARRIVAL,Ankunft: %s,Arrival: %s,Llegada: %s

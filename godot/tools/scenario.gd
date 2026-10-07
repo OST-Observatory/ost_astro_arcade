@@ -111,6 +111,15 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+		"solar", "solar_fly", "solar_result":
+			var sg: Control = load("res://games/solar/solar_game.tscn").instantiate()
+			sg.skip_intro = true
+			add_child(sg)
+			if scenario != "solar":
+				await get_tree().process_frame
+				var best := MarsTransfer.best_launch(sg._jd0, sg._jd0 + 800)
+				sg._slider.slider.value = best - sg._jd0 + (0.0 if scenario == "solar_result" else 12.0)
+				sg._launch()
 		"con", "con_half", "con_done", "con_result":
 			var cg: Control = load("res://games/constellations/constellation_game.tscn").instantiate()
 			cg.skip_intro = true
