@@ -97,7 +97,14 @@ func _build_slides() -> void:
 		sl.add_child(_centered(g.title, UiTheme.SIZE_TITLE, "serif"))
 		sl.add_child(_centered(g.desc, UiTheme.SIZE_H2, "regular", UiTheme.TEXT_DIM))
 
-	# 3) Today's best players (only games that have entries today).
+	# 3) The explorers' gallery: asteroids found by visitors, circling the Sun.
+	if GallerySlide.has_entries():
+		var gallery := GallerySlide.new()
+		gallery.visible = false
+		add_child(gallery)
+		_slides.append(gallery)
+
+	# 4) Today's best players (only games that have entries today).
 	for g in GameRegistry.GAMES:
 		var best := Scores.top(g.id, 5, true)
 		if best.is_empty():

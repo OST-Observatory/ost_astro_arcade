@@ -111,6 +111,9 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+		"gallery":
+			_fake_gallery()
+			add_child(GallerySlide.new())
 		"solar", "solar_fly", "solar_result":
 			var sg: Control = load("res://games/solar/solar_game.tscn").instantiate()
 			sg.skip_intro = true
@@ -246,3 +249,16 @@ func _fake_scores() -> void:
 	for e in [["Mutiger Komet 42", 1840], ["Anna", 1720], ["Funkelnde Nova 7", 1500],
 			["Kühner Pulsar 13", 1210], ["Leo", 980]]:
 		Scores.submit("asteroid", e[0], e[1], 3)
+
+
+## A few visitor discoveries from the real scenarios (for the gallery slide).
+func _fake_gallery() -> void:
+	var idx: Array = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/asteroid/index.json")).scenarios
+	var store := GalleryStore.new(Settings.data_path("gallery.json"))
+	if store.entries.size() >= 12:
+		return
+	var names := ["Kleiner Komet", "Mutige Eule", "Stern-Fuchs", "Luna", "Team Golm", "Schnelle Wega"]
+	for i in 12:
+		var sc := AsteroidScenario.load_by_id(str(idx[(i * 7) % idx.size()].id))
+		store.add(names[i % names.size()], sc, 1500 + i * 37, 2)
+

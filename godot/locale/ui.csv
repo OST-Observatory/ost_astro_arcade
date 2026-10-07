@@ -259,3 +259,5 @@ SOL_FACT,"Weil Erde und Mars unterschiedlich schnell um die Sonne laufen, passt 
 SOL_NOTE,"Vereinfacht: Bahnen in einer Ebene, Start genau entlang der Erdbahn (Hohmann-Bahn). Echte Missionen fliegen etwas schnellere Bahnen.","Simplified: orbits in one plane, launch exactly along Earth's orbit (Hohmann transfer). Real missions fly slightly faster paths.",Simplificado: órbitas en un plano y lanzamiento justo a lo largo de la órbita terrestre (transferencia de Hohmann). Las misiones reales vuelan trayectorias algo más rápidas.
 SOL_AGAIN,Noch ein Start,Another launch,Otro lanzamiento
 SOL_ARRIVAL,Ankunft: %s,Arrival: %s,Llegada: %s
+ATTRACT_GALLERY,Entdecker-Galerie,Explorers' gallery,Galería de exploradores
+ATTRACT_GALLERY_SUB,%d Asteroiden haben Besucher hier schon beobachtet,Visitors have already observed %d asteroids here,Los visitantes ya han observado aquí %d asteroides
