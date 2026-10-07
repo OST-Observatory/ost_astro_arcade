@@ -1,0 +1,51 @@
+{
+ "size": [
+  2000,
+  1250
+ ],
+ "date": "2015-08-13",
+ "frames": [
+  {
+   "image": "res://assets/comet/67p_0.jpg",
+   "comet": [
+    822,
+    870
+   ]
+  },
+  {
+   "image": "res://assets/comet/67p_1.jpg",
+   "comet": [
+    967,
+    612
+   ]
+  },
+  {
+   "image": "res://assets/comet/67p_2.jpg",
+   "comet": [
+    1017,
+    542
+   ]
+  },
+  {
+   "image": "res://assets/comet/67p_3.jpg",
+   "comet": [
+    1058,
+    470
+   ]
+  },
+  {
+   "image": "res://assets/comet/67p_4.jpg",
+   "comet": [
+    1106,
+    390
+   ]
+  },
+  {
+   "image": "res://assets/comet/67p_5.jpg",
+   "comet": [
+    1122,
+    362
+   ]
+  }
+ ]
+}

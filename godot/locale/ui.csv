@@ -261,3 +261,15 @@ SOL_AGAIN,Noch ein Start,Another launch,Otro lanzamiento
 SOL_ARRIVAL,Ankunft: %s,Arrival: %s,Llegada: %s
 ATTRACT_GALLERY,Entdecker-Galerie,Explorers' gallery,Galería de exploradores
 ATTRACT_GALLERY_SUB,%d Asteroiden haben Besucher hier schon beobachtet,Visitors have already observed %d asteroids here,Los visitantes ya han observado aquí %d asteroides
+COMET_BUTTON,Bonus: Ein echter Komet!,Bonus: a real comet!,Extra: ¡un cometa de verdad!
+COMET_TITLE,Bonus: Komet 67P in echten OST-Bildern,Bonus: comet 67P in real OST images,Extra: el cometa 67P en imágenes reales del OST
+COMET_TASK,Diese Bilder hat das OST am 13. August 2015 aufgenommen. Ein Komet wandert durch das Bild – er sieht unscharf und neblig aus. Tippe ihn an!,The OST took these images on 13 August 2015. A comet moves through the picture – it looks fuzzy and misty. Tap it!,El OST tomó estas imágenes el 13 de agosto de 2015. Un cometa se mueve por la imagen: se ve borroso y nebuloso. ¡Tócalo!
+COMET_FRAME,Bild %d von %d,Image %d of %d,Imagen %d de %d
+COMET_WRONG,"Das ist ein Stern – der bleibt an seinem Platz. Achte auf den Fleck, der wandert!",That is a star – it stays in place. Look for the smudge that moves!,Eso es una estrella: se queda en su sitio. ¡Busca la mancha que se mueve!
+COMET_HINT,Tipp: Der Komet ist im gelben Kreis.,Tip: the comet is inside the yellow circle.,Pista: el cometa está dentro del círculo amarillo.
+COMET_FOUND,Gefunden! Das ist 67P/Tschurjumow-Gerassimenko.,Found it! This is 67P/Churyumov-Gerasimenko.,¡Encontrado! Es 67P/Churyumov-Gerasimenko.
+COMET_INFO,"Der Komet ist etwa 4 km groß. Genau an diesem Tag kam er der Sonne am nächsten – und die Raumsonde Rosetta umkreiste ihn dabei. Neun Monate vorher, im November 2014, war das Mini-Labor Philae auf ihm gelandet.","The comet is about 4 km across. On exactly this day it came closest to the Sun – while the spacecraft Rosetta was orbiting it. Nine months earlier, in November 2014, the small lander Philae had touched down on it.","El cometa mide unos 4 km. Justo ese día pasó lo más cerca del Sol, mientras la sonda Rosetta giraba a su alrededor. Nueve meses antes, en noviembre de 2014, el pequeño módulo Philae se posó sobre él."
+COMET_PAUSE,Anhalten,Pause,Pausa
+COMET_PLAY,Weiter blinken,Keep blinking,Seguir
+COMET_BACK,Zurück zur Urkunde,Back to the certificate,Volver al certificado
+COMET_CREDIT,"Aufnahmen: OST-Sternwarte, Universität Potsdam, 13.08.2015 (CC BY-NC-SA 3.0)","Images: OST observatory, University of Potsdam, 2015-08-13 (CC BY-NC-SA 3.0)","Imágenes: observatorio OST, Universidad de Potsdam, 13/08/2015 (CC BY-NC-SA 3.0)"

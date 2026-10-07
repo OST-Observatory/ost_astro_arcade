@@ -111,6 +111,12 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+		"comet", "comet_found":
+			var cb := CometBonus.new()
+			add_child(cb)
+			if scenario == "comet_found":
+				await get_tree().process_frame
+				cb._success()
 		"gallery":
 			_fake_gallery()
 			add_child(GallerySlide.new())

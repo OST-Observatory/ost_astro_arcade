@@ -94,6 +94,9 @@ func _ready() -> void:
 	var more := BigButton.make("CERT_AGAIN", "refresh", true, 620)
 	more.pressed.connect(func(): again.emit())
 	right.add_child(more)
+	var bonus := BigButton.make("COMET_BUTTON", "auto_awesome", false, 620)
+	bonus.pressed.connect(_open_comet)
+	right.add_child(bonus)
 	var home := BigButton.make("BACK_TO_HUB", "home", false, 620)
 	home.pressed.connect(func(): Router.go_home("home"))
 	right.add_child(home)
@@ -101,6 +104,13 @@ func _ready() -> void:
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.5)
 	Audio.play("success")
+
+
+## Bonus: find the real comet 67P in the OST's own images.
+func _open_comet() -> void:
+	var c := CometBonus.new()
+	add_child(c)
+	c.closed.connect(c.queue_free)
 
 
 func _facts() -> Array[String]:
