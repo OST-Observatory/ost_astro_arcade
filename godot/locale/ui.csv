@@ -43,7 +43,7 @@ GAME_GALAXY_DESC,Baue echte Galaxien-Zusammenstöße nach,Rebuild real galaxy co
 GAME_SOLAR,Sonnensystem,Solar System,Sistema solar
 GAME_SOLAR_DESC,Fliege mit einer Sonde zum Mars,Fly a probe to Mars,Vuela con una sonda a Marte
 GAME_CONSTELLATIONS,Sternbilder,Constellations,Constelaciones
-GAME_CONSTELLATIONS_DESC,Zeichne die Sternbilder nach,Trace the constellations,Dibuja las constelaciones
+GAME_CONSTELLATIONS_DESC,Finde Sternbilder am echten Himmel,Find constellations in the real sky,Encuentra constelaciones en el cielo real
 GAME_NBODY,N-Körper-Labor,N-Body Lab,Laboratorio de N cuerpos
 GAME_NBODY_DESC,Spiele mit der Schwerkraft,Play with gravity,Juega con la gravedad
 AST_INTRO_TITLE,Der Blinkkomparator,The blink comparator,El comparador de parpadeo
@@ -225,3 +225,15 @@ GAL_RESULT_TITLE,Galaxie nachgebaut!,Galaxy rebuilt!,¡Galaxia reconstruida!
 GAL_RESULT,Bestwert: %d %% Ähnlichkeit (Versuche: %d),Best: %d %% similarity (attempts: %d),Mejor: %d %% de parecido (intentos: %d)
 GAL_ANSWER,So entsteht das Bild in unserem Modell:,This is how the picture forms in our model:,Así se forma la imagen en nuestro modelo:
 GAL_AGAIN,Andere Galaxie,Another galaxy,Otra galaxia
+CON_FIND,FINDE AM HIMMEL UND VERBINDE,FIND IN THE SKY AND CONNECT,ENCUENTRA EN EL CIELO Y UNE
+CON_HOW,Zieh mit dem Finger von Stern zu Stern – oder tippe die Sterne nacheinander an.,Drag your finger from star to star – or tap the stars one after the other.,"Arrastra el dedo de estrella en estrella, o toca las estrellas una tras otra."
+CON_HINT,Tipp (kostet Punkte),Hint (costs points),Pista (cuesta puntos)
+CON_LINES,Linien: %d von %d,Lines: %d of %d,Líneas: %d de %d
+CON_ROUND,Sternbild %d von %d,Constellation %d of %d,Constelación %d de %d
+CON_WRONG,Daneben: %d,Misses: %d,Fallos: %d
+CON_POINTS,%d Punkte,%d points,%d puntos
+CON_NEXT,Nächstes Sternbild,Next constellation,Siguiente constelación
+CON_FINISH,Zum Ergebnis,See the result,Ver el resultado
+CON_RESULT_TITLE,Himmel erkundet!,Sky explored!,¡Cielo explorado!
+CON_RESULT,Gefunden: %s. Daneben: %d.,Found: %s. Misses: %d.,Encontradas: %s. Fallos: %d.
+CON_AGAIN,Neue Sternbilder,New constellations,Nuevas constelaciones

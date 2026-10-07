@@ -14,6 +14,7 @@ entry.
 | `godot/assets/puzzle/images/`, `godot/assets/data/puzzle/` | 10 puzzle images with de/en/es texts (from astro_mini_games, scaled) | OST, Universität Potsdam (to be confirmed per image) | © OST |
 | `godot/assets/galaxy/images/mice.jpg` | The Mice, NGC 4676 (heic0206h, scaled) | NASA, H. Ford (JHU), G. Illingworth (UCSC/LO), M. Clampin (STScI), G. Hartig (STScI), the ACS Science Team, and ESA | CC BY 4.0 (ESA/Hubble) |
 | `godot/assets/galaxy/images/whirlpool.jpg` | Whirlpool Galaxy M51 and NGC 5195 (heic0506a, scaled) | NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA) | CC BY 4.0 (ESA/Hubble) |
+| `godot/assets/data/constellations/sky.json` | Hipparcos stars to 6 mag, constellation stick figures, star and constellation names (via `tools/constellations/build_constellations.py`); short texts from `tools/constellations/facts.yaml` | d3-celestial © 2015 Olaf Frohn (data from ESA Hipparcos, IAU); texts: OST | BSD-3-Clause (d3-celestial); texts © OST |
 | `godot/assets/fonts/` | Inter, CMU Serif, Material Icons | rsms/inter; Computer Modern Unicode; Google | SIL OFL 1.1; SIL OFL 1.1; Apache 2.0 |
 
 ## Planned (not yet in the repo)

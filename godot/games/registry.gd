@@ -19,7 +19,7 @@ const GAMES := [
 	{"id": "solar", "title": "GAME_SOLAR", "desc": "GAME_SOLAR_DESC", "icon": "public",
 		"color": Color("81c784"), "scene": "", "status": "soon"},
 	{"id": "constellations", "title": "GAME_CONSTELLATIONS", "desc": "GAME_CONSTELLATIONS_DESC",
-		"icon": "stars", "color": Color("90caf9"), "scene": "", "status": "soon"},
+		"icon": "stars", "color": Color("90caf9"), "scene": "res://games/constellations/constellation_game.tscn", "status": "ready"},
 	{"id": "nbody", "title": "GAME_NBODY", "desc": "GAME_NBODY_DESC", "icon": "hub",
 		"color": Color("f48fb1"), "status": "ready",
 		"external": {"path_setting": "external/nbody_path",

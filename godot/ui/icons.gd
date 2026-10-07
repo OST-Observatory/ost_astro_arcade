@@ -4,6 +4,8 @@ class_name Icons
 extends RefCounted
 
 const MAP := {
+	"lightbulb": 0xe0f0,
+	"arrow_forward": 0xe5c8,
 	"add": 0xe145,
 	"remove": 0xe15b,
 	"rotate_left": 0xe419,

@@ -10,6 +10,9 @@ const HUB := "res://hub/hub.tscn"
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var scenario := OS.get_environment("SCENARIO")
+	var diff := OS.get_environment("DIFF")
+	if diff != "":
+		Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
 	await get_tree().process_frame
 	match scenario:
 		"en", "es":
@@ -49,9 +52,6 @@ func _ready() -> void:
 			for ch in ["S", "T", "E", "R", "N", "SPACE", "A"]:
 				e._kb._press(ch)
 		"plan", "dome", "dome_open", "align", "expose", "blink", "blink_loupe", "blink_hint", "blink_wrong", "measure", "orbit", "cert", "briefing":
-			var diff := OS.get_environment("DIFF")
-			if diff != "":
-				Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
 			var g: Control = load("res://games/asteroid/mission/asteroid_mission.tscn").instantiate()
 			g.skip_intro = scenario != "briefing"
 			g.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 7
@@ -111,6 +111,24 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+		"con", "con_half", "con_done", "con_result":
+			var cg: Control = load("res://games/constellations/constellation_game.tscn").instantiate()
+			cg.skip_intro = true
+			cg.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 3
+			add_child(cg)
+			if scenario != "con":
+				await get_tree().process_frame
+				var rounds := 3 if scenario == "con_result" else 1
+				for r in rounds:
+					var edges: Array = cg._con.edges
+					var n := edges.size() if scenario != "con_half" else edges.size() / 2
+					for k in n:
+						cg._connect(int(edges[k][0]), int(edges[k][1]))
+					if scenario == "con_half":
+						cg._connect(int(edges[n][0]), cg._members[0] if cg._members[0] != int(edges[n][0]) else cg._members[1])
+						cg._active = int(edges[n][0])
+					if scenario == "con_result":
+						cg._next_round()
 		"galaxy", "galaxy_pick", "galaxy_run", "galaxy_result":
 			var gg: Control = load("res://games/galaxy/galaxy_game.tscn").instantiate()
 			gg.skip_intro = true

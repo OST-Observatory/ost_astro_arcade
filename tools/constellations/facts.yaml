@@ -1,0 +1,98 @@
+# One or two short sentences per constellation, shown after it has been traced.
+# Drafted for the kiosk; please have them checked by the OST team.
+Dip:
+  de: "Der Große Wagen ist kein eigenes Sternbild, sondern der hellste Teil der Großen Bärin. Er steht bei uns das ganze Jahr über am Himmel."
+  en: "The Big Dipper is not a constellation of its own but the brightest part of the Great Bear. From Germany it can be seen all year round."
+  es: "El Carro Mayor no es una constelación propia, sino la parte más brillante de la Osa Mayor. Desde Alemania se ve durante todo el año."
+Cas:
+  de: "Kassiopeia war in der griechischen Sage eine eitle Königin, die Mutter der Andromeda. Ihr „W“ steht bei uns das ganze Jahr über am Himmel."
+  en: "In Greek myth, Cassiopeia was a vain queen, the mother of Andromeda. From Germany her “W” can be seen all year round."
+  es: "En la mitología griega, Casiopea era una reina vanidosa, madre de Andrómeda. Desde Alemania su «W» se ve durante todo el año."
+UMa:
+  de: "Die Große Bärin enthält den Großen Wagen. Verlängert man seine hintere Kante etwa fünfmal, trifft man auf den Polarstern."
+  en: "The Great Bear contains the Big Dipper. Extend its back edge about five times and you reach the Pole Star."
+  es: "La Osa Mayor contiene el Carro Mayor. Si prolongas unas cinco veces su borde trasero, llegas a la Estrella Polar."
+Ori:
+  de: "Orion war in der griechischen Sage ein großer Jäger. Der rote Riesenstern Beteigeuze ist seine Schulter, der blaue Rigel sein Fuß."
+  en: "In Greek myth, Orion was a great hunter. The red giant Betelgeuse marks his shoulder, blue Rigel his foot."
+  es: "En la mitología griega, Orión era un gran cazador. La gigante roja Betelgeuse marca su hombro y la azul Rigel su pie."
+Cyg:
+  de: "Der Schwan fliegt die Milchstraße entlang. Sein hellster Stern Deneb gehört zum Sommerdreieck."
+  en: "The Swan flies along the Milky Way. Its brightest star, Deneb, is part of the Summer Triangle."
+  es: "El Cisne vuela a lo largo de la Vía Láctea. Su estrella más brillante, Deneb, forma parte del Triángulo de Verano."
+Lyr:
+  de: "Die Leier gehörte dem Sänger Orpheus. Ihr Stern Wega ist einer der hellsten am Nordhimmel und gehört zum Sommerdreieck."
+  en: "The Lyre belonged to the singer Orpheus. Its star Vega is one of the brightest in the northern sky and part of the Summer Triangle."
+  es: "La Lira pertenecía al cantor Orfeo. Su estrella Vega es una de las más brillantes del cielo del norte y forma parte del Triángulo de Verano."
+Leo:
+  de: "Der Löwe gehört zum Tierkreis. Sein Kopf sieht aus wie ein rückwärts geschriebenes Fragezeichen, darunter leuchtet Regulus."
+  en: "The Lion is a zodiac constellation. Its head looks like a backwards question mark, with bright Regulus at the bottom."
+  es: "El León es una constelación del zodiaco. Su cabeza parece un signo de interrogación al revés, con la brillante Régulo abajo."
+UMi:
+  de: "Im Kleinen Bären steht der Polarstern. Er steht fast genau über dem Nordpol der Erde – darum scheint sich der ganze Himmel um ihn zu drehen."
+  en: "The Little Bear holds the Pole Star. It sits almost exactly above Earth's North Pole, so the whole sky seems to turn around it."
+  es: "En la Osa Menor está la Estrella Polar. Está casi justo encima del polo norte de la Tierra, por eso todo el cielo parece girar a su alrededor."
+CrB:
+  de: "Die Nördliche Krone ist ein kleiner Halbkreis aus Sternen. In der Sage ist sie die Krone der Ariadne."
+  en: "The Northern Crown is a small semicircle of stars. In myth it is the crown of Ariadne."
+  es: "La Corona Boreal es un pequeño semicírculo de estrellas. En el mito es la corona de Ariadna."
+Del:
+  de: "Der Delfin ist klein, aber leicht zu finden – eine Raute mit Schwanz, gleich neben dem Sommerdreieck."
+  en: "The Dolphin is small but easy to find – a diamond with a tail, right next to the Summer Triangle."
+  es: "El Delfín es pequeño pero fácil de encontrar: un rombo con cola, justo al lado del Triángulo de Verano."
+Gem:
+  de: "In den Zwillingen stehen die hellen Sterne Kastor und Pollux, benannt nach Zwillingsbrüdern aus der griechischen Sage."
+  en: "Gemini holds the bright stars Castor and Pollux, named after twin brothers from Greek myth."
+  es: "En Géminis están las brillantes estrellas Cástor y Pólux, llamadas así por dos hermanos gemelos de la mitología griega."
+Tau:
+  de: "Der rote Stern Aldebaran ist das Auge des Stiers. Ganz in der Nähe liegen die Plejaden, ein Sternhaufen, den man mit bloßem Auge sieht."
+  en: "The red star Aldebaran is the eye of the Bull. Nearby lie the Pleiades, a star cluster you can see with the naked eye."
+  es: "La estrella roja Aldebarán es el ojo del Toro. Muy cerca están las Pléyades, un cúmulo de estrellas visible a simple vista."
+Boo:
+  de: "Der Bärenhüter treibt die Große Bärin über den Himmel. Sein Stern Arktur ist der hellste Stern des nördlichen Himmels."
+  en: "The Herdsman drives the Great Bear across the sky. Its star Arcturus is the brightest star of the northern sky."
+  es: "El Boyero conduce a la Osa Mayor por el cielo. Su estrella Arturo es la más brillante del cielo del norte."
+Peg:
+  de: "Das geflügelte Pferd Pegasus erkennt man am großen Herbstviereck aus vier hellen Sternen."
+  en: "The winged horse Pegasus is easy to spot by the Great Square of autumn, made of four bright stars."
+  es: "El caballo alado Pegaso se reconoce por el gran cuadrado de otoño, formado por cuatro estrellas brillantes."
+Aql:
+  de: "Der Adler trug in der Sage die Blitze des Zeus. Sein hellster Stern Altair bildet mit Wega und Deneb das Sommerdreieck."
+  en: "In myth, the Eagle carried the thunderbolts of Zeus. Its brightest star, Altair, forms the Summer Triangle with Vega and Deneb."
+  es: "En el mito, el Águila llevaba los rayos de Zeus. Su estrella más brillante, Altair, forma el Triángulo de Verano con Vega y Deneb."
+Aur:
+  de: "Im Fuhrmann leuchtet die helle Kapella. An Winterabenden steht sie bei uns fast genau über unseren Köpfen."
+  en: "The Charioteer holds bright Capella. On winter evenings in Germany it stands almost straight overhead."
+  es: "En el Cochero brilla Capella. En las noches de invierno, desde Alemania, se ve casi justo sobre nuestras cabezas."
+Cep:
+  de: "Kepheus war in der Sage ein König, der Mann der Kassiopeia. Sein Sternbild sieht aus wie ein Haus mit spitzem Dach."
+  en: "In myth, Cepheus was a king, the husband of Cassiopeia. His constellation looks like a house with a pointed roof."
+  es: "En el mito, Cefeo era un rey, esposo de Casiopea. Su constelación parece una casa con tejado puntiagudo."
+Per:
+  de: "Perseus rettete in der Sage Andromeda vor einem Meeresungeheuer. In seinem Sternbild liegt Algol, ein Stern, der regelmäßig dunkler wird."
+  en: "In myth, Perseus saved Andromeda from a sea monster. His constellation contains Algol, a star that regularly gets dimmer."
+  es: "En el mito, Perseo salvó a Andrómeda de un monstruo marino. En su constelación está Algol, una estrella que se oscurece con regularidad."
+Dra:
+  de: "Der Drache windet sich zwischen Großer und Kleiner Bärin. Vor fast 5000 Jahren war sein Stern Thuban der Polarstern."
+  en: "The Dragon winds between the Great and the Little Bear. Almost 5000 years ago, its star Thuban was the pole star."
+  es: "El Dragón serpentea entre la Osa Mayor y la Osa Menor. Hace casi 5000 años su estrella Thuban era la estrella polar."
+Her:
+  de: "Herkules war der stärkste Held der griechischen Sage. In seinem Sternbild liegt M13, ein Kugelsternhaufen aus Hunderttausenden Sternen."
+  en: "Hercules was the strongest hero of Greek myth. His constellation contains M13, a globular cluster of hundreds of thousands of stars."
+  es: "Hércules era el héroe más fuerte de la mitología griega. En su constelación está M13, un cúmulo globular de cientos de miles de estrellas."
+And:
+  de: "Andromeda war in der Sage eine Prinzessin. In ihrem Sternbild liegt die Andromedagalaxie – 2,5 Millionen Lichtjahre entfernt und trotzdem mit bloßem Auge zu sehen."
+  en: "In myth, Andromeda was a princess. Her constellation contains the Andromeda Galaxy – 2.5 million light-years away and still visible to the naked eye."
+  es: "En el mito, Andrómeda era una princesa. En su constelación está la galaxia de Andrómeda: a 2,5 millones de años luz y aun así visible a simple vista."
+Vir:
+  de: "Die Jungfrau ist das größte Sternbild des Tierkreises. Ihr hellster Stern heißt Spica, die „Ähre“."
+  en: "Virgo is the largest constellation of the zodiac. Its brightest star is Spica, the “ear of grain”."
+  es: "Virgo es la constelación más grande del zodiaco. Su estrella más brillante es Espiga."
+Cnc:
+  de: "Der Krebs ist ein lichtschwaches Tierkreissternbild. In seiner Mitte liegt der Sternhaufen Praesepe, die „Krippe“."
+  en: "Cancer is a faint zodiac constellation. In its middle lies the star cluster Praesepe, the “Beehive”."
+  es: "Cáncer es una constelación del zodiaco poco brillante. En su centro está el cúmulo Praesepe, el «Pesebre»."
+CMa:
+  de: "Im Großen Hund leuchtet Sirius, der hellste Stern am ganzen Nachthimmel."
+  en: "The Great Dog holds Sirius, the brightest star in the whole night sky."
+  es: "En el Can Mayor brilla Sirio, la estrella más brillante de todo el cielo nocturno."
