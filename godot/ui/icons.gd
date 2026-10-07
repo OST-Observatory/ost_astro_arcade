@@ -4,6 +4,7 @@ class_name Icons
 extends RefCounted
 
 const MAP := {
+	"groups": 0xf233,
 	"pause": 0xe034,
 	"auto_awesome": 0xe65f,
 	"rocket_launch": 0xeb9b,

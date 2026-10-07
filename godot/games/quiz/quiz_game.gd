@@ -35,7 +35,61 @@ func _ready() -> void:
 		add_child(start)
 		await start.start_pressed
 		start.queue_free()
+		if await _pick_mode() == "duel":
+			var duel := QuizDuel.new()
+			add_child(duel)
+			return
 	_new_round()
+
+
+## Solo round or duel for two players at the same screen.
+func _pick_mode() -> String:
+	var v := VBoxContainer.new()
+	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	v.alignment = BoxContainer.ALIGNMENT_CENTER
+	v.add_theme_constant_override("separation", 50)
+	add_child(v)
+	var t := UiTheme.label("QUIZ_MODE", UiTheme.SIZE_H2 + 10, "serif")
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	v.add_child(t)
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 60)
+	v.add_child(row)
+	var chosen := [""]
+	for m in [["solo", "person", "QUIZ_MODE_SOLO", "QUIZ_MODE_SOLO_DESC"], ["duel", "groups", "QUIZ_MODE_DUEL", "QUIZ_MODE_DUEL_DESC"]]:
+		var b := Button.new()
+		b.custom_minimum_size = Vector2(760, 520)
+		b.focus_mode = Control.FOCUS_NONE
+		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		var col := VBoxContainer.new()
+		col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		col.alignment = BoxContainer.ALIGNMENT_CENTER
+		col.add_theme_constant_override("separation", 24)
+		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(col)
+		var ic := UiTheme.icon(m[1], 180, UiTheme.ACCENT if m[0] == "solo" else UiTheme.SCIENCE)
+		ic.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		ic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_child(ic)
+		var name := UiTheme.label(m[2], UiTheme.SIZE_H2, "serif", UiTheme.TEXT)
+		name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		name.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_child(name)
+		var desc := UiTheme.label(m[3], UiTheme.SIZE_BODY - 2, "regular", UiTheme.TEXT_DIM)
+		desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		desc.custom_minimum_size = Vector2(680, 0)
+		desc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_child(desc)
+		b.pressed.connect(func():
+			Audio.play("tap")
+			chosen[0] = m[0])
+		row.add_child(b)
+	while chosen[0] == "":
+		await get_tree().process_frame
+	v.queue_free()
+	return chosen[0]
 
 
 func _new_round() -> void:

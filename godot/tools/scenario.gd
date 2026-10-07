@@ -117,6 +117,23 @@ func _ready() -> void:
 			if scenario == "comet_found":
 				await get_tree().process_frame
 				cb._success()
+		"duel", "duel_reveal", "duel_result":
+			add_child(Starfield.new())
+			var dq := QuizDuel.new()
+			dq.rng_seed = 11
+			add_child(dq)
+			if scenario != "duel":
+				await get_tree().process_frame
+				var rounds := DuelLogic.ROUND if scenario == "duel_result" else 1
+				for r in rounds:
+					var right := int(dq.logic.current().correct)
+					dq._answer(1, right)
+					dq._answer(0, (right + 1) % 4)
+					if scenario == "duel_result":
+						dq.logic.next()
+				if scenario == "duel_result":
+					dq._layer.queue_free()
+					dq._show_result()
 		"gallery":
 			_fake_gallery()
 			add_child(GallerySlide.new())

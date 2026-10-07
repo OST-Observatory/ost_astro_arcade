@@ -273,3 +273,17 @@ COMET_PAUSE,Anhalten,Pause,Pausa
 COMET_PLAY,Weiter blinken,Keep blinking,Seguir
 COMET_BACK,Zurück zur Urkunde,Back to the certificate,Volver al certificado
 COMET_CREDIT,"Aufnahmen: OST-Sternwarte, Universität Potsdam, 13.08.2015 (CC BY-NC-SA 3.0)","Images: OST observatory, University of Potsdam, 2015-08-13 (CC BY-NC-SA 3.0)","Imágenes: observatorio OST, Universidad de Potsdam, 13/08/2015 (CC BY-NC-SA 3.0)"
+QUIZ_MODE,Wie möchtest du spielen?,How do you want to play?,¿Cómo quieres jugar?
+QUIZ_MODE_SOLO,Allein,On my own,Solo
+QUIZ_MODE_SOLO_DESC,"10 Fragen, Joker und Bestenliste","10 questions, jokers and leaderboard","10 preguntas, comodines y clasificación"
+QUIZ_MODE_DUEL,Duell zu zweit,Duel for two,Duelo para dos
+QUIZ_MODE_DUEL_DESC,"Zwei Spieler, ein Bildschirm – wer ist schneller?","Two players, one screen – who is faster?","Dos jugadores, una pantalla: ¿quién es más rápido?"
+DUEL_QUESTION,Frage %d von %d,Question %d of %d,Pregunta %d de %d
+DUEL_PLAYER,Spieler %d,Player %d,Jugador %d
+DUEL_LOCKED,Antwort gegeben!,Answer locked in!,¡Respuesta dada!
+DUEL_WRONG,Leider falsch,Wrong,Incorrecto
+DUEL_NO_ANSWER,Keine Antwort,No answer,Sin respuesta
+DUEL_WINS,Spieler %d gewinnt!,Player %d wins!,¡Gana el jugador %d!
+DUEL_DRAW,Unentschieden!,It's a draw!,¡Empate!
+DUEL_SCORES,%d : %d Punkte,%d : %d points,%d : %d puntos
+DUEL_AGAIN,Revanche!,Rematch!,¡Revancha!
