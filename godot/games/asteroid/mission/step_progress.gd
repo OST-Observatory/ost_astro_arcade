@@ -2,7 +2,7 @@
 class_name StepProgress
 extends HBoxContainer
 
-const ICONS := {"plan": "timer", "align": "travel_explore", "expose": "brightness_3",
+const ICONS := {"plan": "timer", "dome": "power", "align": "travel_explore", "expose": "brightness_3",
 	"blink": "visibility", "measure": "search", "orbit": "public"}
 
 var _items := {}

@@ -27,6 +27,27 @@ func _ready() -> void:
 
 
 func _briefing() -> void:
+	# The observatory in 3D behind the briefing: camera flies up from the street while
+	# dusk turns into night.
+	var vp := SubViewportContainer.new()
+	vp.stretch = true
+	vp.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	vp.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(vp)
+	var sv := SubViewport.new()
+	sv.own_world_3d = true
+	sv.msaa_3d = Viewport.MSAA_4X
+	vp.add_child(sv)
+	var obs := ObservatoryScene.new()
+	sv.add_child(obs)
+	obs.set_night(0.3)
+	obs.fly("street", "roof", 12.0)
+	create_tween().tween_method(obs.set_night, 0.3, 0.9, 14.0)
+	var shade := ColorRect.new()
+	shade.color = Color(0, 0, 0.02, 0.55)
+	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(shade)
 	var v := VBoxContainer.new()
 	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	v.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -64,6 +85,8 @@ func _briefing() -> void:
 	v.add_child(go)
 	await go.pressed
 	v.queue_free()
+	shade.queue_free()
+	vp.queue_free()
 
 
 func _new_mission() -> MissionState:
@@ -114,6 +137,7 @@ func _run() -> void:
 func _make_step(id: String) -> MissionStep:
 	match id:
 		"plan": return PlanNightStep.new()
+		"dome": return DomeStep.new()
 		"align": return AlignStep.new()
 		"expose": return ExposeStep.new()
 		"blink": return BlinkStep.new()

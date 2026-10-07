@@ -48,19 +48,25 @@ func _ready() -> void:
 			add_child(e)
 			for ch in ["S", "T", "E", "R", "N", "SPACE", "A"]:
 				e._kb._press(ch)
-		"plan", "align", "expose", "blink", "blink_loupe", "blink_hint", "blink_wrong", "measure", "orbit", "cert", "briefing":
+		"plan", "dome", "dome_open", "align", "expose", "blink", "blink_loupe", "blink_hint", "blink_wrong", "measure", "orbit", "cert", "briefing":
 			var diff := OS.get_environment("DIFF")
 			if diff != "":
 				Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
 			var g: Control = load("res://games/asteroid/mission/asteroid_mission.tscn").instantiate()
 			g.skip_intro = scenario != "briefing"
 			g.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 7
-			var step_for := {"blink_loupe": "blink", "blink_hint": "blink", "blink_wrong": "blink", "cert": "__cert"}
+			var step_for := {"blink_loupe": "blink", "blink_hint": "blink", "blink_wrong": "blink", "cert": "__cert", "dome_open": "dome"}
 			g.start_at = step_for.get(scenario, scenario) if scenario != "briefing" else ""
 			if scenario == "briefing":
 				g.skip_intro = false
 			add_child(g)
 			await get_tree().create_timer(0.6).timeout
+			if scenario == "dome_open":
+				g._step._open()
+			if scenario == "briefing":
+				for c in g.get_children():
+					if c is GameStartScreen:
+						c.start_pressed.emit()
 			if scenario.begins_with("blink"):
 				var b: BlinkStep = g._step
 				var a: Vector2 = b.challenge.asteroid_px[1] / Vector2(AsteroidScenario.IMAGE_SIZE) * b.IMAGE_RECT.size
@@ -105,6 +111,41 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+		"obs_day", "obs_dusk", "obs_night", "obs_inside", "obs_street":
+			var vp := SubViewportContainer.new()
+			vp.stretch = true
+			vp.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			add_child(vp)
+			var sv := SubViewport.new()
+			sv.own_world_3d = true
+			sv.msaa_3d = Viewport.MSAA_4X
+			vp.add_child(sv)
+			var obs := ObservatoryScene.new()
+			sv.add_child(obs)
+			await get_tree().process_frame
+			match scenario:
+				"obs_day":
+					obs.set_night(0.1)
+					obs.set_shot("roof")
+				"obs_street":
+					obs.set_night(0.45)
+					obs.set_shot("street")
+				"obs_dusk":
+					obs.set_night(0.55)
+					obs.set_dome_azimuth(160.0)
+					obs.set_shutter(0.5)
+					obs.set_shot("dome_close")
+				"obs_night":
+					obs.set_night(1.0)
+					obs.set_shutter(1.0)
+					obs.point_to(-20.0, 20.0)
+					print("TUBE dir ", obs.tube_direction(), " az ", obs.tube_azimuth())
+					obs.set_shot("roof")
+				"obs_inside":
+					obs.set_night(1.0)
+					obs.set_shutter(1.0)
+					obs.point_to(-20.0, 20.0)
+					obs.set_shot("inside")
 		"psf":
 			# PSF test chart: stars from 3 to 15 mag in a row, through the real CCD display.
 			var stars := []

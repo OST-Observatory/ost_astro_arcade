@@ -170,3 +170,10 @@ PUZZLE_DONE,Geschafft!,Done!,¡Conseguido!
 PUZZLE_CREDIT,"Aufnahme: OST-Sternwarte, Universität Potsdam","Image: OST observatory, University of Potsdam","Imagen: observatorio OST, Universidad de Potsdam"
 PUZZLE_RESULT,%d Teile in %d:%02d min,%d pieces in %d:%02d min,%d piezas en %d:%02d min
 PUZZLE_AGAIN,Neues Bild,New picture,Nueva imagen
+STEP_DOME,Kuppel,Dome,Cúpula
+DOME_TITLE,Öffne die Sternwarte,Open the observatory,Abre el observatorio
+DOME_TASK,Es ist dunkel geworden. Öffne die Kuppel – das Teleskop fährt dann automatisch zum Asteroiden.,It has got dark. Open the dome – the telescope then moves to the asteroid automatically.,Ya es de noche. Abre la cúpula: el telescopio irá automáticamente hacia el asteroide.
+DOME_OPEN,Kuppel öffnen,Open the dome,Abrir la cúpula
+DOME_OPENING,Der Spalt öffnet sich …,The slit is opening …,La rendija se abre…
+DOME_SLEWING,"Das Teleskop fährt zum Asteroiden, die Kuppel dreht sich mit …","The telescope is moving to the asteroid, the dome turns along …",El telescopio se mueve hacia el asteroide y la cúpula gira con él…
+DOME_READY,"Bereit! Höhe %d°, Richtung %d° (Süden = 180°)","Ready! Altitude %d°, direction %d° (south = 180°)","¡Listo! Altura %d°, dirección %d° (sur = 180°)"

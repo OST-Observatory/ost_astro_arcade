@@ -2,7 +2,7 @@
 class_name MissionState
 extends RefCounted
 
-const STEPS := ["plan", "align", "expose", "blink", "measure", "orbit"]
+const STEPS := ["plan", "dome", "align", "expose", "blink", "measure", "orbit"]
 const MAX_POINTS := {"plan": 300, "align": 300, "measure": 400}
 ## JPL SBDB orbit class -> explanation string.
 const CLASS_KEYS := {
