@@ -16,6 +16,9 @@ entry.
 | `godot/assets/galaxy/images/whirlpool.jpg` | Whirlpool Galaxy M51 and NGC 5195 (heic0506a, scaled) | NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA) | CC BY 4.0 (ESA/Hubble) |
 | `godot/assets/data/constellations/sky.json` | Hipparcos stars to 6 mag, constellation stick figures, star and constellation names (via `tools/constellations/build_constellations.py`); short texts from `tools/constellations/facts.yaml` | d3-celestial © 2015 Olaf Frohn (data from ESA Hipparcos, IAU); texts: OST | BSD-3-Clause (d3-celestial); texts © OST |
 | `godot/assets/comet/67p_*.jpg`, `godot/assets/data/comet/67p.json` | Comet 67P time series 2015-08-13 (STF8300M), frames inverted and stretched by `tools/comet/build_67p.py` | OST, Universität Potsdam (polaris gallery) | CC BY-NC-SA 3.0 (derivative under the same license) |
+| `godot/assets/solar/textures/*.jpg` | Planet, Sun and Moon maps (via `tools/solar/fetch_textures.py`, manifest `textures.json`) | Solar System Scope (solarsystemscope.com), copies on Wikimedia Commons | CC BY 4.0 |
+| `godot/assets/solar/saturn_rings.png` | Saturn's ring profile drawn from the measured ring boundaries (`tools/solar/make_rings.py`) | OST (own work) | © OST |
+| `godot/assets/data/solar/bodies.json`, `small_bodies.json` | Orbital elements of dwarf planets, comets and ~11,800 small bodies; physical data | JPL Small-Body Database; NASA planetary fact sheets; texts partly from astro_mini_games | public domain (NASA/JPL); texts © OST |
 | `godot/assets/fonts/` | Inter, CMU Serif, Material Icons | rsms/inter; Computer Modern Unicode; Google | SIL OFL 1.1; SIL OFL 1.1; Apache 2.0 |
 
 ## Planned (not yet in the repo)

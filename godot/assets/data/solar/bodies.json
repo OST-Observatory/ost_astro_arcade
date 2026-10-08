@@ -1,0 +1,655 @@
+{
+ "source": "JPL Small-Body Database; NASA planetary fact sheets",
+ "bodies": [
+  {
+   "id": "sun",
+   "kind": "star",
+   "parent": "",
+   "radius_km": 696340.0,
+   "mass_kg": 1.989e+30,
+   "name": {
+    "de": "Sonne",
+    "en": "Sun",
+    "es": "Sol"
+   },
+   "type": {
+    "de": "Stern",
+    "en": "Star",
+    "es": "Estrella"
+   },
+   "text": {
+    "de": "Unser Stern. In der Sonne stecken 99,8 % der Masse des ganzen Sonnensystems.",
+    "en": "Our star. The Sun holds 99.8 % of the mass of the whole solar system.",
+    "es": "Nuestra estrella. El Sol contiene el 99,8 % de la masa de todo el sistema solar."
+   }
+  },
+  {
+   "id": "mercury",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 2439.7,
+   "mass_kg": 3.301e+23,
+   "name": {
+    "de": "Merkur",
+    "en": "Mercury",
+    "es": "Mercurio"
+   },
+   "type": {
+    "de": "Gesteinsplanet",
+    "en": "Terrestrial planet",
+    "es": "Planeta rocoso"
+   },
+   "text": {
+    "de": "Er ist der kleinste Planet und der Sonne am nächsten.",
+    "en": "The smallest planet and the closest to the Sun.",
+    "es": "El planeta más pequeño y el más cercano al Sol."
+   }
+  },
+  {
+   "id": "venus",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 6051.8,
+   "mass_kg": 4.867e+24,
+   "name": {
+    "de": "Venus",
+    "en": "Venus",
+    "es": "Venus"
+   },
+   "type": {
+    "de": "Gesteinsplanet",
+    "en": "Terrestrial planet",
+    "es": "Planeta rocoso"
+   },
+   "text": {
+    "de": "Schwesterplanet der Erde mit dichter Atmosphäre und extremem Treibhauseffekt.",
+    "en": "Earth’s sister world: a thick atmosphere and a runaway greenhouse effect.",
+    "es": "El gemelo de la Tierra: atmósfera densa y un efecto invernadero extremo."
+   }
+  },
+  {
+   "id": "earth",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 6371.0,
+   "mass_kg": 5.972e+24,
+   "name": {
+    "de": "Erde",
+    "en": "Earth",
+    "es": "Tierra"
+   },
+   "type": {
+    "de": "Gesteinsplanet",
+    "en": "Terrestrial planet",
+    "es": "Planeta rocoso"
+   },
+   "text": {
+    "de": "Unser Heimatplanet – der einzige mit flüssigem Wasser an der Oberfläche.",
+    "en": "Our home world—the only one known with liquid water on its surface.",
+    "es": "Nuestro hogar: el único conocido con agua líquida en la superficie."
+   }
+  },
+  {
+   "id": "mars",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 3389.5,
+   "mass_kg": 6.417e+23,
+   "name": {
+    "de": "Mars",
+    "en": "Mars",
+    "es": "Marte"
+   },
+   "type": {
+    "de": "Gesteinsplanet",
+    "en": "Terrestrial planet",
+    "es": "Planeta rocoso"
+   },
+   "text": {
+    "de": "Der Rote Planet – mit dem höchsten Vulkan des Sonnensystems, dem Olympus Mons.",
+    "en": "The Red Planet, home to Olympus Mons, the tallest volcano in the solar system.",
+    "es": "El planeta rojo; alberga el volcán más alto del sistema solar, el Olympus Mons."
+   }
+  },
+  {
+   "id": "jupiter",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 69911.0,
+   "mass_kg": 1.898e+27,
+   "name": {
+    "de": "Jupiter",
+    "en": "Jupiter",
+    "es": "Júpiter"
+   },
+   "type": {
+    "de": "Gasriese",
+    "en": "Gas giant",
+    "es": "Gigante gaseoso"
+   },
+   "text": {
+    "de": "Der größte Planet des Sonnensystems; der Große Rote Fleck ist ein Sturm größer als die Erde.",
+    "en": "The largest planet; the Great Red Spot is a storm larger than Earth.",
+    "es": "El planeta más grande; la Gran Mancha Roja es una tormenta mayor que la Tierra."
+   }
+  },
+  {
+   "id": "saturn",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 58232.0,
+   "mass_kg": 5.683e+26,
+   "name": {
+    "de": "Saturn",
+    "en": "Saturn",
+    "es": "Saturno"
+   },
+   "type": {
+    "de": "Gasriese",
+    "en": "Gas giant",
+    "es": "Gigante gaseoso"
+   },
+   "text": {
+    "de": "Berühmt für sein Ringsystem aus Eis und Gestein.",
+    "en": "Famous for its spectacular rings of ice and rock.",
+    "es": "Célebre por sus anillos de hielo y roca."
+   }
+  },
+  {
+   "id": "uranus",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 25362.0,
+   "mass_kg": 8.681e+25,
+   "name": {
+    "de": "Uranus",
+    "en": "Uranus",
+    "es": "Urano"
+   },
+   "type": {
+    "de": "Eisriese",
+    "en": "Ice giant",
+    "es": "Gigante de hielo"
+   },
+   "text": {
+    "de": "Ein Eisriese, der stark gekippt rotiert – vermutlich durch einen Zusammenstoß mit einem anderen Himmelskörper.",
+    "en": "An ice giant rotating on its side—likely knocked over by an ancient impact.",
+    "es": "Un gigante de hielo rotando de lado, quizá por un antiguo impacto."
+   }
+  },
+  {
+   "id": "neptune",
+   "kind": "planet",
+   "parent": "sun",
+   "radius_km": 24622.0,
+   "mass_kg": 1.024e+26,
+   "name": {
+    "de": "Neptun",
+    "en": "Neptune",
+    "es": "Neptuno"
+   },
+   "type": {
+    "de": "Eisriese",
+    "en": "Ice giant",
+    "es": "Gigante de hielo"
+   },
+   "text": {
+    "de": "Der äußerste Planet des Sonnensystems; Licht braucht von der Sonne bis hierher über vier Stunden.",
+    "en": "The outermost major planet; sunlight takes over four hours to reach it.",
+    "es": "El planeta mayor más lejano; la luz tarda más de cuatro horas en llegar desde el Sol."
+   }
+  },
+  {
+   "id": "moon",
+   "kind": "moon",
+   "parent": "earth",
+   "radius_km": 1737.4,
+   "mass_kg": 7.342e+22,
+   "name": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "type": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "text": {
+    "de": "Der einzige natürliche Begleiter der Erde. Er zeigt uns immer dieselbe Seite.",
+    "en": "Earth's only natural companion. It always shows us the same side.",
+    "es": "El único compañero natural de la Tierra. Siempre nos muestra la misma cara."
+   }
+  },
+  {
+   "id": "io",
+   "kind": "moon",
+   "parent": "jupiter",
+   "radius_km": 1821.6,
+   "mass_kg": 8.93e+22,
+   "name": {
+    "de": "Io",
+    "en": "Io",
+    "es": "Ío"
+   },
+   "type": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "text": {
+    "de": "Der Jupitermond mit den meisten aktiven Vulkanen im ganzen Sonnensystem.",
+    "en": "Jupiter's moon with the most active volcanoes in the whole solar system.",
+    "es": "La luna de Júpiter con más volcanes activos de todo el sistema solar."
+   }
+  },
+  {
+   "id": "europa",
+   "kind": "moon",
+   "parent": "jupiter",
+   "radius_km": 1560.8,
+   "mass_kg": 4.8e+22,
+   "name": {
+    "de": "Europa",
+    "en": "Europa",
+    "es": "Europa"
+   },
+   "type": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "text": {
+    "de": "Unter seiner Eiskruste liegt vermutlich ein Ozean aus flüssigem Wasser.",
+    "en": "Beneath its icy crust there is probably an ocean of liquid water.",
+    "es": "Bajo su corteza de hielo probablemente hay un océano de agua líquida."
+   }
+  },
+  {
+   "id": "ganymede",
+   "kind": "moon",
+   "parent": "jupiter",
+   "radius_km": 2634.1,
+   "mass_kg": 1.48e+23,
+   "name": {
+    "de": "Ganymed",
+    "en": "Ganymede",
+    "es": "Ganímedes"
+   },
+   "type": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "text": {
+    "de": "Der größte Mond im Sonnensystem – größer als der Planet Merkur.",
+    "en": "The largest moon in the solar system – bigger than the planet Mercury.",
+    "es": "La luna más grande del sistema solar, mayor que el planeta Mercurio."
+   }
+  },
+  {
+   "id": "callisto",
+   "kind": "moon",
+   "parent": "jupiter",
+   "radius_km": 2410.3,
+   "mass_kg": 1.08e+23,
+   "name": {
+    "de": "Kallisto",
+    "en": "Callisto",
+    "es": "Calisto"
+   },
+   "type": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "text": {
+    "de": "Einer der am dichtesten mit Kratern übersäten Himmelskörper überhaupt.",
+    "en": "One of the most heavily cratered bodies of all.",
+    "es": "Uno de los cuerpos con más cráteres de todos."
+   }
+  },
+  {
+   "id": "titan",
+   "kind": "moon",
+   "parent": "saturn",
+   "radius_km": 2574.7,
+   "mass_kg": 1.345e+23,
+   "name": {
+    "de": "Titan",
+    "en": "Titan",
+    "es": "Titán"
+   },
+   "type": {
+    "de": "Mond",
+    "en": "Moon",
+    "es": "Luna"
+   },
+   "text": {
+    "de": "Saturns größter Mond hat eine dichte Atmosphäre und Seen aus flüssigem Methan.",
+    "en": "Saturn's largest moon has a thick atmosphere and lakes of liquid methane.",
+    "es": "La mayor luna de Saturno tiene una atmósfera densa y lagos de metano líquido."
+   }
+  },
+  {
+   "id": "ceres",
+   "kind": "dwarf",
+   "parent": "sun",
+   "radius_km": 469.7,
+   "mass_kg": 9.38e+20,
+   "name": {
+    "de": "Ceres",
+    "en": "Ceres",
+    "es": "Ceres"
+   },
+   "type": {
+    "de": "Zwergplanet",
+    "en": "Dwarf planet",
+    "es": "Planeta enano"
+   },
+   "text": {
+    "de": "Ceres ist das größte Objekt im Asteroidengürtel. Sie wurde am 1. Januar 1801 von Giuseppe Piazzi an der Sternwarte Palermo entdeckt und nach der römischen Göttin des Ackerbaus benannt.",
+    "en": "Ceres is the largest object in the asteroid belt. Discovered on 1 January 1801 by Giuseppe Piazzi at the Palermo Observatory, it was named after the Roman goddess of agriculture.",
+    "es": "Ceres es el objeto más grande del cinturón de asteroides. Fue descubierto el 1 de enero de 1801 por Giuseppe Piazzi en el Observatorio de Palermo y recibe su nombre de la diosa romana de la agricultura."
+   },
+   "elements": {
+    "a": 2.77,
+    "e": 0.0797,
+    "i": 10.6,
+    "node": 80.2,
+    "w": 73.3,
+    "M": 274.0,
+    "n": 0.214,
+    "epoch": 2461200.5
+   }
+  },
+  {
+   "id": "pluto",
+   "kind": "dwarf",
+   "parent": "sun",
+   "radius_km": 1188.3,
+   "mass_kg": 1.303e+22,
+   "name": {
+    "de": "Pluto",
+    "en": "Pluto",
+    "es": "Plutón"
+   },
+   "type": {
+    "de": "Zwergplanet",
+    "en": "Dwarf planet",
+    "es": "Planeta enano"
+   },
+   "text": {
+    "de": "Pluto wurde am 18. Februar 1930 entdeckt und ist der größte und zweitmassereichste bekannte Zwergplanet im Sonnensystem. Zudem ist er das am längsten bekannte Objekt im Kuipergürtel. Aufgrund seiner stark exzentrischen Umlaufbahn befindet sich Pluto bei seinem sonnennächsten Punkt näher an der Sonne als Neptun.",
+    "en": "Discovered on 18 February 1930, Pluto is the largest and second most massive known dwarf planet in the Solar System. It is also the longest-known object in the Kuiper Belt. Due to its highly eccentric orbit, Pluto is closer to the Sun than Neptune at its closest approach.",
+    "es": "Descubierto el 18 de febrero de 1930, es el planeta enano más grande y el segundo más masivo conocido del sistema solar. También es el objeto más antiguo conocido del cinturón de Kuiper. Debido a su órbita altamente excéntrica, Plutón se encuentra más cerca del Sol que Neptuno en su punto de máxima aproximación."
+   },
+   "elements": {
+    "a": 39.6,
+    "e": 0.252,
+    "i": 17.1,
+    "node": 110.0,
+    "w": 114.0,
+    "M": 38.7,
+    "n": 0.00396,
+    "epoch": 2457588.5
+   }
+  },
+  {
+   "id": "haumea",
+   "kind": "dwarf",
+   "parent": "sun",
+   "radius_km": 780.0,
+   "mass_kg": 4e+21,
+   "name": {
+    "de": "Haumea",
+    "en": "Haumea",
+    "es": "Haumea"
+   },
+   "type": {
+    "de": "Zwergplanet",
+    "en": "Dwarf planet",
+    "es": "Planeta enano"
+   },
+   "text": {
+    "de": "Schnell rotierender, stark verformter Zwergplanet im Kuipergürtel mit einem Ring.",
+    "en": "A fast-spinning, elongated Kuiper belt dwarf planet with a ring system.",
+    "es": "Planeta enano del cinturón de Kuiper, muy achatado por su rápida rotación y con un anillo."
+   },
+   "elements": {
+    "a": 43.1,
+    "e": 0.194,
+    "i": 28.2,
+    "node": 122.0,
+    "w": 241.0,
+    "M": 223.0,
+    "n": 0.00349,
+    "epoch": 2461200.5
+   }
+  },
+  {
+   "id": "makemake",
+   "kind": "dwarf",
+   "parent": "sun",
+   "radius_km": 715.0,
+   "mass_kg": 3.1e+21,
+   "name": {
+    "de": "Makemake",
+    "en": "Makemake",
+    "es": "Makemake"
+   },
+   "type": {
+    "de": "Zwergplanet",
+    "en": "Dwarf planet",
+    "es": "Planeta enano"
+   },
+   "text": {
+    "de": "Makemake ist ein Zwergplanet im Kuipergürtel mit einer sehr dunklen, rötlichen Oberfläche. Er wurde am 31. März 2005 entdeckt und ist nach Makemake, der Schöpfergottheit in der Mythologie der Osterinsel, benannt.",
+    "en": "Makemake is a Kuiper belt dwarf planet with a very dark, reddish surface. It was discovered on 31 March 2005 and is named after Makemake, the goddess of creation in the mythology of the Easter Islands.",
+    "es": "Makemake es un planeta enano del cinturón de Kuiper con una superficie muy oscura y rojiza. Fue descubierto el 31 de marzo de 2005 y recibe su nombre de Makemake, la diosa de la creación en la mitología de la isla de Pascua."
+   },
+   "elements": {
+    "a": 45.6,
+    "e": 0.159,
+    "i": 29.0,
+    "node": 79.3,
+    "w": 297.0,
+    "M": 170.0,
+    "n": 0.0032,
+    "epoch": 2461200.5
+   }
+  },
+  {
+   "id": "eris",
+   "kind": "dwarf",
+   "parent": "sun",
+   "radius_km": 1163.0,
+   "mass_kg": 1.66e+22,
+   "name": {
+    "de": "Eris",
+    "en": "Eris",
+    "es": "Eris"
+   },
+   "type": {
+    "de": "Zwergplanet",
+    "en": "Dwarf planet",
+    "es": "Planeta enano"
+   },
+   "text": {
+    "de": "Eris ist der massereichste und nach Pluto der zweitgrößte bekannte Zwergplanet unseres Sonnensystems. Er ist nach der griechischen Göttin der Zwietracht und des Streits benannt.",
+    "en": "Eris is the largest known dwarf planet in our solar system after Pluto. It is named after the Greek goddess of discord and strife.",
+    "es": "Eris es el planeta enano más grande conocido de nuestro sistema solar después de Plutón. Recibe su nombre de la diosa griega de la discordia y la contienda."
+   },
+   "elements": {
+    "a": 67.9,
+    "e": 0.438,
+    "i": 43.9,
+    "node": 36.0,
+    "w": 151.0,
+    "M": 212.0,
+    "n": 0.00176,
+    "epoch": 2461200.5
+   }
+  },
+  {
+   "id": "sedna",
+   "kind": "dwarf",
+   "parent": "sun",
+   "radius_km": 500.0,
+   "mass_kg": null,
+   "name": {
+    "de": "Sedna",
+    "en": "Sedna",
+    "es": "Sedna"
+   },
+   "type": {
+    "de": "Transneptunisches Objekt",
+    "en": "Trans-Neptunian object",
+    "es": "Objeto transneptuniano"
+   },
+   "text": {
+    "de": "Sedna ist ein großes transneptunisches Objekt (TNO), das sich jenseits des Kuipergürtels befindet. Aufgrund seiner Größe und Masse zählt es höchstwahrscheinlich zu den Zwergplaneten. Es wurde am 14. November 2003 entdeckt.",
+    "en": "Sedna is a large trans-Neptunian object (TNO) located beyond the Kuiper Belt. Due to its size and mass, it is likely to be classified as a dwarf planet. It was discovered on 14 November 2003.",
+    "es": "Sedna es un gran objeto transneptuniano (TNO) situado más allá del cinturón de Kuiper. Debido a su tamaño y masa, es probable que se clasifique como planeta enano. Fue descubierto el 14 de noviembre de 2003."
+   },
+   "elements": {
+    "a": 544.0,
+    "e": 0.86,
+    "i": 11.9,
+    "node": 145.0,
+    "w": 311.0,
+    "M": 359.0,
+    "n": 7.77e-05,
+    "epoch": 2461200.5
+   }
+  },
+  {
+   "id": "halley",
+   "kind": "comet",
+   "parent": "sun",
+   "radius_km": 5.5,
+   "mass_kg": 220000000000000.0,
+   "name": {
+    "de": "Halleyscher Komet",
+    "en": "Halley's Comet",
+    "es": "cometa Halley"
+   },
+   "type": {
+    "de": "Komet",
+    "en": "Comet",
+    "es": "Cometa"
+   },
+   "text": {
+    "de": "Der berühmteste Komet. Er kehrt etwa alle 76 Jahre zurück – das nächste Mal 2061.",
+    "en": "The most famous comet. It returns about every 76 years – next time in 2061.",
+    "es": "El cometa más famoso. Vuelve aproximadamente cada 76 años; la próxima vez, en 2061."
+   },
+   "elements": {
+    "a": 17.9,
+    "e": 0.968,
+    "i": 162.0,
+    "node": 59.1,
+    "w": 112.0,
+    "M": 274.0,
+    "n": 0.013,
+    "epoch": 2439875.5
+   }
+  },
+  {
+   "id": "67p",
+   "kind": "comet",
+   "parent": "sun",
+   "radius_km": 1.7,
+   "mass_kg": 10000000000000.0,
+   "name": {
+    "de": "67P/Tschurjumow-Gerassimenko",
+    "en": "67P/Churyumov–Gerasimenko",
+    "es": "67P/Churiumov-Guerasimenko"
+   },
+   "type": {
+    "de": "Komet",
+    "en": "Comet",
+    "es": "Cometa"
+   },
+   "text": {
+    "de": "Die Raumsonde Rosetta hat diesen Kometen umkreist, 2014 landete Philae auf ihm. Die OST hat ihn 2015 fotografiert.",
+    "en": "The spacecraft Rosetta orbited this comet, and Philae landed on it in 2014. The OST photographed it in 2015.",
+    "es": "La sonda Rosetta orbitó este cometa y Philae aterrizó en él en 2014. El OST lo fotografió en 2015."
+   },
+   "elements": {
+    "a": 3.46,
+    "e": 0.641,
+    "i": 7.04,
+    "node": 50.1,
+    "w": 12.8,
+    "M": 8.86,
+    "n": 0.153,
+    "epoch": 2457305.5
+   }
+  },
+  {
+   "id": "halebopp",
+   "kind": "comet",
+   "parent": "sun",
+   "radius_km": 30.0,
+   "mass_kg": null,
+   "name": {
+    "de": "Hale-Bopp",
+    "en": "Hale-Bopp",
+    "es": "Hale-Bopp"
+   },
+   "type": {
+    "de": "Komet",
+    "en": "Comet",
+    "es": "Cometa"
+   },
+   "text": {
+    "de": "Einer der hellsten Kometen des 20. Jahrhunderts – 1997 monatelang mit bloßem Auge zu sehen.",
+    "en": "One of the brightest comets of the 20th century – visible to the naked eye for months in 1997.",
+    "es": "Uno de los cometas más brillantes del siglo XX, visible a simple vista durante meses en 1997."
+   },
+   "elements": {
+    "a": 177.0,
+    "e": 0.995,
+    "i": 89.3,
+    "node": 283.0,
+    "w": 130.0,
+    "M": 3.88,
+    "n": 0.000417,
+    "epoch": 2459837.5
+   }
+  },
+  {
+   "id": "encke",
+   "kind": "comet",
+   "parent": "sun",
+   "radius_km": 2.4,
+   "mass_kg": null,
+   "name": {
+    "de": "Enckescher Komet",
+    "en": "Comet Encke",
+    "es": "cometa Encke"
+   },
+   "type": {
+    "de": "Komet",
+    "en": "Comet",
+    "es": "Cometa"
+   },
+   "text": {
+    "de": "Hat eine der kürzesten Umlaufzeiten aller Kometen: nur etwa 3,3 Jahre.",
+    "en": "Has one of the shortest orbital periods of all comets: only about 3.3 years.",
+    "es": "Tiene uno de los periodos orbitales más cortos de todos los cometas: solo unos 3,3 años."
+   },
+   "elements": {
+    "a": 2.22,
+    "e": 0.847,
+    "i": 11.3,
+    "node": 334.0,
+    "w": 187.0,
+    "M": 332.0,
+    "n": 0.298,
+    "epoch": 2460147.5
+   }
+  }
+ ]
+}

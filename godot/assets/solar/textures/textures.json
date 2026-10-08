@@ -1,0 +1,47 @@
+{
+ "sun": {
+  "file": "res://assets/solar/textures/sun.jpg",
+  "source": "Solarsystemscope_texture_2k_sun.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "mercury": {
+  "file": "res://assets/solar/textures/mercury.jpg",
+  "source": "Solarsystemscope_texture_2k_mercury.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "venus": {
+  "file": "res://assets/solar/textures/venus.jpg",
+  "source": "Solarsystemscope_texture_2k_venus_atmosphere.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "earth": {
+  "file": "res://assets/solar/textures/earth.jpg",
+  "source": "Solarsystemscope_texture_2k_earth_daymap.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "moon": {
+  "file": "res://assets/solar/textures/moon.jpg",
+  "source": "Solarsystemscope_texture_2k_moon.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "mars": {
+  "file": "res://assets/solar/textures/mars.jpg",
+  "source": "Solarsystemscope_texture_2k_mars.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "jupiter": {
+  "file": "res://assets/solar/textures/jupiter.jpg",
+  "source": "Solarsystemscope_texture_2k_jupiter.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "saturn": {
+  "file": "res://assets/solar/textures/saturn.jpg",
+  "source": "Solarsystemscope_texture_2k_saturn.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
+ "neptune": {
+  "file": "res://assets/solar/textures/neptune.jpg",
+  "source": "Solarsystemscope_texture_2k_neptune.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ }
+}
