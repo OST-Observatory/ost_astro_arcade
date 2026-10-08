@@ -27,6 +27,9 @@ func _ready() -> void:
 			var a: AttractMode = _hub().get_node("AttractMode")
 			a.start()
 			a._show_slide(a._slides.size() - 1)
+		"leaderboards":
+			_fake_scores()
+			_hub().add_child(LeaderboardOverlay.new())
 		"info":
 			_hub().add_child(InfoPanel.new())
 		"admin":

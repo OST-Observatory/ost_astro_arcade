@@ -288,3 +288,9 @@ DUEL_DRAW,Unentschieden!,It's a draw!,¡Empate!
 DUEL_SCORES,%d : %d Punkte,%d : %d points,%d : %d puntos
 DUEL_AGAIN,Revanche!,Rematch!,¡Revancha!
 CHANGE_DIFFICULTY,Schwierigkeit ändern,Change difficulty,Cambiar dificultad
+HUB_LEADERBOARD,Bestenliste,Leaderboard,Clasificación
+LB_TITLE,Bestenlisten,Leaderboards,Clasificaciones
+LB_TODAY,Heute,Today,Hoy
+LB_ALL,Insgesamt,All time,Total
+LB_TODAY_TITLE,Bestenliste heute,Today's leaderboard,Clasificación de hoy
+LB_EMPTY,Noch keine Einträge – sei die oder der Erste!,No entries yet – be the first!,Todavía no hay entradas: ¡sé el primero!

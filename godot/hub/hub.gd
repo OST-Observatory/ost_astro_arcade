@@ -76,6 +76,12 @@ func _build_footer() -> void:
 	info.offset_top = -140
 	info.pressed.connect(func(): add_child(InfoPanel.new()))
 	add_child(info)
+	var best := BigButton.make("HUB_LEADERBOARD", "trophy", false, 0)
+	best.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
+	best.offset_left = 64 + 240
+	best.offset_top = -140
+	best.pressed.connect(func(): add_child(LeaderboardOverlay.new()))
+	add_child(best)
 
 	var hint := UiTheme.label("HUB_HINT", UiTheme.SIZE_BODY, "regular", UiTheme.TEXT_DIM)
 	hint.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)

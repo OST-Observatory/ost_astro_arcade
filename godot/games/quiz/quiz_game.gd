@@ -327,20 +327,34 @@ func _show_result() -> void:
 	var v := VBoxContainer.new()
 	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	v.alignment = BoxContainer.ALIGNMENT_CENTER
-	v.add_theme_constant_override("separation", 30)
+	v.add_theme_constant_override("separation", 50)
 	add_child(v)
+	var cols := HBoxContainer.new()
+	cols.alignment = BoxContainer.ALIGNMENT_CENTER
+	cols.add_theme_constant_override("separation", 120)
+	v.add_child(cols)
+	var res := VBoxContainer.new()
+	res.alignment = BoxContainer.ALIGNMENT_CENTER
+	res.add_theme_constant_override("separation", 26)
+	cols.add_child(res)
 	var star_row := HBoxContainer.new()
 	star_row.alignment = BoxContainer.ALIGNMENT_CENTER
 	for i in 3:
 		star_row.add_child(UiTheme.icon("star" if i < stars else "star_border", 150, UiTheme.ACCENT))
-	v.add_child(star_row)
-	for line in [[tr("QUIZ_CORRECT_OF") % [logic.correct, QuizLogic.ROUND], UiTheme.SIZE_TITLE, "serif", UiTheme.TEXT],
+	res.add_child(star_row)
+	for line in [[tr("QUIZ_CORRECT_OF") % [logic.correct, QuizLogic.ROUND], UiTheme.SIZE_TITLE - 16, "serif", UiTheme.TEXT],
 			[tr("AST_SCORE") % logic.points, UiTheme.SIZE_H2 + 10, "bold", UiTheme.ACCENT_HI],
 			[tr("QUIZ_BEST_STREAK") % logic.best_streak, UiTheme.SIZE_BODY + 4, "regular", UiTheme.TEXT_DIM],
 			[tr("AST_RANK") % [Session.player_name, int(rank.get("rank_today", 0))], UiTheme.SIZE_BODY + 4, "medium", UiTheme.TEXT_DIM]]:
 		var l := _plain(line[0], line[1], line[2], line[3])
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		v.add_child(l)
+		res.add_child(l)
+	# Today's leaderboard next to the result, the visitor's own entry highlighted.
+	var lb := VBoxContainer.new()
+	lb.add_theme_constant_override("separation", 16)
+	lb.add_child(UiTheme.label("LB_TODAY_TITLE", UiTheme.SIZE_H2 - 6, "serif", UiTheme.ACCENT_HI))
+	lb.add_child(LeaderboardTable.make("quiz", true, 8, str(rank.entry.id), 900.0))
+	cols.add_child(lb)
 	v.add_child(ResultActions.make("QUIZ_AGAIN", "refresh", _new_round, 1700.0, false))
 	Audio.play("success")
 
