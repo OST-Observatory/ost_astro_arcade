@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-time kiosk setup for the OST Astro Arcade on Ubuntu Server 24.04 LTS (run as root).
+# One-time kiosk setup for the OST Space Lab on Ubuntu Server 24.04 LTS (run as root).
 #   sudo bash kiosk/install.sh [--lan 192.168.0.0/16]
 # Idempotent: safe to run again after changes. Read kiosk/README.md first (BIOS settings,
 # GRUB password, optional read-only root). Make sure your SSH key works BEFORE running it:

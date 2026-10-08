@@ -85,22 +85,22 @@ func set_pin(pin: String) -> void:
 	set_value("kiosk/admin_pin_sha256", pin.sha256_text())
 
 
-## 3D quality preset: [render scale (FSR below 1), MSAA, galaxy stars, SSAO].
+## 3D quality presets: render scale (FSR below 1), MSAA, galaxy stars, SSAO, small bodies
+## (asteroids etc.) drawn in the solar system.
 const QUALITY_3D := {
-	"high": [1.0, Viewport.MSAA_4X, 200000, true],
-	"medium": [0.77, Viewport.MSAA_2X, 150000, true],
-	"low": [0.59, Viewport.MSAA_DISABLED, 100000, false],
+	"high": {"scale": 1.0, "msaa": Viewport.MSAA_4X, "stars": 200000, "ssao": true, "small_bodies": 15000},
+	"medium": {"scale": 0.77, "msaa": Viewport.MSAA_2X, "stars": 150000, "ssao": true, "small_bodies": 10000},
+	"low": {"scale": 0.59, "msaa": Viewport.MSAA_DISABLED, "stars": 100000, "ssao": false, "small_bodies": 5000},
 }
 
 
-func quality_3d() -> Array:
+func quality_3d() -> Dictionary:
 	return QUALITY_3D.get(str(get_value("display/quality_3d")), QUALITY_3D.high)
 
 
 ## Applies the 3D quality preset to a viewport that renders a 3D scene.
 func apply_3d(vp: Viewport) -> void:
 	var q := quality_3d()
-	vp.msaa_3d = q[1]
-	vp.scaling_3d_scale = q[0]
-	vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if q[0] < 1.0 else Viewport.SCALING_3D_MODE_BILINEAR
-
+	vp.msaa_3d = q.msaa
+	vp.scaling_3d_scale = q.scale
+	vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if q.scale < 1.0 else Viewport.SCALING_3D_MODE_BILINEAR

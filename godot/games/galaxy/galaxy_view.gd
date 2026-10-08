@@ -60,7 +60,7 @@ func _ready() -> void:
 	_quad.material = draw_mat
 
 	_particles = GPUParticles3D.new()
-	_particles.amount = int(Settings.quality_3d()[2])
+	_particles.amount = int(Settings.quality_3d().stars)
 	_particles.lifetime = 100000.0
 	_particles.explosiveness = 1.0
 	_particles.one_shot = true

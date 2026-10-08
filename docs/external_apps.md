@@ -1,4 +1,4 @@
-# External apps in the OST Astro Arcade kiosk
+# External apps in the OST Space Lab kiosk
 
 The kiosk runs one Godot program, the **hub**, inside the Wayland kiosk compositor
 [cage](https://github.com/cage-kiosk/cage). Apps maintained in their own repositories

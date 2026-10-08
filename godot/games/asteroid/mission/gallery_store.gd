@@ -28,6 +28,10 @@ func add(player: String, sc: AsteroidScenario, points: int, stars: int) -> void:
 	})
 	if entries.size() > MAX_ENTRIES:
 		entries = entries.slice(entries.size() - MAX_ENTRIES)
-	var f := FileAccess.open(path, FileAccess.WRITE)
+	# Write to a temp file and rename, so a power cut never leaves a broken gallery.
+	var tmp := path + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
 	if f:
 		f.store_string(JSON.stringify(entries))
+		f.close()
+		DirAccess.rename_absolute(tmp, path)

@@ -1,5 +1,5 @@
 [Unit]
-Description=Check the OST Astro Arcade heartbeat every 30 s
+Description=Check the OST Space Lab heartbeat every 30 s
 
 [Timer]
 OnBootSec=2min

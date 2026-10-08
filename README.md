@@ -1,4 +1,4 @@
-# OST Astro Arcade
+# OST Space Lab
 
 Touch kiosk with astronomy games of the **OST** student observatory ("Overwhelmingly Small
 Telescope"), Universität Potsdam, Campus Golm. It replaces `astro_mini_games` (Kivy) and

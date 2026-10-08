@@ -1,6 +1,6 @@
 # Kiosk setup (NiPoGi E3B, Ubuntu Server 24.04 LTS)
 
-The kiosk boots straight into the OST Astro Arcade: `systemd` → `cage` (a Wayland compositor
+The kiosk boots straight into the OST Space Lab: `systemd` → `cage` (a Wayland compositor
 that shows exactly one fullscreen app) → Godot. There is no desktop and no login prompt, and
 switching to another virtual terminal is disabled. If the app crashes, systemd restarts it.
 If it hangs, the watchdog restarts it (heartbeat older than 60 s).

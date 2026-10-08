@@ -1,5 +1,5 @@
 [Unit]
-Description=Restart the OST Astro Arcade if it stopped writing its heartbeat
+Description=Restart the OST Space Lab if it stopped writing its heartbeat
 
 [Service]
 Type=oneshot
