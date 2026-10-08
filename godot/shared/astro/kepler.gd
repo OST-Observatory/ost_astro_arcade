@@ -24,7 +24,13 @@ const PLANETS := {
 		-0.00011607, -0.00013253, -0.00183714, 3034.74612775, 0.21252668, 0.20469106],
 	"saturn": [9.53667594, 0.05386179, 2.48599187, 49.95424423, 92.59887831, 113.66242448,
 		-0.00125060, -0.00050991, 0.00193609, 1222.49362201, -0.41897216, -0.28867794],
+	"uranus": [19.18916464, 0.04725744, 0.77263783, 313.23810451, 170.95427630, 74.01692503,
+		-0.00196176, -0.00004397, -0.00242939, 428.48202785, 0.40805281, 0.04240589],
+	"neptune": [30.06992276, 0.00859048, 1.77004347, -55.12002969, 44.96476227, 131.78422574,
+		0.00026291, 0.00005105, 0.00035372, 218.45945325, -0.32241464, -0.00508664],
 }
+## Gravitational parameter of the Sun in AU^3 / day^2.
+const GM_SUN := 2.959122082855911e-4
 
 
 static func solve_eccentric_anomaly(m_rad: float, e: float) -> float:
@@ -74,6 +80,87 @@ static func planet_elements(planet: String, jd: float) -> Dictionary:
 static func planet_position(planet: String, jd: float) -> Vector3:
 	var el := planet_elements(planet, jd)
 	return position(el.a, el.e, el.i, el.node, el.w, el.M)
+
+
+## Heliocentric velocity (AU/day) by central differences.
+static func planet_velocity(planet: String, jd: float) -> Vector3:
+	var h := 0.05
+	return (planet_position(planet, jd + h) - planet_position(planet, jd - h)) / (2.0 * h)
+
+
+## Orbital elements from a heliocentric state (AU, AU/day) at a Julian date:
+## {a, e, i, node, w, M, n (deg/day), epoch}; a < 0 and e > 1 for open (hyperbolic) orbits.
+## Computed with 64-bit scalars (Vector3 is only 32-bit, too coarse for nearly round orbits).
+static func elements_from_state(r: Vector3, v: Vector3, jd: float, mu := GM_SUN) -> Dictionary:
+	var rx := float(r.x)
+	var ry := float(r.y)
+	var rz := float(r.z)
+	var vx := float(v.x)
+	var vy := float(v.y)
+	var vz := float(v.z)
+	var rr := sqrt(rx * rx + ry * ry + rz * rz)
+	var v2 := vx * vx + vy * vy + vz * vz
+	var rv := rx * vx + ry * vy + rz * vz
+	var hx := ry * vz - rz * vy
+	var hy := rz * vx - rx * vz
+	var hz := rx * vy - ry * vx
+	var h := sqrt(hx * hx + hy * hy + hz * hz)
+	var nx := -hy
+	var ny := hx
+	var nn := sqrt(nx * nx + ny * ny)
+	var ex := ((v2 - mu / rr) * rx - rv * vx) / mu
+	var ey := ((v2 - mu / rr) * ry - rv * vy) / mu
+	var ez := ((v2 - mu / rr) * rz - rv * vz) / mu
+	var e := sqrt(ex * ex + ey * ey + ez * ez)
+	var a := -mu / (2.0 * (v2 / 2.0 - mu / rr))
+	var inc := acos(clampf(hz / h, -1.0, 1.0))
+	var node := atan2(ny, nx) if nn > 1e-12 else 0.0
+	# Argument of latitude u (angle node -> position) and of perihelion w, via atan2 (robust
+	# for nearly circular orbits).
+	var cn := cos(node)
+	var sn := sin(node)
+	var u := atan2((-sn * rx + cn * ry) * cos(inc) + rz * sin(inc), cn * rx + sn * ry)
+	var w := atan2((-sn * ex + cn * ey) * cos(inc) + ez * sin(inc), cn * ex + sn * ey) if e > 1e-10 else 0.0
+	var nu := u - w
+	var m: float
+	if e < 1.0:
+		var ea := atan2(sqrt(1.0 - e * e) * sin(nu), e + cos(nu))
+		m = ea - e * sin(ea)
+	else:
+		var hh := 2.0 * atanh(sqrt((e - 1.0) / (e + 1.0)) * tan(nu / 2.0))
+		m = e * sinh(hh) - hh
+	var n := sqrt(mu / pow(absf(a), 3.0))
+	return {"a": a, "e": e, "i": rad_to_deg(inc), "node": rad_to_deg(node), "w": rad_to_deg(fposmod(w, TAU)),
+		"M": rad_to_deg(m), "n": rad_to_deg(n), "epoch": jd}
+
+
+## Position for elements from elements_from_state() at a Julian date, for closed and open orbits.
+static func state_position(el: Dictionary, jd: float) -> Vector3:
+	var m := deg_to_rad(float(el.M) + float(el.n) * (jd - float(el.epoch)))
+	var e := float(el.e)
+	var a := float(el.a)
+	var xp: float
+	var yp: float
+	if e < 1.0:
+		var ea := solve_eccentric_anomaly(fposmod(m, TAU), e)
+		xp = a * (cos(ea) - e)
+		yp = a * sqrt(1.0 - e * e) * sin(ea)
+	else:
+		var hh := solve_hyperbolic_anomaly(m, e)
+		xp = -a * (e - cosh(hh))
+		yp = -a * sqrt(e * e - 1.0) * sinh(hh)
+	return _rotate(xp, yp, deg_to_rad(float(el.i)), deg_to_rad(float(el.node)), deg_to_rad(float(el.w)))
+
+
+## Solves M = e sinh H - H for open orbits.
+static func solve_hyperbolic_anomaly(m: float, e: float) -> float:
+	var hh := asinh(m / e) if absf(m) < 1e9 else signf(m) * 20.0
+	for i in 60:
+		var d := (e * sinh(hh) - hh - m) / (e * cosh(hh) - 1.0)
+		hh -= d
+		if absf(d) < 1e-12:
+			break
+	return hh
 
 
 ## Asteroid elements as stored by the pipeline (JPL Horizons, ecliptic J2000):
