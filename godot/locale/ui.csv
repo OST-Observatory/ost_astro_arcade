@@ -39,7 +39,7 @@ GAME_QUIZ_DESC,Teste dein Wissen über das Weltall,Test your knowledge of the un
 GAME_PUZZLE,Astro-Puzzle,Astro Puzzle,Astro rompecabezas
 GAME_PUZZLE_DESC,Setze echte Himmelsfotos zusammen,Piece together real sky images,Monta imágenes reales del cielo
 GAME_GALAXY,Galaxien-Baumeister,Galaxy Builder,Constructor de galaxias
-GAME_GALAXY_DESC,Baue echte Galaxien-Zusammenstöße nach,Rebuild real galaxy collisions,Reconstruye choques reales de galaxias
+GAME_GALAXY_DESC,Baue eine Galaxie – und lass sie zusammenstoßen,Build a galaxy – then let it collide,Construye una galaxia y hazla chocar
 GAME_SOLAR,Sonnensystem,Solar System,Sistema solar
 GAME_SOLAR_DESC,Fliege mit einer Sonde zum Mars,Fly a probe to Mars,Vuela con una sonda a Marte
 GAME_CONSTELLATIONS,Sternbilder,Constellations,Constelaciones
@@ -177,54 +177,6 @@ DOME_OPEN,Kuppel öffnen,Open the dome,Abrir la cúpula
 DOME_OPENING,Der Spalt öffnet sich …,The slit is opening …,La rendija se abre…
 DOME_SLEWING,"Das Teleskop fährt zum Asteroiden, die Kuppel dreht sich mit …","The telescope is moving to the asteroid, the dome turns along …",El telescopio se mueve hacia el asteroide y la cúpula gira con él…
 DOME_READY,"Bereit! Höhe %d°, Richtung %d° (Süden = 180°)","Ready! Altitude %d°, direction %d° (south = 180°)","¡Listo! Altura %d°, dirección %d° (sur = 180°)"
-GAL_PICK,Welche Galaxien-Kollision baust du nach?,Which galaxy collision will you rebuild?,¿Qué choque de galaxias vas a reconstruir?
-GAL_PICK_SUB,"Echte Fotos – finde heraus, wie sie entstanden sind.",Real photos – find out how they formed.,Fotos reales: descubre cómo se formaron.
-GAL_T_ANTENNAE,Antennen-Galaxien,Antennae Galaxies,Galaxias Antenas
-GAL_T_MICE,Mäuse-Galaxien,Mice Galaxies,Galaxias Ratones
-GAL_T_WHIRLPOOL,Whirlpool-Galaxie,Whirlpool Galaxy,Galaxia Remolino
-GAL_D_ANTENNAE,"Die Antennen-Galaxien NGC 4038 und 4039 im Sternbild Rabe sind rund 45 bis 65 Millionen Lichtjahre entfernt und mitten im Verschmelzen. Die langen „Fühler“ sind Sterne, die bei ihrer ersten Begegnung vor einigen hundert Millionen Jahren herausgeschleudert wurden. Dieses Foto hat die OST-Sternwarte aufgenommen.",The Antennae Galaxies NGC 4038 and 4039 in the constellation Corvus are about 45 to 65 million light-years away and in the middle of merging. The long “antennae” are stars flung out during their first encounter a few hundred million years ago. This photo was taken at the OST observatory.,"Las galaxias Antenas NGC 4038 y 4039, en la constelación del Cuervo, están a unos 45 a 65 millones de años luz y en plena fusión. Las largas «antenas» son estrellas lanzadas en su primer encuentro hace unos cientos de millones de años. Esta foto se tomó en el observatorio OST."
-GAL_D_MICE,Die Mäuse-Galaxien NGC 4676 im Sternbild Haar der Berenike sind etwa 300 Millionen Lichtjahre entfernt. Ihre langen Gezeitenschweife aus Sternen und Gas erinnern an Mäuseschwänze. Irgendwann werden die beiden zu einer einzigen Galaxie verschmelzen.,The Mice Galaxies NGC 4676 in the constellation Coma Berenices are about 300 million light-years away. Their long tidal tails of stars and gas look like mouse tails. One day the two will merge into a single galaxy.,"Las galaxias Ratones NGC 4676, en la constelación Cabellera de Berenice, están a unos 300 millones de años luz. Sus largas colas de marea de estrellas y gas parecen colas de ratón. Algún día las dos se fusionarán en una sola galaxia."
-GAL_D_WHIRLPOOL,"Die Whirlpool-Galaxie M51 im Sternbild Jagdhunde ist rund 25 bis 30 Millionen Lichtjahre entfernt. Ihre prächtigen Spiralarme wurden vermutlich durch die kleine Begleitgalaxie NGC 5195 verstärkt, die an ihr vorbeigezogen ist und jetzt am Ende eines Arms steht.","The Whirlpool Galaxy M51 in the constellation Canes Venatici is about 25 to 30 million light-years away. Its splendid spiral arms were probably strengthened by the small companion galaxy NGC 5195, which passed by and now sits at the end of one arm.","La galaxia Remolino M51, en la constelación de los Perros de Caza, está a unos 25 a 30 millones de años luz. Sus espléndidos brazos espirales probablemente se reforzaron con el paso de la pequeña galaxia compañera NGC 5195, que ahora está al final de un brazo."
-GAL_CREDIT,Foto: %s,Photo: %s,Foto: %s
-GAL_TASK,"Stell die Regler so ein, dass deine Simulation aussieht wie das echte Foto. Dann starte den Zusammenstoß!",Set the knobs so your simulation looks like the real photo. Then start the collision!,Ajusta los controles para que tu simulación se parezca a la foto real. ¡Después inicia el choque!
-GAL_SIM,DEINE SIMULATION,YOUR SIMULATION,TU SIMULACIÓN
-GAL_TRUE_SIM,SO KÖNNTE ES PASSIERT SEIN,HOW IT MAY HAVE HAPPENED,ASÍ PUDO HABER OCURRIDO
-GAL_REAL,DAS ECHTE FOTO,THE REAL PHOTO,LA FOTO REAL
-GAL_K_T_AFTER,Zeit seit der Begegnung,Time since the encounter,Tiempo desde el encuentro
-GAL_K_M2,Masse der zweiten Galaxie,Mass of the second galaxy,Masa de la segunda galaxia
-GAL_K_Q,Abstand beim Vorbeiflug,Distance when passing,Distancia al pasar
-GAL_K_INCL2,Neigung der zweiten Galaxie,Tilt of the second galaxy,Inclinación de la segunda galaxia
-GAL_K_SPIN1,Drehsinn der großen Galaxie,Spin of the big galaxy,Giro de la galaxia grande
-GAL_SPIN_WITH,mit der Bahn,with the orbit,con la órbita
-GAL_SPIN_AGAINST,gegen die Bahn,against the orbit,contra la órbita
-GAL_V_MYR,%d Mio. Jahre,%d million years,%d millones de años
-GAL_V_MASS,%d %% der ersten,%d %% of the first,%d %% de la primera
-GAL_V_LY,%d.000 Lichtjahre,"%d,000 light-years",%d.000 años luz
-GAL_RUN,Zusammenstoß starten,Start the collision,Iniciar el choque
-GAL_DONE,Fertig,Done,Listo
-GAL_RUNNING,Die Galaxien ziehen sich gegenseitig an …,The galaxies pull on each other …,Las galaxias se atraen mutuamente …
-GAL_BEFORE,Vor der Begegnung,Before the encounter,Antes del encuentro
-GAL_T_TO_ENCOUNTER,noch %d Mio. Jahre bis zur Begegnung,%d million years until the encounter,faltan %d millones de años para el encuentro
-GAL_T_SINCE,%d Mio. Jahre nach der Begegnung,%d million years after the encounter,%d millones de años después del encuentro
-GAL_T_NOW,Heute – so sehen wir sie,Today – this is how we see them,Hoy: así las vemos
-GAL_ATTEMPT,Versuch %d von %d,Attempt %d of %d,Intento %d de %d
-GAL_BEST,Bestwert %d %%,Best %d %%,Mejor %d %%
-GAL_SIMILARITY,Ähnlichkeit: %d %%,Similarity: %d %%,Parecido: %d %%
-GAL_HINT_CLOSE,"Super, schon ganz nah dran!","Great, very close!","¡Genial, ya casi!"
-GAL_TRY_AGAIN,Ändere die Regler und probier es noch einmal.,Change the knobs and try again.,Cambia los controles y vuelve a intentarlo.
-GAL_HINT_SPIN,Tipp: Probier den anderen Drehsinn.,Tip: try the other spin.,Pista: prueba el otro sentido de giro.
-GAL_HINT_T_AFTER_UP,Tipp: Lass mehr Zeit vergehen.,Tip: let more time pass.,Pista: deja pasar más tiempo.
-GAL_HINT_T_AFTER_DOWN,Tipp: Weniger Zeit – schau früher hin.,Tip: less time – look earlier.,"Pista: menos tiempo, mira antes."
-GAL_HINT_M2_UP,Tipp: Die zweite Galaxie ist schwerer.,Tip: the second galaxy is heavier.,Pista: la segunda galaxia es más pesada.
-GAL_HINT_M2_DOWN,Tipp: Die zweite Galaxie ist leichter.,Tip: the second galaxy is lighter.,Pista: la segunda galaxia es más ligera.
-GAL_HINT_Q_UP,Tipp: Lass sie weiter voneinander entfernt vorbeifliegen.,Tip: let them pass further apart.,Pista: haz que pasen más lejos.
-GAL_HINT_Q_DOWN,Tipp: Lass sie näher aneinander vorbeifliegen.,Tip: let them pass closer.,Pista: haz que pasen más cerca.
-GAL_HINT_INCL2_UP,Tipp: Größerer Neigungswinkel.,Tip: a larger tilt angle.,Pista: un ángulo de inclinación mayor.
-GAL_HINT_INCL2_DOWN,Tipp: Kleinerer Neigungswinkel.,Tip: a smaller tilt angle.,Pista: un ángulo de inclinación menor.
-GAL_RESULT_TITLE,Galaxie nachgebaut!,Galaxy rebuilt!,¡Galaxia reconstruida!
-GAL_RESULT,Bestwert: %d %% Ähnlichkeit (Versuche: %d),Best: %d %% similarity (attempts: %d),Mejor: %d %% de parecido (intentos: %d)
-GAL_ANSWER,So entsteht das Bild in unserem Modell:,This is how the picture forms in our model:,Así se forma la imagen en nuestro modelo:
-GAL_AGAIN,Andere Galaxie,Another galaxy,Otra galaxia
 CON_FIND,FINDE AM HIMMEL UND VERBINDE,FIND IN THE SKY AND CONNECT,ENCUENTRA EN EL CIELO Y UNE
 CON_HOW,"Zieh mit dem Finger von Stern zu Stern oder tippe die Sterne nacheinander an. Um woanders weiterzumachen, tippe einfach einen anderen Stern an.","Drag your finger from star to star or tap the stars one after the other. To continue somewhere else, just tap another star.","Arrastra el dedo de estrella en estrella o toca las estrellas una tras otra. Para seguir en otro sitio, toca otra estrella."
 CON_HINT,Tipp (kostet Punkte),Hint (costs points),Pista (cuesta puntos)
@@ -294,3 +246,125 @@ LB_TODAY,Heute,Today,Hoy
 LB_ALL,Insgesamt,All time,Total
 LB_TODAY_TITLE,Bestenliste heute,Today's leaderboard,Clasificación de hoy
 LB_EMPTY,Noch keine Einträge – sei die oder der Erste!,No entries yet – be the first!,Todavía no hay entradas: ¡sé el primero!
+GAL_PICK,Welche Galaxie baust du?,Which galaxy will you build?,¿Qué galaxia vas a construir?
+GAL_PICK_SUB,"Echte Galaxien mit echten Messungen – finde heraus, was sie zusammenhält.",Real galaxies with real measurements – find out what holds them together.,Galaxias reales con medidas reales: descubre qué las mantiene unidas.
+GAL_T_MILKYWAY,Milchstraße,Milky Way,Vía Láctea
+GAL_T_NGC3198,NGC 3198,NGC 3198,NGC 3198
+GAL_T_DDO154,DDO 154,DDO 154,DDO 154
+GAL_TD_MILKYWAY,Unsere Heimatgalaxie. Ihre Rotation hat der Satellit Gaia vermessen.,Our home galaxy. Its rotation was measured with the Gaia satellite.,Nuestra galaxia. El satélite Gaia midió su rotación.
+GAL_TD_NGC3198,"Eine Spiralgalaxie im Großen Bären. An ihr zeigte sich 1985 besonders deutlich, dass Galaxien Dunkle Materie brauchen.",A spiral galaxy in Ursa Major. In 1985 it showed especially clearly that galaxies need dark matter.,Una galaxia espiral en la Osa Mayor. En 1985 mostró con especial claridad que las galaxias necesitan materia oscura.
+GAL_TD_DDO154,Eine kleine Zwerggalaxie in den Jagdhunden – mit viel mehr Gas als Sternen.,A small dwarf galaxy in Canes Venatici – with far more gas than stars.,"Una pequeña galaxia enana en los Perros de Caza, con mucho más gas que estrellas."
+GAL_QUICK,Gleich zum Zusammenstoß (mit fertiger Milchstraße),Straight to the collision (finished Milky Way),Directo al choque (con la Vía Láctea terminada)
+GAL_BUILD_TITLE,Baue: %s,Build: %s,Construye: %s
+GAL_BUILD_TASK,"Die Sterne kreisen so schnell, wie man es gemessen hat. Füge Bausteine hinzu, bis die Schwerkraft sie festhält – und die orange Linie zu den Messpunkten passt.",The stars orbit as fast as measured. Add building blocks until gravity holds them – and the orange line fits the measured points.,Las estrellas giran tan rápido como se ha medido. Añade piezas hasta que la gravedad las sujete y la línea naranja encaje con los puntos medidos.
+GAL_MATCH_HEAD,Passt zur Messung,Fits the measurement,Coincide con la medida
+GAL_AXIS_V,km/s,km/s,km/s
+GAL_AXIS_R,Abstand vom Zentrum (kpc),Distance from the centre (kpc),Distancia al centro (kpc)
+GAL_DATA_SOURCE,Messdaten: %s,Data: %s,Datos: %s
+GAL_BLOCK_BH,Schwarzes Loch,Black hole,Agujero negro
+GAL_BLOCK_STARS,Sterne,Stars,Estrellas
+GAL_BLOCK_GAS,Gas & Staub,Gas & dust,Gas y polvo
+GAL_BLOCK_HALO,Dunkle Materie,Dark matter,Materia oscura
+GAL_UNLOCK,Freischalten – mit einer Frage,Unlock – answer a question,Desbloquear con una pregunta
+GAL_KNOB_CORE,Kernradius des Halos,Halo core radius,Radio del núcleo del halo
+GAL_V_KPC,%s kpc,%s kpc,%s kpc
+GAL_MASS_NONE,keine,none,ninguna
+GAL_MASS_BN,%s Mrd. Sonnenmassen,%s billion solar masses,%s mil millones de masas solares
+GAL_MASS_MN,%s Mio. Sonnenmassen,%s million solar masses,%s millones de masas solares
+GAL_MASS_TH,%s Tsd. Sonnenmassen,%s thousand solar masses,%s mil masas solares
+GAL_HINT_EMPTY,Noch hält nichts die Sterne fest – sie fliegen davon. Schalte den ersten Baustein frei!,Nothing holds the stars yet – they fly away. Unlock the first building block!,Todavía nada sujeta las estrellas: salen volando. ¡Desbloquea la primera pieza!
+GAL_HINT_NEED_MORE,Die sichtbare Materie reicht nicht: Außen sind die Sterne zu schnell. Was fehlt noch?,Visible matter is not enough: the outer stars are too fast. What is missing?,La materia visible no basta: las estrellas exteriores van demasiado rápido. ¿Qué falta?
+GAL_HINT_TUNE,"Stell die Mengen so ein, dass die orange Linie durch die Messpunkte geht.",Adjust the amounts so the orange line runs through the measured points.,Ajusta las cantidades para que la línea naranja pase por los puntos medidos.
+GAL_HINT_STABLE,Stabil! Deine Galaxie passt zur Messung. Weiter zum Zusammenstoß!,Stable! Your galaxy fits the measurement. On to the collision!,¡Estable! Tu galaxia coincide con la medida. ¡Al choque!
+GAL_TO_COLLIDE,Weiter: Zusammenstoß,Next: collision,Siguiente: choque
+GAL_QUIZ_HEAD,Wissensfrage,Knowledge question,Pregunta
+GAL_QUIZ_RIGHT,Richtig!,Right!,¡Correcto!
+GAL_QUIZ_WRONG,Nicht ganz – so ist es:,Not quite – here's how it is:,No exactamente; así es:
+GAL_QUIZ_GO,Weiter,Continue,Seguir
+GAL_COLLIDE_TITLE,Galaxien-Zusammenstoß,Galaxy collision,Choque de galaxias
+GAL_COLLIDE_TASK,Wähle einen Partner und wie sich die Galaxien begegnen. Welche Formen entstehen? Sammle alle vier!,Choose a partner and how the galaxies meet. Which shapes appear? Collect all four!,Elige una compañera y cómo se encuentran las galaxias. ¿Qué formas aparecen? ¡Consigue las cuatro!
+GAL_PARTNER,Partner,Partner,Compañera
+GAL_PARTNER_DWARF,Zwerggalaxie,Dwarf galaxy,Galaxia enana
+GAL_PARTNER_SPIRAL,Spiralgalaxie,Spiral galaxy,Galaxia espiral
+GAL_PARTNER_TWIN,Zwilling,Twin,Gemela
+GAL_PARTNER_GALLERY,Galaxie von %s,Galaxy by %s,Galaxia de %s
+GAL_APPROACH,Begegnung,Encounter,Encuentro
+GAL_APPROACH_HEADON,Frontal,Head-on,Frontal
+GAL_APPROACH_GRAZING,Streifend,Grazing,Rasante
+GAL_APPROACH_WIDE,Weit vorbei,Wide,Lejana
+GAL_SPIN,Drehsinn deiner Galaxie,Spin of your galaxy,Giro de tu galaxia
+GAL_SPIN_WITH,mit der Bahn,with the orbit,con la órbita
+GAL_SPIN_AGAINST,gegen die Bahn,against the orbit,contra la órbita
+GAL_RUN,Zusammenstoß starten,Start the collision,Iniciar el choque
+GAL_LEFT,Noch %d Zusammenstöße,%d collisions left,Quedan %d choques
+GAL_BADGES,Gefundene Formen,Shapes found,Formas encontradas
+GAL_FEATURE_TAILS,Gezeitenarme,Tidal tails,Colas de marea
+GAL_FEATURE_BRIDGE,Brücke,Bridge,Puente
+GAL_FEATURE_RING,Ring,Ring,Anillo
+GAL_FEATURE_MERGER,Verschmelzung,Merger,Fusión
+GAL_FEATURE_TAILS_TEXT,Die Schwerkraft der Nachbargalaxie zieht Sterne zu langen Armen heraus. So entstanden die „Schwänze“ der Mäuse-Galaxien (NGC 4676).,The neighbour's gravity pulls stars out into long arms. This is how the “tails” of the Mice galaxies (NGC 4676) formed.,La gravedad de la vecina arrastra estrellas formando largos brazos. Así se formaron las «colas» de las galaxias Ratones (NGC 4676).
+GAL_FEATURE_BRIDGE_TEXT,Zwischen zwei Galaxien spannt sich eine Brücke aus Sternen und Gas – wie bei der Whirlpool-Galaxie M51 und ihrem Begleiter NGC 5195.,A bridge of stars and gas stretches between two galaxies – like between the Whirlpool Galaxy M51 and its companion NGC 5195.,"Entre dos galaxias se tiende un puente de estrellas y gas, como entre la galaxia Remolino M51 y su compañera NGC 5195."
+GAL_FEATURE_RING_TEXT,"Rast eine kleinere Galaxie mitten durch eine Scheibe, läuft eine Welle nach außen – ein Ring entsteht, wie bei der Wagenrad-Galaxie.","When a smaller galaxy punches right through a disk, a wave runs outwards – a ring forms, as in the Cartwheel Galaxy.","Cuando una galaxia más pequeña atraviesa un disco por el centro, una onda se expande: se forma un anillo, como en la galaxia Rueda de Carro."
+GAL_FEATURE_MERGER_TEXT,"Die Galaxien bremsen sich gegenseitig ab und werden eins – so wie die Antennen-Galaxien, die die OST fotografiert hat. In einigen Milliarden Jahren stößt vermutlich auch die Milchstraße mit Andromeda zusammen.","The galaxies slow each other down and become one – like the Antennae galaxies photographed by the OST. In a few billion years the Milky Way will probably collide with Andromeda, too.","Las galaxias se frenan mutuamente y se funden en una sola, como las galaxias Antenas que fotografió el OST. Dentro de unos miles de millones de años, probablemente la Vía Láctea también choque con Andrómeda."
+GAL_NEW_BADGE,Neue Form: %s!,New shape: %s!,¡Nueva forma: %s!
+GAL_SEEN,Entstanden: %s.,Formed: %s.,Se formó: %s.
+GAL_SEEN_NONE,Diesmal sind keine besonderen Formen entstanden.,No special shapes formed this time.,Esta vez no se formaron formas especiales.
+GAL_RECIPE_TAILS,Tipp: Lass die Galaxien streifend aneinander vorbeiziehen.,Tip: let the galaxies graze past each other.,Pista: haz que las galaxias pasen rozándose.
+GAL_RECIPE_MERGER,Tipp: Ein schwerer Partner und eine frontale oder streifende Begegnung.,Tip: a heavy partner and a head-on or grazing encounter.,Pista: una compañera pesada y un encuentro frontal o rasante.
+GAL_RECIPE_RING,Tipp: Frontal – mit der kleineren Spiralgalaxie.,Tip: head-on – with the smaller spiral galaxy.,"Pista: frontal, con la galaxia espiral más pequeña."
+GAL_RECIPE_BRIDGE,"Tipp: Streifend mit dem Zwilling, Drehsinn mit der Bahn.","Tip: grazing with the twin, spinning with the orbit.","Pista: rasante con la gemela, girando con la órbita."
+GAL_RUNNING,Die Galaxien ziehen sich an …,The galaxies pull on each other …,Las galaxias se atraen …
+GAL_ANALYSING,Wird ausgewertet …,Analysing …,Analizando …
+GAL_TIME,%d Mio. Jahre,%d million years,%d millones de años
+GAL_BEFORE,Vor der Begegnung,Before the encounter,Antes del encuentro
+GAL_DONE,Fertig,Done,Listo
+GAL_RESULT_TITLE,Galaxie gebaut!,Galaxy built!,¡Galaxia construida!
+GAL_RESULT_MATCH,Passt zur Messung: %d %%,Fits the measurement: %d %%,Coincide con la medida: %d %%
+GAL_RESULT_BADGES,Formen gefunden: %d von %d,Shapes found: %d of %d,Formas encontradas: %d de %d
+GAL_MODEL_NOTE,"Vereinfachtes Modell: Die Galaxien behalten ihre Form, nur die Sterne bewegen sich frei. Echte Simulationen rechnen mit Milliarden Teilchen.","Simplified model: the galaxies keep their shape, only the stars move freely. Real simulations use billions of particles.",Modelo simplificado: las galaxias conservan su forma y solo las estrellas se mueven libremente. Las simulaciones reales usan miles de millones de partículas.
+GAL_AGAIN,Neue Galaxie,New galaxy,Nueva galaxia
+GAL_Q_BH_CENTER_Q,Was sitzt im Zentrum fast jeder großen Galaxie?,What sits at the centre of almost every large galaxy?,¿Qué hay en el centro de casi todas las galaxias grandes?
+GAL_Q_BH_CENTER_A0,Ein supermassereiches Schwarzes Loch,A supermassive black hole,Un agujero negro supermasivo
+GAL_Q_BH_CENTER_A1,"Ein riesiger, heller Stern","A giant, bright star",Una estrella gigante y brillante
+GAL_Q_BH_CENTER_A2,Ein leerer Raum ohne Materie,Empty space with no matter,Un espacio vacío sin materia
+GAL_Q_BH_CENTER_EXPL,Im Zentrum der Milchstraße sitzt Sagittarius A* mit rund 4 Millionen Sonnenmassen. 2022 wurde sein erstes Bild veröffentlicht.,"At the centre of the Milky Way sits Sagittarius A*, about 4 million solar masses. Its first image was published in 2022.","En el centro de la Vía Láctea está Sagitario A*, con unos 4 millones de masas solares. Su primera imagen se publicó en 2022."
+GAL_Q_BH_MASS_Q,Wie viel trägt das Schwarze Loch zur Masse der Milchstraße bei?,How much does the black hole add to the mass of the Milky Way?,¿Cuánto aporta el agujero negro a la masa de la Vía Láctea?
+GAL_Q_BH_MASS_A0,Fast nichts – weniger als ein Hunderttausendstel,Almost nothing – less than one hundred-thousandth,Casi nada: menos de una cienmilésima parte
+GAL_Q_BH_MASS_A1,Etwa die Hälfte,About half,Más o menos la mitad
+GAL_Q_BH_MASS_A2,Etwa ein Zehntel,About a tenth,Más o menos una décima parte
+GAL_Q_BH_MASS_EXPL,"4 Millionen Sonnenmassen klingt viel, doch die ganze Milchstraße wiegt rund eine Billion Sonnenmassen. Für das Kreisen der äußeren Sterne spielt das Schwarze Loch keine Rolle.","4 million solar masses sounds like a lot, but the whole Milky Way weighs about a trillion solar masses. For the orbits of the outer stars the black hole does not matter.","4 millones de masas solares parece mucho, pero toda la Vía Láctea pesa alrededor de un billón de masas solares. Para las órbitas de las estrellas exteriores, el agujero negro no importa."
+GAL_Q_STARS_COUNT_Q,Wie viele Sterne hat die Milchstraße ungefähr?,Roughly how many stars does the Milky Way have?,¿Cuántas estrellas tiene aproximadamente la Vía Láctea?
+GAL_Q_STARS_COUNT_A0,100 bis 400 Milliarden,100 to 400 billion,Entre 100.000 y 400.000 millones
+GAL_Q_STARS_COUNT_A1,Etwa eine Million,About a million,Alrededor de un millón
+GAL_Q_STARS_COUNT_A2,Etwa 10 Billionen,About 10 trillion,Unos 10 billones
+GAL_Q_STARS_COUNT_EXPL,Man schätzt 100 bis 400 Milliarden Sterne. Trotzdem machen alle Sterne zusammen nur einen kleinen Teil der Gesamtmasse aus.,"Estimates range from 100 to 400 billion stars. Even so, all stars together make up only a small part of the total mass.","Se estima que hay entre 100.000 y 400.000 millones de estrellas. Aun así, todas juntas son solo una pequeña parte de la masa total."
+GAL_Q_STARS_DISK_Q,Wo stehen die meisten Sterne einer Spiralgalaxie?,Where are most of the stars of a spiral galaxy?,¿Dónde están la mayoría de las estrellas de una galaxia espiral?
+GAL_Q_STARS_DISK_A0,"In einer flachen, rotierenden Scheibe","In a flat, rotating disk",En un disco plano que gira
+GAL_Q_STARS_DISK_A1,In einer Kugel weit draußen,In a sphere far outside,"En una esfera muy lejos, en el exterior"
+GAL_Q_STARS_DISK_A2,Gleichmäßig verteilt im ganzen Raum,Spread evenly through all of space,Repartidas por igual en todo el espacio
+GAL_Q_STARS_DISK_EXPL,"Die meisten Sterne kreisen in einer dünnen Scheibe, in der Mitte sitzt ein dichter Kern, der Bulge. Unsere Sonne braucht für eine Runde etwa 230 Millionen Jahre.","Most stars orbit in a thin disk with a dense centre, the bulge. Our Sun needs about 230 million years for one lap.","La mayoría de las estrellas giran en un disco delgado con un núcleo denso en el centro, el bulbo. Nuestro Sol tarda unos 230 millones de años en dar una vuelta."
+GAL_Q_GAS_BIRTH_Q,Woraus entstehen neue Sterne?,What are new stars made from?,¿De qué nacen las nuevas estrellas?
+GAL_Q_GAS_BIRTH_A0,Aus kalten Gas- und Staubwolken,From cold clouds of gas and dust,De nubes frías de gas y polvo
+GAL_Q_GAS_BIRTH_A1,Aus alten Planeten,From old planets,De planetas viejos
+GAL_Q_GAS_BIRTH_A2,Aus Schwarzen Löchern,From black holes,De agujeros negros
+GAL_Q_GAS_BIRTH_EXPL,"In dichten, kalten Wolken aus Wasserstoffgas und Staub fällt Materie unter ihrer eigenen Schwerkraft zusammen – so entstehen neue Sterne. Die rosa Flecken in Galaxienbildern sind solche Sternentstehungsgebiete.","In dense, cold clouds of hydrogen gas and dust, matter collapses under its own gravity – new stars are born. The pink spots in galaxy images are such star-forming regions.","En nubes densas y frías de hidrógeno y polvo, la materia se contrae por su propia gravedad y nacen estrellas. Las manchas rosadas de las imágenes de galaxias son regiones de formación estelar."
+GAL_Q_GAS_VS_STARS_Q,Was wiegt in der Milchstraße mehr: die Sterne oder das kalte Gas?,"In the Milky Way, which weighs more: the stars or the cold gas?","En la Vía Láctea, ¿qué pesa más: las estrellas o el gas frío?"
+GAL_Q_GAS_VS_STARS_A0,Die Sterne – etwa 5- bis 10-mal mehr,The stars – about 5 to 10 times more,"Las estrellas, de 5 a 10 veces más"
+GAL_Q_GAS_VS_STARS_A1,Das Gas – etwa 10-mal mehr,The gas – about 10 times more,"El gas, unas 10 veces más"
+GAL_Q_GAS_VS_STARS_A2,Beide gleich viel,Both the same,Ambos lo mismo
+GAL_Q_GAS_VS_STARS_EXPL,"In großen Spiralgalaxien überwiegen die Sterne. In kleinen Zwerggalaxien wie DDO 154 ist es umgekehrt. Und im ganzen Universum steckt die meiste normale Materie in dünnem, heißem Gas zwischen den Galaxien.","In large spiral galaxies stars dominate. In small dwarf galaxies like DDO 154 it is the other way round. And in the universe as a whole, most normal matter is thin, hot gas between the galaxies.","En las grandes galaxias espirales predominan las estrellas. En galaxias enanas como DDO 154 ocurre lo contrario. Y en el universo entero, la mayor parte de la materia normal es gas caliente y tenue entre las galaxias."
+GAL_Q_HALO_MASS_Q,Woraus besteht der größte Teil der Masse einer Galaxie?,What makes up most of a galaxy's mass?,¿De qué está hecha la mayor parte de la masa de una galaxia?
+GAL_Q_HALO_MASS_A0,Aus Dunkler Materie,Dark matter,De materia oscura
+GAL_Q_HALO_MASS_A1,Aus Sternen,Stars,De estrellas
+GAL_Q_HALO_MASS_A2,Aus Gas,Gas,De gas
+GAL_Q_HALO_MASS_EXPL,"Etwa 85 % aller Materie im Universum ist Dunkle Materie. Man sieht sie nicht, aber man spürt ihre Schwerkraft – zum Beispiel an der Rotation der Galaxien.","About 85 % of all matter in the universe is dark matter. We cannot see it, but we feel its gravity – for example in how galaxies rotate.","Alrededor del 85 % de toda la materia del universo es materia oscura. No se ve, pero se nota su gravedad, por ejemplo en la rotación de las galaxias."
+GAL_Q_HALO_RUBIN_Q,"Wer zeigte in den 1970er-Jahren, dass die äußeren Sterne von Galaxien zu schnell kreisen?",Who showed in the 1970s that the outer stars of galaxies orbit too fast?,¿Quién mostró en los años 70 que las estrellas exteriores de las galaxias giran demasiado rápido?
+GAL_Q_HALO_RUBIN_A0,Vera Rubin,Vera Rubin,Vera Rubin
+GAL_Q_HALO_RUBIN_A1,Albert Einstein,Albert Einstein,Albert Einstein
+GAL_Q_HALO_RUBIN_A2,Edwin Hubble,Edwin Hubble,Edwin Hubble
+GAL_Q_HALO_RUBIN_EXPL,"Die Astronomin Vera Rubin maß mit Kent Ford, dass Sterne außen in Galaxien nicht langsamer werden – einer der stärksten Hinweise auf Dunkle Materie. Heute trägt ein großes Observatorium ihren Namen.","Astronomer Vera Rubin, with Kent Ford, measured that stars in the outer parts of galaxies do not slow down – one of the strongest hints of dark matter. Today a large observatory bears her name.","La astrónoma Vera Rubin midió con Kent Ford que las estrellas de las afueras de las galaxias no se frenan, una de las pistas más fuertes de la materia oscura. Hoy un gran observatorio lleva su nombre."
+GAL_Q_HALO_WITHOUT_Q,Was würde ohne Dunkle Materie mit den äußeren Sternen einer Galaxie passieren?,What would happen to a galaxy's outer stars without dark matter?,¿Qué pasaría con las estrellas exteriores de una galaxia sin materia oscura?
+GAL_Q_HALO_WITHOUT_A0,Sie würden davonfliegen,They would fly away,Saldrían volando
+GAL_Q_HALO_WITHOUT_A1,Sie würden in die Mitte stürzen,They would fall into the centre,Caerían al centro
+GAL_Q_HALO_WITHOUT_A2,Nichts – sie kreisen genauso weiter,Nothing – they keep orbiting the same way,Nada: seguirían girando igual
+GAL_Q_HALO_WITHOUT_EXPL,"Die äußeren Sterne sind so schnell, dass die sichtbare Masse sie nicht festhalten kann. Probier es aus: Ohne Dunkle Materie fliegen sie aus deiner Galaxie heraus!",The outer stars are so fast that visible matter cannot hold them. Try it: without dark matter they fly out of your galaxy!,Las estrellas exteriores van tan rápido que la materia visible no puede sujetarlas. Pruébalo: ¡sin materia oscura salen volando de tu galaxia!

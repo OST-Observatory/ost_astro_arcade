@@ -4,6 +4,11 @@ class_name Icons
 extends RefCounted
 
 const MAP := {
+	"workspace_premium": 0xe7af,
+	"bolt": 0xea0b,
+	"lock_open": 0xe898,
+	"visibility_off": 0xe8f5,
+	"cloud": 0xe2bd,
 	"tune": 0xe429,
 	"groups": 0xf233,
 	"pause": 0xe034,

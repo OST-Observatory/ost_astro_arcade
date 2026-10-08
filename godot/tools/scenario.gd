@@ -176,35 +176,41 @@ func _ready() -> void:
 						cg._active = int(edges[n][0])
 					if scenario == "con_result":
 						cg._next_round()
-		"galaxy", "galaxy_pick", "galaxy_run", "galaxy_result":
+		"gal_pick", "gal_empty", "gal_stars", "gal_stable", "gal_quiz", "gal_collide", "gal_badge":
 			var gg: Control = load("res://games/galaxy/galaxy_game.tscn").instantiate()
 			gg.skip_intro = true
-			if scenario != "galaxy_pick":
-				gg.target_id = OS.get_environment("GAL") if OS.get_environment("GAL") != "" else "antennae"
+			gg.rng_seed = 5
 			add_child(gg)
-			if scenario in ["galaxy_run", "galaxy_result"]:
-				await get_tree().process_frame
-				await get_tree().process_frame
-				gg._view.fixed_step = 1.0 / 30.0
-				gg._run()
-				if scenario == "galaxy_result":
-					await gg._view.finished
-					await get_tree().create_timer(2.5).timeout
-					gg._finish()
-		"galaxy_view":
-			var vp := SubViewportContainer.new()
-			vp.stretch = true
-			vp.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-			add_child(vp)
-			var sv := SubViewport.new()
-			sv.own_world_3d = true
-			vp.add_child(sv)
-			var gv := GalaxyView.new()
-			sv.add_child(gv)
-			var t := GalaxyLogic.target(OS.get_environment("GAL") if OS.get_environment("GAL") != "" else "antennae")
-			gv.fixed_step = 1.0 / 30.0
-			gv.setup(t.params, t.extent)
-			gv.play()
+			await get_tree().process_frame
+			var gid := OS.get_environment("GAL") if OS.get_environment("GAL") != "" else "milkyway"
+			match scenario:
+				"gal_pick":
+					gg._pick_target()
+				"gal_empty", "gal_stars", "gal_stable", "gal_quiz":
+					gg.start_build(gid)
+					gg._view.fixed_step = 1.0 / 60.0
+					if scenario in ["gal_stars", "gal_stable"]:
+						gg._unlocked = ["bh", "stars", "gas"] + (["halo"] as Array if scenario == "gal_stable" else [])
+						gg._knobs = GalaxyTemplates.reference_knobs(gg._target)
+						gg._rebuild_blocks()
+						gg._on_knob()
+					elif scenario == "gal_quiz":
+						gg._unlock("bh")
+				"gal_collide", "gal_badge":
+					gg._target = GalaxyTemplates.get_target(gid)
+					gg._knobs = GalaxyTemplates.reference_knobs(gg._target)
+					gg._unlocked = GalaxyTemplates.COMPONENTS.duplicate()
+					gg._match = 99.0
+					gg._approach = OS.get_environment("APPROACH") if OS.get_environment("APPROACH") != "" else "grazing"
+					gg._partner = OS.get_environment("PARTNER") if OS.get_environment("PARTNER") != "" else "twin"
+					gg.start_collide()
+					if scenario == "gal_badge":
+						gg._badges = ["tails"]
+						gg._update_badges()
+						gg._show_badge("merger")
+					else:
+						gg._view.fixed_step = 1.0 / 30.0
+						gg._run_collision()
 		"obs_day", "obs_dusk", "obs_night", "obs_inside", "obs_street":
 			var vp := SubViewportContainer.new()
 			vp.stretch = true
