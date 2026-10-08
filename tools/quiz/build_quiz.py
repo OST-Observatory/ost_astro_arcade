@@ -22,12 +22,17 @@ SRC = TOOLS / "quiz/source"
 OUT_JSON = REPO / "godot/assets/data/quiz/questions.json"
 OUT_IMG = REPO / "godot/assets/quiz/images"
 OLD_IMAGES = Path("/home/schedar/projects/astro_mini_games/astro_mini_games/apps/quiz/data/images")
+# Images added later (missing in the old app); looked up by file stem before OLD_IMAGES.
+EXTRA_IMAGES = TOOLS / "quiz/images_extra"
 LANGS = ("de", "en", "es")
 MAX_PX = 1400
 DIFFICULTY = {"laie": 1, "amateur": 2, "astronom": 3, 1: 1, 2: 2, 3: 3}
 
 
 def convert_image(src: Path, dst: Path) -> bool:
+    extra = next(iter(sorted(EXTRA_IMAGES.glob(src.stem + ".*"))), None)
+    if extra:
+        src = extra
     if not src.exists():
         print("  missing image:", src.name)
         return False

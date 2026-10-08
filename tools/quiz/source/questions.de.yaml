@@ -176,7 +176,7 @@ questions:
 
   - id: q17
     text: "Was sind Sternschnuppen?"
-    answers: ["Ein Asteroid, der in die Erdatmosphäre eintritt", "Ein kurzes Aufleuchten eines weit entfernten Sterns", "Ein Planet der schnell über den Himmel zieht", "Ein Komet, der schnell über den Himmel zieht"]
+    answers: ["Ein kleines Staubkorn oder Steinchen, das in der Erdatmosphäre verglüht", "Ein kurzes Aufleuchten eines weit entfernten Sterns", "Ein Planet der schnell über den Himmel zieht", "Ein Komet, der schnell über den Himmel zieht"]
     correct: 0
     category: allgemein
     difficulty: laie
@@ -226,7 +226,7 @@ questions:
     category: himmelsmechanik
     difficulty: amateur
     image: "data/images/Ceres_Orbit_de.svg"
-    image_credit: "File:Ceres Orbit.svg: Orionist / *derivative work Sebastian Wallroth, CC BY-SA 2.5, via Wikimedia Commons"
+    image_credit: "Orionist / derivative work Sebastian Wallroth (File:Ceres Orbit.svg), CC BY-SA 3.0, via Wikimedia Commons"
 
   - id: q22
     text: "Was umgibt die Erde ständig und schützt uns vor dem Sonnenwind?"
@@ -365,7 +365,7 @@ questions:
 
   - id: q37
     text: "Was ist Sedna?"
-    answers: ["Ein Planet", "Ein Zwergplanet", "Ein Mond", "Ein Asteroid"]
+    answers: ["Ein Planet", "Ein Kandidat für einen Zwergplaneten", "Ein Mond", "Ein Komet"]
     correct: 1
     category: sonnensystem
     difficulty: astronom
@@ -552,7 +552,7 @@ questions:
   - id: q53
     text: "Was ist ein Lagrange-Punkt?"
     answers: ['Ein Punkt maximaler Gravitation', 
-              'Ein Ort stabiler Gleichgewichtsposition in einem Zwei-Körper-System',
+              'Ein Gleichgewichtspunkt im Schwerefeld zweier umeinander kreisender Körper',
               'Das Zentrum einer Galaxie',
               'Ein Punkt maximaler Gezeitenwirkung']
     correct: 1
@@ -649,7 +649,7 @@ questions:
     text: "Welcher Anteil der Gesamtenergie des Universums entfällt ungefähr auf Dunkle Energie?"
     answers: ['~5 %',
               '~27 %',
-              '~72 %',
+              '~68 %',
               '~90 %']
     correct: 2
     category: kosmologie

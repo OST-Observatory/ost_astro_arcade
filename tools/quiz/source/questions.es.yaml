@@ -176,7 +176,7 @@ questions:
 
   - id: q17
     text: "¿Qué son las estrellas fugaces?"
-    answers: ["Un asteroide que entra en la atmósfera terrestre", "Un breve destello de una estrella lejana", "Un planeta que cruza el cielo rápidamente", "Un cometa que cruza el cielo rápidamente"]
+    answers: ["Un pequeño grano de polvo o piedrecita que arde en la atmósfera terrestre", "Un breve destello de una estrella lejana", "Un planeta que cruza el cielo rápidamente", "Un cometa que cruza el cielo rápidamente"]
     correct: 0
     category: allgemein
     difficulty: laie
@@ -226,7 +226,7 @@ questions:
     category: himmelsmechanik
     difficulty: amateur
     image: "data/images/Ceres_Orbit_de.svg"
-    image_credit: "File:Ceres Orbit.svg: Orionist / *derivative work Sebastian Wallroth, CC BY-SA 2.5, via Wikimedia Commons"
+    image_credit: "Orionist / derivative work Sebastian Wallroth (File:Ceres Orbit.svg), CC BY-SA 3.0, via Wikimedia Commons"
 
   - id: q22
     text: "¿Qué rodea constantemente la Tierra y nos protege del viento solar?"
@@ -365,7 +365,7 @@ questions:
 
   - id: q37
     text: "¿Qué es Sedna?"
-    answers: ["Un planeta", "Un planeta enano", "Una luna", "Un asteroide"]
+    answers: ["Un planeta", "Un candidato a planeta enano", "Una luna", "Un cometa"]
     correct: 1
     category: sonnensystem
     difficulty: astronom
@@ -552,7 +552,7 @@ questions:
   - id: q53
     text: "¿Qué es un punto de Lagrange?"
     answers: ['Un punto de máxima gravedad',
-              'Una posición de equilibrio estable en un sistema de dos cuerpos',
+              'Un punto de equilibrio en el campo gravitatorio de dos cuerpos que giran uno alrededor del otro',
               'El centro de una galaxia',
               'Un punto de máximo efecto de marea']
     correct: 1
@@ -649,7 +649,7 @@ questions:
     text: "¿Qué proporción de la energía total del universo corresponde aproximadamente a la energía oscura?"
     answers: ['~5 %',
               '~27 %',
-              '~72 %',
+              '~68 %',
               '~90 %']
     correct: 2
     category: kosmologie

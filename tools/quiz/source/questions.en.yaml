@@ -225,7 +225,7 @@ questions:
 - id: q17
   text: What are shooting stars?
   answers:
-  - An asteroid entering the Earth's atmosphere
+  - A tiny grain of dust or small stone burning up in Earth's atmosphere
   - A brief glow of a distant star
   - A planet that moves quickly across the sky
   - A comet moving quickly across the sky
@@ -286,8 +286,7 @@ questions:
   category: himmelsmechanik
   difficulty: amateur
   image: data/images/Ceres_Orbit_de.svg
-  image_credit: 'File:Ceres Orbit.svg: Orionist / *derivative work Sebastian Wallroth,
-    CC BY-SA 2.5, via Wikimedia Commons'
+  image_credit: 'Orionist / derivative work Sebastian Wallroth (File:Ceres Orbit.svg), CC BY-SA 3.0, via Wikimedia Commons'
 - id: q22
   text: What constantly surrounds the earth and protects us from the solar wind?
   answers:
@@ -480,9 +479,9 @@ questions:
   text: What is Sedna?
   answers:
   - A planet
-  - A dwarf planet
+  - A dwarf planet candidate
   - A moon
-  - An asteroid
+  - A comet
   correct: 1
   category: sonnensystem
   difficulty: astronom
@@ -682,7 +681,7 @@ questions:
   text: What is a Lagrange point?
   answers:
   - A point of maximum gravity
-  - A place of stable equilibrium position in a two-body system
+  - A point of balance in the gravity field of two bodies orbiting each other
   - The centre of a galaxy
   - A point of maximum tidal effect
   correct: 1
@@ -781,10 +780,10 @@ questions:
 - id: q61
   text: Approximately what proportion of the universe's total energy is dark energy?
   answers:
-  - '5'
-  - '27'
-  - '72'
-  - 90%
+  - '~5 %'
+  - '~27 %'
+  - '~68 %'
+  - '~90 %'
   correct: 2
   category: kosmologie
   difficulty: astronom

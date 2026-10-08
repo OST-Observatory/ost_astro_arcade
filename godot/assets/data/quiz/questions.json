@@ -677,28 +677,28 @@
    },
    "answers": {
     "de": [
-     "Ein Asteroid, der in die Erdatmosphäre eintritt",
+     "Ein kleines Staubkorn oder Steinchen, das in der Erdatmosphäre verglüht",
      "Ein kurzes Aufleuchten eines weit entfernten Sterns",
      "Ein Planet der schnell über den Himmel zieht",
      "Ein Komet, der schnell über den Himmel zieht"
     ],
     "en": [
-     "An asteroid entering the Earth's atmosphere",
+     "A tiny grain of dust or small stone burning up in Earth's atmosphere",
      "A brief glow of a distant star",
      "A planet that moves quickly across the sky",
      "A comet moving quickly across the sky"
     ],
     "es": [
-     "Un asteroide que entra en la atmósfera terrestre",
+     "Un pequeño grano de polvo o piedrecita que arde en la atmósfera terrestre",
      "Un breve destello de una estrella lejana",
      "Un planeta que cruza el cielo rápidamente",
      "Un cometa que cruza el cielo rápidamente"
     ]
    },
    "explain": {
-    "de": "Meist sind es winzige Staubkörnchen, die in der Atmosphäre verglühen – größere Brocken nennt man Meteoroiden.",
-    "en": "Most are tiny dust grains burning up in the atmosphere – larger pieces are called meteoroids.",
-    "es": "Casi siempre son diminutos granos de polvo que arden en la atmósfera; los trozos mayores se llaman meteoroides."
+    "de": "Meist sind es winzige Staubkörnchen von Kometen oder Asteroiden (Meteoroide), die in rund 100 km Höhe verglühen.",
+    "en": "Most are tiny dust grains from comets or asteroids (meteoroids) burning up about 100 km above the ground.",
+    "es": "Casi siempre son diminutos granos de polvo de cometas o asteroides (meteoroides) que arden a unos 100 km de altura."
    },
    "image": "res://assets/quiz/images/2014_Meteor.jpg",
    "credit": "Jacek Halicki, CC BY-SA 4.0, via Wikimedia Commons"
@@ -851,7 +851,9 @@
     "de": "Orbit kommt vom lateinischen „orbis“ – Kreis, Bahn.",
     "en": "'Orbit' comes from the Latin 'orbis' – circle, track.",
     "es": "«Órbita» viene del latín «orbis»: círculo, camino."
-   }
+   },
+   "image": "res://assets/quiz/images/Ceres_Orbit_de.jpg",
+   "credit": "Orionist / derivative work Sebastian Wallroth (File:Ceres Orbit.svg), CC BY-SA 3.0, via Wikimedia Commons"
   },
   {
    "id": "q22",
@@ -1436,27 +1438,27 @@
    "answers": {
     "de": [
      "Ein Planet",
-     "Ein Zwergplanet",
+     "Ein Kandidat für einen Zwergplaneten",
      "Ein Mond",
-     "Ein Asteroid"
+     "Ein Komet"
     ],
     "en": [
      "A planet",
-     "A dwarf planet",
+     "A dwarf planet candidate",
      "A moon",
-     "An asteroid"
+     "A comet"
     ],
     "es": [
      "Un planeta",
-     "Un planeta enano",
+     "Un candidato a planeta enano",
      "Una luna",
-     "Un asteroide"
+     "Un cometa"
     ]
    },
    "explain": {
-    "de": "Sedna ist eines der fernsten bekannten Objekte; ein Umlauf dauert rund 11.000 Jahre.",
-    "en": "Sedna is one of the most distant known objects; one orbit takes about 11,000 years.",
-    "es": "Sedna es uno de los objetos conocidos más lejanos; una órbita dura unos 11.000 años."
+    "de": "Sedna ist eines der fernsten bekannten Objekte; ein Umlauf dauert rund 11.000 Jahre. Offiziell als Zwergplanet anerkannt ist es (noch) nicht.",
+    "en": "Sedna is one of the most distant known objects; one orbit takes about 11,000 years. It has not (yet) been officially recognised as a dwarf planet.",
+    "es": "Sedna es uno de los objetos conocidos más lejanos; una órbita dura unos 11.000 años. Aún no está reconocido oficialmente como planeta enano."
    },
    "image": "res://assets/quiz/images/Sedna_Discovery_(geminiann05005c).jpg",
    "credit": "International Gemini Observatory/NOIRLab/NSF/AURA, CC BY 4.0, via Wikimedia Commons"
@@ -2044,27 +2046,27 @@
    "answers": {
     "de": [
      "Ein Punkt maximaler Gravitation",
-     "Ein Ort stabiler Gleichgewichtsposition in einem Zwei-Körper-System",
+     "Ein Gleichgewichtspunkt im Schwerefeld zweier umeinander kreisender Körper",
      "Das Zentrum einer Galaxie",
      "Ein Punkt maximaler Gezeitenwirkung"
     ],
     "en": [
      "A point of maximum gravity",
-     "A place of stable equilibrium position in a two-body system",
+     "A point of balance in the gravity field of two bodies orbiting each other",
      "The centre of a galaxy",
      "A point of maximum tidal effect"
     ],
     "es": [
      "Un punto de máxima gravedad",
-     "Una posición de equilibrio estable en un sistema de dos cuerpos",
+     "Un punto de equilibrio en el campo gravitatorio de dos cuerpos que giran uno alrededor del otro",
      "El centro de una galaxia",
      "Un punto de máximo efecto de marea"
     ]
    },
    "explain": {
-    "de": "An den fünf Lagrange-Punkten heben sich Schwerkraft und Fliehkraft auf – das James-Webb-Teleskop sitzt bei L2.",
-    "en": "At the five Lagrange points gravity and centrifugal force balance – the James Webb telescope sits at L2.",
-    "es": "En los cinco puntos de Lagrange se equilibran la gravedad y la fuerza centrífuga; el telescopio James Webb está en L2."
+    "de": "An den fünf Lagrange-Punkten heben sich Schwerkraft und Fliehkraft auf. Nur L4 und L5 sind stabil; das James-Webb-Teleskop muss bei L2 seine Bahn regelmäßig korrigieren.",
+    "en": "At the five Lagrange points gravity and centrifugal force balance. Only L4 and L5 are stable; the James Webb telescope at L2 has to correct its orbit regularly.",
+    "es": "En los cinco puntos de Lagrange se equilibran la gravedad y la fuerza centrífuga. Solo L4 y L5 son estables; el telescopio James Webb, en L2, debe corregir su órbita con regularidad."
    },
    "image": "res://assets/quiz/images/Lagrange_points2.svg.jpg",
    "credit": "Xander89, CC BY 3.0, via Wikimedia Commons"
@@ -2349,26 +2351,26 @@
     "de": [
      "~5 %",
      "~27 %",
-     "~72 %",
+     "~68 %",
      "~90 %"
     ],
     "en": [
-     "5",
-     "27",
-     "72",
-     "90%"
+     "~5 %",
+     "~27 %",
+     "~68 %",
+     "~90 %"
     ],
     "es": [
      "~5 %",
      "~27 %",
-     "~72 %",
+     "~68 %",
      "~90 %"
     ]
    },
    "explain": {
-    "de": "Dunkle Energie treibt die beschleunigte Ausdehnung des Universums an – was sie ist, weiß noch niemand.",
-    "en": "Dark energy drives the accelerating expansion of the universe – nobody yet knows what it is.",
-    "es": "La energía oscura impulsa la expansión acelerada del universo; nadie sabe aún qué es."
+    "de": "Rund 68 % sind Dunkle Energie, 27 % Dunkle Materie und nur 5 % normale Materie. Dunkle Energie treibt die beschleunigte Ausdehnung an – was sie ist, weiß noch niemand.",
+    "en": "About 68 % is dark energy, 27 % dark matter and only 5 % normal matter. Dark energy drives the accelerating expansion – nobody yet knows what it is.",
+    "es": "Alrededor del 68 % es energía oscura, el 27 % materia oscura y solo el 5 % materia normal. La energía oscura impulsa la expansión acelerada; nadie sabe aún qué es."
    },
    "image": "res://assets/quiz/images/CMB_universe_expansion.jpg",
    "credit": "NASA/WMAP Science Team/ Art by Dana Berry, Public domain, via Wikimedia Commons"
@@ -2787,7 +2789,9 @@
     "de": "Für Astronominnen und Astronomen ist alles schwerer als Helium ein „Metall“ – auch Sauerstoff oder Kohlenstoff.",
     "en": "For astronomers, everything heavier than helium is a 'metal' – even oxygen or carbon.",
     "es": "Para los astrónomos todo lo más pesado que el helio es un «metal», incluso el oxígeno o el carbono."
-   }
+   },
+   "image": "res://assets/quiz/images/Messier92_LRGB.jpg",
+   "credit": "Jeremias Siehr, CC BY-NC-SA 3.0"
   },
   {
    "id": "q73",
