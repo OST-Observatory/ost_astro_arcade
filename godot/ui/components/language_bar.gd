@@ -29,7 +29,7 @@ func _update() -> void:
 		var b: Button = _buttons[code]
 		var active: bool = code == I18n.locale
 		b.add_theme_stylebox_override("normal",
-			UiTheme.box(Color(UiTheme.ACCENT, 0.9), UiTheme.ACCENT_HI, 2, 48) if active
-			else UiTheme.box(Color(UiTheme.SURFACE, 0.6), UiTheme.LINE, 2, 48))
+			UiTheme.box(Color(UiTheme.ACCENT, 0.9), UiTheme.ACCENT_HI) if active
+			else UiTheme.box(Color(UiTheme.SURFACE, 0.6), UiTheme.LINE))
 		b.add_theme_color_override("font_color", UiTheme.BG if active else UiTheme.TEXT)
 		b.add_theme_color_override("font_hover_color", UiTheme.BG if active else UiTheme.TEXT)

@@ -25,6 +25,7 @@ static func make(key: String, icon := "", accent := false, min_width := 0) -> Bi
 	if accent:
 		b.add_theme_stylebox_override("normal", UiTheme.box(Color(UiTheme.ACCENT, 0.9), UiTheme.ACCENT_HI))
 		b.add_theme_stylebox_override("hover", UiTheme.box(UiTheme.ACCENT_HI, UiTheme.ACCENT_HI))
+		b.add_theme_stylebox_override("pressed", UiTheme.box(UiTheme.ACCENT.darkened(0.25), UiTheme.ACCENT))
 		b.add_theme_color_override("font_color", UiTheme.BG)
 		b.add_theme_color_override("font_hover_color", UiTheme.BG)
 	return b
