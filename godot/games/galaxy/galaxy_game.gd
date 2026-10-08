@@ -433,18 +433,11 @@ func _show_result(pts: int, stars: int, rank: Dictionary) -> void:
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	v.add_child(spacer)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 20)
-	var home := BigButton.make("BACK_TO_HUB", "home", false, 360)
-	home.pressed.connect(func(): Router.go_home("home"))
-	row.add_child(home)
-	var again := BigButton.make("GAL_AGAIN", "blur_on", true, 440)
-	again.pressed.connect(func():
+	var on_again := func():
 		_running = false
 		await _pick_target()
-		_start())
-	row.add_child(again)
-	v.add_child(row)
+		_start()
+	v.add_child(ResultActions.make("GAL_AGAIN", "blur_on", on_again, PANEL_W - 30.0, true))
 	# Show the "true" encounter that reproduces the photo behind the result.
 	_running = false
 	_view.setup(_target.params, _target.extent)

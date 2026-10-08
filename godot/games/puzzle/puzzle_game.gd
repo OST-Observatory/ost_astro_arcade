@@ -281,17 +281,10 @@ func _show_info(pts: int, stars: int, rank: Dictionary) -> void:
 	v.add_child(_plain(tr("PUZZLE_RESULT") % [logic.piece_count(), int(_elapsed) / 60, int(_elapsed) % 60], UiTheme.SIZE_BODY, "medium", UiTheme.TEXT))
 	v.add_child(_plain(tr("AST_SCORE") % pts + "  ·  " + tr("AST_RANK") % [Session.player_name, int(rank.get("rank_today", 0))],
 		UiTheme.SIZE_BODY, "semibold", UiTheme.ACCENT_HI))
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 24)
-	var home := BigButton.make("BACK_TO_HUB", "home", false, 380)
-	home.pressed.connect(func(): Router.go_home("home"))
-	row.add_child(home)
-	var again := BigButton.make("PUZZLE_AGAIN", "extension", true, 420)
-	again.pressed.connect(func():
+	var on_again := func():
 		await _pick_image()
-		_start())
-	row.add_child(again)
-	v.add_child(row)
+		_start()
+	v.add_child(ResultActions.make("PUZZLE_AGAIN", "extension", on_again, 840.0, true))
 
 
 func _tr_dict(d: Dictionary) -> String:

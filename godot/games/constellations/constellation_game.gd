@@ -344,13 +344,7 @@ func _finish() -> void:
 	v.add_child(done)
 	v.add_child(_plain(tr("AST_SCORE") % _total_points + "  ·  " + tr("AST_RANK") % [Session.player_name, int(rank.get("rank_today", 0))],
 		UiTheme.SIZE_BODY, "semibold", UiTheme.ACCENT_HI))
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 24)
-	var home := BigButton.make("BACK_TO_HUB", "home", false, 380)
-	home.pressed.connect(func(): Router.go_home("home"))
-	row.add_child(home)
-	var again := BigButton.make("CON_AGAIN", "stars", true, 420)
-	again.pressed.connect(func():
+	var on_again := func():
 		panel.queue_free()
 		_round = 0
 		_total_points = 0
@@ -358,9 +352,8 @@ func _finish() -> void:
 		_total_wrong = 0
 		_total_time = 0.0
 		_queue = logic.pick(_rng)
-		_next_round())
-	row.add_child(again)
-	v.add_child(row)
+		_next_round()
+	v.add_child(ResultActions.make("CON_AGAIN", "stars", on_again, 980.0, true))
 
 
 func _plain(t: String, font_size: int, kind := "regular", color := UiTheme.TEXT) -> Label:

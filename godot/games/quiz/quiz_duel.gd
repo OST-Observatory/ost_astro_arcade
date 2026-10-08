@@ -224,20 +224,12 @@ func _show_result() -> void:
 	var scores := _plain(tr("DUEL_SCORES") % [logic.scores[0], logic.scores[1]], UiTheme.SIZE_H2, "medium", UiTheme.TEXT)
 	scores.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	v.add_child(scores)
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 30)
-	var home := BigButton.make("BACK_TO_HUB", "home", false, 400)
-	home.pressed.connect(func(): Router.go_home("home"))
-	row.add_child(home)
-	var again := BigButton.make("DUEL_AGAIN", "refresh", true, 420)
-	again.pressed.connect(func():
+	var on_again := func():
 		_layer.queue_free()
 		_layer = null
 		logic.new_round(_rng)
-		_show_question())
-	row.add_child(again)
-	v.add_child(row)
+		_show_question()
+	v.add_child(ResultActions.make("DUEL_AGAIN", "refresh", on_again, 1700.0, false))
 
 
 func _plain(t: String, font_size: int, kind := "regular", color := UiTheme.TEXT) -> Label:

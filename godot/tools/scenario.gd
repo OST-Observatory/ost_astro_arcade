@@ -14,6 +14,8 @@ func _ready() -> void:
 	if diff != "":
 		Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
 	await get_tree().process_frame
+	if OS.get_environment("INGAME") != "":
+		Router._home_btn.visible = true
 	match scenario:
 		"en", "es":
 			I18n.set_locale(scenario)
@@ -32,6 +34,13 @@ func _ready() -> void:
 			var p := AdminPanel.new()
 			_hub().add_child(p)
 			p._show_main()
+		"dialog_restart":
+			var rq: Control = load("res://games/quiz/quiz_game.tscn").instantiate()
+			rq.skip_intro = true
+			add_child(rq)
+			Router._home_btn.visible = true
+			Router.current = GameRegistry.get_entry("quiz")
+			Router._confirm_home()
 		"dialog":
 			_hub()
 			Dialog.ask(self, "HOME_CONFIRM",

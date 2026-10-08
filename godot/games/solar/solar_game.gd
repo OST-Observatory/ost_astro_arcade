@@ -300,13 +300,7 @@ func _finish() -> void:
 	var spacer := Control.new()
 	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	v.add_child(spacer)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 20)
-	var home := BigButton.make("BACK_TO_HUB", "home", false, 360)
-	home.pressed.connect(func(): Router.go_home("home"))
-	row.add_child(home)
-	var again := BigButton.make("SOL_AGAIN", "rocket_launch", true, 380)
-	again.pressed.connect(func():
+	var on_again := func():
 		panel.queue_free()
 		_attempts = 0
 		_best_miss = INF
@@ -320,9 +314,8 @@ func _finish() -> void:
 		_launch_btn.disabled = false
 		_feedback.text = ""
 		_update_status()
-		_set_launch(_jd))
-	row.add_child(again)
-	v.add_child(row)
+		_set_launch(_jd)
+	v.add_child(ResultActions.make("SOL_AGAIN", "rocket_launch", on_again, PANEL_W - 30.0, true))
 
 
 func _plain(t: String, font_size: int, kind := "regular", color := UiTheme.TEXT) -> Label:

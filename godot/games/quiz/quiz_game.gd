@@ -341,16 +341,7 @@ func _show_result() -> void:
 		var l := _plain(line[0], line[1], line[2], line[3])
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		v.add_child(l)
-	var row := HBoxContainer.new()
-	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	row.add_theme_constant_override("separation", 40)
-	var home := BigButton.make("BACK_TO_HUB", "home", false, 440)
-	home.pressed.connect(func(): Router.go_home("home"))
-	row.add_child(home)
-	var again := BigButton.make("QUIZ_AGAIN", "refresh", true, 520)
-	again.pressed.connect(_new_round)
-	row.add_child(again)
-	v.add_child(row)
+	v.add_child(ResultActions.make("QUIZ_AGAIN", "refresh", _new_round, 1700.0, false))
 	Audio.play("success")
 
 

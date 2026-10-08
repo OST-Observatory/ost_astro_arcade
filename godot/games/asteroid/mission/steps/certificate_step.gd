@@ -97,6 +97,7 @@ func _ready() -> void:
 	var bonus := BigButton.make("COMET_BUTTON", "auto_awesome", false, 620)
 	bonus.pressed.connect(_open_comet)
 	right.add_child(bonus)
+	right.add_child(Router.restart_button(620))
 	var home := BigButton.make("BACK_TO_HUB", "home", false, 620)
 	home.pressed.connect(func(): Router.go_home("home"))
 	right.add_child(home)

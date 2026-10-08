@@ -36,6 +36,14 @@ func _initialize() -> void:
 	vp.add_child(holder)
 	var packed: PackedScene = load(scene_path)
 	holder.add_child(packed.instantiate())
+	# Router overlays (home button, dialogs, idle countdown) live in CanvasLayers of the
+	# autoload; move them into the capture viewport so they appear in screenshots.
+	await process_frame
+	var router := root.get_node_or_null("Router")
+	if router:
+		for c in router.get_children():
+			if c is CanvasLayer:
+				c.reparent(vp)
 
 	DirAccess.make_dir_recursive_absolute(out_prefix.get_base_dir())
 	var start_ms := Time.get_ticks_msec()

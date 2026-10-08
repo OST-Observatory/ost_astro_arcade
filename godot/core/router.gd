@@ -19,7 +19,11 @@ var _overlay_root: Control
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	get_tree().root.theme = UiTheme.build()
+	var theme := UiTheme.build()
+	get_tree().root.theme = theme
+	# Controls under a CanvasLayer or in a SubViewport do not inherit the window theme;
+	# merged into the default theme, the same look applies everywhere.
+	ThemeDB.get_default_theme().merge_with(theme)
 	_build_overlays()
 	Kiosk.activity.connect(_on_activity)
 	Kiosk.external_finished.connect(_on_external_finished)
@@ -122,6 +126,7 @@ func complete(result := {}) -> void:
 func go_home(reason := "home") -> void:
 	if _busy:
 		return
+	_close_dialogs()
 	Telemetry.game_ended(reason)  # no-op if the game already completed
 	current = {}
 	_home_btn.visible = false
@@ -131,15 +136,51 @@ func go_home(reason := "home") -> void:
 	await _transition(HUB_SCENE)
 
 
+## Restarts the running game at its start screen, so the visitor can pick another
+## difficulty (or simply start over).
+func restart_current() -> void:
+	if _busy or not is_in_game():
+		return
+	var game_id: String = current.id
+	Telemetry.game_ended("restart")
+	current = {}
+	_home_btn.visible = false
+	start_game(game_id)
+
+
+## The "change difficulty" button for result screens (same action as the overlay button).
+func restart_button(min_width := 0) -> BigButton:
+	var b := BigButton.make("CHANGE_DIFFICULTY", "tune", false, min_width)
+	b.pressed.connect(restart_current)
+	return b
+
+
+## The home button asks first: keep playing, start over with another difficulty, or leave.
 func _confirm_home() -> void:
-	var choice := await Dialog.ask(_overlay_root, "HOME_CONFIRM",
-		[["HOME_STAY", "play_arrow", false, "stay"], ["HOME_LEAVE", "home", true, "leave"]], "home")
+	var buttons := [["HOME_STAY", "play_arrow", false, "stay"]]
+	if current.get("scene", "") != "":
+		buttons.append(["CHANGE_DIFFICULTY", "tune", false, "restart"])
+	buttons.append(["HOME_LEAVE", "home", true, "leave"])
+	get_tree().paused = true   # timers and simulations stop while the dialog is open
+	var choice := await Dialog.ask(_overlay_root, "HOME_CONFIRM", buttons, "home")
+	get_tree().paused = false
 	if choice == "leave":
 		go_home("home")
+	elif choice == "restart":
+		restart_current()
+
+
+## Closes open overlay dialogs (e.g. when the idle timeout fires) and resumes the game.
+func _close_dialogs() -> void:
+	for c in _overlay_root.get_children():
+		if c is Dialog:
+			c.queue_free()
+	get_tree().paused = false
 
 
 func _transition(scene_path: String) -> void:
 	_busy = true
+	get_tree().paused = false
 	Audio.play("whoosh", "SFX")
 	_fade.mouse_filter = Control.MOUSE_FILTER_STOP
 	await create_tween().tween_property(_fade, "modulate:a", 1.0, 0.25).finished
