@@ -23,6 +23,8 @@ var _pos := {}              # hip -> screen position (visible stars)
 var _active := -1           # star the next line starts from
 var _finger := Vector2.ZERO
 var _dragging := false
+var _touch := -1            # index of the drawing finger
+var _drag_from := Vector2.ZERO
 var _wrong_flash := []      # [from, to, time left]
 var _glow := 0.0            # member highlight strength
 var _hint_until := 0.0
@@ -136,6 +138,7 @@ func _next_round() -> void:
 	_members = ConstellationLogic.members(_con)
 	_active = -1
 	_dragging = false
+	_touch = -1
 	_wrong_flash = []
 	_glow = 0.0
 	_hint_until = 0.0
@@ -200,41 +203,60 @@ func _process(delta: float) -> void:
 
 # --- input ---------------------------------------------------------------------------------
 
+## One finger draws. Touch indices are not always 0 (X11 numbers touches on and on),
+## so the first finger down is remembered and others are ignored until it is lifted.
+## Tap a star to select it; tapping a second star connects the two if that is a line of
+## the figure, otherwise the selection simply moves there (no penalty) – that is how to
+## continue somewhere else in the figure. Tapping empty sky clears the selection.
+## Dragging from star to star draws; only releasing on a wrong star counts as a miss.
 func _unhandled_input(event: InputEvent) -> void:
 	if not _playing:
 		return
-	if event is InputEventScreenTouch and event.index == 0:
+	if event is InputEventScreenTouch:
+		if _touch >= 0 and event.index != _touch:
+			return
 		var local: Vector2 = event.position - SKY.position
 		if event.pressed:
 			if not Rect2(Vector2.ZERO, SKY.size).has_point(local):
 				return
+			_touch = event.index
 			var s := _star_at(local, PICK_TAP)
 			if s < 0:
-				return
-			if _active >= 0 and s != _active:
-				_connect(_active, s)   # tap-tap mode
+				_active = -1
+				_dragging = false
+			elif _active >= 0 and s != _active and _is_open_edge(_active, s):
+				_connect(_active, s)
+				_dragging = true
 			else:
 				_active = s
+				_dragging = true
 				Audio.play("tick")
-			_dragging = true
 			_finger = local
+			_drag_from = local
 		else:
-			if _dragging and _active >= 0:
+			if _dragging and _active >= 0 and local.distance_to(_drag_from) > PICK_TAP:
 				var s := _star_at(local, PICK_TAP * 0.7)
 				if s >= 0 and s != _active:
 					_connect(_active, s)
 			_dragging = false
+			_touch = -1
 		get_viewport().set_input_as_handled()
-	elif event is InputEventScreenDrag and event.index == 0 and _dragging:
+	elif event is InputEventScreenDrag and event.index == _touch and _dragging:
 		var local: Vector2 = event.position - SKY.position
 		_finger = local
 		if _active >= 0:
 			var s := _star_at(local, PICK_PASS)
-			# Passing a star only counts if it belongs to the figure; random stars along the
-			# way are ignored (releasing on one still counts as a try).
-			if s >= 0 and s != _active and _members.has(s):
+			# Passing a star connects only along a line of the figure; other stars along
+			# the way are ignored.
+			if s >= 0 and s != _active and _is_open_edge(_active, s):
 				_connect(_active, s)
+				_drag_from = local
 		get_viewport().set_input_as_handled()
+
+
+func _is_open_edge(a: int, b: int) -> bool:
+	var key := ConstellationLogic.edge_key(a, b)
+	return _edges.has(key) and not _done.has(key)
 
 
 func _star_at(local: Vector2, max_px: float) -> int:

@@ -106,7 +106,8 @@ func _update_status() -> void:
 func _on_input(event: InputEvent) -> void:
 	if _found:
 		return
-	if not (event is InputEventScreenTouch and event.pressed):
+	# Mouse clicks: real touches arrive here as emulated clicks, whatever their touch index.
+	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		return
 	var img_pos: Vector2 = event.position / _scale
 	var c: Array = _data.frames[_frame].comet

@@ -10,8 +10,8 @@ const ROUNDS := 3
 ## the middle of the view (fraction of its radius), ghost lines, and when member stars glow.
 const RULES := {
 	"explorer": {"mag": 5.0, "offset": 0.0, "ghost": true, "glow_after": 0.0, "mult": 1.0},
-	"researcher": {"mag": 5.3, "offset": 0.35, "ghost": false, "glow_after": 25.0, "mult": 1.5},
-	"pro": {"mag": 6.0, "offset": 0.6, "ghost": false, "glow_after": 45.0, "mult": 2.5},
+	"researcher": {"mag": 4.8, "offset": 0.15, "ghost": false, "glow_after": 12.0, "mult": 1.5},
+	"pro": {"mag": 5.4, "offset": 0.3, "ghost": false, "glow_after": 25.0, "mult": 2.5},
 }
 const POINTS_PER_LINE := 40
 const MIN_FIELD := 8.0

@@ -226,7 +226,7 @@ GAL_RESULT,Bestwert: %d %% Ähnlichkeit (Versuche: %d),Best: %d %% similarity (a
 GAL_ANSWER,So entsteht das Bild in unserem Modell:,This is how the picture forms in our model:,Así se forma la imagen en nuestro modelo:
 GAL_AGAIN,Andere Galaxie,Another galaxy,Otra galaxia
 CON_FIND,FINDE AM HIMMEL UND VERBINDE,FIND IN THE SKY AND CONNECT,ENCUENTRA EN EL CIELO Y UNE
-CON_HOW,Zieh mit dem Finger von Stern zu Stern – oder tippe die Sterne nacheinander an.,Drag your finger from star to star – or tap the stars one after the other.,"Arrastra el dedo de estrella en estrella, o toca las estrellas una tras otra."
+CON_HOW,"Zieh mit dem Finger von Stern zu Stern oder tippe die Sterne nacheinander an. Um woanders weiterzumachen, tippe einfach einen anderen Stern an.","Drag your finger from star to star or tap the stars one after the other. To continue somewhere else, just tap another star.","Arrastra el dedo de estrella en estrella o toca las estrellas una tras otra. Para seguir en otro sitio, toca otra estrella."
 CON_HINT,Tipp (kostet Punkte),Hint (costs points),Pista (cuesta puntos)
 CON_LINES,Linien: %d von %d,Lines: %d of %d,Líneas: %d de %d
 CON_ROUND,Sternbild %d von %d,Constellation %d of %d,Constelación %d de %d
