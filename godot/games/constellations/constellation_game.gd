@@ -324,6 +324,8 @@ func _finish() -> void:
 	Router.complete({"score": _total_points, "stars": stars, "wrong": _total_wrong,
 		"seconds": snappedf(_total_time, 0.1)})
 	Audio.play("success")
+	if stars == 3:
+		Confetti.burst(self)
 	var panel := PanelContainer.new()
 	panel.add_theme_stylebox_override("panel", UiTheme.box(UiTheme.SURFACE_HI, Color(UiTheme.SUCCESS, 0.6), 3))
 	panel.position = Vector2(SKY.position.x + 460, 330)

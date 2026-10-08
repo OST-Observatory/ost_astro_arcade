@@ -240,6 +240,7 @@ func _arrived() -> void:
 	if st >= 3:
 		lines.append(tr("SOL_HIT"))
 		Audio.play("success")
+		Confetti.burst(self)
 	else:
 		lines.append(tr("SOL_MISS") % AstroFormat.num(_transfer.miss_km() / 1e6, 1))
 		Audio.play("success" if st >= 2 else "fail", "SFX", 0.6)

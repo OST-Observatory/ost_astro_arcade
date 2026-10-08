@@ -208,6 +208,7 @@ func _show_result() -> void:
 	Router.step("duel_done")
 	Router.complete({"mode": "duel", "scores": logic.scores, "winner": logic.winner()})
 	Audio.play("success")
+	Confetti.burst(self)
 	var v := VBoxContainer.new()
 	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	v.alignment = BoxContainer.ALIGNMENT_CENTER

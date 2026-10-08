@@ -105,6 +105,8 @@ func _ready() -> void:
 	modulate.a = 0.0
 	create_tween().tween_property(self, "modulate:a", 1.0, 0.5)
 	Audio.play("success")
+	if stars == 3:
+		Confetti.burst(self)
 
 
 ## Bonus: find the real comet 67P in the OST's own images.

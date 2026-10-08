@@ -246,6 +246,7 @@ func _finished() -> void:
 	_playing = false
 	Router.step("solved")
 	Audio.play("success")
+	Confetti.burst(self)
 	var pts := logic.score(_elapsed)
 	var stars := logic.stars(_elapsed)
 	var rank := Scores.submit("puzzle", Session.player_name, pts, stars, {"image": _entry.id})

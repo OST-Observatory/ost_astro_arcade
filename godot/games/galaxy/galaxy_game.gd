@@ -398,6 +398,8 @@ func _finish() -> void:
 	Router.complete({"score": pts, "stars": stars, "similarity": _best, "attempts": _attempts,
 		"target": _target.id})
 	Audio.play("success")
+	if stars == 3:
+		Confetti.burst(self)
 	_show_result(pts, stars, rank)
 
 

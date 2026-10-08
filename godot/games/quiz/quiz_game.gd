@@ -357,6 +357,8 @@ func _show_result() -> void:
 	cols.add_child(lb)
 	v.add_child(ResultActions.make("QUIZ_AGAIN", "refresh", _new_round, 1700.0, false))
 	Audio.play("success")
+	if stars == 3:
+		Confetti.burst(self)
 
 
 func _plain(t: String, font_size: int, kind := "regular", color := UiTheme.TEXT) -> Label:

@@ -128,6 +128,7 @@ func _success() -> void:
 	_found = true
 	_playing = true
 	Audio.play("success")
+	Confetti.burst(self)
 	Router.step("comet_found")
 	_status.text = tr("COMET_FOUND")
 	_status.add_theme_color_override("font_color", UiTheme.SUCCESS)
