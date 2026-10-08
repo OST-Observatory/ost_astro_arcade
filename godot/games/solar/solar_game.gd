@@ -9,7 +9,7 @@ const VIEW := Rect2(40, 170, 1640, 1230)
 const PANEL_X := 1730.0
 const PANEL_W := 790.0
 const RANGE_DAYS := 800
-const FLIGHT_SECONDS := 7.0
+const FLIGHT_SECONDS := 5.0
 const ATTEMPTS := 3
 const PLANETS := [["mercury", Color("a7a7a7"), 0.035], ["venus", Color("e8cfa0"), 0.055],
 	["earth", Color("4dd0e1"), 0.06], ["mars", Color("e2725b"), 0.05]]
@@ -23,6 +23,7 @@ var _attempts := 0
 var _best_miss := INF
 var _flying := false
 var _f := 0.0
+var _fast := 1.0            # tap during the flight to fast-forward
 var _root: Node3D
 var _cam: Camera3D
 var _bodies := {}           # planet -> MeshInstance3D
@@ -101,7 +102,7 @@ func _build_3d() -> void:
 		body.add_child(lbl)
 		_bodies[p[0]] = body
 	_ghost = SpaceDraw.sphere(Vector3.ZERO, 0.05, Color(0.89, 0.45, 0.36, 0.35), 1.0)
-	_ghost.visible = diff == "explorer"
+	_ghost.visible = diff != "pro"   # pros see it from the second attempt on
 	_root.add_child(_ghost)
 	_target = SpaceDraw.sphere(Vector3.ZERO, 0.03, Color(1.0, 0.85, 0.4), 3.0)
 	_root.add_child(_target)
@@ -206,12 +207,18 @@ func _launch() -> void:
 	Audio.play("whoosh", "SFX", 0.7)
 	_rocket.visible = true
 	_f = 0.0
+	_fast = 1.0
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if _flying and event is InputEventMouseButton and event.pressed:
+		_fast = 4.0
 
 
 func _process(delta: float) -> void:
 	if not _flying:
 		return
-	_f = minf(_f + delta / FLIGHT_SECONDS, 1.0)
+	_f = minf(_f + delta * _fast / FLIGHT_SECONDS, 1.0)
 	var jd := _jd + _f * _transfer.days
 	_place_planets(jd)
 	_rocket.position = Kepler.to_godot(_transfer.position_at(_f))
@@ -261,6 +268,7 @@ func _arrived() -> void:
 	if _trail:
 		_trail.queue_free()
 		_trail = null
+	_ghost.visible = true
 	_slider.set_enabled(true)
 	_launch_btn.disabled = false
 	_set_launch(_jd)

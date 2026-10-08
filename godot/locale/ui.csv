@@ -245,7 +245,7 @@ SOL_PHASE,Mars steht beim Start %d° vor der Erde.,"At launch, Mars is %d° ahea
 SOL_GO,Rakete starten!,Launch the rocket!,¡Lanzar el cohete!
 SOL_ATTEMPT,Versuch %d von %d,Attempt %d of %d,Intento %d de %d
 SOL_DATE,Start: %s,Launch: %s,Lanzamiento: %s
-SOL_DAY,Flugtag %d von %d  ·  %s,Flight day %d of %d  ·  %s,Día de vuelo %d de %d  ·  %s
+SOL_DAY,Flugtag %d von %d  ·  %s  ·  Tippen = schneller,Flight day %d of %d  ·  %s  ·  tap = faster,Día de vuelo %d de %d  ·  %s  ·  toca = más rápido
 SOL_HIT,Treffer! Deine Sonde erreicht den Mars.,Hit! Your probe reaches Mars.,¡Acierto! Tu sonda llega a Marte.
 SOL_MISS,Knapp daneben: Mars war %s Millionen km entfernt.,Missed: Mars was %s million km away.,Fallaste: Marte estaba a %s millones de km.
 SOL_DAYS_LATER,Tipp: Starte etwa %d Tage später.,Tip: launch about %d days later.,Pista: lanza unos %d días más tarde.
