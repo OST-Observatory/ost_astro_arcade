@@ -19,6 +19,8 @@ entry.
 | `godot/assets/solar/textures/*.jpg` | Planet, Sun and Moon maps (via `tools/solar/fetch_textures.py`, manifest `textures.json`) | Solar System Scope (solarsystemscope.com), copies on Wikimedia Commons | CC BY 4.0 |
 | `godot/assets/solar/saturn_rings.png` | Saturn's ring profile drawn from the measured ring boundaries (`tools/solar/make_rings.py`) | OST (own work) | © OST |
 | `godot/assets/data/solar/bodies.json`, `small_bodies.json` | Orbital elements of dwarf planets, comets and ~11,800 small bodies; physical data | JPL Small-Body Database; NASA planetary fact sheets; texts partly from astro_mini_games | public domain (NASA/JPL); texts © OST |
+| `godot/assets/galaxy/images/cartwheel.jpg` | Cartwheel Galaxy (weic2211a, scaled) | NASA, ESA, CSA, STScI | CC BY 4.0 (ESA/Webb) |
+| `godot/assets/data/galaxy/rotation_curves.json` | Measured rotation curves and reference mass models (`tools/galaxy/build_rotation_curves.py`) | Milky Way: Eilers et al. 2019, ApJ 871, 120; NGC 3198 and DDO 154: SPARC, Lelli, McGaugh & Schombert 2016, AJ 152, 157; Milky Way baryons: Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529 | published data, cited |
 | `godot/assets/fonts/` | Inter, CMU Serif, Material Icons | rsms/inter; Computer Modern Unicode; Google | SIL OFL 1.1; SIL OFL 1.1; Apache 2.0 |
 
 ## Planned (not yet in the repo)

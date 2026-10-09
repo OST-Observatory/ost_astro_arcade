@@ -2,17 +2,17 @@
 ##   build:     one galaxy, stars start with the measured speeds, gravity is the player's mass
 ##              model; loops over LOOP_T so the effect of each change is seen again and again.
 ##   collide:   two galaxies along the centre track of an EncounterModel.
-## Time advances in fixed steps of EncounterModel.DT (up to 16 per frame), exactly like the CPU.
+## Time advances in fixed steps of EncounterModel.DT (up to MAX_STEPS per frame), like the CPU.
 class_name GalaxyView
 extends Node3D
 
 signal finished
 
 const DT := EncounterModel.DT
-const MAX_STEPS := 16
+const MAX_STEPS := 24
 const LOOP_T := 129.0          # 1 billion years
-const BUILD_SPEED := 14.0      # time units per second
-const COLLIDE_SPEED := 12.0
+const BUILD_SPEED := 5.0       # time units per second (calm, so the eye can follow)
+const COLLIDE_SPEED := 14.0
 
 var fixed_step := 0.0          # > 0: seconds per frame regardless of the real frame time (captures)
 var t := 0.0

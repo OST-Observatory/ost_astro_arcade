@@ -4,6 +4,7 @@ class_name Icons
 extends RefCounted
 
 const MAP := {
+	"grid_view": 0xe9b0,
 	"workspace_premium": 0xe7af,
 	"bolt": 0xea0b,
 	"lock_open": 0xe898,

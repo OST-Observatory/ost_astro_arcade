@@ -1,4 +1,4 @@
-"""Downloads the target images for the galaxy builder (ESA/Hubble, ESA/Webb; CC BY 4.0)
+"""Downloads the photos for the galaxy builder's badges (ESA/Hubble, ESA/Webb; CC BY 4.0)
 and scales them to at most 1600 px. The Antennae use the OST's own image (puzzle set).
 Output: godot/assets/galaxy/images/<id>.jpg
 
@@ -18,6 +18,7 @@ MAX_PX = 1600
 IMAGES = {
     "mice": "https://esahubble.org/media/archives/images/large/heic0206h.jpg",
     "whirlpool": "https://esahubble.org/media/archives/images/large/heic0506a.jpg",
+    "cartwheel": "https://esawebb.org/media/archives/images/large/weic2211a.jpg",
 }
 
 

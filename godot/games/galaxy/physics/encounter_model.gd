@@ -8,7 +8,7 @@
 class_name EncounterModel
 extends RefCounted
 
-const DT := 0.025            # track step = GPU step (model time units)
+const DT := 0.05             # track step = GPU step (model time units)
 const DT_CPU := 0.1          # CPU star integration step
 const LN_LAMBDA := 3.0
 const DF_SCALE := 0.25

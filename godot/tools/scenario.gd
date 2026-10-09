@@ -176,7 +176,7 @@ func _ready() -> void:
 						cg._active = int(edges[n][0])
 					if scenario == "con_result":
 						cg._next_round()
-		"gal_pick", "gal_empty", "gal_stars", "gal_stable", "gal_quiz", "gal_collide", "gal_badge":
+		"gal_pick", "gal_empty", "gal_stars", "gal_stable", "gal_quiz", "gal_collide", "gal_badge", "gal_partners":
 			var gg: Control = load("res://games/galaxy/galaxy_game.tscn").instantiate()
 			gg.skip_intro = true
 			gg.rng_seed = 5
@@ -196,7 +196,7 @@ func _ready() -> void:
 						gg._on_knob()
 					elif scenario == "gal_quiz":
 						gg._unlock("bh")
-				"gal_collide", "gal_badge":
+				"gal_collide", "gal_badge", "gal_partners":
 					gg._target = GalaxyTemplates.get_target(gid)
 					gg._knobs = GalaxyTemplates.reference_knobs(gg._target)
 					gg._unlocked = GalaxyTemplates.COMPONENTS.duplicate()
@@ -204,7 +204,9 @@ func _ready() -> void:
 					gg._approach = OS.get_environment("APPROACH") if OS.get_environment("APPROACH") != "" else "grazing"
 					gg._partner = OS.get_environment("PARTNER") if OS.get_environment("PARTNER") != "" else "twin"
 					gg.start_collide()
-					if scenario == "gal_badge":
+					if scenario == "gal_partners":
+						gg._open_partner_picker()
+					elif scenario == "gal_badge":
 						gg._badges = ["tails"]
 						gg._update_badges()
 						gg._show_badge("merger")

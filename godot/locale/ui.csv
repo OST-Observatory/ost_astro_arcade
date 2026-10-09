@@ -265,7 +265,7 @@ GAL_BLOCK_BH,Schwarzes Loch,Black hole,Agujero negro
 GAL_BLOCK_STARS,Sterne,Stars,Estrellas
 GAL_BLOCK_GAS,Gas & Staub,Gas & dust,Gas y polvo
 GAL_BLOCK_HALO,Dunkle Materie,Dark matter,Materia oscura
-GAL_UNLOCK,Freischalten – mit einer Frage,Unlock – answer a question,Desbloquear con una pregunta
+GAL_UNLOCK,Freischalten,Unlock,Desbloquear
 GAL_KNOB_CORE,Kernradius des Halos,Halo core radius,Radio del núcleo del halo
 GAL_V_KPC,%s kpc,%s kpc,%s kpc
 GAL_MASS_NONE,keine,none,ninguna
@@ -311,7 +311,7 @@ GAL_SEEN,Entstanden: %s.,Formed: %s.,Se formó: %s.
 GAL_SEEN_NONE,Diesmal sind keine besonderen Formen entstanden.,No special shapes formed this time.,Esta vez no se formaron formas especiales.
 GAL_RECIPE_TAILS,Tipp: Lass die Galaxien streifend aneinander vorbeiziehen.,Tip: let the galaxies graze past each other.,Pista: haz que las galaxias pasen rozándose.
 GAL_RECIPE_MERGER,Tipp: Ein schwerer Partner und eine frontale oder streifende Begegnung.,Tip: a heavy partner and a head-on or grazing encounter.,Pista: una compañera pesada y un encuentro frontal o rasante.
-GAL_RECIPE_RING,Tipp: Frontal – mit der kleineren Spiralgalaxie.,Tip: head-on – with the smaller spiral galaxy.,"Pista: frontal, con la galaxia espiral más pequeña."
+GAL_RECIPE_RING,Tipp: Frontal – mit der leichteren Spiralgalaxie.,Tip: head-on – with the lighter spiral galaxy.,"Pista: frontal, con la galaxia espiral más ligera."
 GAL_RECIPE_BRIDGE,"Tipp: Streifend mit dem Zwilling, Drehsinn mit der Bahn.","Tip: grazing with the twin, spinning with the orbit.","Pista: rasante con la gemela, girando con la órbita."
 GAL_RUNNING,Die Galaxien ziehen sich an …,The galaxies pull on each other …,Las galaxias se atraen …
 GAL_ANALYSING,Wird ausgewertet …,Analysing …,Analizando …
@@ -368,3 +368,12 @@ GAL_Q_HALO_WITHOUT_A0,Sie würden davonfliegen,They would fly away,Saldrían vol
 GAL_Q_HALO_WITHOUT_A1,Sie würden in die Mitte stürzen,They would fall into the centre,Caerían al centro
 GAL_Q_HALO_WITHOUT_A2,Nichts – sie kreisen genauso weiter,Nothing – they keep orbiting the same way,Nada: seguirían girando igual
 GAL_Q_HALO_WITHOUT_EXPL,"Die äußeren Sterne sind so schnell, dass die sichtbare Masse sie nicht festhalten kann. Probier es aus: Ohne Dunkle Materie fliegen sie aus deiner Galaxie heraus!",The outer stars are so fast that visible matter cannot hold them. Try it: without dark matter they fly out of your galaxy!,Las estrellas exteriores van tan rápido que la materia visible no puede sujetarlas. Pruébalo: ¡sin materia oscura salen volando de tu galaxia!
+GAL_INTRO_TITLE,So funktioniert's,How it works,Cómo funciona
+GAL_INTRO_1,"Gleich siehst du die Sterne dieser Galaxie. Sie kreisen genau so schnell, wie Astronominnen und Astronomen es gemessen haben – das zeigen die weißen Punkte im Diagramm rechts.",In a moment you will see the stars of this galaxy. They orbit exactly as fast as astronomers have measured – shown by the white points in the chart on the right.,Enseguida verás las estrellas de esta galaxia. Giran exactamente tan rápido como lo han medido los astrónomos: son los puntos blancos del gráfico de la derecha.
+GAL_INTRO_2,"Noch fehlt die Schwerkraft, die sie festhält – ohne sie fliegen die Sterne davon. Füge Baustein für Baustein hinzu: Schwarzes Loch, Sterne, Gas und …?","The gravity that holds them is still missing – without it the stars fly away. Add one building block after another: black hole, stars, gas and …?","Todavía falta la gravedad que las sujeta: sin ella, las estrellas salen volando. Añade pieza a pieza: agujero negro, estrellas, gas y …?"
+GAL_INTRO_3,Ziel: Die orange Linie im Diagramm soll durch die Messpunkte gehen. Dann bleibt deine Galaxie zusammen.,Goal: the orange line in the chart should pass through the measured points. Then your galaxy holds together.,Objetivo: la línea naranja del gráfico debe pasar por los puntos medidos. Así tu galaxia se mantiene unida.
+GAL_INTRO_GO,Los geht's,Let's go,¡Vamos!
+GAL_RESTART_SIM,Simulation neu starten,Restart the simulation,Reiniciar la simulación
+GAL_YOUR_GALAXY,Deine Galaxie: %s – gebaut von %s,Your galaxy: %s – built by %s,"Tu galaxia: %s, construida por %s"
+GAL_PARTNER_CHOOSE,Anderen Partner wählen,Choose another partner,Elegir otra compañera
+GAL_PARTNER_PICK,Mit welcher Galaxie soll deine zusammenstoßen?,Which galaxy should yours collide with?,¿Con qué galaxia debe chocar la tuya?

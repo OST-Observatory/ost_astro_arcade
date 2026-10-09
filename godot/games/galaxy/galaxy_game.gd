@@ -35,6 +35,9 @@ var _collisions := 0
 var _model: EncounterModel
 var _thread: Thread
 var _partner := "spiral"
+var _gallery: Array = []
+var _partner_thumb: TextureRect
+var _partner_label: Label
 var _approach := "grazing"
 var _spin := 1.0
 var _choice_buttons := {}
@@ -43,6 +46,7 @@ var _info: Label
 var _start_btn: BigButton
 var _left_label: Label
 var _running := false
+var _finished := false
 
 
 func _ready() -> void:
@@ -196,11 +200,42 @@ func start_build(target_id: String) -> void:
 	_continue_btn.pressed.connect(_finish_build)
 	col.add_child(_continue_btn)
 
+	var restart := BigButton.make("GAL_RESTART_SIM", "refresh", false, 0)
+	restart.position = VIEW.end - Vector2(620, 130)
+	restart.pressed.connect(func():
+		_view.set_potential(_current_pot())
+		_view.play())
+	add_child(restart)
+
 	_rebuild_blocks()
 	_view.show_build(_target, _current_pot())
-	_view.play()
 	_refresh()
+	_show_intro()
 	Router.step("build")
+
+
+## Short explanation first; the stars start moving when the visitor is ready.
+func _show_intro() -> void:
+	var card := PanelContainer.new()
+	card.add_theme_stylebox_override("panel", UiTheme.box(UiTheme.SURFACE_HI, Color(UiTheme.SCIENCE, 0.6), 3))
+	card.position = VIEW.position + Vector2(160, 260)
+	card.custom_minimum_size = Vector2(VIEW.size.x - 320, 0)
+	add_child(card)
+	var v := VBoxContainer.new()
+	v.add_theme_constant_override("separation", 24)
+	card.add_child(v)
+	v.add_child(UiTheme.label("GAL_INTRO_TITLE", UiTheme.SIZE_H2 - 4, "serif", UiTheme.ACCENT_HI))
+	for key in ["GAL_INTRO_1", "GAL_INTRO_2", "GAL_INTRO_3"]:
+		var l := UiTheme.label(key, UiTheme.SIZE_BODY - 2, "regular", UiTheme.TEXT)
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size = Vector2(VIEW.size.x - 400, 0)
+		v.add_child(l)
+	var go := BigButton.make("GAL_INTRO_GO", "play_arrow", true, 420)
+	go.size_flags_horizontal = Control.SIZE_SHRINK_END
+	go.pressed.connect(func():
+		card.queue_free()
+		_view.play())
+	v.add_child(go)
 
 
 func _make_view() -> void:
@@ -352,6 +387,7 @@ func _finish_build() -> void:
 func start_collide() -> void:
 	_clear()
 	_running = false
+	_finished = false
 	_make_view()
 	var title := UiTheme.label("GAL_COLLIDE_TITLE", UiTheme.SIZE_H2 - 4, "serif", UiTheme.TEXT)
 	title.position = Vector2(200, 52)
@@ -365,19 +401,30 @@ func start_collide() -> void:
 	col.custom_minimum_size = Vector2(PANEL_W, 0)
 	col.add_theme_constant_override("separation", 12)
 	add_child(col)
+	var mine := _plain(tr("GAL_YOUR_GALAXY") % [tr("GAL_T_" + str(_target.id).to_upper()), Session.ensure_name()],
+		UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.ACCENT_HI)
+	mine.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	mine.custom_minimum_size = Vector2(PANEL_W, 0)
+	col.add_child(mine)
 	col.add_child(UiTheme.label("GAL_PARTNER", UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.TEXT_DIM))
-	var partners := HFlowContainer.new()
-	partners.add_theme_constant_override("h_separation", 12)
-	partners.add_theme_constant_override("v_separation", 12)
-	for p in GalaxyTemplates.PARTNERS:
-		partners.add_child(_choice("partner", p[0], "GAL_PARTNER_" + str(p[0]).to_upper(), 300))
-	var gallery := GalaxyGalleryStore.new(Settings.data_path("galaxy_gallery.json")).latest(2)
-	for i in gallery.size():
-		var b := _choice("partner", "gallery_%d" % i, "", 300)
-		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-		b.set_key(tr("GAL_PARTNER_GALLERY") % str(gallery[i].player))
-		partners.add_child(b)
-	col.add_child(partners)
+	var prow := HBoxContainer.new()
+	prow.add_theme_constant_override("separation", 20)
+	_partner_thumb = TextureRect.new()
+	_partner_thumb.custom_minimum_size = Vector2(120, 120)
+	_partner_thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	prow.add_child(_partner_thumb)
+	var pcol := VBoxContainer.new()
+	pcol.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_partner_label = _plain("", UiTheme.SIZE_BODY, "semibold", UiTheme.TEXT)
+	pcol.add_child(_partner_label)
+	var choose := BigButton.make("GAL_PARTNER_CHOOSE", "grid_view", false, 520)
+	choose.pressed.connect(_open_partner_picker)
+	pcol.add_child(choose)
+	prow.add_child(pcol)
+	col.add_child(prow)
+	_gallery = GalaxyGalleryStore.new(Settings.data_path("galaxy_gallery.json")).latest(12)
+	_gallery.reverse()   # newest first
+	_show_partner()
 	col.add_child(UiTheme.label("GAL_APPROACH", UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.TEXT_DIM))
 	var ap := HBoxContainer.new()
 	ap.add_theme_constant_override("separation", 12)
@@ -450,10 +497,85 @@ func _mark_choices() -> void:
 	_left_label.text = tr("GAL_LEFT") % (CollideLogic.MAX_COLLISIONS - _collisions)
 
 
+## All partner options: [id, target id, label].
+func _partner_options() -> Array:
+	var out := []
+	for p in GalaxyTemplates.PARTNERS:
+		out.append([p[0], p[1], tr("GAL_PARTNER_" + str(p[0]).to_upper())])
+	for i in _gallery.size():
+		out.append(["gallery_%d" % i, str(_gallery[i].target), tr("GAL_PARTNER_GALLERY") % str(_gallery[i].player)])
+	return out
+
+
+func _show_partner() -> void:
+	for o in _partner_options():
+		if o[0] == _partner:
+			_partner_label.text = o[2]
+			_partner_thumb.texture = GalaxyTemplates.thumbnail(GalaxyTemplates.get_target(o[1]))
+
+
+## Partner choice as picture cards: the three galaxy types and the newest visitor galaxies.
+func _open_partner_picker() -> void:
+	if _running:
+		return
+	var overlay := ColorRect.new()
+	overlay.color = Color(0.0, 0.0, 0.02, 0.94)
+	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(overlay)
+	var v := VBoxContainer.new()
+	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	v.alignment = BoxContainer.ALIGNMENT_CENTER
+	v.add_theme_constant_override("separation", 30)
+	overlay.add_child(v)
+	var t := UiTheme.label("GAL_PARTNER_PICK", UiTheme.SIZE_H2, "serif", UiTheme.TEXT)
+	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	v.add_child(t)
+	var grid := GridContainer.new()
+	grid.columns = 5
+	grid.add_theme_constant_override("h_separation", 24)
+	grid.add_theme_constant_override("v_separation", 24)
+	var center := CenterContainer.new()
+	center.add_child(grid)
+	v.add_child(center)
+	for o in _partner_options():
+		var b := Button.new()
+		b.custom_minimum_size = Vector2(400, 330)
+		b.focus_mode = Control.FOCUS_NONE
+		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		var col := VBoxContainer.new()
+		col.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		col.alignment = BoxContainer.ALIGNMENT_CENTER
+		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		b.add_child(col)
+		var img := TextureRect.new()
+		img.texture = GalaxyTemplates.thumbnail(GalaxyTemplates.get_target(o[1]))
+		img.custom_minimum_size = Vector2(220, 220)
+		img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		img.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		img.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		col.add_child(img)
+		var l := _plain(o[2], UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.ACCENT_HI if o[0] == _partner else UiTheme.TEXT)
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size = Vector2(380, 0)
+		col.add_child(l)
+		var id: String = o[0]
+		b.pressed.connect(func():
+			Audio.play("tap")
+			_partner = id
+			_show_partner()
+			_preview_encounter()
+			overlay.queue_free())
+		grid.add_child(b)
+	var close := BigButton.make("CLOSE", "close", false, 360)
+	close.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	close.pressed.connect(overlay.queue_free)
+	v.add_child(close)
+
+
 func _partner_galaxy() -> Dictionary:
 	if _partner.begins_with("gallery_"):
-		var entries := GalaxyGalleryStore.new(Settings.data_path("galaxy_gallery.json")).latest(2)
-		var e: Dictionary = entries[int(_partner.trim_prefix("gallery_"))]
+		var e: Dictionary = _gallery[int(_partner.trim_prefix("gallery_"))]
 		var t := GalaxyTemplates.get_target(str(e.target))
 		return {"pot": GalaxyTemplates.build(t, e.knobs), "target": t, "spin": 1.0}
 	for p in GalaxyTemplates.PARTNERS:
@@ -587,8 +709,13 @@ func _show_badge(f: String) -> void:
 # --- result -------------------------------------------------------------------------------------
 
 func _finish() -> void:
-	if _running:
+	if _finished:
 		return
+	if _running:
+		# "Done" during a collision: stop it; the analysis thread is joined later.
+		_view.stop()
+		_running = false
+	_finished = true
 	_running = true
 	Router.step("done")
 	var stable := BuildLogic.is_stable(_match, diff)

@@ -65,7 +65,8 @@ func _notification(what: int) -> void:
 
 func set_key(key: String) -> void:
 	text_key = key
-	_refresh_text()
+	if _label != null:   # before _ready() the label does not exist yet; _ready() shows the key
+		_refresh_text()
 
 
 func _refresh_text() -> void:

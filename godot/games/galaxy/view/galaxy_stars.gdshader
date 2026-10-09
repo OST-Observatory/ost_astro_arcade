@@ -5,7 +5,7 @@
 // Particle velocity is kept in CUSTOM.xyz, the host galaxy in CUSTOM.w.
 shader_type particles;
 
-const int MAX_STEPS = 16;
+const int MAX_STEPS = 24;
 
 uniform int n_first = 100000;          // particles [0, n_first) belong to galaxy 0
 uniform float pot[32];                 // 16 per galaxy, see GalaxyPotential.to_uniforms()
@@ -21,9 +21,9 @@ uniform float r_gas[2];
 uniform float spin[2];
 uniform vec3 start_center[2];
 uniform vec3 start_vel[2];
-uniform vec3 centers[32];              // per step k: galaxy 0 at 2k, galaxy 1 at 2k+1
+uniform vec3 centers[48];              // per step k: galaxy 0 at 2k, galaxy 1 at 2k+1
 uniform int steps = 0;                 // steps to do this frame (0 = paused)
-uniform float dt = 0.025;
+uniform float dt = 0.05;
 
 uniform vec4 color_core0 : source_color = vec4(1.0, 0.84, 0.6, 1.0);
 uniform vec4 color_edge0 : source_color = vec4(0.55, 0.7, 1.0, 1.0);

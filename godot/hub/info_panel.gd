@@ -5,7 +5,9 @@ extends Control
 const CREDITS := [
 	"OST-Logo, Fotos & Aufnahmen: OST, Universität Potsdam (Komet 67P: CC BY-NC-SA 3.0)",
 	"Quiz-Bilder: siehe Bildnachweis unter jedem Bild",
-	"Galaxien: NASA, ESA & Hubble Heritage Team / ACS Science Team (CC BY 4.0)",
+	"Galaxien: NASA, ESA & Hubble Heritage Team / ACS Science Team; Wagenrad: NASA, ESA, CSA, STScI (CC BY 4.0)",
+	"Rotationskurven: Eilers et al. 2019 (Gaia), SPARC (Lelli, McGaugh & Schombert 2016)",
+	"Planetentexturen: Solar System Scope (CC BY 4.0); Kleinkörper: JPL Small-Body Database",
 	"Sternkarten: d3-celestial, Olaf Frohn (BSD-3), Daten ESA Hipparcos",
 	"Asteroiden: JPL Horizons & SBDB (NASA/JPL-Caltech), ESA Gaia DR3 (CC BY-SA 3.0 IGO)",
 	"Schriften: Inter (SIL OFL 1.1), CMU Serif (SIL OFL 1.1), Material Icons (Apache 2.0)",

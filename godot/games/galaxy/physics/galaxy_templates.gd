@@ -109,3 +109,47 @@ static func measured_v(t: Dictionary, r: float) -> float:
 
 ## Partner galaxies for collisions (besides galaxies saved by visitors): [id, target].
 const PARTNERS := [["dwarf", "ddo154"], ["spiral", "ngc3198"], ["twin", "milkyway"]]
+
+
+static var _thumbs := {}
+
+
+## A small picture of a galaxy (seen at an angle), drawn from the same star distribution as
+## the simulation; cached per target.
+static func thumbnail(t: Dictionary, size := 220) -> ImageTexture:
+	var key := "%s_%d" % [t.id, size]
+	if _thumbs.has(key):
+		return _thumbs[key]
+	var setup := star_setup(t, t.reference, false)
+	var acc := PackedFloat32Array()
+	acc.resize(size * size * 3)
+	# Same scale for all galaxies, so a dwarf looks small next to the Milky Way.
+	var biggest := 0.0
+	for other in targets():
+		biggest = maxf(biggest, float(other.r_last))
+	var scale := size * 0.46 / biggest
+	var core: Color = t.look.core
+	var edge: Color = t.look.edge
+	var tilt := Basis(Vector3.RIGHT, deg_to_rad(55.0))
+	for i in 12000:
+		var s := StarSampler.sample(i, setup)
+		var p: Vector3 = tilt * (s[0] as Vector3)
+		var px := int(size * 0.5 + p.x * scale)
+		var py := int(size * 0.5 + p.y * scale)
+		if px < 0 or py < 0 or px >= size or py >= size:
+			continue
+		var f := clampf(Vector2(s[0].x, s[0].z).length() / float(t.r_last), 0.0, 1.0)
+		var c := core.lerp(edge, sqrt(f))
+		var o := (py * size + px) * 3
+		acc[o] += c.r
+		acc[o + 1] += c.g
+		acc[o + 2] += c.b
+	var img := Image.create(size, size, false, Image.FORMAT_RGB8)
+	for y in size:
+		for x in size:
+			var o := (y * size + x) * 3
+			# Soft tone curve: faint outskirts stay visible, the centre does not burn out.
+			img.set_pixel(x, y, Color(1.0 - exp(-acc[o] * 0.6), 1.0 - exp(-acc[o + 1] * 0.6), 1.0 - exp(-acc[o + 2] * 0.6)))
+	var tex := ImageTexture.create_from_image(img)
+	_thumbs[key] = tex
+	return tex
