@@ -226,17 +226,22 @@ func _process(delta: float) -> void:
 	var n := mini(int(_acc / DT), MAX_STEPS)
 	_acc -= n * DT
 	_acc = minf(_acc, DT * MAX_STEPS)
-	if t + n * DT > _t_end:
-		n = maxi(0, int((_t_end - t) / DT))
+	# Never stop short of the end: the last step may go a little past it (the track has room).
+	n = mini(n, steps_left())
 	_push(n)
 	t += n * DT
 	_update_scene()
-	if t >= _t_end - DT * 0.5:
+	if steps_left() == 0:
 		if mode == "build":
 			_restart()
 		else:
 			playing = false
 			finished.emit()
+
+
+## Fixed steps still needed to reach the end of the run (or of the build loop).
+func steps_left() -> int:
+	return maxi(0, int(ceil((_t_end - t) / DT - 1e-6)))
 
 
 func _speed() -> float:

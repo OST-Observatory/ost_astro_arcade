@@ -47,6 +47,9 @@ var _start_btn: BigButton
 var _left_label: Label
 var _running := false
 var _finished := false
+var _analysis: EncounterModel
+var _progress: ProgressBar
+var _progress_label: Label
 
 
 func _ready() -> void:
@@ -68,6 +71,8 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	if _analysis:
+		_analysis.cancelled = true   # leaving: don't wait for the whole analysis
 	if _thread and _thread.is_started():
 		_thread.wait_to_finish()
 
@@ -457,6 +462,21 @@ func start_collide() -> void:
 		strip.add_child(b)
 		_badge_icons[f] = [ic, l]
 	col.add_child(strip)
+	var bar_row := HBoxContainer.new()
+	bar_row.add_theme_constant_override("separation", 16)
+	_progress_label = _plain("", UiTheme.SIZE_SMALL, "medium", UiTheme.SCIENCE)
+	_progress_label.custom_minimum_size = Vector2(330, 0)
+	bar_row.add_child(_progress_label)
+	_progress = ProgressBar.new()
+	_progress.show_percentage = false
+	_progress.custom_minimum_size = Vector2(PANEL_W - 346, 26)
+	_progress.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_progress.add_theme_stylebox_override("background", UiTheme.box(Color(1, 1, 1, 0.08), Color(0, 0, 0, 0), 0, 13))
+	_progress.add_theme_stylebox_override("fill", UiTheme.box(UiTheme.SCIENCE, Color(0, 0, 0, 0), 0, 13))
+	_progress.max_value = 1.0
+	bar_row.add_child(_progress)
+	bar_row.modulate.a = 0.0
+	col.add_child(bar_row)
 	_info = _plain(tr("GAL_COLLIDE_TASK"), UiTheme.SIZE_SMALL, "regular", UiTheme.TEXT)
 	_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_info.custom_minimum_size = Vector2(PANEL_W, 0)
@@ -617,12 +637,19 @@ func _run_collision() -> void:
 		_thread.wait_to_finish()
 	_thread = Thread.new()
 	var m := _model
+	_analysis = m
 	_thread.start(func() -> Dictionary:
 		m.run_stars(250)
 		return FeatureDetector.detect(m))
 
 
 func _process(_delta: float) -> void:
+	if _progress and is_instance_valid(_progress):
+		var busy := _thread != null and _thread.is_alive() and _analysis != null
+		(_progress.get_parent() as Control).modulate.a = 1.0 if busy else 0.0
+		if busy:
+			_progress.value = _analysis.progress()
+			_progress_label.text = tr("GAL_PROGRESS") % int(_analysis.progress() * 100.0)
 	if _view and _time_label and (_running or _view.mode == "build"):
 		_time_label.text = tr("GAL_TIME") % int(round(_view.t * GalaxyPotential.MYR / 10.0) * 10)
 
@@ -712,8 +739,10 @@ func _finish() -> void:
 	if _finished:
 		return
 	if _running:
-		# "Done" during a collision: stop it; the analysis thread is joined later.
+		# "Done" during a collision: stop it and its analysis; the thread is joined later.
 		_view.stop()
+		if _analysis:
+			_analysis.cancelled = true
 		_running = false
 	_finished = true
 	_running = true

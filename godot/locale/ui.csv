@@ -377,3 +377,4 @@ GAL_RESTART_SIM,Simulation neu starten,Restart the simulation,Reiniciar la simul
 GAL_YOUR_GALAXY,Deine Galaxie: %s – gebaut von %s,Your galaxy: %s – built by %s,"Tu galaxia: %s, construida por %s"
 GAL_PARTNER_CHOOSE,Anderen Partner wählen,Choose another partner,Elegir otra compañera
 GAL_PARTNER_PICK,Mit welcher Galaxie soll deine zusammenstoßen?,Which galaxy should yours collide with?,¿Con qué galaxia debe chocar la tuya?
+GAL_PROGRESS,Auswertung: %d %%,Analysis: %d %%,Análisis: %d %%

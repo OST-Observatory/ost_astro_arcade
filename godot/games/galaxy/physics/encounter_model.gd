@@ -27,6 +27,9 @@ var q_actual := 0.0
 var mu := [0.5, 0.5]         # mass fractions
 var v_rel0 := Vector3.ZERO
 var snapshots: Array = []    # [{t, c1, c2, stars: PackedVector3Array, owner: PackedByteArray}]
+var _done: Array = []        # stars finished per worker chunk (read by progress())
+var _total := 1
+var cancelled := false       # set from the main thread: run_stars() stops early, no snapshots
 
 
 ## Orientation of the player's disk and of the partner for an approach type and spin.
@@ -176,6 +179,14 @@ func _build_track() -> void:
 	track.append(r)
 
 
+## Share of the CPU analysis already done (0..1), safe to call from the main thread.
+func progress() -> float:
+	var s := 0
+	for d in _done:
+		s += int(d)
+	return clampf(float(s) / _total, 0.0, 1.0)
+
+
 ## True if the centres end close together and slow: the galaxies have merged.
 func merged() -> bool:
 	var r := rel_at(t_end)
@@ -203,11 +214,18 @@ func run_stars(n_per_galaxy := 500, dt := DT_CPU) -> void:
 	var per := int(ceil(float(n) / chunks))
 	var parts := []
 	parts.resize(chunks)
+	var done := []
+	done.resize(chunks)
+	done.fill(0)
+	_done = done
+	_total = maxi(n, 1)
 	var p1: GalaxyPotential = gal[0].pot
 	var p2: GalaxyPotential = gal[1].pot
 	var job := func(ch: int) -> void:
 		var out := []   # per star: PackedVector3Array of snapshot positions
 		for i in range(ch * per, mini(n, (ch + 1) * per)):
+			if cancelled:
+				return
 			var x: Vector3 = init[i][0]
 			var v: Vector3 = init[i][1]
 			var snaps := PackedVector3Array([x])
@@ -219,9 +237,13 @@ func run_stars(n_per_galaxy := 500, dt := DT_CPU) -> void:
 				if (k + 1) % every == 0:
 					snaps.append(x)
 			out.append(snaps)
+			done[ch] += 1   # each chunk writes only its own slot
 		parts[ch] = out
 	var id := WorkerThreadPool.add_group_task(job, chunks, -1, true, "galaxy_encounter")
 	WorkerThreadPool.wait_for_group_task_completion(id)
+	if cancelled:
+		snapshots = []
+		return
 	var all := []
 	for p in parts:
 		all.append_array(p)
