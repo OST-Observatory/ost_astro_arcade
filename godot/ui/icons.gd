@@ -57,6 +57,18 @@ const MAP := {
 	"person": 0xe7fd,
 	"edit": 0xe3c9,
 	"play_arrow": 0xe037,
+	"zoom_in": 0xe8ff,
+	"zoom_out": 0xe900,
+	"fast_forward": 0xe01f,
+	"fast_rewind": 0xe020,
+	"skip_next": 0xe044,
+	"today": 0xe8df,
+	"wb_sunny": 0xe430,
+	"crop_free": 0xe3c2,
+	"view_day": 0xe8ed,
+	"near_me": 0xe569,
+	"explore": 0xe87a,
+	"flag": 0xe153,
 }
 
 

@@ -31,4 +31,4 @@ func assert_eq(actual: Variant, expected: Variant, msg := "") -> void:
 
 func assert_almost(actual: float, expected: float, tol: float, msg := "") -> void:
 	if absf(actual - expected) > tol:
-		_fail("%s expected %f ± %g, got %f" % [msg, expected, tol, actual])
+		_fail("%s expected %f ± %f, got %f" % [msg, expected, tol, actual])

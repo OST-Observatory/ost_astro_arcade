@@ -1,5 +1,6 @@
 ## Puts the UI into a specific state for screenshots (used with tools/capture.gd).
 ##   OST_DATA_DIR=/tmp/ost_capture SCENARIO=attract godot --path godot -s res://tools/capture.gd -- res://tools/scenario.tscn captures/attract
+## UI_LANG=en|es switches the language for any scenario.
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 extends Control
@@ -14,6 +15,8 @@ func _ready() -> void:
 	if diff != "":
 		Session.set_difficulty(Session.DIFFICULTY_NAMES.find(diff) as Session.Difficulty)
 	await get_tree().process_frame
+	if OS.get_environment("UI_LANG") != "":
+		I18n.set_locale(OS.get_environment("UI_LANG"))
 	if OS.get_environment("INGAME") != "":
 		Router._home_btn.visible = true
 	match scenario:
@@ -149,15 +152,62 @@ func _ready() -> void:
 		"gallery":
 			_fake_gallery()
 			add_child(GallerySlide.new())
-		"solar", "solar_fly", "solar_result":
+		"sol_menu", "sol_explore", "sol_done", "sol_edge", "sol_body", "sol_trojans", "sol_kuiper", "sol_mission", "sol_fly", "sol_result":
 			var sg: Control = load("res://games/solar/solar_game.tscn").instantiate()
 			sg.skip_intro = true
 			add_child(sg)
-			if scenario != "solar":
-				await get_tree().process_frame
-				var best := MarsTransfer.best_launch(sg._jd0, sg._jd0 + 800)
-				sg._slider.slider.value = best - sg._jd0 + (0.0 if scenario == "solar_result" else 12.0)
-				sg._launch()
+			await get_tree().process_frame
+			var v: SolarView = sg.view
+			match scenario:
+				"sol_menu":
+					sg.show_menu()
+				"sol_explore", "sol_done", "sol_edge", "sol_body", "sol_trojans", "sol_kuiper":
+					sg.start_explore()
+					var em: ExploreMode = sg._mode
+					v.rate = 0.0
+					v.idle_spin = false
+					match scenario:
+						"sol_edge":
+							v.pitch = 0.03
+							v.dist = 110.0
+						"sol_body":
+							var body := OS.get_environment("BODY") if OS.get_environment("BODY") != "" else "saturn"
+							v.focus = body
+							v.dist = v.nice_dist(body) * float(OS.get_environment("ZOOM") if OS.get_environment("ZOOM") != "" else "1")
+							em._on_tap(body)
+						"sol_trojans":
+							v.dist = 14.0
+							v.pitch = 1.3
+							em._index = 0
+							em._tasks[0] = FindTasks.TASKS.filter(func(t): return t.id == "trojan")[0]
+							em._show_task()
+							em._t = 40.0
+							em._hint()
+							v._fly = {}
+							v.focus = "sun"
+						"sol_kuiper":
+							v.dist = 130.0
+							v.pitch = 0.9
+						"sol_done":
+							em._on_tap("jupiter")
+							em._total = 1800
+							em._index = em._tasks.size() - 1
+							em._tasks[em._index] = FindTasks.TASKS[2]
+							em._on_tap("jupiter")
+				"sol_mission", "sol_fly", "sol_result":
+					sg.start_mission()
+					var mm: MissionMode = sg._mode
+					v.idle_spin = false
+					if mm.planet == "saturn":
+						mm._select_window(int(OS.get_environment("WINDOW")) if OS.get_environment("WINDOW") != "" else 7)
+					else:
+						var best := MarsTransfer.best_launch(mm._jd0, mm._jd0 + MissionLogic.RANGE_DAYS[mm.diff]) if mm.planet == "mars" \
+							else HohmannTransfer.next_window(mm.planet, mm._jd0, mm._jd0 + 1100.0)
+						mm._slider.slider.value = best - mm._jd0 + (0.0 if scenario == "sol_result" else 12.0)
+					if scenario != "sol_mission":
+						mm._launch()
+						if scenario == "sol_result":
+							mm._fast = 40.0
 		"con", "con_half", "con_done", "con_result":
 			var cg: Control = load("res://games/constellations/constellation_game.tscn").instantiate()
 			cg.skip_intro = true

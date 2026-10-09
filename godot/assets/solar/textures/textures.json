@@ -39,6 +39,11 @@
   "source": "Solarsystemscope_texture_2k_saturn.jpg",
   "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
  },
+ "uranus": {
+  "file": "res://assets/solar/textures/uranus.jpg",
+  "source": "Solarsystemscope_texture_2k_uranus.jpg",
+  "credit": "Solar System Scope (solarsystemscope.com), CC BY 4.0"
+ },
  "neptune": {
   "file": "res://assets/solar/textures/neptune.jpg",
   "source": "Solarsystemscope_texture_2k_neptune.jpg",

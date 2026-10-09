@@ -41,7 +41,7 @@ GAME_PUZZLE_DESC,Setze echte Himmelsfotos zusammen,Piece together real sky image
 GAME_GALAXY,Galaxien-Baumeister,Galaxy Builder,Constructor de galaxias
 GAME_GALAXY_DESC,Baue eine Galaxie – und lass sie zusammenstoßen,Build a galaxy – then let it collide,Construye una galaxia y hazla chocar
 GAME_SOLAR,Sonnensystem,Solar System,Sistema solar
-GAME_SOLAR_DESC,Fliege mit einer Sonde zum Mars,Fly a probe to Mars,Vuela con una sonda a Marte
+GAME_SOLAR_DESC,Erkunde das Sonnensystem und fliege Missionen,Explore the solar system and fly missions,Explora el sistema solar y vuela en misiones
 GAME_CONSTELLATIONS,Sternbilder,Constellations,Constelaciones
 GAME_CONSTELLATIONS_DESC,Finde Sternbilder am echten Himmel,Find constellations in the real sky,Encuentra constelaciones en el cielo real
 GAME_NBODY,N-Körper-Labor,N-Body Lab,Laboratorio de N cuerpos
@@ -189,28 +189,17 @@ CON_FINISH,Zum Ergebnis,See the result,Ver el resultado
 CON_RESULT_TITLE,Himmel erkundet!,Sky explored!,¡Cielo explorado!
 CON_RESULT,Gefunden: %s. Daneben: %d.,Found: %s. Misses: %d.,Encontradas: %s. Fallos: %d.
 CON_AGAIN,Neue Sternbilder,New constellations,Nuevas constelaciones
-SOL_TITLE,Ab zum Mars!,Off to Mars!,¡Rumbo a Marte!
-SOL_TASK,"Wähle den Starttag so, dass deine Sonde auf ihrer Bahn um die Sonne genau dann bei der Marsbahn ankommt, wenn auch der Mars dort ist.",Pick the launch day so that your probe reaches Mars' orbit exactly when Mars is there too.,Elige el día de lanzamiento para que tu sonda llegue a la órbita de Marte justo cuando Marte también esté allí.
 SOL_LAUNCH,Starttag,Launch day,Día de lanzamiento
 SOL_FLIGHT,Flugzeit: %d Tage,Flight time: %d days,Tiempo de vuelo: %d días
-SOL_PHASE,Mars steht beim Start %d° vor der Erde.,"At launch, Mars is %d° ahead of Earth.","Al despegar, Marte va %d° por delante de la Tierra."
 SOL_GO,Rakete starten!,Launch the rocket!,¡Lanzar el cohete!
 SOL_ATTEMPT,Versuch %d von %d,Attempt %d of %d,Intento %d de %d
 SOL_DATE,Start: %s,Launch: %s,Lanzamiento: %s
-SOL_DAY,Flugtag %d von %d  ·  %s  ·  Tippen = schneller,Flight day %d of %d  ·  %s  ·  tap = faster,Día de vuelo %d de %d  ·  %s  ·  toca = más rápido
-SOL_HIT,Treffer! Deine Sonde erreicht den Mars.,Hit! Your probe reaches Mars.,¡Acierto! Tu sonda llega a Marte.
-SOL_MISS,Knapp daneben: Mars war %s Millionen km entfernt.,Missed: Mars was %s million km away.,Fallaste: Marte estaba a %s millones de km.
 SOL_DAYS_LATER,Tipp: Starte etwa %d Tage später.,Tip: launch about %d days later.,Pista: lanza unos %d días más tarde.
 SOL_DAYS_EARLIER,Tipp: Starte etwa %d Tage früher.,Tip: launch about %d days earlier.,Pista: lanza unos %d días antes.
-SOL_LATER,Du warst zu früh dran.,You launched too early.,Lanzaste demasiado pronto.
-SOL_EARLIER,Du warst zu spät dran.,You launched too late.,Lanzaste demasiado tarde.
-SOL_FAR,Mars war ganz woanders – probier einen ganz anderen Starttag.,Mars was far away – try a very different launch day.,Marte estaba muy lejos: prueba un día de lanzamiento muy distinto.
 SOL_RESULT_TITLE,Mission geglückt!,Mission accomplished!,¡Misión cumplida!
 SOL_RESULT_TITLE_MISS,Mission beendet,Mission over,Misión terminada
-SOL_FACT,"Weil Erde und Mars unterschiedlich schnell um die Sonne laufen, passt der Starttag nur etwa alle 26 Monate. Der Rover Perseverance startete am 30. Juli 2020 genau in so einem Startfenster. Das nächste Startfenster nach unserem Modell: %s.","Because Earth and Mars orbit the Sun at different speeds, a good launch day only comes about every 26 months. The rover Perseverance launched on 30 July 2020 in exactly such a window. The next launch window according to our model: %s.","Como la Tierra y Marte giran alrededor del Sol a distinta velocidad, un buen día de lanzamiento solo llega cada 26 meses aproximadamente. El rover Perseverance despegó el 30 de julio de 2020 justo en una de esas ventanas. La próxima ventana de lanzamiento según nuestro modelo: %s."
 SOL_NOTE,"Vereinfacht: Bahnen in einer Ebene, Start genau entlang der Erdbahn (Hohmann-Bahn). Echte Missionen fliegen etwas schnellere Bahnen.","Simplified: orbits in one plane, launch exactly along Earth's orbit (Hohmann transfer). Real missions fly slightly faster paths.",Simplificado: órbitas en un plano y lanzamiento justo a lo largo de la órbita terrestre (transferencia de Hohmann). Las misiones reales vuelan trayectorias algo más rápidas.
 SOL_AGAIN,Noch ein Start,Another launch,Otro lanzamiento
-SOL_ARRIVAL,Ankunft: %s,Arrival: %s,Llegada: %s
 ATTRACT_GALLERY,Entdecker-Galerie,Explorers' gallery,Galería de exploradores
 ATTRACT_GALLERY_SUB,%d Asteroiden haben Besucher hier schon beobachtet,Visitors have already observed %d asteroids here,Los visitantes ya han observado aquí %d asteroides
 COMET_BUTTON,Bonus: Ein echter Komet!,Bonus: a real comet!,Extra: ¡un cometa de verdad!
@@ -378,3 +367,102 @@ GAL_YOUR_GALAXY,Deine Galaxie: %s – gebaut von %s,Your galaxy: %s – built by
 GAL_PARTNER_CHOOSE,Anderen Partner wählen,Choose another partner,Elegir otra compañera
 GAL_PARTNER_PICK,Mit welcher Galaxie soll deine zusammenstoßen?,Which galaxy should yours collide with?,¿Con qué galaxia debe chocar la tuya?
 GAL_PROGRESS,Auswertung: %d %%,Analysis: %d %%,Análisis: %d %%
+SOL_MENU_TITLE,Was möchtest du tun?,What would you like to do?,¿Qué quieres hacer?
+SOL_MENU_EXPLORE,Sonnensystem erkunden,Explore the solar system,Explorar el sistema solar
+SOL_MENU_EXPLORE_DESC,"Fliege zu Planeten, Monden, Kometen und Asteroiden und löse fünf Suchaufgaben.","Fly to planets, moons, comets and asteroids and solve five search tasks.","Vuela a planetas, lunas, cometas y asteroides y resuelve cinco tareas de búsqueda."
+SOL_MENU_MISSION_DESC_MARS,Schicke eine Sonde zum Mars – finde den richtigen Starttag.,Send a probe to Mars – find the right launch day.,Envía una sonda a Marte: encuentra el día de lanzamiento adecuado.
+SOL_MENU_MISSION_DESC_JUPITER,Schicke eine Sonde auf die fast dreijährige Reise zum Jupiter.,Send a probe on the almost three-year journey to Jupiter.,Envía una sonda en el viaje de casi tres años a Júpiter.
+SOL_MENU_MISSION_DESC_SATURN,Hol dir Schwung bei Jupiter und fliege weiter zum Saturn – wie die Voyager-Sonden.,Gain speed at Jupiter and fly on to Saturn – like the Voyager probes.,"Toma impulso en Júpiter y sigue hasta Saturno, como las sondas Voyager."
+SOL_MENU,Zur Auswahl,Back to the choice,Volver a la selección
+SOL_EXPLORE_TITLE,Sonnensystem erkunden,Explore the solar system,Explorar el sistema solar
+SOL_MISSION_TITLE,Mission,Mission,Misión
+SOL_CAM_TOP,Draufsicht,Top view,Vista superior
+SOL_CAM_EDGE,Seitenansicht,Side view,Vista lateral
+SOL_CAM_SUN,Sonne,Sun,Sol
+SOL_HOWTO,Ein Finger dreht · zwei Finger zoomen · antippen zeigt Infos · doppelt tippen fliegt hin,One finger rotates · two fingers zoom · tap for info · double-tap to fly there,Un dedo gira · dos dedos hacen zoom · toca para ver información · toca dos veces para volar allí
+SOL_TODAY,Heute,Today,Hoy
+SOL_SPEED_-30,rückwärts: 1 Monat pro Sekunde,backwards: 1 month per second,hacia atrás: 1 mes por segundo
+SOL_SPEED_0,Zeit angehalten,Time stopped,Tiempo detenido
+SOL_SPEED_1,1 Tag pro Sekunde,1 day per second,1 día por segundo
+SOL_SPEED_30,1 Monat pro Sekunde,1 month per second,1 mes por segundo
+SOL_SPEED_365,1 Jahr pro Sekunde,1 year per second,1 año por segundo
+SOL_AU,%s AE,%s AU,%s UA
+SOL_AU_UNIT,AE,AU,UA
+SOL_FLY_TO,Hinfliegen,Fly there,Volar allí
+SOL_FACT_SUN_DIST,Abstand zur Sonne: %s AE (%s Mio. km),Distance from the Sun: %s AU (%s million km),Distancia al Sol: %s UA (%s millones de km)
+SOL_FACT_EARTH_DIST,Abstand zur Erde: %s,Distance from Earth: %s,Distancia a la Tierra: %s
+SOL_FACT_PERIOD_Y,Umlaufzeit: %s Jahre,Orbital period: %s years,Periodo orbital: %s años
+SOL_FACT_PERIOD_D,Umlaufzeit: %s Tage,Orbital period: %s days,Periodo orbital: %s días
+SOL_FACT_INCL,Bahnneigung: %s°,Orbital inclination: %s°,Inclinación de la órbita: %s°
+SOL_FACT_ORBITS,umkreist: %s,orbits: %s,orbita: %s
+SOL_FACT_PLANET_DIST,Abstand zum Planeten: %s km,Distance from its planet: %s km,Distancia a su planeta: %s km
+SOL_FACT_DIAM,Durchmesser: %s km,Diameter: %s km,Diámetro: %s km
+SOL_FACT_MASS,Masse: %s Erdmassen,Mass: %s Earth masses,Masa: %s masas terrestres
+SOL_SB_TYPE,Kleinkörper,Small body,Cuerpo menor
+SOL_SB_BELT,Asteroid im Hauptgürtel,Main-belt asteroid,Asteroide del cinturón principal
+SOL_SB_TJN,Jupiter-Trojaner,Jupiter Trojan,Troyano de Júpiter
+SOL_SB_TNO,Objekt im Kuipergürtel,Kuiper-belt object,Objeto del cinturón de Kuiper
+SOL_SB_NEO,Erdnaher Asteroid,Near-Earth asteroid,Asteroide cercano a la Tierra
+SOL_SB_CEN,Zentaur,Centaur,Centauro
+SOL_SBD_BELT,Zwischen Mars und Jupiter kreisen über eine Million bekannte Asteroiden. Hier siehst du einige Tausend der größten.,More than a million known asteroids orbit between Mars and Jupiter. Here you see a few thousand of the largest.,Entre Marte y Júpiter orbitan más de un millón de asteroides conocidos. Aquí ves unos miles de los más grandes.
+SOL_SBD_TJN,"Trojaner laufen auf Jupiters Bahn mit: ein Schwarm 60° vor Jupiter, einer 60° hinter ihm. Dort halten sich die Schwerkraft von Sonne und Jupiter die Waage.","Trojans share Jupiter's orbit: one swarm 60° ahead of Jupiter, one 60° behind. There the gravity of the Sun and Jupiter keeps them in balance.",Los troyanos comparten la órbita de Júpiter: un enjambre 60° por delante y otro 60° por detrás. Allí la gravedad del Sol y de Júpiter los mantiene en equilibrio.
+SOL_SBD_TNO,Jenseits von Neptun kreisen eisige Kleinkörper – der Kuipergürtel. Auch Pluto gehört dazu.,Icy small bodies orbit beyond Neptune – the Kuiper belt. Pluto belongs to it too.,Más allá de Neptuno orbitan pequeños cuerpos helados: el cinturón de Kuiper. Plutón también forma parte de él.
+SOL_SBD_NEO,"Seine Bahn kommt der Erdbahn nahe (kleinster Sonnenabstand unter 1,3 AE). Solche Asteroiden werden weltweit genau beobachtet.",Its orbit comes close to Earth's orbit (closest distance to the Sun below 1.3 AU). Such asteroids are watched closely worldwide.,"Su órbita se acerca a la de la Tierra (distancia mínima al Sol inferior a 1,3 UA). Estos asteroides se vigilan de cerca en todo el mundo."
+SOL_SBD_CEN,"Zentauren kreisen zwischen Jupiter und Neptun – halb Asteroid, halb Komet.","Centaurs orbit between Jupiter and Neptune – half asteroid, half comet.","Los centauros orbitan entre Júpiter y Neptuno: mitad asteroide, mitad cometa."
+SOL_TASK_N,Aufgabe %d von %d,Task %d of %d,Tarea %d de %d
+SOL_HINT,Zeig's mir,Show me,Muéstramelo
+SOL_FOUND,Richtig! +%d Punkte,Correct! +%d points,¡Correcto! +%d puntos
+SOL_NOT_IT,Das ist es nicht – lies die Infos und such weiter.,That is not it – read the info and keep looking.,No es eso: lee la información y sigue buscando.
+SOL_FIND_DONE,Alle gefunden!,All found!,¡Todo encontrado!
+SOL_KEEP_EXPLORING,Weiter erkunden,Keep exploring,Seguir explorando
+SOL_AGAIN_FIND,Neue Aufgaben,New tasks,Nuevas tareas
+SOL_HINT_TROJAN,Die Jupiter-Trojaner leuchten jetzt grün: Sie laufen 60° vor und hinter Jupiter auf seiner Bahn. Zoome heraus und tippe einen grünen Punkt an.,The Jupiter Trojans now glow green: they run 60° ahead of and behind Jupiter on its orbit. Zoom out and tap a green dot.,Los troyanos de Júpiter brillan ahora en verde: van 60° por delante y por detrás de Júpiter en su órbita. Aleja la vista y toca un punto verde.
+SOL_HINT_NEO,Erdnahe Asteroiden leuchten jetzt orange: Sie kreuzen die Nähe der Erdbahn. Tippe einen orangen Punkt an.,Near-Earth asteroids now glow orange: they cross the region of Earth's orbit. Tap an orange dot.,Los asteroides cercanos a la Tierra brillan ahora en naranja: cruzan la zona de la órbita terrestre. Toca un punto naranja.
+SOL_HINT_KUIPER,"Der Kuipergürtel leuchtet jetzt blau, jenseits der Neptunbahn. Zoome weit heraus und tippe einen blauen Punkt an – oder Pluto.","The Kuiper belt now glows blue, beyond Neptune's orbit. Zoom far out and tap a blue dot – or Pluto.","El cinturón de Kuiper brilla ahora en azul, más allá de la órbita de Neptuno. Aleja mucho la vista y toca un punto azul, o Plutón."
+SOL_FIND_MARS,Finde den Roten Planeten.,Find the Red Planet.,Encuentra el planeta rojo.
+SOL_FIND_SATURN,Finde den Planeten mit den auffälligen Ringen.,Find the planet with the striking rings.,Encuentra el planeta con los llamativos anillos.
+SOL_FIND_JUPITER,Finde den größten Planeten des Sonnensystems.,Find the largest planet of the solar system.,Encuentra el planeta más grande del sistema solar.
+SOL_FIND_MOON,Finde den Mond der Erde. Tipp: Fliege zur Erde und zoome heran.,Find Earth's Moon. Tip: fly to Earth and zoom in.,Encuentra la Luna de la Tierra. Pista: vuela a la Tierra y acércate.
+SOL_FIND_MERCURY,"Finde den Planeten, der der Sonne am nächsten ist.",Find the planet closest to the Sun.,Encuentra el planeta más cercano al Sol.
+SOL_FIND_EARTH,Finde unseren Heimatplaneten.,Find our home planet.,Encuentra nuestro planeta.
+SOL_FIND_URANUS,"Finde den Planeten, der auf der Seite liegt.",Find the planet that lies on its side.,Encuentra el planeta que está tumbado de lado.
+SOL_FIND_CERES,Finde den Zwergplaneten im Asteroidengürtel.,Find the dwarf planet in the asteroid belt.,Encuentra el planeta enano del cinturón de asteroides.
+SOL_FIND_HALLEY,"Finde den Kometen, der 2061 wiederkommt.",Find the comet that returns in 2061.,Encuentra el cometa que volverá en 2061.
+SOL_FIND_BIGMOON,"Finde einen Mond, der größer ist als der Planet Merkur.",Find a moon that is bigger than the planet Mercury.,Encuentra una luna más grande que el planeta Mercurio.
+SOL_FIND_NEPTUNE,Finde den äußersten Planeten.,Find the outermost planet.,Encuentra el planeta más exterior.
+SOL_FIND_PLUTO,"Finde den Zwergplaneten, der bis 2006 als neunter Planet galt.",Find the dwarf planet that counted as the ninth planet until 2006.,Encuentra el planeta enano que se consideró el noveno planeta hasta 2006.
+SOL_FIND_IO,Finde den Mond mit den meisten aktiven Vulkanen.,Find the moon with the most active volcanoes.,Encuentra la luna con más volcanes activos.
+SOL_FIND_ERIS,"Finde einen Zwergplaneten, dessen Bahn mehr als 40° gegen die Erdbahn geneigt ist.",Find a dwarf planet whose orbit is tilted more than 40° against Earth's orbit.,Encuentra un planeta enano cuya órbita esté inclinada más de 40° respecto a la de la Tierra.
+SOL_FIND_TROJAN,Finde einen Trojaner des Jupiter.,Find one of Jupiter's Trojans.,Encuentra un troyano de Júpiter.
+SOL_FIND_NEO,Finde einen erdnahen Asteroiden.,Find a near-Earth asteroid.,Encuentra un asteroide cercano a la Tierra.
+SOL_FIND_SEDNA,"Finde das Objekt, das über 10.000 Jahre für eine Runde um die Sonne braucht.","Find the object that needs more than 10,000 years for one trip around the Sun.",Encuentra el objeto que tarda más de 10 000 años en dar una vuelta al Sol.
+SOL_FIND_TITAN,Finde den Mond mit dichter Atmosphäre und Seen aus flüssigem Methan.,Find the moon with a thick atmosphere and lakes of liquid methane.,Encuentra la luna con una atmósfera densa y lagos de metano líquido.
+SOL_FIND_67P,"Finde den Kometen, auf dem 2014 die Landesonde Philae aufsetzte.",Find the comet on which the lander Philae touched down in 2014.,Encuentra el cometa en el que se posó el módulo Philae en 2014.
+SOL_FIND_KUIPER,Finde ein Objekt im Kuipergürtel jenseits von Neptun.,Find an object in the Kuiper belt beyond Neptune.,"Encuentra un objeto del cinturón de Kuiper, más allá de Neptuno."
+SOL_FIND_ENCKE,"Finde den Kometen mit der kürzesten Umlaufzeit – nur etwa 3,3 Jahre.",Find the comet with the shortest orbital period – only about 3.3 years.,"Encuentra el cometa con el periodo orbital más corto: solo unos 3,3 años."
+SOL_M_TITLE_MARS,Ab zum Mars!,Off to Mars!,¡Rumbo a Marte!
+SOL_M_TITLE_JUPITER,Ab zum Jupiter!,Off to Jupiter!,¡Rumbo a Júpiter!
+SOL_M_TITLE_SATURN,Mit Schwung zum Saturn,Swing by to Saturn,Con impulso hacia Saturno
+SOL_M_TASK_MARS,"Wähle den Starttag so, dass deine Sonde auf der gelben Bahn genau dann bei der Marsbahn ankommt, wenn auch der Mars dort ist. Der blasse Mars zeigt, wo Mars bei der Ankunft steht.","Pick the launch day so that your probe, on the yellow path, reaches Mars' orbit exactly when Mars is there. The faint Mars shows where Mars will be on arrival.","Elige el día de lanzamiento para que tu sonda, por la trayectoria amarilla, llegue a la órbita de Marte justo cuando Marte esté allí. El Marte tenue muestra dónde estará Marte a la llegada."
+SOL_M_TASK_JUPITER,"Jupiter ist weit weg: Der Flug dauert fast drei Jahre. Wähle den Starttag so, dass der blasse Jupiter – dort steht Jupiter bei der Ankunft – genau am Ende der gelben Bahn liegt.",Jupiter is far away: the flight takes almost three years. Pick the launch day so that the faint Jupiter – where Jupiter will be on arrival – lies exactly at the end of the yellow path.,Júpiter está lejos: el vuelo dura casi tres años. Elige el día de lanzamiento para que el Júpiter tenue (donde estará Júpiter a la llegada) quede justo al final de la trayectoria amarilla.
+SOL_M_TASK_SATURN,"Direkt zum Saturn bräuchte man sehr viel Treibstoff. Nutze Jupiters Schwerkraft als Schleuder: Wähle Startfenster, Seite und Abstand des Vorbeiflugs so, dass die blaue Bahn dem Saturn möglichst nahe kommt.","Flying straight to Saturn would need a lot of fuel. Use Jupiter's gravity as a slingshot: choose the launch window, side and distance of the flyby so that the blue path comes as close to Saturn as possible.","Ir directamente a Saturno requeriría mucho combustible. Usa la gravedad de Júpiter como honda: elige la ventana de lanzamiento, el lado y la distancia del sobrevuelo para que la trayectoria azul se acerque lo más posible a Saturno."
+SOL_WINDOWS,Startfenster zum Jupiter,Launch window to Jupiter,Ventana de lanzamiento hacia Júpiter
+SOL_SIDE,Vorbeiflug an Jupiter,Flyby at Jupiter,Sobrevuelo de Júpiter
+SOL_SIDE_OUT,außen vorbei,outer side,por fuera
+SOL_SIDE_IN,sonnenseitig vorbei,sunward side,por el lado del Sol
+SOL_RP,Abstand beim Vorbeiflug,Flyby distance,Distancia del sobrevuelo
+SOL_RP_VALUE,%s Jupiter-Radien,%s Jupiter radii,%s radios de Júpiter
+SOL_PHASE_NOW,%s steht beim Start %d° vor der Erde – nötig sind etwa %d°.,"At launch, %s is %d° ahead of Earth – about %d° are needed.","Al despegar, %s va %d° por delante de la Tierra; se necesitan unos %d°."
+SOL_FLYBY_AT,Vorbeiflug an Jupiter: %s,Jupiter flyby: %s,Sobrevuelo de Júpiter: %s
+SOL_ESCAPES,So viel Schwung: Die Sonde verlässt danach das Sonnensystem!,So much speed: afterwards the probe leaves the solar system!,¡Tanto impulso que después la sonda abandona el sistema solar!
+SOL_SATURN_DIST,Kleinster Abstand zu Saturn: %s AE,Closest distance to Saturn: %s AU,Distancia mínima a Saturno: %s UA
+SOL_FLIGHT_DATE,%s  ·  Tippen = schneller,%s  ·  tap = faster,%s  ·  toca = más rápido
+SOL_M_HIT,Treffer! Deine Sonde erreicht ihr Ziel: %s.,Hit! Your probe reaches its target: %s.,¡Acierto! Tu sonda llega a su destino: %s.
+SOL_M_MISS,Knapp daneben: %s war %s Millionen km entfernt.,Missed: %s was %s million km away.,Fallaste: %s estaba a %s millones de km.
+SOL_M_FAR,%s war ganz woanders – probier einen ganz anderen Starttag.,%s was somewhere else entirely – try a very different launch day.,%s estaba en otro lugar: prueba un día de lanzamiento muy distinto.
+SOL_M_SATURN_HIT,Geschafft! Deine Sonde kommt Saturn bis auf %s AE nahe – mitten in seinen Schwerkraft-Einflussbereich.,Done! Your probe gets within %s AU of Saturn – right into its sphere of gravitational influence.,"¡Lo lograste! Tu sonda se acerca a %s UA de Saturno, dentro de su esfera de influencia gravitatoria."
+SOL_M_SATURN_MISS,Saturn verfehlt: kleinster Abstand %s AE.,Saturn missed: closest distance %s AU.,Saturno fallado: distancia mínima %s UA.
+SOL_M_SATURN_TIP,"Tipp: Die blaue Bahn zeigt schon vor dem Start, wohin die Sonde fliegt. Probier ein anderes Startfenster, die andere Seite oder einen anderen Abstand.","Tip: the blue path shows where the probe will go before you launch. Try another window, the other side or another distance.","Pista: la trayectoria azul muestra adónde irá la sonda antes del lanzamiento. Prueba otra ventana, el otro lado u otra distancia."
+SOL_M_FACT_MARS,"Weil Erde und Mars unterschiedlich schnell um die Sonne laufen, passt der Starttag nur etwa alle 26 Monate. Der Rover Perseverance startete am 30. Juli 2020 genau in so einem Startfenster. Das nächste Startfenster nach unserem Modell: %s.","Because Earth and Mars orbit the Sun at different speeds, a good launch day only comes about every 26 months. The rover Perseverance launched on 30 July 2020 in exactly such a window. The next launch window according to our model: %s.","Como la Tierra y Marte giran alrededor del Sol a distinta velocidad, un buen día de lanzamiento solo llega cada 26 meses aproximadamente. El rover Perseverance despegó el 30 de julio de 2020 justo en una de esas ventanas. La próxima ventana de lanzamiento según nuestro modelo: %s."
+SOL_M_FACT_JUPITER,"Startfenster zum Jupiter öffnen sich etwa alle 13 Monate: Jupiter läuft so langsam, dass die Erde ihn schnell wieder einholt. Das nächste nach unserem Modell: %s. Die Sonde Juno brauchte fast fünf Jahre, weil sie unterwegs noch einmal Schwung an der Erde holte.",Launch windows to Jupiter open about every 13 months: Jupiter moves so slowly that Earth soon catches up again. The next one according to our model: %s. The probe Juno took almost five years because it swung by Earth once more on the way.,Las ventanas de lanzamiento hacia Júpiter se abren cada 13 meses aproximadamente: Júpiter avanza tan despacio que la Tierra lo alcanza pronto. La próxima según nuestro modelo: %s. La sonda Juno tardó casi cinco años porque tomó impulso una vez más en la Tierra.
+SOL_M_FACT_SATURN,"Genau so flogen Voyager 1 und 2: 1977 gestartet, mit Schwung von Jupiter (1979) weiter zum Saturn (1980 und 1981). Gute Fenster für diesen Weg gibt es nur etwa alle 20 Jahre, weil Jupiter und Saturn passend zueinander stehen müssen.","This is exactly how Voyager 1 and 2 flew: launched in 1977, they swung by Jupiter (1979) on to Saturn (1980 and 1981). Good windows for this route only come about every 20 years, because Jupiter and Saturn have to be in the right places.","Así volaron exactamente las Voyager 1 y 2: lanzadas en 1977, tomaron impulso en Júpiter (1979) y siguieron hasta Saturno (1980 y 1981). Las buenas ventanas para esta ruta solo llegan cada 20 años, porque Júpiter y Saturno deben estar bien situados."

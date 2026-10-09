@@ -7,16 +7,12 @@ extends Control
 const SHOWN := 40          # newest orbits drawn
 const LABELLED := 5
 const DAYS_PER_SECOND := 60.0
-const PLANETS := [["mercury", Color("a7a7a7"), 0.035], ["venus", Color("e8cfa0"), 0.05],
-	["earth", Color("4dd0e1"), 0.055], ["mars", Color("e2725b"), 0.045], ["jupiter", Color("d8b48a"), 0.11]]
 
 var entries: Array = []
 var _jd0 := 0.0
 var _t := 0.0
-var _root: Node3D
-var _cam: Camera3D
-var _planets := {}
-var _rocks: Array = []       # [MeshInstance3D, elements]
+var _view: SolarView
+var _rocks: Array = []       # [Node3D, elements]
 
 
 static func has_entries() -> bool:
@@ -39,45 +35,40 @@ func _ready() -> void:
 	add_child(container)
 	var vp := SubViewport.new()
 	vp.own_world_3d = true
-	vp.transparent_bg = true
 	Settings.apply_3d(vp)
 	container.add_child(vp)
-	var env := Environment.new()
-	env.background_mode = Environment.BG_CLEAR_COLOR
-	env.glow_enabled = true
-	env.glow_intensity = 0.9
-	env.glow_hdr_threshold = 1.2
-	env.tonemap_mode = Environment.TONE_MAPPER_AGX
-	var we := WorldEnvironment.new()
-	we.environment = env
-	vp.add_child(we)
-	_root = Node3D.new()
-	vp.add_child(_root)
-	_root.add_child(SpaceDraw.sphere(Vector3.ZERO, 0.12, Color(1.0, 0.85, 0.5), 6.0))
-	for p in PLANETS:
-		var el := Kepler.planet_elements(p[0], _jd0)
-		_root.add_child(SpaceDraw.line(Kepler.orbit_points(el.a, el.e, el.i, el.node, el.w, 256), Color(p[1], 0.35), 1.0))
-		var body := SpaceDraw.sphere(Vector3.ZERO, p[2], p[1], 1.6)
-		_root.add_child(body)
-		_planets[p[0]] = body
+	# The same solar system as in the game (textures, orbits, names), in time-lapse.
+	_view = SolarView.new()
+	vp.add_child(_view)
+	_view.show_minor = false
+	_view.idle_spin = false
+	_view.jd = _jd0
+	_view.rate = DAYS_PER_SECOND
+	_view.dist = 10.2
+	_view.pitch = 0.58
+	visibility_changed.connect(func():
+		_view.process_mode = Node.PROCESS_MODE_INHERIT if is_visible_in_tree() else Node.PROCESS_MODE_DISABLED)
 	var newest := entries.slice(maxi(0, entries.size() - SHOWN))
 	for i in newest.size():
 		var e: Dictionary = newest[i]
 		var el: Dictionary = e.elements
 		var fresh := i >= newest.size() - LABELLED
 		var col := UiTheme.ACCENT if fresh else Color(1.0, 0.75, 0.4, 0.5)
-		_root.add_child(SpaceDraw.line(Kepler.orbit_points(el.a, el.e, el.incl, el.Omega, el.w, 180), Color(col, 0.5 if fresh else 0.18), 1.4))
-		var rock := SpaceDraw.sphere(Vector3.ZERO, 0.03 if fresh else 0.02, col, 3.0)
-		_root.add_child(rock)
+		_view.overlay.add_child(SpaceDraw.line(Kepler.orbit_points(el.a, el.e, el.incl, el.Omega, el.w, 180), Color(col, 0.5 if fresh else 0.18), 1.4))
+		var rock := Sprite3D.new()
+		rock.texture = _dot_texture()
+		rock.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		rock.fixed_size = true
+		rock.no_depth_test = true
+		rock.pixel_size = 0.00026 if fresh else 0.00016
+		rock.modulate = col
+		_view.overlay.add_child(rock)
 		if fresh:
-			var lbl := SpaceDraw.label("%s · %s" % [e.name, e.player], Vector3(0, 0.12, 0), UiTheme.ACCENT_HI)
-			lbl.pixel_size *= 0.5
+			var lbl := SpaceDraw.label("%s · %s" % [e.name, e.player], Vector3.ZERO, UiTheme.ACCENT_HI)
+			lbl.pixel_size = 0.0005
+			lbl.offset = Vector2(0, 30)
 			rock.add_child(lbl)
 		_rocks.append([rock, el])
-	_cam = Camera3D.new()
-	_cam.fov = 40
-	_cam.far = 200
-	_root.add_child(_cam)
 
 	var head := VBoxContainer.new()
 	head.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
@@ -103,11 +94,21 @@ func _process(delta: float) -> void:
 
 
 func _update(t: float) -> void:
-	var jd := _jd0 + t * DAYS_PER_SECOND
-	for p in PLANETS:
-		(_planets[p[0]] as Node3D).position = Kepler.to_godot(Kepler.planet_position(p[0], jd))
+	var jd := _view.jd
 	for r in _rocks:
 		(r[0] as Node3D).position = Kepler.to_godot(Kepler.asteroid_position(r[1], jd))
-	var ang := 0.04 * t
-	_cam.position = Vector3(sin(ang) * 8.5, 5.6, cos(ang) * 8.5)
-	_cam.look_at(Vector3.ZERO)
+	_view.yaw = 0.04 * t
+
+
+static func _dot_texture() -> GradientTexture2D:
+	var tex := GradientTexture2D.new()
+	tex.fill = GradientTexture2D.FILL_RADIAL
+	tex.fill_from = Vector2(0.5, 0.5)
+	tex.fill_to = Vector2(1.0, 0.5)
+	var g := Gradient.new()
+	g.offsets = PackedFloat32Array([0.0, 0.5, 1.0])
+	g.colors = PackedColorArray([Color(1, 1, 1, 1), Color(1, 1, 1, 0.8), Color(1, 1, 1, 0)])
+	tex.gradient = g
+	tex.width = 64
+	tex.height = 64
+	return tex
