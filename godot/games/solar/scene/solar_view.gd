@@ -53,6 +53,8 @@ var _fly := {}
 var _cam_rel := Vector3(0, 0, 8)      # camera and look-at point relative to the origin (scene axes)
 var _look_rel := Vector3.ZERO
 var _moon_orbit_jd := -1e12
+var _pole := Vector3.UP               # galactic north pole (scene axes)
+var _galaxy_w := 0.0                  # how far the zoom has turned the camera above the Milky Way
 var _sky: ShaderMaterial
 var _deep_labels: Array[Label] = []
 var _deep_items: Array = []           # DeepSpace.label_items() of this frame, with screen positions
@@ -70,7 +72,8 @@ func _ready() -> void:
 	sky_mat.shader = preload("res://games/solar/scene/space_sky.gdshader")
 	env.sky = Sky.new()
 	env.sky.sky_material = sky_mat
-	sky_mat.set_shader_parameter("galactic_pole", Kepler.to_godot(DeepSpace.galactic_basis().z))
+	_pole = Kepler.to_godot(DeepSpace.galactic_basis().z)
+	sky_mat.set_shader_parameter("galactic_pole", _pole)
 	_sky = sky_mat
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.1, 0.1, 0.12)
@@ -378,6 +381,8 @@ func fly_to(id: String, d := -1.0) -> void:
 	var d0 := maxf((cam - target).length(), 1e-12)
 	_fly = {"to": id, "t": 0.0, "cam": cam, "look": _origin + _from_godot(_look_rel), "d1": d1,
 		"dur": clampf(1.4 + 0.12 * absf(log(d1 / d0)), 1.4, 4.5)}
+	if id == "deep:gc":
+		_fly["end_dir"] = _pole   # the Milky Way seen face-on, from its north pole
 
 
 static func _from_godot(v: Vector3) -> Vector3:
@@ -397,8 +402,9 @@ func _fly_step(delta: float) -> void:
 	var d0 := maxf(v.length(), 1e-12)
 	var u0 := v / d0
 	# Where the orbit camera will be at the end (its pitch is limited to ±1.5 rad).
-	var y1 := atan2(u0.x, u0.z)
-	var p1 := clampf(asin(clampf(u0.y, -1.0, 1.0)), -1.5, 1.5)
+	var end: Vector3 = _fly.get("end_dir", u0)
+	var y1 := atan2(end.x, end.z)
+	var p1 := clampf(asin(clampf(end.y, -1.0, 1.0)), -1.5, 1.5)
 	var u1 := _orbit_dir(y1, p1)
 	var turn := smoothstep(0.0, 0.3, s)
 	var move := smoothstep(0.15, 1.0, s)
@@ -415,6 +421,7 @@ func _fly_step(delta: float) -> void:
 		yaw = y1
 		pitch = p1
 		dist = float(_fly.d1)
+		_galaxy_w = _galaxy_weight(dist)
 		_fly = {}
 		arrived.emit(focus)
 
@@ -516,7 +523,27 @@ func _process(delta: float) -> void:
 		_idle += delta
 		if idle_spin and _idle > IDLE_SPIN_AFTER:
 			yaw += 0.04 * delta
+		_steer_above_galaxy()
 	_update_scene()
+
+
+## 0 below ~1,600 light-years, 1 beyond ~24,000: the scale of the whole Milky Way.
+static func _galaxy_weight(d: float) -> float:
+	return smoothstep(log(1e8), log(1.5e9), log(maxf(d, 1.0)))
+
+
+## Zooming out to the scale of the Milky Way turns the camera step by step above its disk
+## (seen face-on its spiral shows best). Zooming back in leaves the direction alone, and the
+## visitor can turn freely at any time.
+func _steer_above_galaxy() -> void:
+	var w := _galaxy_weight(dist)
+	if w > _galaxy_w + 1e-6 and _galaxy_w < 1.0:
+		var f := (w - _galaxy_w) / (1.0 - _galaxy_w)
+		var cur := _orbit_dir(yaw, pitch)
+		var to := cur.slerp(_pole, f).normalized() if cur.dot(_pole) > -0.9999 else _pole
+		yaw = atan2(to.x, to.z)
+		pitch = clampf(asin(clampf(to.y, -1.0, 1.0)), -1.5, 1.5)
+	_galaxy_w = w
 
 
 func _update_scene() -> void:
