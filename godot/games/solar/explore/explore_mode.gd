@@ -45,7 +45,7 @@ func _ready() -> void:
 	view.rate = 1.0
 	view.focus = "sun"
 	view.selected = ""
-	view.dist = 4.5
+	view.dist = SolarView.OVERVIEW_DIST
 	view.pitch = 0.55
 	view.small.highlight("")
 	var bar := TimeBar.make(view, today)

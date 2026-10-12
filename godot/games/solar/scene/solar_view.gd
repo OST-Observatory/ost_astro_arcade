@@ -21,6 +21,7 @@ const GRID_RINGS := [1.0, 5.0, 10.0, 30.0, 50.0, 100.0]
 const PICK_PX := 60.0
 const SMALL_PICK_PX := 26.0
 const FLY_TIME := 1.8
+const OVERVIEW_DIST := 18.0           # start view: the planets out to Jupiter and Saturn
 const IDLE_SPIN_AFTER := 20.0
 const LABEL_PX := 0.0005
 const SATURN_RING_R := 140500.0 / 58232.0   # outer edge of the F ring in Saturn radii
@@ -311,7 +312,7 @@ func view_edge() -> void:
 ## A good viewing distance for a body.
 func nice_dist(id: String) -> float:
 	if id == "sun":
-		return 4.5
+		return OVERVIEW_DIST
 	if id.begins_with("sb:"):
 		return 0.5
 	match BodyCatalog.kind(id):
@@ -428,9 +429,10 @@ func _update_scene() -> void:
 	var dir := Vector3(cos(pitch) * sin(yaw), sin(pitch), cos(pitch) * cos(yaw))
 	_cam.position = dir * dist
 	_cam.look_at(Vector3.ZERO, Vector3.UP)
-	# Near and far grow with the zoom: a fixed far plane with a tiny near plane breaks the
-	# frustum maths (ratio about 1e7 is fine).
-	_cam.near = maxf(dist * 0.004, 1e-8)
+	# Near and far grow with the zoom: with a far/near ratio much above 1e7 Godot's frustum
+	# maths fails and close-up planets vanish. The camera never comes closer than 1.8 radii
+	# (min_dist), so the surface is always beyond a tenth of the distance.
+	_cam.near = maxf(dist * 0.1, 1e-9)
 	_cam.far = clampf(dist * 4e4, 60.0, 20000.0)
 	var sun_pos := Kepler.to_godot(-_origin)
 	_helio_root.position = sun_pos

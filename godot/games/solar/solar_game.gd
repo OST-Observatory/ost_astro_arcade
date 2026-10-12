@@ -61,7 +61,7 @@ func _build_3d() -> void:
 	_cam_bar.add_theme_constant_override("separation", 10)
 	add_child(_cam_bar)
 	for b in [["SOL_CAM_TOP", "crop_free", view.view_top], ["SOL_CAM_EDGE", "view_day", view.view_edge],
-			["SOL_CAM_SUN", "wb_sunny", func(): view.fly_to("sun", 4.5)],
+			["SOL_CAM_SUN", "wb_sunny", func(): view.fly_to("sun", SolarView.OVERVIEW_DIST)],
 			["", "add", func(): view.zoom_by(2.0)], ["", "remove", func(): view.zoom_by(0.5)]]:
 		var btn := BigButton.make(b[0], b[1], false, 96)
 		btn.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL)
