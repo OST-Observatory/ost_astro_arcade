@@ -2,6 +2,7 @@
 ## comets (BodyCatalog) plus thousands of asteroids and Kuiper-belt objects (SmallBodies, on
 ## the GPU) at their true positions for any date, with orbits, an ecliptic grid and an orbit
 ## camera (one finger rotates, two fingers zoom, tap selects, double tap flies there).
+## Further out (DeepSpace): the Oort cloud, the nearest stars and a model of the Milky Way.
 ## Scene unit = 1 AU. Floating origin: the focused body sits at the scene origin and the rest
 ## is placed relative to it, so close-ups stay precise with 32-bit floats. Every body is drawn
 ## at least MIN_PX pixels wide and becomes a true-size textured sphere when the camera comes close.
@@ -14,13 +15,12 @@ signal arrived(id: String)            # a fly_to() has finished
 
 const MIN_PX := 7.0
 const FOV := 45.0
-const DIST_MAX := 1500.0
+const DIST_MAX := 1.6e10                # about 250,000 light-years: the whole Milky Way
 const JD_MIN := 2396758.5             # 1850-01-01
 const JD_MAX := 2506331.5             # 2150-01-01
 const GRID_RINGS := [1.0, 5.0, 10.0, 30.0, 50.0, 100.0]
 const PICK_PX := 60.0
 const SMALL_PICK_PX := 26.0
-const FLY_TIME := 1.8
 const OVERVIEW_DIST := 18.0           # start view: the planets out to Jupiter and Saturn
 const IDLE_SPIN_AFTER := 20.0
 const LABEL_PX := 0.0005
@@ -37,6 +37,7 @@ var idle_spin := true
 var show_minor := true                # dwarf planets, comets, small bodies (missions hide them)
 var gestures := TouchGestures.new()
 var small: SmallBodies
+var deep: DeepSpace
 var overlay: Node3D                   # heliocentric scene axes (AU): mission lines and markers
 
 var _bodies := {}                     # id -> {node, mesh, label, r, base, spin, tail}
@@ -49,6 +50,12 @@ var _light: OmniLight3D
 var _marker: Sprite3D
 var _origin := Vector3.ZERO           # heliocentric ecliptic position at the scene origin
 var _fly := {}
+var _cam_rel := Vector3(0, 0, 8)      # camera and look-at point relative to the origin (scene axes)
+var _look_rel := Vector3.ZERO
+var _moon_orbit_jd := -1e12
+var _sky: ShaderMaterial
+var _deep_labels: Array[Label] = []
+var _deep_items: Array = []           # DeepSpace.label_items() of this frame, with screen positions
 var _spin_vel := Vector2.ZERO
 var _idle := 0.0
 var _orbit_jd := -1e12
@@ -63,6 +70,8 @@ func _ready() -> void:
 	sky_mat.shader = preload("res://games/solar/scene/space_sky.gdshader")
 	env.sky = Sky.new()
 	env.sky.sky_material = sky_mat
+	sky_mat.set_shader_parameter("galactic_pole", Kepler.to_godot(DeepSpace.galactic_basis().z))
+	_sky = sky_mat
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.1, 0.1, 0.12)
 	env.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
@@ -96,6 +105,9 @@ func _ready() -> void:
 	small = SmallBodies.new()
 	small.setup(int(Settings.quality_3d().get("small_bodies", 10000)))
 	add_child(small)
+	deep = DeepSpace.new()
+	deep.setup(int(Settings.quality_3d().get("small_bodies", 10000)) * 3)
+	_helio_root.add_child(deep)
 
 	_marker = Sprite3D.new()
 	_marker.texture = _ring_texture()
@@ -218,7 +230,7 @@ func _build_orbits() -> void:
 			continue
 		var moon := BodyCatalog.kind(id) == "moon"
 		var alpha: float = {"planet": 0.5, "moon": 0.35, "dwarf": 0.22, "comet": 0.16}.get(BodyCatalog.kind(id), 0.3)
-		var pts := BodyCatalog.orbit_points(id, jd, 128 if moon else (1024 if BodyCatalog.kind(id) == "comet" else 512))
+		var pts := _moon_track() if id == "moon" else BodyCatalog.orbit_points(id, jd, 128 if moon else (1024 if BodyCatalog.kind(id) == "comet" else 512))
 		var line := SpaceDraw.line(pts, Color(BodyCatalog.color(id), alpha), 1.0)
 		line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		if moon:
@@ -226,6 +238,28 @@ func _build_orbits() -> void:
 		else:
 			_helio_root.add_child(line)
 		_orbits[id] = [line, alpha]
+
+
+## The Moon's path from half a month before to half a month after the date. Its orbit is no
+## fixed ellipse (the Sun pulls on it, the perigee turns round in 9 years), so the track is
+## drawn anew as time goes on – the Moon is always in the middle of it.
+func _moon_track() -> PackedVector3Array:
+	_moon_orbit_jd = jd
+	var pts := PackedVector3Array()
+	for k in 129:
+		pts.append(Moons.offset("moon", jd + BodyCatalog.MOON_MONTH * (k / 128.0 - 0.5)))
+	return pts
+
+
+func _update_moon_track() -> void:
+	if absf(jd - _moon_orbit_jd) < 0.25 or not _orbits.has("moon"):
+		return
+	var old: MeshInstance3D = _orbits.moon[0]
+	var line := SpaceDraw.line(_moon_track(), (old.material_override as StandardMaterial3D).albedo_color, 1.0)
+	line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	old.get_parent().add_child(line)
+	old.queue_free()
+	_orbits.moon[0] = line
 
 
 func _build_grid() -> void:
@@ -296,6 +330,8 @@ func zoom_by(factor: float, smooth := true) -> void:
 func min_dist() -> float:
 	if focus.begins_with("sb:"):
 		return 2e-5
+	if focus.begins_with("deep:"):
+		return nice_dist(focus) * 0.01
 	return maxf(BodyCatalog.radius_au(focus) * 1.8, 2e-6)
 
 
@@ -315,6 +351,10 @@ func nice_dist(id: String) -> float:
 		return OVERVIEW_DIST
 	if id.begins_with("sb:"):
 		return 0.5
+	if id == "deep:gc":
+		return 1.3e5 * DeepSpace.LY
+	if id.begins_with("deep:"):
+		return 0.3 * DeepSpace.LY
 	match BodyCatalog.kind(id):
 		"comet":
 			return 0.3
@@ -323,10 +363,60 @@ func nice_dist(id: String) -> float:
 	return BodyCatalog.radius_au(id) * 7.0
 
 
-## Flies the camera to a body (it becomes the focus); d < 0: nice_dist().
+## Flies the camera to a body (it becomes the focus); d < 0: nice_dist(). The camera first
+## turns towards the target, then flies straight at it (along the line of sight), so the
+## approach never goes sideways. Big changes of scale take longer.
 func fly_to(id: String, d := -1.0) -> void:
+	if id == "deep:oort":   # a cloud around the Sun: look at it from outside
+		id = "sun"
+		d = 2.5e5 if d < 0.0 else d
 	_idle = 0.0
-	_fly = {"from": _origin, "to": id, "t": 0.0, "d0": dist, "d1": d if d > 0.0 else nice_dist(id)}
+	_spin_vel = Vector2.ZERO
+	var target := helio_of(id)
+	var cam := _origin + _from_godot(_cam_rel)
+	var d1 := d if d > 0.0 else nice_dist(id)
+	var d0 := maxf((cam - target).length(), 1e-12)
+	_fly = {"to": id, "t": 0.0, "cam": cam, "look": _origin + _from_godot(_look_rel), "d1": d1,
+		"dur": clampf(1.4 + 0.12 * absf(log(d1 / d0)), 1.4, 4.5)}
+
+
+static func _from_godot(v: Vector3) -> Vector3:
+	return Vector3(v.x, -v.z, v.y)
+
+
+static func _orbit_dir(y: float, p: float) -> Vector3:
+	return Vector3(cos(p) * sin(y), sin(p), cos(p) * cos(y))
+
+
+func _fly_step(delta: float) -> void:
+	_fly.t = minf(float(_fly.t) + delta / float(_fly.dur), 1.0)
+	var s := float(_fly.t)
+	var target := helio_of(_fly.to)
+	_origin = target
+	var v := Kepler.to_godot((_fly.cam as Vector3) - target)
+	var d0 := maxf(v.length(), 1e-12)
+	var u0 := v / d0
+	# Where the orbit camera will be at the end (its pitch is limited to ±1.5 rad).
+	var y1 := atan2(u0.x, u0.z)
+	var p1 := clampf(asin(clampf(u0.y, -1.0, 1.0)), -1.5, 1.5)
+	var u1 := _orbit_dir(y1, p1)
+	var turn := smoothstep(0.0, 0.3, s)
+	var move := smoothstep(0.15, 1.0, s)
+	var u := u0.slerp(u1, move).normalized() if u0.dot(u1) < 0.9999999 else u1
+	var d := exp(lerpf(log(d0), log(float(_fly.d1)), move))
+	_cam_rel = u * d
+	var look_from := Kepler.to_godot((_fly.look as Vector3) - target)
+	var dir_a := (look_from - v).normalized()
+	var dir := dir_a.slerp(-u, turn).normalized() if dir_a.dot(-u) > -0.9999 and dir_a.length() > 0.5 else -u
+	_look_rel = _cam_rel + dir * d
+	dist = d
+	if s >= 1.0:
+		focus = _fly.to
+		yaw = y1
+		pitch = p1
+		dist = float(_fly.d1)
+		_fly = {}
+		arrived.emit(focus)
 
 
 func is_flying() -> bool:
@@ -337,6 +427,8 @@ func is_flying() -> bool:
 func helio_of(id: String) -> Vector3:
 	if id.begins_with("sb:"):
 		return SmallBodies.position_of(small.rows[int(id.substr(3))], jd)
+	if id.begins_with("deep:"):
+		return DeepSpace.helio(id)
 	return BodyCatalog.helio(id, jd)
 
 
@@ -365,8 +457,17 @@ func pick(pos: Vector2) -> String:
 		if d < best_d:
 			best_d = d
 			best = id
+	for it in _deep_items:   # [id, text, helio, colour, pickable, scene pos, screen pos]
+		if not it[4] or it.size() < 7:
+			continue
+		var d := (it[6] as Vector2).distance_to(pos)
+		if d < best_d:
+			best_d = d
+			best = it[0]
 	if best != "":
 		return best
+	if not small.visible:
+		return ""
 	var pts := small.positions(jd)
 	best_d = SMALL_PICK_PX
 	for k in pts.size():
@@ -385,6 +486,8 @@ func _px_per_au(d: float) -> float:
 
 
 func _radius_px(id: String, sp: Vector3) -> float:
+	if not _bodies.has(id):
+		return MIN_PX * 0.5
 	var d := _cam.position.distance_to(sp)
 	return maxf(float(_bodies[id].r) * _px_per_au(d), MIN_PX * 0.5)
 
@@ -403,38 +506,31 @@ func _process(delta: float) -> void:
 		if jd <= JD_MIN or jd >= JD_MAX:
 			rate = 0.0
 	if not _fly.is_empty():
-		_fly.t = minf(float(_fly.t) + delta / FLY_TIME, 1.0)
-		var s := smoothstep(0.0, 1.0, float(_fly.t))
-		_origin = (_fly.from as Vector3).lerp(helio_of(_fly.to), s)
-		dist = exp(lerpf(log(float(_fly.d0)), log(float(_fly.d1)), s))
-		if _fly.t >= 1.0:
-			focus = _fly.to
-			_fly = {}
-			arrived.emit(focus)
+		_fly_step(delta)
 	else:
 		_origin = helio_of(focus)
-	if not gestures.active():
-		yaw += _spin_vel.x * delta
-		pitch = clampf(pitch + _spin_vel.y * delta, -1.5, 1.5)
-		_spin_vel *= pow(0.03, delta)
-	_idle += delta
-	if idle_spin and _idle > IDLE_SPIN_AFTER:
-		yaw += 0.04 * delta
+		if not gestures.active():
+			yaw += _spin_vel.x * delta
+			pitch = clampf(pitch + _spin_vel.y * delta, -1.5, 1.5)
+			_spin_vel *= pow(0.03, delta)
+		_idle += delta
+		if idle_spin and _idle > IDLE_SPIN_AFTER:
+			yaw += 0.04 * delta
 	_update_scene()
 
 
 func _update_scene() -> void:
 	if absf(jd - _orbit_jd) > 3650.0:
 		_build_orbits()
-	var dir := Vector3(cos(pitch) * sin(yaw), sin(pitch), cos(pitch) * cos(yaw))
-	_cam.position = dir * dist
-	_cam.look_at(Vector3.ZERO, Vector3.UP)
-	# Near and far grow with the zoom: with a far/near ratio much above 1e7 Godot's frustum
-	# maths fails and close-up planets vanish. The camera never comes closer than 1.8 radii
-	# (min_dist), so the surface is always beyond a tenth of the distance.
-	_cam.near = maxf(dist * 0.1, 1e-9)
-	_cam.far = clampf(dist * 4e4, 60.0, 20000.0)
+	_update_moon_track()
+	if _fly.is_empty():
+		_cam_rel = _orbit_dir(yaw, pitch) * dist
+		_look_rel = Vector3.ZERO
+	_cam.position = _cam_rel
+	var view_dir := (_look_rel - _cam_rel).normalized()
+	_cam.look_at(_look_rel, Vector3.UP if absf(view_dir.y) < 0.999 else Vector3.FORWARD)
 	var sun_pos := Kepler.to_godot(-_origin)
+	var sun_d := (_cam_rel - sun_pos).length()
 	_helio_root.position = sun_pos
 	_grid_root.position = sun_pos
 	_light.position = sun_pos
@@ -443,10 +539,19 @@ func _update_scene() -> void:
 	var spin_now := absf(rate) <= 2.0
 
 	_scene_pos.clear()
-	var screen := {}
+	var nearest := INF
 	for id: String in _bodies:
 		var sp := Kepler.to_godot(BodyCatalog.helio(id, jd) - _origin)
 		_scene_pos[id] = sp
+		nearest = minf(nearest, _cam_rel.distance_to(sp) - float(_bodies[id].r))
+	# Near and far planes: with a far/near ratio much above 1e7 Godot's frustum maths fails
+	# and close-up planets vanish. Near stays in front of the closest surface (in flight that
+	# may be the body we came from, not the target).
+	_cam.far = maxf(clampf(dist * 4e4, 60.0, 20000.0), dist * 20.0)
+	_cam.near = maxf(minf(dist * 0.1, maxf(nearest, 0.0) * 0.5), _cam.far * 1e-7)
+	var screen := {}
+	for id: String in _bodies:
+		var sp: Vector3 = _scene_pos[id]
 		screen[id] = Vector2(-1e6, -1e6) if _cam.is_position_behind(sp) else _cam.unproject_position(sp)
 	var radius_px := {}
 	for id: String in _bodies:
@@ -470,8 +575,13 @@ func _update_scene() -> void:
 			node.visible = false
 		if b.tail:
 			_place_tail(b.tail, p, sun_pos, BodyCatalog.helio(id, jd).length())
+	# Far out the Sun's label says where we are.
+	(_bodies.sun.label as Label).text = tr("SOL_SUN_HERE") if sun_d > 3e4 else BodyCatalog.display_name("sun")
+	deep.update(sun_d, show_minor)
+	_sky.set_shader_parameter("band", 1.0 - deep.galaxy_alpha)
 	# Labels: focus and selection first, then in catalogue order (Sun, planets, moons, dwarf
-	# planets, comets); a label that would overlap one already placed stays hidden.
+	# planets, comets), then stars and the Milky Way; a label that would overlap one already
+	# placed stays hidden.
 	var placed: Array[Rect2] = []
 	var order: Array = [focus, selected]
 	order.append_array(BodyCatalog.ids())
@@ -494,9 +604,10 @@ func _update_scene() -> void:
 			if vis:
 				placed.append(rect)
 		label.visible = vis
+	_place_deep_labels(placed)
 	# Orbits: heliocentric ones fade out in close-ups (a polyline cannot follow the planet that
 	# closely), moon orbits show together with their moons.
-	var fade := clampf((dist - 0.01) / 0.04, 0.0, 1.0)
+	var fade := clampf((dist - 0.01) / 0.04, 0.0, 1.0) * (1.0 - smoothstep(2e4, 1e5, sun_d))
 	for id: String in _orbits:
 		var line: MeshInstance3D = _orbits[id][0]
 		var a: float = _orbits[id][1] * (1.8 if id == focus or id == selected else 1.0)
@@ -515,9 +626,46 @@ func _update_scene() -> void:
 	_marker.visible = false
 	if selected != "":
 		var sp := to_scene(helio_of(selected))
-		var big := selected in _bodies and _radius_px(selected, sp) > 26.0
+		var big: bool = selected in _bodies and _radius_px(selected, sp) > 26.0
 		_marker.visible = not big
 		_marker.position = sp
+
+
+func _place_deep_labels(placed: Array[Rect2]) -> void:
+	_deep_items = deep.label_items()
+	while _deep_labels.size() < _deep_items.size():
+		var l := UiTheme.label("", 27, "medium", UiTheme.TEXT)
+		l.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		l.add_theme_constant_override("outline_size", 8)
+		l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
+		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_labels.add_child(l)
+		_deep_labels.append(l)
+	for k in _deep_labels.size():
+		var l := _deep_labels[k]
+		l.visible = false
+		if k >= _deep_items.size():
+			continue
+		var it: Array = _deep_items[k]
+		var sp := to_scene(it[2])
+		it.append(sp)
+		var scr := Vector2(-1e6, -1e6) if _cam.is_position_behind(sp) else _cam.unproject_position(sp)
+		it.append(scr)
+		if scr.x < -1e5:
+			continue
+		l.text = it[1]
+		l.add_theme_color_override("font_color", it[3])
+		var size := l.get_combined_minimum_size()
+		var rect := Rect2(scr - Vector2(size.x / 2.0, size.y + 10.0), size)
+		var free := true
+		for q in placed:
+			if q.intersects(rect):
+				free = it[0] == selected and it[0] != ""
+				break
+		if free:
+			placed.append(rect)
+			l.position = rect.position
+			l.visible = true
 
 
 func _place_tail(pivot: Node3D, p: Vector3, sun_pos: Vector3, r_sun: float) -> void:

@@ -4,7 +4,8 @@ shader_type sky;
 
 uniform float star_scale = 260.0;
 uniform float star_brightness = 0.45;
-uniform vec3 galactic_pole = vec3(-0.45, 0.62, 0.64);
+uniform vec3 galactic_pole = vec3(-0.45, 0.62, 0.64);   // set to the real pole by SolarView
+uniform float band = 1.0;                                // Milky Way band (0 when we look at it from outside)
 
 float hash13(vec3 p) {
 	p = fract(p * 0.1031);
@@ -63,8 +64,8 @@ float stars(vec3 dir, float scale, float density) {
 void sky() {
 	vec3 dir = EYEDIR;
 	float s = stars(dir, star_scale, 0.08) + stars(dir, star_scale * 0.45, 0.05) * 1.5;
-	float band = exp(-pow(dot(dir, normalize(galactic_pole)) / 0.22, 2.0));
-	float mw = band * fbm(dir * 6.0) * (0.6 + 0.4 * fbm(dir * 18.0 + 3.0));
-	COLOR = vec3(0.002, 0.003, 0.008) + vec3(0.75, 0.8, 1.0) * s * 2.2 * star_brightness * (1.0 + band)
+	float b = band * exp(-pow(dot(dir, normalize(galactic_pole)) / 0.22, 2.0));
+	float mw = b * fbm(dir * 6.0) * (0.6 + 0.4 * fbm(dir * 18.0 + 3.0));
+	COLOR = vec3(0.002, 0.003, 0.008) + vec3(0.75, 0.8, 1.0) * s * 2.2 * star_brightness * (1.0 + b)
 		+ vec3(0.07, 0.065, 0.08) * mw;
 }

@@ -152,7 +152,7 @@ func _ready() -> void:
 		"gallery":
 			_fake_gallery()
 			add_child(GallerySlide.new())
-		"sol_menu", "sol_explore", "sol_done", "sol_edge", "sol_body", "sol_trojans", "sol_kuiper", "sol_mission", "sol_fly", "sol_result":
+		"sol_menu", "sol_explore", "sol_done", "sol_flight", "sol_edge", "sol_body", "sol_trojans", "sol_kuiper", "sol_mission", "sol_fly", "sol_result":
 			var sg: Control = load("res://games/solar/solar_game.tscn").instantiate()
 			sg.skip_intro = true
 			add_child(sg)
@@ -161,7 +161,7 @@ func _ready() -> void:
 			match scenario:
 				"sol_menu":
 					sg.show_menu()
-				"sol_explore", "sol_done", "sol_edge", "sol_body", "sol_trojans", "sol_kuiper":
+				"sol_explore", "sol_done", "sol_flight", "sol_edge", "sol_body", "sol_trojans", "sol_kuiper":
 					sg.start_explore()
 					var em: ExploreMode = sg._mode
 					v.rate = 0.0
@@ -188,6 +188,12 @@ func _ready() -> void:
 						"sol_kuiper":
 							v.dist = 130.0
 							v.pitch = 0.9
+						"sol_flight":
+							v.focus = "earth"
+							v.dist = v.nice_dist("earth")
+							v.pitch = 0.3
+							v._process(0.0)
+							v.fly_to(OS.get_environment("BODY") if OS.get_environment("BODY") != "" else "mars")
 						"sol_done":
 							em._on_tap("jupiter")
 							em._total = 1800

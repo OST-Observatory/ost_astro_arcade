@@ -21,6 +21,7 @@ const TASKS := [
 	{"id": "neptune", "level": 1, "accept": ["neptune"], "fly": "neptune"},
 	{"id": "pluto", "level": 1, "accept": ["pluto"], "fly": "pluto"},
 	{"id": "io", "level": 1, "accept": ["io"], "fly": "io"},
+	{"id": "proxima", "level": 1, "accept": ["deep:proxima"], "fly": "deep:proxima"},
 	{"id": "eris", "level": 2, "accept": ["eris"], "fly": "eris"},
 	{"id": "trojan", "level": 2, "accept": ["class:TJN"], "fly": "jupiter"},
 	{"id": "neo", "level": 2, "accept": ["class:APO", "class:ATE", "class:AMO"], "fly": "earth"},
@@ -29,6 +30,8 @@ const TASKS := [
 	{"id": "67p", "level": 2, "accept": ["67p"], "fly": "67p"},
 	{"id": "kuiper", "level": 2, "accept": ["class:TNO", "pluto", "haumea", "makemake", "eris"], "fly": "pluto"},
 	{"id": "encke", "level": 2, "accept": ["encke"], "fly": "encke"},
+	{"id": "oort", "level": 2, "accept": ["deep:oort"], "fly": "deep:oort"},
+	{"id": "gc", "level": 2, "accept": ["deep:gc"], "fly": "deep:gc"},
 ]
 ## How many tasks of each level a round has, per difficulty.
 const MIX := {"explorer": [5, 0, 0], "researcher": [2, 3, 0], "pro": [0, 2, 3]}

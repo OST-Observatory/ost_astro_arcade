@@ -58,6 +58,10 @@ func show_body(body: String, view: SolarView) -> void:
 		return
 	var jd := view.jd
 	var lines: Array[String] = []
+	if body.begins_with("deep:"):
+		_show_deep(body)
+		_fly.visible = body != view.focus
+		return
 	if body.begins_with("sb:"):
 		var row: Array = view.small.rows[int(body.substr(3))]
 		var group: String = SB_GROUP.get(SmallBodies.class_of(row), "BELT")
@@ -95,4 +99,28 @@ func show_body(body: String, view: SolarView) -> void:
 			lines.append(tr("SOL_FACT_MASS") % AstroFormat.sig(m / BodyCatalog.EARTH_MASS))
 		_text.text = BodyCatalog.description(body)
 	_facts.text = "\n".join(lines)
+	_facts.visible = true
 	_fly.visible = body != view.focus
+
+
+## Oort cloud, galactic centre and the nearby stars (DeepSpace).
+func _show_deep(body: String) -> void:
+	var k := body.substr(5)
+	_title.text = DeepSpace.display_name(body)
+	var ly := DeepSpace.helio(body).length() / DeepSpace.LY
+	var lines: Array[String] = []
+	if k == "oort":
+		_type.text = tr("SOL_DEEPT_OORT")
+		_text.text = tr("SOL_DEEPD_OORT")
+	elif k == "gc":
+		_type.text = tr("SOL_DEEPT_GC")
+		lines.append(tr("SOL_FACT_LY") % AstroFormat.grouped(ly))
+		_text.text = tr("SOL_DEEPD_GC")
+	else:
+		var star: Array = DeepSpace.STARS[DeepSpace.star_index(k)]
+		_type.text = tr("SOL_STAR_" + str(star[5]).to_upper())
+		lines.append(tr("SOL_FACT_LY") % AstroFormat.sig(ly))
+		lines.append(tr("SOL_FACT_LIGHT") % AstroFormat.sig(ly))
+		_text.text = tr("SOL_STARD_" + k.to_upper()) if star[6] else tr("SOL_STARD_DWARF")
+	_facts.text = "\n".join(lines)
+	_facts.visible = not lines.is_empty()

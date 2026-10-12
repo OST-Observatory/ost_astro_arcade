@@ -22,6 +22,7 @@ entry.
 | `godot/assets/galaxy/images/cartwheel.jpg` | Cartwheel Galaxy (weic2211a, scaled) | NASA, ESA, CSA, STScI | CC BY 4.0 (ESA/Webb) |
 | `godot/assets/data/galaxy/rotation_curves.json` | Measured rotation curves and reference mass models (`tools/galaxy/build_rotation_curves.py`) | Milky Way: Eilers et al. 2019, ApJ 871, 120; NGC 3198 and DDO 154: SPARC, Lelli, McGaugh & Schombert 2016, AJ 152, 157; Milky Way baryons: Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529 | published data, cited |
 | `godot/shared/astro/kepler.gd`, `moons.gd`, `rotation.gd` | Planet positions, Moon and Galilean moons, spin axes (formulas, no data files) | Standish, "Keplerian Elements for Approximate Positions of the Major Planets" (JPL); J. Meeus, *Astronomical Algorithms* (2nd ed. 1998); IAU WGCCRE report (Archinal et al. 2018) | published methods, cited |
+| `godot/games/solar/scene/deep_space.gd` | Nearby stars (J2000 positions, distances), galactic centre and pole; schematic Milky Way model and Oort cloud | Star data: standard catalogue values (SIMBAD, CDS Strasbourg; Hipparcos/Gaia); galactic frame: IAU definition (J2000); Sun–centre distance 8.2 kpc (GRAVITY Collaboration 2019); arm layout schematic after published maps (e.g. Reid et al. 2019, ApJ 885, 131) | published values, cited; model © OST |
 | `godot/assets/fonts/` | Inter, CMU Serif, Material Icons | rsms/inter; Computer Modern Unicode; Google | SIL OFL 1.1; SIL OFL 1.1; Apache 2.0 |
 
 ## Planned (not yet in the repo)

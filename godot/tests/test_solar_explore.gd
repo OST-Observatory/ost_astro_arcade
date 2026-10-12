@@ -3,12 +3,12 @@ extends TestCase
 
 func test_every_task_target_exists() -> void:
 	for t in FindTasks.TASKS:
-		assert_true(BodyCatalog.has(t.fly), "%s: fly target %s" % [t.id, t.fly])
+		assert_true(BodyCatalog.has(t.fly) or DeepSpace.has(t.fly), "%s: fly target %s" % [t.id, t.fly])
 		for a in t.accept:
 			if str(a).begins_with("class:"):
 				assert_true(str(a).substr(6) in SmallBodies.CLASSES, "%s: class %s" % [t.id, a])
 			else:
-				assert_true(BodyCatalog.has(a), "%s: body %s" % [t.id, a])
+				assert_true(BodyCatalog.has(a) or DeepSpace.has(a), "%s: body %s" % [t.id, a])
 
 
 func test_task_facts() -> void:
@@ -80,3 +80,22 @@ func test_moon_and_planet_positions() -> void:
 	assert_true(d > 356000.0 and d < 407000.0, "Moon distance %f km" % d)
 	assert_almost(BodyCatalog.helio("ceres", jd).length(), 2.77, 0.25, "Ceres in the belt")
 	assert_eq(BodyCatalog.orbit_points("io", jd, 32).size(), 33)
+
+
+func test_deep_space_geometry() -> void:
+	# Galactic centre (Sgr A*) at ecliptic longitude ~266.8°, latitude ~-5.6°; the galactic
+	# plane is tilted ~60° to the ecliptic.
+	var gc := DeepSpace.gc_helio().normalized()
+	assert_almost(rad_to_deg(fposmod(atan2(gc.y, gc.x), TAU)), 266.8, 0.3, "GC longitude")
+	assert_almost(rad_to_deg(asin(gc.z)), -5.6, 0.3, "GC latitude")
+	assert_almost(DeepSpace.gc_helio().length() / DeepSpace.LY, 26745.0, 300.0, "Sun - centre")
+	var tilt := rad_to_deg(acos(DeepSpace.galactic_basis().z.dot(Vector3(0, 0, 1))))
+	assert_almost(tilt, 60.2, 0.5, "galactic plane vs ecliptic")
+	# Proxima is ~2.2° from Alpha Centauri on the sky and a bit closer.
+	var p := DeepSpace.star_helio(DeepSpace.star_index("proxima"))
+	var a := DeepSpace.star_helio(DeepSpace.star_index("alphacen"))
+	assert_almost(rad_to_deg(p.angle_to(a)), 2.2, 0.15, "Proxima - Alpha Cen")
+	assert_true(p.length() < a.length())
+	# The Sun lies on the model's Orion spur, between the Sagittarius and the Perseus arm.
+	assert_true(DeepSpace.galactic_point(DeepSpace.R0_KPC, PI).length() < 1e4, "Sun at the origin (32-bit: ~100 AU)")
+	assert_true(DeepSpace.has("deep:sirius") and DeepSpace.has("deep:gc") and not DeepSpace.has("deep:xyz"))

@@ -26,6 +26,10 @@ var _hint_btn: BigButton
 var _feedback: Label
 var _card: InfoCard
 var _result: PanelContainer
+var _width_label: Label
+## Jumps of the "journey outwards": [label, focus, camera distance in AU (< 0: the body's own)].
+const SCALES := [["SOL_SCALE_PLANETS", "sun", SolarView.OVERVIEW_DIST], ["SOL_SCALE_KUIPER", "sun", 160.0],
+	["SOL_SCALE_OORT", "sun", 2.5e5], ["SOL_SCALE_STARS", "sun", 70.0 * DeepSpace.LY], ["SOL_SCALE_GALAXY", "deep:gc", -1.0]]
 
 
 static func make(v: SolarView, difficulty: String, panel_rect: Rect2, view_r: Rect2) -> ExploreMode:
@@ -51,6 +55,7 @@ func _ready() -> void:
 	var bar := TimeBar.make(view, today)
 	bar.position = Vector2(view_rect.position.x + 24, view_rect.end.y - 140)
 	add_child(bar)
+	_build_scale_buttons()
 
 	_col = VBoxContainer.new()
 	_col.position = panel.position
@@ -104,6 +109,37 @@ func _ready() -> void:
 	_start_round()
 
 
+func _build_scale_buttons() -> void:
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 8)
+	col.position = Vector2(view_rect.end.x - 300, view_rect.position.y + 150)
+	add_child(col)
+	var head := UiTheme.label("SOL_SCALE_TITLE", UiTheme.SIZE_SMALL - 4, "semibold", UiTheme.SCIENCE)
+	col.add_child(head)
+	for sc in SCALES:
+		var b := BigButton.make(sc[0], "", false, 276)
+		b.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL - 2)
+		b.custom_minimum_size.y = 72
+		var focus_id: String = sc[1]
+		var d: float = sc[2]
+		b.pressed.connect(func(): view.fly_to(focus_id, d))
+		col.add_child(b)
+	_width_label = _plain(UiTheme.SIZE_SMALL - 4, "semibold", UiTheme.SCIENCE)
+	_width_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_width_label.custom_minimum_size = Vector2(276, 0)
+	col.add_child(_width_label)
+
+
+## Width of the picture at the focus, in km, AU or light-years.
+func _width_text() -> String:
+	var w := 2.0 * view.dist * tan(deg_to_rad(SolarView.FOV * 0.5)) * view_rect.size.x / view_rect.size.y
+	if w < 0.05:
+		return AstroFormat.grouped(w * Kepler.AU_KM) + " km"
+	if w < 20000.0:
+		return AstroFormat.sig(w) + " " + tr("SOL_AU_UNIT")
+	return AstroFormat.sig(w / DeepSpace.LY) + " " + tr("SOL_LY_UNIT")
+
+
 func _exit_tree() -> void:
 	for sig in [view.body_tapped, view.body_double_tapped, view.arrived]:
 		for c in sig.get_connections():
@@ -138,6 +174,8 @@ func _show_task() -> void:
 
 
 func _process(delta: float) -> void:
+	if _width_label:
+		_width_label.text = tr("SOL_VIEW_WIDTH") % _width_text()
 	if _free or _tasks.is_empty():
 		return
 	_t += delta
