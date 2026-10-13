@@ -90,9 +90,9 @@ func _ready() -> void:
 	# Researchers work out the launch day from the phase angle; the ghost Jupiter only helps
 	# after a first miss.
 	_ghost.visible = diff != "researcher"
-	_ghost_probe = _marker(Color(1, 1, 1, 1), 0.00032)
+	_ghost_probe = _probe_sprite(Color(1, 1, 1, 0.85), 0.00019)
 	_ghost_probe.visible = planet == "saturn"
-	_probe = _marker(Color(1, 1, 1, 1), 0.0003)
+	_probe = _probe_sprite(Color(1, 1, 1, 1), 0.00022)
 	_probe.visible = false
 	_dist_label = SpaceDraw.label("", Vector3.ZERO, UiTheme.ACCENT_HI)
 	_dist_label.pixel_size = SolarView.LABEL_PX
@@ -147,6 +147,21 @@ func _marker(col: Color, px: float) -> Sprite3D:
 	s.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	s.fixed_size = true
 	s.no_depth_test = true
+	s.pixel_size = px
+	s.modulate = col
+	_ov.add_child(s)
+	return s
+
+
+## The space probe (assets/solar/probe.svg, 256 px), always about 70 px on screen.
+func _probe_sprite(col: Color, px: float) -> Sprite3D:
+	var s := Sprite3D.new()
+	s.texture = preload("res://assets/solar/probe.svg")
+	s.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	s.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	s.fixed_size = true
+	s.no_depth_test = true
+	s.render_priority = 1
 	s.pixel_size = px
 	s.modulate = col
 	_ov.add_child(s)
@@ -334,7 +349,7 @@ func _update_preview() -> void:
 		_ghost_probe.position = Kepler.to_godot(probe)
 		_preview.add_child(SpaceDraw.line(PackedVector3Array([probe, sat]), Color(1.0, 0.92, 0.7, 1.0), 3.0))
 		_dist_label.text = AstroFormat.num(float(_plan.closest), 2) + " " + tr("SOL_AU_UNIT")
-		_dist_label.position = Kepler.to_godot((probe + sat) / 2.0)
+		_dist_label.position = Kepler.to_godot(sat)
 		_dist_label.visible = true
 		lines.append(tr("SOL_FLYBY_AT") % AstroFormat.date(MarsTransfer.iso_from_jd(arrive_jd)))
 		if _plan.escapes:
@@ -364,6 +379,20 @@ func _update_preview() -> void:
 
 # --- flight ------------------------------------------------------------------------------
 
+## The distance label sits at the ghost Saturn, on the side away from the probe (on screen),
+## so it never covers the probe.
+func _place_dist_label() -> void:
+	if not _dist_label.visible:
+		return
+	var cam := view.camera()
+	var a := _ghost_probe.global_position
+	var b := _ghost2.global_position
+	if cam.is_position_behind(a) or cam.is_position_behind(b):
+		return
+	var below := cam.unproject_position(a).y < cam.unproject_position(b).y
+	_dist_label.offset = Vector2(0, -60 if below else 60)
+
+
 func _launch() -> void:
 	if _flying or _done:
 		return
@@ -385,6 +414,7 @@ func _on_tap(_id: String) -> void:
 
 
 func _process(delta: float) -> void:
+	_place_dist_label()
 	if not _flying:
 		return
 	_f = minf(_f + delta * _fast / FLIGHT_SECONDS, 1.0)
