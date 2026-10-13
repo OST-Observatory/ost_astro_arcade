@@ -512,3 +512,4 @@ SOL_FIND_OORT,"Finde die Wolke, aus der Kometen mit sehr langen Umlaufzeiten kom
 SOL_FIND_GC,Finde das Zentrum der Milchstraße.,Find the centre of the Milky Way.,Encuentra el centro de la Vía Láctea.
 SOL_PHASE_RESEARCH,%s steht beim Start %d° vor der Erde. Während deines Flugs läuft %s noch %d° weiter.,"At launch, %s is %d° ahead of Earth. During your flight, %s moves on by %d°.","Al despegar, %s va %d° por delante de la Tierra. Durante tu vuelo, %s avanza otros %d°."
 SOL_GHOST_NOW,"Hilfe: Der blasse %s zeigt jetzt, wo er bei der Ankunft steht.",Help: the faint %s now shows where it will be on arrival.,Ayuda: el %s tenue muestra ahora dónde estará a la llegada.
+SOL_NEW_SITUATION,Neue Ausgangslage: Die Planeten stehen jetzt anders – Starttermine ab %s.,New situation: the planets stand elsewhere now – launch dates from %s on.,Nueva situación: los planetas están ahora en otro lugar; fechas de lanzamiento a partir del %s.

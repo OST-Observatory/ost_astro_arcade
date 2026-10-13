@@ -65,6 +65,13 @@ func _initialize() -> void:
 			await process_frame
 		print("mission %s: %s | result shown %s" % [mm.planet, mm._feedback.text.replace("\n", " | "),
 			mm.find_children("*", "ResultActions", true, false).size() > 0])
+		# "Another launch": a new situation (other dates) and everything usable again.
+		var jd_before: float = mm._jd0
+		var again = mm.find_children("*", "ResultActions", true, false)[0].get_child(0)
+		again.pressed.emit()
+		await process_frame
+		print("  again: start %s -> %s, launch enabled %s | %s" % [MarsTransfer.iso_from_jd(jd_before).left(10),
+			MarsTransfer.iso_from_jd(mm._jd0).left(10), not mm._launch_btn.disabled, mm._feedback.text])
 		g.queue_free()
 		await process_frame
 	quit()

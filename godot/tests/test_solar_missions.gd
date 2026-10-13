@@ -49,16 +49,38 @@ func test_scores_order() -> void:
 
 
 func test_closest_approach_is_the_true_minimum() -> void:
-	# Brute force with a fine step (and in 3D, Saturn's orbit is tilted) must not find a
-	# closer approach than Flyby.closest_to().
+	# Brute force with a fine step (in 3D, Saturn's orbit is tilted): the smallest real
+	# approach (local minimum of the distance after the swing-by) is what closest_to() finds.
 	var ws := MissionLogic.jupiter_windows(2461322.5, 12.0)
 	for k in [3, 5, 8, 10]:
 		for side in [1.0, -1.0]:
 			var p := MissionLogic.plan_flyby(ws[k], 6.0, side)
 			var f: Flyby = p.flyby
 			var best := INF
+			var prev2 := INF
+			var prev := INF
 			var jd := f.jd_flyby
-			while jd < f.jd_flyby + MissionLogic.SATURN_YEARS * 365.25:
-				best = minf(best, f.position(jd).distance_to(Kepler.planet_position("saturn", jd)))
+			while jd <= f.jd_flyby + MissionLogic.SATURN_YEARS * 365.25:
+				var d := f.position(jd).distance_to(Kepler.planet_position("saturn", jd))
+				if prev2 < INF and prev < prev2 and prev <= d:
+					best = minf(best, prev)
+				prev2 = prev
+				prev = d
 				jd += 0.5
-			assert_almost(float(p.closest), best, 0.01, "window %d side %+d" % [k, int(side)])
+			if p.approach:
+				assert_almost(float(p.closest), best, 0.01, "window %d side %+d" % [k, int(side)])
+			else:
+				assert_eq(best, INF, "window %d side %+d: no approach" % [k, int(side)])
+
+
+func test_closest_approach_moves_smoothly() -> void:
+	# Small changes of the pass distance give small changes of the result (the old search
+	# could wander past its time span and jump).
+	var w: float = MissionLogic.jupiter_windows(2461326.5)[12]
+	var last := -1.0
+	for k in 16:
+		var p := MissionLogic.plan_flyby(w, 12.5 + k * 0.2, 1.0)
+		assert_true(float(p.jd_closest) >= (p.flyby as Flyby).jd_flyby, "never before the swing-by")
+		if last >= 0.0:
+			assert_true(absf(float(p.closest) - last) < 0.4, "step %d: %.2f -> %.2f" % [k, last, p.closest])
+		last = p.closest

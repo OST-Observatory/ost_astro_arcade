@@ -46,6 +46,8 @@ var _col: VBoxContainer
 var _slider: KnobSlider
 var _rp_slider: KnobSlider
 var _win_buttons: Array[Button] = []
+var _win_grid: GridContainer
+var _rng := RandomNumberGenerator.new()
 var _side_buttons := {}
 var _info: Label
 var _launch_btn: BigButton
@@ -102,13 +104,23 @@ func _ready() -> void:
 	_date = _plain(UiTheme.SIZE_BODY + 2, "semibold", UiTheme.TEXT)
 	_date.position = Vector2(view_rect.position.x + 28, view_rect.end.y - 70)
 	add_child(_date)
+	_rng.randomize()
 	_build_panel()
+	_start_situation(_jd0)
+	Router.step("plan")
+
+
+## A new starting situation from a date on: the slider range or the launch windows begin there.
+func _start_situation(jd0: float) -> void:
+	_jd0 = jd0
 	if planet == "saturn":
 		_windows = MissionLogic.jupiter_windows(_jd0)
+		_build_window_buttons()
 		_select_window(0)
 	else:
+		_slider.slider.set_value_no_signal(0.0)
+		_slider._refresh()   # the date shown depends on _jd0
 		_set_launch(_jd0)
-	Router.step("plan")
 
 
 func _exit_tree() -> void:
@@ -168,23 +180,11 @@ func _build_panel() -> void:
 	_col.add_child(_wrap(UiTheme.label("SOL_M_TASK_" + key, UiTheme.SIZE_SMALL - 2, "regular", UiTheme.TEXT), w))
 	if planet == "saturn":
 		_col.add_child(UiTheme.label("SOL_WINDOWS", UiTheme.SIZE_SMALL, "semibold", UiTheme.TEXT))
-		var grid := GridContainer.new()
-		grid.columns = 5
-		grid.add_theme_constant_override("h_separation", 10)
-		grid.add_theme_constant_override("v_separation", 10)
-		_col.add_child(grid)
-		for k in MissionLogic.jupiter_windows(_jd0).size():
-			var b := Button.new()
-			b.custom_minimum_size = Vector2((w - 48) / 5.0, 56)
-			b.focus_mode = Control.FOCUS_NONE
-			b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
-			b.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL - 4)
-			var i := k
-			b.pressed.connect(func():
-				Audio.play("tap")
-				_select_window(i))
-			grid.add_child(b)
-			_win_buttons.append(b)
+		_win_grid = GridContainer.new()
+		_win_grid.columns = 5
+		_win_grid.add_theme_constant_override("h_separation", 10)
+		_win_grid.add_theme_constant_override("v_separation", 10)
+		_col.add_child(_win_grid)
 		_col.add_child(UiTheme.label("SOL_SIDE", UiTheme.SIZE_SMALL, "semibold", UiTheme.TEXT))
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 14)
@@ -223,6 +223,24 @@ func _build_panel() -> void:
 	menu.pressed.connect(func(): menu_pressed.emit())
 	add_child(menu)
 	_update_status()
+
+
+func _build_window_buttons() -> void:
+	for b in _win_buttons:
+		b.queue_free()
+	_win_buttons.clear()
+	for k in _windows.size():
+		var b := Button.new()
+		b.custom_minimum_size = Vector2((panel.size.x - 48) / 5.0, 56)
+		b.focus_mode = Control.FOCUS_NONE
+		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		b.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL - 4)
+		var i := k
+		b.pressed.connect(func():
+			Audio.play("tap")
+			_select_window(i))
+		_win_grid.add_child(b)
+		_win_buttons.append(b)
 
 
 func _update_status() -> void:
@@ -501,7 +519,9 @@ func _finish() -> void:
 		_ghost.visible = diff != "researcher" or planet == "saturn"
 		_reset_flight()
 		_col.visible = true
-		_feedback.text = ""
 		_set_controls(true)
 		_update_status()
-		_update_preview(), w - 30.0, true))
+		# Another launch is a new situation: the planets stand elsewhere, from a date
+		# between half a year and twelve years from now.
+		_start_situation(floorf(MarsTransfer.jd_now() - 0.5) + 0.5 + float(_rng.randi_range(180, 4400)))
+		_feedback.text = tr("SOL_NEW_SITUATION") % AstroFormat.date(MarsTransfer.iso_from_jd(_jd0)), w - 30.0, true))

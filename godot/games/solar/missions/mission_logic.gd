@@ -12,7 +12,7 @@ const ATTEMPTS := 3
 const WINDOW_YEARS := 20.0
 const RP_MIN := 1.1          # closest approach to Jupiter in Jupiter radii
 const RP_MAX := 30.0
-const SATURN_YEARS := 12.0   # how long after the swing-by Saturn is looked for
+const SATURN_YEARS := 20.0   # how long after the swing-by Saturn is looked for
 const HILL_SATURN := 0.43    # AU
 
 
@@ -79,7 +79,8 @@ static func plan_flyby(jd_launch: float, rp_radii: float, side: float) -> Dictio
 	var t := HohmannTransfer.compute("jupiter", jd_launch)
 	var f := Flyby.compute(t, rp_radii, side)
 	var c := f.closest_to("saturn", SATURN_YEARS)
-	return {"transfer": t, "flyby": f, "closest": float(c[0]), "jd_closest": float(c[1]), "escapes": f.escapes()}
+	return {"transfer": t, "flyby": f, "closest": float(c[0]), "jd_closest": float(c[1]), "approach": c[2],
+		"escapes": f.escapes()}
 
 
 ## Best result a window allows (over both sides and the whole pass-distance range).

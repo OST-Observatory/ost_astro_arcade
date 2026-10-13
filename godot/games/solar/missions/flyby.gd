@@ -59,22 +59,67 @@ func escapes() -> bool:
 	return float(elements.e) >= 1.0
 
 
-## Closest approach to a planet within `years` after the swing-by: [distance AU, jd].
+## Closest approach to a planet within `years` after the swing-by: [distance AU, jd, true
+## approach?]. Only real approaches count – moments when the distance stops shrinking and
+## grows again; the smallest of them wins. Without any (the probe only moves away, or is
+## still coming closer at the end) the closest edge of the time span is returned.
 func closest_to(target_planet: String, years := 20.0) -> Array:
+	var step := 10.0
+	var n := int(years * 365.25 / step)
+	var planet_pos := _planet_grid(target_planet, step, n)
 	var best := INF
 	var best_jd := jd_flyby
-	var jd := jd_flyby
-	var end := jd_flyby + years * 365.25
-	while jd < end:
-		var d := position(jd).distance_to(Kepler.planet_position(target_planet, jd))
-		if d < best:
-			best = d
-			best_jd = jd
-		jd += 5.0
-	# Refine around the best coarse sample.
-	jd = best_jd - 5.0
-	while jd < best_jd + 5.0:
-		var d := position(jd).distance_to(Kepler.planet_position(target_planet, jd))
+	var edge := INF
+	var edge_jd := jd_flyby
+	var prev2 := INF
+	var prev := INF
+	for k in n + 1:
+		var jd := jd_flyby + k * step
+		var d := position(jd).distance_to(planet_pos[k])
+		if (k == 0 or k == n) and d < edge:
+			edge = d
+			edge_jd = jd
+		if prev2 < INF and prev < prev2 and prev <= d:   # the moment of the swing-by itself is no approach
+			var r := _refine(target_planet, jd - 2.0 * step, jd)
+			if float(r[0]) < best:
+				best = r[0]
+				best_jd = r[1]
+		prev2 = prev
+		prev = d
+	if best < INF:
+		return [best, best_jd, true]
+	return [edge, edge_jd, false]
+
+
+## Planet positions on the coarse time grid after the swing-by – the same for every pass
+## distance and side of one launch window, so they are kept (moving a slider stays smooth).
+static var _grids := {}
+
+
+func _planet_grid(target_planet: String, step: float, n: int) -> PackedVector3Array:
+	var key := "%s %.3f %.1f %d" % [target_planet, jd_flyby, step, n]
+	if not _grids.has(key):
+		if _grids.size() > 64:
+			_grids.clear()
+		var pts := PackedVector3Array()
+		pts.resize(n + 1)
+		for k in n + 1:
+			pts[k] = Kepler.planet_position(target_planet, jd_flyby + k * step)
+		_grids[key] = pts
+	return _grids[key]
+
+
+func _dist(target_planet: String, jd: float) -> float:
+	return position(jd).distance_to(Kepler.planet_position(target_planet, jd))
+
+
+## Smallest distance in [lo, hi] (fixed bounds), quarter-day steps.
+func _refine(target_planet: String, lo: float, hi: float) -> Array:
+	var best := INF
+	var best_jd := lo
+	var jd := lo
+	while jd <= hi:
+		var d := _dist(target_planet, jd)
 		if d < best:
 			best = d
 			best_jd = jd

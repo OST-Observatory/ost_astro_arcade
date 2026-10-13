@@ -205,6 +205,8 @@ func _ready() -> void:
 					sg.start_mission()
 					var mm: MissionMode = sg._mode
 					v.idle_spin = false
+					if OS.get_environment("SHIFT") != "":   # a later starting situation ("another launch")
+						mm._start_situation(mm._jd0 + float(OS.get_environment("SHIFT")))
 					if mm.planet == "saturn":
 						mm._select_window(int(OS.get_environment("WINDOW")) if OS.get_environment("WINDOW") != "" else 7)
 					else:
