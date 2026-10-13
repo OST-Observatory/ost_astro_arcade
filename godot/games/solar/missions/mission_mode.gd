@@ -114,7 +114,7 @@ func _ready() -> void:
 func _start_situation(jd0: float) -> void:
 	_jd0 = jd0
 	if planet == "saturn":
-		_windows = MissionLogic.jupiter_windows(_jd0)
+		_windows = MissionLogic.saturn_windows(_jd0, _rng)
 		_build_window_buttons()
 		_select_window(0)
 	else:
@@ -339,8 +339,11 @@ func _update_preview() -> void:
 		lines.append(tr("SOL_FLYBY_AT") % AstroFormat.date(MarsTransfer.iso_from_jd(arrive_jd)))
 		if _plan.escapes:
 			lines.append(tr("SOL_ESCAPES"))
-		elif not _plan.reached:
+		if not _plan.reached:
 			lines.append(tr("SOL_NOT_REACHED"))
+		else:
+			var off := MissionLogic.saturn_offset(_plan)
+			lines.append(tr("SOL_SATURN_AHEAD" if off >= 0.0 else "SOL_SATURN_BEHIND") % int(round(absf(off))))
 		lines.append(tr("SOL_SATURN_DIST") % [AstroFormat.num(float(_plan.closest), 2),
 			AstroFormat.date(MarsTransfer.iso_from_jd(float(_plan.jd_closest)))]
 			+ ("  ✓" if float(_plan.closest) < MissionLogic.HILL_SATURN + 0.02 else ""))
@@ -430,7 +433,12 @@ func _arrived() -> void:
 		st = MissionLogic.flyby_stars(d)
 		lines.append(tr("SOL_M_SATURN_HIT" if st >= 3 else "SOL_M_SATURN_MISS") % AstroFormat.num(d, 2))
 		if st < 3:
-			lines.append(tr("SOL_M_SATURN_TIP"))
+			if not _plan.reached:
+				lines.append(tr("SOL_TIP_CLOSER"))
+			elif absf(MissionLogic.saturn_offset(_plan)) > 8.0:
+				lines.append(tr("SOL_TIP_LATER" if MissionLogic.saturn_offset(_plan) > 0.0 else "SOL_TIP_EARLIER"))
+			else:
+				lines.append(tr("SOL_TIP_FINE"))
 	else:
 		var miss := absf(_transfer.miss_deg)
 		_best = minf(_best, miss)

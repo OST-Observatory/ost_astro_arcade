@@ -100,3 +100,21 @@ func test_encounter_moves_smoothly() -> void:
 								tag + ": date jumps %.0f days" % absf(float(q.jd_closest) - float(prev.jd_closest)))
 							prev = q
 				last = p
+
+
+func test_saturn_windows_always_offer_solutions() -> void:
+	# From any starting date the eight windows offered contain several that reach Saturn's
+	# sphere of influence; the offset shrinks by about 20° per later window (the hint).
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 11
+	for start in [2461326.5, 2462500.5, 2464100.5, 2465300.5]:
+		var ws := MissionLogic.saturn_windows(start, rng)
+		assert_eq(ws.size(), 8)
+		var good := 0
+		for w in ws:
+			if MissionLogic.flyby_stars(float(MissionLogic.best_for_window(w).closest)) == 3:
+				good += 1
+		assert_true(good >= 2, "%s: %d windows with three stars" % [MarsTransfer.iso_from_jd(start).left(10), good])
+		var a := MissionLogic.saturn_offset(MissionLogic.plan_flyby(ws[2], 6.0, -1.0))
+		var b := MissionLogic.saturn_offset(MissionLogic.plan_flyby(ws[3], 6.0, -1.0))
+		assert_almost(a - b, 20.0, 8.0, "offset change per window")

@@ -105,3 +105,36 @@ static func days_off(planet: String, jd: float) -> float:
 	if absf(slope) < 0.01:
 		return 0.0
 	return -m0 / slope
+
+
+## How far Saturn is ahead (+) or behind (-) the probe, in degrees around the Sun, at the
+## moment that counts (see Flyby.encounter). Every later Jupiter window makes it about 20°
+## smaller – that is how the right window can be worked out.
+static func saturn_offset(plan: Dictionary) -> float:
+	var t := float(plan.jd_ref)
+	var pr := (plan.flyby as Flyby).position(t)
+	var ps := Kepler.planet_position("saturn", t)
+	return rad_to_deg(wrapf(atan2(ps.y, ps.x) - atan2(pr.y, pr.x), -PI, PI))
+
+
+## Launch windows for the Saturn mission: `count` Jupiter windows around the next group of
+## good ones (good windows come in groups of about eight years every twenty years), starting
+## zero to two windows before the group, so the choice still matters.
+static func saturn_windows(jd_from: float, rng: RandomNumberGenerator, count := 8) -> Array:
+	var all := jupiter_windows(jd_from, 26.0)
+	var first_good := 0
+	for i in all.size():
+		if _promising(all[i]):
+			first_good = i
+			break
+	var start := clampi(first_good - rng.randi_range(0, 2), 0, maxi(0, all.size() - count))
+	return all.slice(start, start + count)
+
+
+## A quick look whether a window can reach Saturn (a few pass distances, both sides).
+static func _promising(jd_launch: float) -> bool:
+	for side in [-1.0, 1.0]:
+		for rp in [2.0, 6.0, 15.0]:
+			if float(plan_flyby(jd_launch, rp, side).closest) < 1.0:
+				return true
+	return false
