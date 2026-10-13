@@ -46,3 +46,19 @@ func test_scores_order() -> void:
 	assert_eq(MissionLogic.flyby_stars(0.8), 2)
 	assert_eq(MissionLogic.flyby_stars(1.5), 1)
 	assert_eq(MissionLogic.flyby_stars(5.0), 0)
+
+
+func test_closest_approach_is_the_true_minimum() -> void:
+	# Brute force with a fine step (and in 3D, Saturn's orbit is tilted) must not find a
+	# closer approach than Flyby.closest_to().
+	var ws := MissionLogic.jupiter_windows(2461322.5, 12.0)
+	for k in [3, 5, 8, 10]:
+		for side in [1.0, -1.0]:
+			var p := MissionLogic.plan_flyby(ws[k], 6.0, side)
+			var f: Flyby = p.flyby
+			var best := INF
+			var jd := f.jd_flyby
+			while jd < f.jd_flyby + MissionLogic.SATURN_YEARS * 365.25:
+				best = minf(best, f.position(jd).distance_to(Kepler.planet_position("saturn", jd)))
+				jd += 0.5
+			assert_almost(float(p.closest), best, 0.01, "window %d side %+d" % [k, int(side)])

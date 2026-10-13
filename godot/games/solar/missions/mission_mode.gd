@@ -37,6 +37,7 @@ var _ov: Node3D
 var _preview: Node3D
 var _ghost: Sprite3D
 var _ghost2: Sprite3D
+var _ghost_probe: Sprite3D
 var _probe: Sprite3D
 var _trail: MeshInstance3D
 var _dist_label: Label3D
@@ -84,12 +85,18 @@ func _ready() -> void:
 	_ghost = _marker(Color(BodyCatalog.color("jupiter" if planet == "saturn" else planet), 0.6), 0.0005)
 	_ghost2 = _marker(Color(BodyCatalog.color("saturn"), 0.6), 0.0005)
 	_ghost2.visible = planet == "saturn"
+	# Researchers work out the launch day from the phase angle; the ghost Jupiter only helps
+	# after a first miss.
+	_ghost.visible = diff != "researcher"
+	_ghost_probe = _marker(Color(1, 1, 1, 1), 0.00032)
+	_ghost_probe.visible = planet == "saturn"
 	_probe = _marker(Color(1, 1, 1, 1), 0.0003)
 	_probe.visible = false
 	_dist_label = SpaceDraw.label("", Vector3.ZERO, UiTheme.ACCENT_HI)
 	_dist_label.pixel_size = SolarView.LABEL_PX
 	_dist_label.font_size = 40
 	_dist_label.visible = false
+	_dist_label.offset = Vector2(0, 36)
 	_ov.add_child(_dist_label)
 
 	_date = _plain(UiTheme.SIZE_BODY + 2, "semibold", UiTheme.TEXT)
@@ -303,22 +310,31 @@ func _update_preview() -> void:
 		_preview.add_child(SpaceDraw.line(out, Color(0.5, 0.95, 1.0, 0.85), 1.6))
 		var sat := Kepler.planet_position("saturn", float(_plan.jd_closest))
 		var probe := f.position(float(_plan.jd_closest))
+		# Both at the moment of closest approach: what counts is the distance at the same time
+		# (the path may cross Saturn's orbit while Saturn is elsewhere).
 		_ghost2.position = Kepler.to_godot(sat)
-		_preview.add_child(SpaceDraw.line(SpaceDraw.dashed(Kepler.to_godot(probe), Kepler.to_godot(sat), 16),
-			Color(UiTheme.ACCENT_HI, 0.9), 1.4, true))
+		_ghost_probe.position = Kepler.to_godot(probe)
+		_preview.add_child(SpaceDraw.line(PackedVector3Array([probe, sat]), Color(1.0, 0.92, 0.7, 1.0), 3.0))
 		_dist_label.text = AstroFormat.num(float(_plan.closest), 2) + " " + tr("SOL_AU_UNIT")
 		_dist_label.position = Kepler.to_godot((probe + sat) / 2.0)
 		_dist_label.visible = true
 		lines.append(tr("SOL_FLYBY_AT") % AstroFormat.date(MarsTransfer.iso_from_jd(arrive_jd)))
 		if _plan.escapes:
 			lines.append(tr("SOL_ESCAPES"))
-		lines.append(tr("SOL_SATURN_DIST") % AstroFormat.num(float(_plan.closest), 2)
+		lines.append(tr("SOL_SATURN_DIST") % [AstroFormat.num(float(_plan.closest), 2),
+			AstroFormat.date(MarsTransfer.iso_from_jd(float(_plan.jd_closest)))]
 			+ ("  ✓" if float(_plan.closest) < MissionLogic.HILL_SATURN + 0.02 else ""))
 	else:
 		_ghost.position = Kepler.to_godot(Kepler.planet_position(planet, arrive_jd))
 		lines.append(tr("SOL_FLIGHT") % int(round(_transfer.days)))
-		lines.append(tr("SOL_PHASE_NOW") % [BodyCatalog.display_name(planet), int(round(MissionLogic.phase(planet, _jd))),
-			int(round(MissionLogic.ideal_phase(planet, _jd)))])
+		var pname := BodyCatalog.display_name(planet)
+		var now := int(round(MissionLogic.phase(planet, _jd)))
+		var ideal := MissionLogic.ideal_phase(planet, _jd)
+		if diff == "researcher":
+			# No answer given: how far Jupiter moves on during the flight – the rest is 180° minus that.
+			lines.append(tr("SOL_PHASE_RESEARCH") % [pname, now, pname, int(round(180.0 - ideal))])
+		else:
+			lines.append(tr("SOL_PHASE_NOW") % [pname, now, int(round(ideal))])
 	_info.text = "\n".join(lines)
 	_date.text = tr("SOL_DATE") % AstroFormat.date(MarsTransfer.iso_from_jd(_jd))
 
@@ -420,6 +436,9 @@ func _arrived() -> void:
 		if is_inside_tree():
 			_finish()
 		return
+	if not _ghost.visible:
+		_ghost.visible = true
+		_feedback.text += "\n" + tr("SOL_GHOST_NOW") % BodyCatalog.display_name(planet)
 	_update_status()
 	_reset_flight()
 	_set_controls(true)
@@ -479,6 +498,7 @@ func _finish() -> void:
 		_attempts = 0
 		_best = INF
 		_done = false
+		_ghost.visible = diff != "researcher" or planet == "saturn"
 		_reset_flight()
 		_col.visible = true
 		_feedback.text = ""

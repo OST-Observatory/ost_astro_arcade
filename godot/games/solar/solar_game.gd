@@ -117,6 +117,8 @@ func _card(icon: String, title: String, desc: String, col: Color, action: Callab
 	b.add_theme_stylebox_override("pressed", UiTheme.box(UiTheme.SURFACE_HI, col, 4))
 	var v := VBoxContainer.new()
 	v.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	v.offset_left = 56          # keep the text clear of the card's rounded border
+	v.offset_right = -56
 	v.alignment = BoxContainer.ALIGNMENT_CENTER
 	v.add_theme_constant_override("separation", 24)
 	v.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -128,7 +130,7 @@ func _card(icon: String, title: String, desc: String, col: Color, action: Callab
 		var l := UiTheme.label(line[0], line[1], line[2], line[3])
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		l.custom_minimum_size = Vector2(800, 0)
+		l.custom_minimum_size = Vector2(900 - 2 * 56, 0)
 		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		v.add_child(l)
 	b.pressed.connect(func():
