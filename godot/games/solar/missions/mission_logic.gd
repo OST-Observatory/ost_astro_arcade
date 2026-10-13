@@ -78,9 +78,9 @@ static func jupiter_windows(jd_from: float, years := WINDOW_YEARS) -> Array:
 static func plan_flyby(jd_launch: float, rp_radii: float, side: float) -> Dictionary:
 	var t := HohmannTransfer.compute("jupiter", jd_launch)
 	var f := Flyby.compute(t, rp_radii, side)
-	var c := f.closest_to("saturn", SATURN_YEARS)
-	return {"transfer": t, "flyby": f, "closest": float(c[0]), "jd_closest": float(c[1]), "approach": c[2],
-		"escapes": f.escapes()}
+	var c := f.encounter("saturn", SATURN_YEARS)
+	return {"transfer": t, "flyby": f, "closest": float(c[0]), "jd_closest": float(c[1]), "reached": c[2],
+		"jd_ref": float(c[3]), "escapes": f.escapes()}
 
 
 ## Best result a window allows (over both sides and the whole pass-distance range).

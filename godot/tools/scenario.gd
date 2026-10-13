@@ -209,6 +209,13 @@ func _ready() -> void:
 						mm._start_situation(mm._jd0 + float(OS.get_environment("SHIFT")))
 					if mm.planet == "saturn":
 						mm._select_window(int(OS.get_environment("WINDOW")) if OS.get_environment("WINDOW") != "" else 7)
+						if OS.get_environment("RP") != "":
+							mm._rp = float(OS.get_environment("RP"))
+							mm._rp_slider.slider.set_value_no_signal(mm._rp)
+							mm._rp_slider._refresh()
+						if OS.get_environment("SIDE") != "":
+							mm._side = float(OS.get_environment("SIDE"))
+						mm._update_preview()
 					else:
 						var best := MarsTransfer.best_launch(mm._jd0, mm._jd0 + MissionLogic.RANGE_DAYS[mm.diff]) if mm.planet == "mars" \
 							else HohmannTransfer.next_window(mm.planet, mm._jd0, mm._jd0 + 1100.0)

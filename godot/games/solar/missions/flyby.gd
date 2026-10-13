@@ -91,6 +91,59 @@ func closest_to(target_planet: String, years := 20.0) -> Array:
 	return [edge, edge_jd, false]
 
 
+## The probe's chance to meet a planet farther out, as a mission is planned: around the
+## moment the probe first reaches the planet's distance from the Sun – or, if it never gets
+## that far, around its farthest point – the closest approach within ±ENCOUNTER_DAYS.
+## Both reference moments merge when the orbit just touches the planet's distance, so the
+## result changes smoothly with the pass distance (a search over a fixed time span can jump
+## between far-apart candidates). [distance AU, jd, planet's distance reached?, reference jd]
+const ENCOUNTER_DAYS := 730.0
+
+
+func encounter(target_planet: String, years := 20.0) -> Array:
+	var step := 10.0
+	var n := int(years * 365.25 / step)
+	var planet_pos := _planet_grid(target_planet, step, n)
+	var t_ref := -1.0
+	var t_far := -1.0
+	var reached := false
+	var r_prev2 := -1.0
+	var r_prev := -1.0
+	var gap_prev := 0.0
+	for k in n + 1:
+		var jd := jd_flyby + k * step
+		var r := position(jd).length()
+		var gap := r - planet_pos[k].length()
+		if gap >= 0.0:
+			# Linear interpolation of the crossing between the two samples.
+			t_ref = jd - step * gap / (gap - gap_prev) if k > 0 else jd
+			reached = true
+			break
+		if t_far < 0.0 and r_prev2 >= 0.0 and r_prev > r_prev2 and r_prev >= r:
+			t_far = jd - step
+		r_prev2 = r_prev
+		r_prev = r
+		gap_prev = gap
+	if not reached:
+		t_ref = t_far if t_far > 0.0 else jd_flyby + years * 365.25
+	var lo := maxf(jd_flyby, t_ref - ENCOUNTER_DAYS)
+	var hi := minf(jd_flyby + years * 365.25, t_ref + ENCOUNTER_DAYS)
+	var best := INF
+	var best_jd := lo
+	var jd2 := lo
+	while jd2 <= hi:
+		var d := _dist(target_planet, jd2)
+		if d < best:
+			best = d
+			best_jd = jd2
+		jd2 += 2.0
+	var r := _refine(target_planet, maxf(lo, best_jd - 2.0), minf(hi, best_jd + 2.0))
+	if float(r[0]) < best:
+		best = r[0]
+		best_jd = r[1]
+	return [best, best_jd, reached, t_ref]
+
+
 ## Planet positions on the coarse time grid after the swing-by – the same for every pass
 ## distance and side of one launch window, so they are kept (moving a slider stays smooth).
 static var _grids := {}
