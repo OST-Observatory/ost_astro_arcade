@@ -49,38 +49,54 @@ func test_scores_order() -> void:
 
 
 func test_encounter_is_the_minimum_around_the_orbit_crossing() -> void:
-	# Brute force with a fine step (in 3D, Saturn's orbit is tilted) in the same time span
-	# around the moment the probe reaches Saturn's distance finds the same closest approach.
+	# Brute force with a fine step (in 3D, Saturn's orbit is tilted) in the time span around
+	# the moment the probe reaches Saturn's distance: for near misses (where stars are won)
+	# the same closest approach; for wide misses never less than the true minimum.
 	var ws := MissionLogic.jupiter_windows(2461322.5, 12.0)
-	for k in [3, 5, 8, 10]:
+	var near := 0
+	for k in [3, 4, 5, 6, 7, 8, 10]:
 		for side in [1.0, -1.0]:
-			var p := MissionLogic.plan_flyby(ws[k], 6.0, side)
-			var f: Flyby = p.flyby
-			var lo := maxf(f.jd_flyby, float(p.jd_ref) - Flyby.ENCOUNTER_DAYS)
-			var hi := minf(f.jd_flyby + MissionLogic.SATURN_YEARS * 365.25, float(p.jd_ref) + Flyby.ENCOUNTER_DAYS)
-			var best := INF
-			var jd := lo
-			while jd <= hi:
-				best = minf(best, f.position(jd).distance_to(Kepler.planet_position("saturn", jd)))
-				jd += 0.5
-			assert_almost(float(p.closest), best, 0.01, "window %d side %+d" % [k, int(side)])
-			assert_true(float(p.jd_closest) >= f.jd_flyby, "never before the swing-by")
-			if p.reached:
-				var at := f.position(float(p.jd_ref)).length() - Kepler.planet_position("saturn", float(p.jd_ref)).length()
-				assert_almost(at, 0.0, 0.05, "reference = crossing of Saturn's distance")
+			for rp in [3.0, 6.0, 12.0]:
+				var p := MissionLogic.plan_flyby(ws[k], rp, side)
+				var f: Flyby = p.flyby
+				var lo := maxf(f.jd_flyby, float(p.jd_ref) - Flyby.ENCOUNTER_DAYS)
+				var hi := minf(f.jd_flyby + MissionLogic.SATURN_YEARS * 365.25, float(p.jd_ref) + Flyby.ENCOUNTER_DAYS)
+				var best := INF
+				var jd := lo
+				while jd <= hi:
+					best = minf(best, f.position(jd).distance_to(Kepler.planet_position("saturn", jd)))
+					jd += 0.5
+				if float(p.closest) < 1.5:
+					near += 1
+					assert_almost(float(p.closest), best, 0.01, "window %d side %+d rp %.0f" % [k, int(side), rp])
+				else:
+					assert_true(float(p.closest) >= best - 0.01, "never below the true minimum")
+				assert_true(float(p.jd_closest) >= f.jd_flyby, "never before the swing-by")
+				if p.reached:
+					var at := f.position(float(p.jd_ref)).length() - Kepler.planet_position("saturn", float(p.jd_ref)).length()
+					assert_true(at >= -0.05, "reference at or beyond Saturn's distance: %.2f" % at)
+	assert_true(near >= 3, "some near misses checked: %d" % near)
 
 
 func test_encounter_moves_smoothly() -> void:
-	# Small changes of the pass distance give small changes of distance and date – also in
-	# cases where Saturn is missed by far (there the old search jumped between candidates
-	# years apart).
-	var cases := [[MissionLogic.jupiter_windows(2461326.5)[12], 12.5], [HohmannTransfer.next_window("jupiter",
-		Kepler.jd_from_iso("2045-01-01T00:00:00Z"), Kepler.jd_from_iso("2046-01-01T00:00:00Z")), 7.0]]
-	for c in cases:
-		var last := {}
-		for k in 21:
-			var p := MissionLogic.plan_flyby(c[0], float(c[1]) + k * 0.1, 1.0)
-			if not last.is_empty():
-				assert_true(absf(float(p.closest) - float(last.closest)) < 0.3, "distance %.2f -> %.2f" % [last.closest, p.closest])
-				assert_true(absf(float(p.jd_closest) - float(last.jd_closest)) < 120.0, "date jumps")
-			last = p
+	# No jumps when the pass distance changes a little – in any launch window, on both sides.
+	# Where the date moves fast (an orbit just touching Saturn's distance) a ten times finer
+	# step must give a ten times smaller change, i.e. the change is steep but continuous.
+	var ws := MissionLogic.jupiter_windows(2461326.5, 20.0)
+	for w in ws:
+		for side in [1.0, -1.0]:
+			var last := {}
+			for k in 290:
+				var rp := 1.1 + k * 0.1
+				var p := MissionLogic.plan_flyby(w, rp, side)
+				if not last.is_empty():
+					var tag := "%s %+d rp %.1f" % [MarsTransfer.iso_from_jd(w).left(7), int(side), rp]
+					assert_true(absf(float(p.closest) - float(last.closest)) < 0.6, tag + ": distance jumps")
+					if absf(float(p.jd_closest) - float(last.jd_closest)) > 60.0:
+						var prev := last
+						for j in range(1, 11):
+							var q := MissionLogic.plan_flyby(w, rp - 0.1 + j * 0.01, side)
+							assert_true(absf(float(q.jd_closest) - float(prev.jd_closest)) < 40.0,
+								tag + ": date jumps %.0f days" % absf(float(q.jd_closest) - float(prev.jd_closest)))
+							prev = q
+				last = p

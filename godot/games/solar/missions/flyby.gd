@@ -91,12 +91,14 @@ func closest_to(target_planet: String, years := 20.0) -> Array:
 	return [edge, edge_jd, false]
 
 
-## The probe's chance to meet a planet farther out, as a mission is planned: around the
-## moment the probe first reaches the planet's distance from the Sun – or, if it never gets
-## that far, around its farthest point – the closest approach within ±ENCOUNTER_DAYS.
-## Both reference moments merge when the orbit just touches the planet's distance, so the
-## result changes smoothly with the pass distance (a search over a fixed time span can jump
-## between far-apart candidates). [distance AU, jd, planet's distance reached?, reference jd]
+## The probe's chance to meet a planet farther out, as a mission is planned: on the probe's
+## first way out after the swing-by, the moment it reaches the planet's distance from the
+## Sun – or, if it falls short, the moment it comes closest to that distance – and the
+## closest approach within ±ENCOUNTER_DAYS of it. Only the first way out counts, and the two
+## reference moments merge exactly when the orbit just touches the planet's distance, so
+## the result changes smoothly with the pass distance (searching later orbits or a fixed
+## time span jumps between candidates years apart). For wide misses see the end of encounter().
+## [distance AU, jd, planet's distance reached?, reference jd]
 const ENCOUNTER_DAYS := 730.0
 
 
@@ -104,43 +106,70 @@ func encounter(target_planet: String, years := 20.0) -> Array:
 	var step := 10.0
 	var n := int(years * 365.25 / step)
 	var planet_pos := _planet_grid(target_planet, step, n)
-	var t_ref := -1.0
-	var t_far := -1.0
-	var reached := false
-	var r_prev2 := -1.0
-	var r_prev := -1.0
-	var gap_prev := 0.0
+	var t_cross := -1.0
+	var t_peak := -1.0
+	var g_peak := INF
+	var g_prev2 := INF
+	var g_prev := INF
 	for k in n + 1:
 		var jd := jd_flyby + k * step
-		var r := position(jd).length()
-		var gap := r - planet_pos[k].length()
-		if gap >= 0.0:
-			# Linear interpolation of the crossing between the two samples.
-			t_ref = jd - step * gap / (gap - gap_prev) if k > 0 else jd
-			reached = true
+		var g := position(jd).length() - planet_pos[k].length()   # < 0: still inside the planet's distance
+		if g >= 0.0 and t_cross < 0.0:
+			# Crossing, interpolated linearly between the two samples.
+			t_cross = jd - step * g / (g - g_prev) if k > 0 else jd
+		if g_prev2 < INF and g_prev > g_prev2 and g_prev >= g:
+			# End of the first way out: the vertex of the parabola through the last three samples.
+			var den := g_prev2 - 2.0 * g_prev + g
+			var off := clampf(0.5 * (g_prev2 - g) / den, -1.0, 1.0) if absf(den) > 1e-12 else 0.0
+			t_peak = jd - step + off * step
+			g_peak = g_prev - 0.25 * (g_prev2 - g) * off
 			break
-		if t_far < 0.0 and r_prev2 >= 0.0 and r_prev > r_prev2 and r_prev >= r:
-			t_far = jd - step
-		r_prev2 = r_prev
-		r_prev = r
-		gap_prev = gap
-	if not reached:
-		t_ref = t_far if t_far > 0.0 else jd_flyby + years * 365.25
-	var lo := maxf(jd_flyby, t_ref - ENCOUNTER_DAYS)
-	var hi := minf(jd_flyby + years * 365.25, t_ref + ENCOUNTER_DAYS)
-	var best := INF
-	var best_jd := lo
-	var jd2 := lo
-	while jd2 <= hi:
-		var d := _dist(target_planet, jd2)
-		if d < best:
+		g_prev2 = g_prev
+		g_prev = g
+	var reached := t_cross >= 0.0
+	var t_ref := jd_flyby + years * 365.25
+	if t_peak < 0.0:
+		t_ref = t_cross if reached else t_ref   # still on the way out (or leaving for good)
+	elif not reached:
+		t_ref = t_peak
+	else:
+		# Just reaching the planet's distance, the crossing moves very fast with the pass
+		# distance (it splits from the turning point like a square root); near that edge the
+		# turning point counts instead, blended smoothly.
+		t_ref = lerpf(t_cross, t_peak, 1.0 - smoothstep(0.0, 0.8, g_peak))
+	# A wide miss has no meaningful closest approach: with the planet far away the distance
+	# hardly changes or even has a hump around the reference moment, and "nearest" flips
+	# between before and after. So the search reach shrinks with the miss: full ±2 years
+	# below 1.5 AU (where stars are won), none above 3 AU (the reference moment itself),
+	# smoothly in between – the result never jumps.
+	var d_ref := _dist(target_planet, t_ref)
+	var w := 1.0 - smoothstep(1.5, 3.0, d_ref)
+	var reach := ENCOUNTER_DAYS * w
+	var lo := maxf(jd_flyby, t_ref - reach)
+	var hi := minf(jd_flyby + years * 365.25, t_ref + reach)
+	t_ref = clampf(t_ref, lo, hi)
+	var best_jd := t_ref
+	var best := d_ref
+	if reach > 0.0:
+		# From the reference moment downhill to the nearest approach (not across a hump).
+		var h := minf(2.0, reach)
+		best = _dist(target_planet, t_ref)
+		var dir := -1.0 if _dist(target_planet, maxf(lo, t_ref - h)) < _dist(target_planet, minf(hi, t_ref + h)) else 1.0
+		while true:
+			var nxt := best_jd + dir * h
+			if nxt < lo or nxt > hi:
+				break
+			var d := _dist(target_planet, nxt)
+			if d >= best:
+				break
 			best = d
-			best_jd = jd2
-		jd2 += 2.0
-	var r := _refine(target_planet, maxf(lo, best_jd - 2.0), minf(hi, best_jd + 2.0))
-	if float(r[0]) < best:
-		best = r[0]
-		best_jd = r[1]
+			best_jd = nxt
+		var r := _refine(target_planet, maxf(lo, best_jd - h), minf(hi, best_jd + h))
+		if float(r[0]) < best:
+			best = r[0]
+			best_jd = r[1]
+		best_jd = lerpf(t_ref, best_jd, w)
+		best = _dist(target_planet, best_jd)
 	return [best, best_jd, reached, t_ref]
 
 
