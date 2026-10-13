@@ -189,8 +189,9 @@ func _ready() -> void:
 							v.dist = 130.0
 							v.pitch = 0.9
 						"sol_flight":
-							v.focus = "earth"
-							v.dist = v.nice_dist("earth")
+							var from := OS.get_environment("FROM") if OS.get_environment("FROM") != "" else "earth"
+							v.focus = from
+							v.dist = v.nice_dist(from)
 							v.pitch = 0.3
 							v._process(0.0)
 							v.fly_to(OS.get_environment("BODY") if OS.get_environment("BODY") != "" else "mars")

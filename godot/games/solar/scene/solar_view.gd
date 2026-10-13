@@ -366,9 +366,14 @@ func nice_dist(id: String) -> float:
 	return BodyCatalog.radius_au(id) * 7.0
 
 
-## Flies the camera to a body (it becomes the focus); d < 0: nice_dist(). The camera first
-## turns towards the target, then flies straight at it (along the line of sight), so the
-## approach never goes sideways. Big changes of scale take longer.
+## Flies the camera to a body (it becomes the focus); d < 0: nice_dist(). Two kinds of flight:
+##   zoom   – the scale changes a lot and the target is close compared with it (the jump
+##            buttons, Planets <-> Milky Way): like zooming with the fingers, the camera moves
+##            back or in, the point it looks at drifts to the target in step with the scale,
+##            and at the scale of the Milky Way it turns above the disk (see _galaxy_weight)
+##   travel – to a body elsewhere (Earth -> Mars): the camera first turns towards the target,
+##            then flies straight at it, so the approach never goes sideways
+## Big changes of scale take longer.
 func fly_to(id: String, d := -1.0) -> void:
 	if id == "deep:oort":   # a cloud around the Sun: look at it from outside
 		id = "sun"
@@ -377,12 +382,47 @@ func fly_to(id: String, d := -1.0) -> void:
 	_spin_vel = Vector2.ZERO
 	var target := helio_of(id)
 	var cam := _origin + _from_godot(_cam_rel)
+	var look := _origin + _from_godot(_look_rel)
 	var d1 := d if d > 0.0 else nice_dist(id)
 	var d0 := maxf((cam - target).length(), 1e-12)
-	_fly = {"to": id, "t": 0.0, "cam": cam, "look": _origin + _from_godot(_look_rel), "d1": d1,
-		"dur": clampf(1.4 + 0.12 * absf(log(d1 / d0)), 1.4, 4.5)}
+	var r0 := maxf((_cam_rel - _look_rel).length(), 1e-12)
+	var zoom := maxf(r0, d1) > 2.0 * (target - look).length()
+	_fly = {"to": id, "t": 0.0, "cam": cam, "look": look, "d1": d1, "zoom": zoom,
+		"r0": r0, "dir0": (_cam_rel - _look_rel) / r0, "w0": _galaxy_weight(r0),
+		"dur": clampf(1.4 + 0.12 * absf(log(d1 / (r0 if zoom else d0))), 1.4, 4.5)}
 	if id == "deep:gc":
 		_fly["end_dir"] = _pole   # the Milky Way seen face-on, from its north pole
+
+
+## Zoom flight: the scene origin is the point looked at, which moves from the old to the new
+## focus in proportion to the change of distance – so on screen it drifts in smoothly
+## instead of panning sideways.
+func _zoom_step() -> void:
+	var s := float(_fly.t)
+	var e := smoothstep(0.0, 1.0, s)
+	var r0 := float(_fly.r0)
+	var r1 := float(_fly.d1)
+	var r := exp(lerpf(log(r0), log(r1), e))
+	var a := clampf((r - r0) / (r1 - r0), 0.0, 1.0) if absf(r1 - r0) > 1e-6 * maxf(r0, r1) else e
+	_origin = (_fly.look as Vector3).lerp(helio_of(_fly.to), a)
+	var dir: Vector3 = _fly.dir0
+	if _fly.has("end_dir"):
+		# Like zooming out with the fingers: turn above the Milky Way on its scale.
+		var w0 := float(_fly.w0)
+		var f := clampf((_galaxy_weight(r) - w0) / maxf(1.0 - w0, 1e-6), 0.0, 1.0) if w0 < 1.0 else e
+		if dir.dot(_fly.end_dir) > -0.9999:
+			dir = dir.slerp(_fly.end_dir, f).normalized()
+	_cam_rel = dir * r
+	_look_rel = Vector3.ZERO
+	dist = r
+	if s >= 1.0:
+		focus = _fly.to
+		yaw = atan2(dir.x, dir.z)
+		pitch = clampf(asin(clampf(dir.y, -1.0, 1.0)), -1.5, 1.5)
+		dist = r1
+		_galaxy_w = _galaxy_weight(dist)
+		_fly = {}
+		arrived.emit(focus)
 
 
 static func _from_godot(v: Vector3) -> Vector3:
@@ -395,6 +435,9 @@ static func _orbit_dir(y: float, p: float) -> Vector3:
 
 func _fly_step(delta: float) -> void:
 	_fly.t = minf(float(_fly.t) + delta / float(_fly.dur), 1.0)
+	if _fly.zoom:
+		_zoom_step()
+		return
 	var s := float(_fly.t)
 	var target := helio_of(_fly.to)
 	_origin = target
