@@ -2,12 +2,14 @@
 ## prints closest approach, merger, detected features and timings. Used to tune the friction,
 ## approach presets and feature thresholds.
 ##   godot --headless --path godot --script res://tools/galaxy_calibrate.gd
+##   GPU=1 godot --path godot --script res://tools/galaxy_calibrate.gd      (8000 stars on the GPU)
 extends SceneTree
 
 
 func _init() -> void:
 	var player := GalaxyTemplates.get_target(OS.get_environment("GAL") if OS.get_environment("GAL") != "" else "milkyway")
 	var n := int(OS.get_environment("N")) if OS.get_environment("N") != "" else 400
+	var gpu := OS.get_environment("GPU") != ""   # analysis as in the game (needs a window, not --headless)
 	for partner in GalaxyTemplates.PARTNERS:
 		var pt := GalaxyTemplates.get_target(partner[1])
 		for approach in ["headon", "grazing", "wide"]:
@@ -19,7 +21,10 @@ func _init() -> void:
 				m.setup({"pot": player.reference, "target": player, "spin": spin},
 					{"pot": pt.reference, "target": pt, "spin": 1.0}, approach)
 				var t1 := Time.get_ticks_msec()
-				m.run_stars(n)
+				if gpu:
+					m.run_stars_gpu(8000)
+				else:
+					m.run_stars(n)
 				var t2 := Time.get_ticks_msec()
 				var f := FeatureDetector.detect(m)
 				var feats := []

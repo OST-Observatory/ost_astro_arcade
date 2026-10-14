@@ -259,3 +259,92 @@ func run_stars(n_per_galaxy := 500, dt := DT_CPU) -> void:
 		for i in n:
 			pos[i] = (all[i] as PackedVector3Array)[k]
 		snapshots.append({"t": tk, "c": [center(0, tk), center(1, tk)], "stars": pos, "owner": owner})
+
+
+# --- GPU stars -----------------------------------------------------------------------------------
+
+## Like run_stars(), but on the graphics card (encounter_stars.glsl): many more stars in a
+## fraction of the time, so faint shapes (e.g. rings with little contrast) stand out from
+## the noise. Returns false where there is no RenderingDevice (headless, compatibility
+## renderer) – then run_stars() is the fallback.
+func run_stars_gpu(n_per_galaxy := 8000, dt := DT) -> bool:
+	var rd := RenderingServer.create_local_rendering_device()
+	if rd == null:
+		return false
+	_done = [0]
+	_total = 1
+	var init := PackedFloat32Array()
+	var owner := PackedByteArray()
+	for g in 2:
+		var setup: Dictionary = gal[g].setup
+		var pot: GalaxyPotential = gal[g].pot
+		var c := center(g, 0.0)
+		var cv := center_velocity(g, 0.0)
+		for i in n_per_galaxy:
+			if cancelled:
+				rd.free()
+				return true
+			var s := StarSampler.sample(i + g * 1000003, setup)
+			var x := c + pot.basis * (s[0] as Vector3)
+			var v := cv + pot.basis * (s[1] as Vector3)
+			init.append_array([x.x, x.y, x.z, float(g), v.x, v.y, v.z, 0.0])
+			owner.append(g)
+		_done = [g + 1]
+		_total = 3
+	var n := owner.size()
+	var steps := int(ceil(t_end / dt))
+	var every := maxi(1, int(round(SNAPSHOT_EVERY / dt)))
+	var count := 1 + steps / every
+	var params := PackedFloat32Array([float(n), float(steps), dt, float(every)])
+	for g in 2:
+		params.append_array((gal[g].pot as GalaxyPotential).to_uniforms())
+	for g in 2:
+		var b: Basis = (gal[g].pot as GalaxyPotential).basis
+		params.append_array([b.x.x, b.x.y, b.x.z, b.y.x, b.y.y, b.y.z, b.z.x, b.z.y, b.z.z])
+	var centers := PackedFloat32Array()
+	centers.resize(steps * 8)
+	for k in steps:
+		var tm := (k + 0.5) * dt
+		for g in 2:
+			var cp := center(g, tm)
+			centers[k * 8 + g * 4] = cp.x
+			centers[k * 8 + g * 4 + 1] = cp.y
+			centers[k * 8 + g * 4 + 2] = cp.z
+	var shader_file: RDShaderFile = load("res://games/galaxy/physics/encounter_stars.glsl")
+	var shader := rd.shader_create_from_spirv(shader_file.get_spirv())
+	var bufs := []
+	var uniforms := []
+	var out_bytes := count * n * 16
+	for k in 4:
+		var bytes: PackedByteArray = [params.to_byte_array(), centers.to_byte_array(), init.to_byte_array(), PackedByteArray()][k]
+		var buf := rd.storage_buffer_create(out_bytes if k == 3 else bytes.size(), bytes)
+		bufs.append(buf)
+		var u := RDUniform.new()
+		u.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		u.binding = k
+		u.add_id(buf)
+		uniforms.append(u)
+	var uset := rd.uniform_set_create(uniforms, shader, 0)
+	var pipeline := rd.compute_pipeline_create(shader)
+	var cl := rd.compute_list_begin()
+	rd.compute_list_bind_compute_pipeline(cl, pipeline)
+	rd.compute_list_bind_uniform_set(cl, uset, 0)
+	rd.compute_list_dispatch(cl, int(ceil(n / 64.0)), 1, 1)
+	rd.compute_list_end()
+	rd.submit()
+	rd.sync()
+	var out := rd.buffer_get_data(bufs[3]).to_float32_array()
+	for r in [pipeline, uset] + bufs + [shader]:
+		rd.free_rid(r)
+	rd.free()
+	snapshots = []
+	for k in count:
+		var tk := minf(k * every * dt, t_end)
+		var pos := PackedVector3Array()
+		pos.resize(n)
+		var base := k * n * 4
+		for i in n:
+			pos[i] = Vector3(out[base + i * 4], out[base + i * 4 + 1], out[base + i * 4 + 2])
+		snapshots.append({"t": tk, "c": [center(0, tk), center(1, tk)], "stars": pos, "owner": owner})
+	_done = [3]
+	return true

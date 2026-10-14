@@ -25,13 +25,13 @@ static func new_badges(found: Dictionary, have: Array) -> Array[String]:
 
 
 ## A recipe per target galaxy and shape: [partner, approach, spin (0: either)]. Taken from
-## the recipe matrix of tools/galaxy_calibrate.gd – each one gives the shape with the 250
-## stars of the game and with 500 (so it is not luck of the draw).
+## the recipe matrix of tools/galaxy_calibrate.gd – each one gives the shape with the
+## graphics-card analysis (8000 stars) and with the CPU fallback (250 stars).
 const RECIPES := {
-	"milkyway": {"tails": ["twin", "grazing", 1], "merger": ["twin", "headon", 0],
-		"ring": ["spiral", "headon", 0], "bridge": ["twin", "wide", 1]},
+	"milkyway": {"tails": ["spiral", "grazing", 0], "merger": ["twin", "headon", 0],
+		"ring": ["spiral", "headon", 1], "bridge": ["twin", "wide", 1]},
 	"ngc3198": {"tails": ["twin", "grazing", 1], "merger": ["spiral", "headon", 0],
-		"ring": ["spiral", "headon", 0], "bridge": ["spiral", "wide", 1]},
+		"ring": ["spiral", "headon", 0], "bridge": ["twin", "grazing", 1]},
 	"ddo154": {"tails": ["dwarf", "headon", 0], "merger": ["dwarf", "headon", 0],
 		"ring": ["dwarf", "headon", 0], "bridge": ["dwarf", "wide", 1]},
 }

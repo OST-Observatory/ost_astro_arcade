@@ -362,7 +362,7 @@ GAL_RESTART_SIM,Simulation neu starten,Restart the simulation,Reiniciar la simul
 GAL_YOUR_GALAXY,Deine Galaxie: %s – gebaut von %s,Your galaxy: %s – built by %s,"Tu galaxia: %s, construida por %s"
 GAL_PARTNER_CHOOSE,Anderen Partner wählen,Choose another partner,Elegir otra compañera
 GAL_PARTNER_PICK,Mit welcher Galaxie soll deine zusammenstoßen?,Which galaxy should yours collide with?,¿Con qué galaxia debe chocar la tuya?
-GAL_PROGRESS,Der Computer rechnet den Zusammenstoß im Hintergrund mit: %d %%,The computer works out the collision in the background: %d %%,El ordenador calcula la colisión en segundo plano: %d %%
+GAL_PROGRESS,Auswertung läuft parallel zur Simulation: %d %%,Analysis running alongside the simulation: %d %%,Análisis en paralelo a la simulación: %d %%
 SOL_MENU_TITLE,Was möchtest du tun?,What would you like to do?,¿Qué quieres hacer?
 SOL_MENU_EXPLORE,Sonnensystem erkunden,Explore the solar system,Explorar el sistema solar
 SOL_MENU_EXPLORE_DESC,"Fliege zu Planeten, Monden, Kometen und Asteroiden und löse fünf Suchaufgaben.","Fly to planets, moons, comets and asteroids and solve five search tasks.","Vuela a planetas, lunas, cometas y asteroides y resuelve cinco tareas de búsqueda."

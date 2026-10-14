@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://06hsdk6ixiwl"
+path="res://.godot/imported/encounter_stars.glsl-5fe90228c42d7f557037027991ae5bbe.res"
+
+[deps]
+
+source_file="res://games/galaxy/physics/encounter_stars.glsl"
+dest_files=["res://.godot/imported/encounter_stars.glsl-5fe90228c42d7f557037027991ae5bbe.res"]
+
+[params]
+

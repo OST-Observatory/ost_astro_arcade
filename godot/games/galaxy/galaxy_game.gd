@@ -10,6 +10,7 @@ const VIEW := Rect2(40, 170, 1500, 1230)
 const PANEL_X := 1580.0
 const PANEL_W := 940.0
 const BLOCK_W := 460.0
+const GPU_STARS := 8000          # test stars per galaxy for the analysis on the graphics card
 const BLOCK_ICONS := {"bh": "blur_on", "stars": "stars", "gas": "cloud", "halo": "visibility_off"}
 
 var skip_intro := false   # screenshots/tests
@@ -658,7 +659,10 @@ func _run_collision() -> void:
 	var m := _model
 	_analysis = m
 	_thread.start(func() -> Dictionary:
-		m.run_stars(250)
+		# On the graphics card with many stars (faint rings stand out); without one, a few
+		# hundred stars on the CPU.
+		if not m.run_stars_gpu(GPU_STARS):
+			m.run_stars(250)
 		return FeatureDetector.detect(m))
 
 
