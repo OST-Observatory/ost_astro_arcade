@@ -1,7 +1,8 @@
 ## Finds the shapes a collision produced, from the CPU snapshots of an EncounterModel:
 ##   tails   – a one-sided, coherent stream of stars far from both galaxies
 ##   bridge  – a continuous band of stars between two separated galaxies
-##   ring    – an expanding ring with a hollow inside, seen in a disk's own plane
+##   ring    – a closed ring of stars with a hollow inside, in a disk's own plane (the shape
+##             counts, however it formed: a partner punching through, or tidal arms closing)
 ##   merger  – the two centres have come together for good
 ## Each feature returns the time it was seen best (or -1).
 class_name FeatureDetector
@@ -10,8 +11,11 @@ extends RefCounted
 const FEATURES := ["tails", "bridge", "ring", "merger"]
 const TAIL_FAR := 0.05          # share of a galaxy's stars far away
 const TAIL_COHERENT := 0.55     # of those, share within 3 neighbouring direction bins
-const RING_WINDOW := 80.0       # rings show up soon after the partner punched through
-const RING_MASS := 0.1          # the intruder must have at least this mass ratio
+const RING_WINDOW := 80.0       # rings show up soon after the closest approach
+const RING_MASS := 0.01         # a partner lighter than this cannot shape a disk
+const RING_BUMP := 1.9          # density in the ring vs. at the start (smoothed over 3 radii)
+const RING_DIP := 0.7           # density inside the ring vs. at the start: hollow
+const RING_SECTORS := 6         # of 8 directions around the ring filled: closed
 
 
 static func detect(m: EncounterModel) -> Dictionary:
@@ -118,48 +122,59 @@ static func _bridge(m: EncounterModel, snap: Dictionary, r0: Array) -> float:
 	return float(count) / n
 
 
-## Score > 0 for a ring in galaxy g's own plane: surface density relative to the start shows a
-## bump >= 1.8 at 0.4–2 r0 with a dip <= 0.8 inside, and the bump radius is filled in >= 6 of
-## 8 direction sectors.
+## Score > 0 for a ring in galaxy g's own plane: the surface density relative to the start,
+## smoothed over three neighbouring radii (with a few hundred stars single radii are mostly
+## noise), has a bump >= RING_BUMP at 0.3–1.8 r0 with a hollow <= RING_DIP inside, and the
+## ring is closed: >= RING_SECTORS of 8 directions carry at least 40 % of the average.
+## Calibrated so that an undisturbed disk and wide fly-bys stay below (tools/galaxy_calibrate.gd).
 static func _ring(m: EncounterModel, snap: Dictionary, first: Dictionary, r0: Array) -> float:
 	var best := 0.0
 	for g in 2:
-		# Only a disk that a heavy enough partner crossed close to its centre can ring.
 		var host: GalaxyPotential = m.gal[g].pot
 		var guest: GalaxyPotential = m.gal[1 - g].pot
-		if guest.total_mass() < RING_MASS * host.total_mass() or m.q_actual > 0.5 * float(r0[g]):
+		if guest.total_mass() < RING_MASS * host.total_mass():
 			continue
 		var basis: Basis = host.basis
 		var rmax: float = 2.4 * float(r0[g])
 		var now := _profile(snap, g, basis, rmax)
 		var start := _profile(first, g, basis, rmax)
+		var ratio := PackedFloat32Array()
+		ratio.resize(24)
+		for k in 24:
+			var a := 0.0
+			var b := 0.0
+			for j in range(maxi(k - 1, 0), mini(k + 2, 24)):
+				a += float(now[0][j])
+				b += float(start[0][j])
+			ratio[k] = (a + 1.0) / (b + 1.0)
 		var bump := -1
 		var bump_ratio := 0.0
 		for k in 24:
 			var rk: float = (k + 0.5) / 24.0 * rmax
-			if rk < 0.4 * r0[g] or rk > 2.0 * r0[g]:
+			if rk < 0.3 * r0[g] or rk > 1.8 * r0[g]:
 				continue
-			var ratio: float = (float(now[0][k]) + 0.5) / (float(start[0][k]) + 0.5)
-			if ratio > bump_ratio:
-				bump_ratio = ratio
+			if ratio[k] > bump_ratio:
+				bump_ratio = ratio[k]
 				bump = k
-		if bump < 2 or bump_ratio < 1.8:
+		if bump < 3 or bump_ratio < RING_BUMP:
 			continue
 		var dip := INF
-		for k in range(1, bump):
-			dip = minf(dip, (float(now[0][k]) + 0.5) / (float(start[0][k]) + 0.5))
-		if dip > 0.8:
+		for k in range(1, bump - 1):
+			dip = minf(dip, ratio[k])
+		if dip > RING_DIP:
 			continue
 		var sectors: PackedInt32Array = now[1]
-		var mean := 0.0
-		for sec in 8:
-			mean += sectors[bump * 8 + sec]
-		mean /= 8.0
+		var per := PackedInt32Array([0, 0, 0, 0, 0, 0, 0, 0])
+		var total := 0
+		for j in range(bump - 1, mini(bump + 2, 24)):
+			for sec in 8:
+				per[sec] += sectors[j * 8 + sec]
+				total += sectors[j * 8 + sec]
 		var filled := 0
 		for sec in 8:
-			if sectors[bump * 8 + sec] >= 0.5 * mean:
+			if per[sec] >= 0.4 * total / 8.0:
 				filled += 1
-		if filled >= 6:
+		if filled >= RING_SECTORS:
 			best = maxf(best, bump_ratio)
 	return best
 

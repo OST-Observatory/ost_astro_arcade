@@ -24,11 +24,33 @@ static func new_badges(found: Dictionary, have: Array) -> Array[String]:
 	return out
 
 
-## A hint towards a badge the player does not have yet (key GAL_RECIPE_<FEATURE>), or "".
-static func recipe_hint(have: Array) -> String:
+## A recipe per target galaxy and shape: [partner, approach, spin (0: either)]. Taken from
+## the recipe matrix of tools/galaxy_calibrate.gd – each one gives the shape with the 250
+## stars of the game and with 500 (so it is not luck of the draw).
+const RECIPES := {
+	"milkyway": {"tails": ["twin", "grazing", 1], "merger": ["twin", "headon", 0],
+		"ring": ["spiral", "headon", 0], "bridge": ["twin", "wide", 1]},
+	"ngc3198": {"tails": ["twin", "grazing", 1], "merger": ["spiral", "headon", 0],
+		"ring": ["spiral", "headon", 0], "bridge": ["spiral", "wide", 1]},
+	"ddo154": {"tails": ["dwarf", "headon", 0], "merger": ["dwarf", "headon", 0],
+		"ring": ["dwarf", "headon", 0], "bridge": ["dwarf", "wide", 1]},
+}
+
+
+## A hint towards a badge the player does not have yet, for the galaxy they built, as text
+## ("" when all badges are there).
+static func recipe_hint(have: Array, target_id: String) -> String:
+	var recipes: Dictionary = RECIPES.get(target_id, RECIPES.milkyway)
 	for f in ["tails", "merger", "ring", "bridge"]:
-		if not have.has(f):
-			return "GAL_RECIPE_" + f.to_upper()
+		if have.has(f):
+			continue
+		var r: Array = recipes[f]
+		var parts := [TranslationServer.translate("GAL_PARTNER_" + str(r[0]).to_upper()),
+			TranslationServer.translate("GAL_APPROACH_" + str(r[1]).to_upper())]
+		if int(r[2]) != 0:
+			parts.append(TranslationServer.translate("GAL_SPIN_WITH" if int(r[2]) > 0 else "GAL_SPIN_AGAINST"))
+		return TranslationServer.translate("GAL_RECIPE") % [TranslationServer.translate("GAL_FEATURE_" + f.to_upper()),
+			"  ·  ".join(parts)]
 	return ""
 
 

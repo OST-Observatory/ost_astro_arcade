@@ -298,12 +298,8 @@ GAL_FEATURE_MERGER_TEXT,"Die Galaxien bremsen sich gegenseitig ab und werden ein
 GAL_NEW_BADGE,Neue Form: %s!,New shape: %s!,¡Nueva forma: %s!
 GAL_SEEN,Entstanden: %s.,Formed: %s.,Se formó: %s.
 GAL_SEEN_NONE,Diesmal sind keine besonderen Formen entstanden.,No special shapes formed this time.,Esta vez no se formaron formas especiales.
-GAL_RECIPE_TAILS,Tipp: Lass die Galaxien streifend aneinander vorbeiziehen.,Tip: let the galaxies graze past each other.,Pista: haz que las galaxias pasen rozándose.
-GAL_RECIPE_MERGER,Tipp: Ein schwerer Partner und eine frontale oder streifende Begegnung.,Tip: a heavy partner and a head-on or grazing encounter.,Pista: una compañera pesada y un encuentro frontal o rasante.
-GAL_RECIPE_RING,Tipp: Frontal – mit der leichteren Spiralgalaxie.,Tip: head-on – with the lighter spiral galaxy.,"Pista: frontal, con la galaxia espiral más ligera."
-GAL_RECIPE_BRIDGE,"Tipp: Streifend mit dem Zwilling, Drehsinn mit der Bahn.","Tip: grazing with the twin, spinning with the orbit.","Pista: rasante con la gemela, girando con la órbita."
 GAL_RUNNING,Die Galaxien ziehen sich an …,The galaxies pull on each other …,Las galaxias se atraen …
-GAL_ANALYSING,Wird ausgewertet …,Analysing …,Analizando …
+GAL_ANALYSING,Gleich fertig: Die Formen werden ausgewertet …,Almost done: the shapes are being analysed …,Casi listo: se analizan las formas …
 GAL_TIME,%d Mio. Jahre,%d million years,%d millones de años
 GAL_BEFORE,Vor der Begegnung,Before the encounter,Antes del encuentro
 GAL_DONE,Fertig,Done,Listo
@@ -366,7 +362,7 @@ GAL_RESTART_SIM,Simulation neu starten,Restart the simulation,Reiniciar la simul
 GAL_YOUR_GALAXY,Deine Galaxie: %s – gebaut von %s,Your galaxy: %s – built by %s,"Tu galaxia: %s, construida por %s"
 GAL_PARTNER_CHOOSE,Anderen Partner wählen,Choose another partner,Elegir otra compañera
 GAL_PARTNER_PICK,Mit welcher Galaxie soll deine zusammenstoßen?,Which galaxy should yours collide with?,¿Con qué galaxia debe chocar la tuya?
-GAL_PROGRESS,Auswertung: %d %%,Analysis: %d %%,Análisis: %d %%
+GAL_PROGRESS,Der Computer rechnet den Zusammenstoß im Hintergrund mit: %d %%,The computer works out the collision in the background: %d %%,El ordenador calcula la colisión en segundo plano: %d %%
 SOL_MENU_TITLE,Was möchtest du tun?,What would you like to do?,¿Qué quieres hacer?
 SOL_MENU_EXPLORE,Sonnensystem erkunden,Explore the solar system,Explorar el sistema solar
 SOL_MENU_EXPLORE_DESC,"Fliege zu Planeten, Monden, Kometen und Asteroiden und löse fünf Suchaufgaben.","Fly to planets, moons, comets and asteroids and solve five search tasks.","Vuela a planetas, lunas, cometas y asteroides y resuelve cinco tareas de búsqueda."
@@ -519,3 +515,7 @@ SOL_TIP_LATER,Tipp: Saturn war zu weit vorn. Mit jedem späteren Startfenster ho
 SOL_TIP_EARLIER,Tipp: Saturn war noch nicht da. Mit jedem früheren Startfenster steht Saturn etwa 20° weiter vorn.,Tip: Saturn was not there yet. With every earlier launch window Saturn is about 20° further ahead.,"Pista: Saturno aún no había llegado. Con cada ventana de lanzamiento anterior, Saturno va unos 20° más adelantado."
 SOL_TIP_CLOSER,"Tipp: Fliege enger an Jupiter vorbei, dann bekommt deine Sonde mehr Schwung.",Tip: pass closer to Jupiter to give your probe more speed.,Pista: pasa más cerca de Júpiter para darle más impulso a tu sonda.
 SOL_TIP_FINE,Tipp: Das Startfenster passt fast – verändere den Abstand beim Vorbeiflug oder die Seite ein wenig.,Tip: the launch window almost fits – change the flyby distance or the side a little.,Pista: la ventana casi encaja; cambia un poco la distancia del sobrevuelo o el lado.
+GAL_RECIPE,"Tipp für „%s“:
+%s","Tip for “%s”:
+%s","Pista para «%s»:
+%s"

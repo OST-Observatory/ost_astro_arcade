@@ -43,6 +43,8 @@ var _spin := 1.0
 var _choice_buttons := {}
 var _badge_icons := {}
 var _info: Label
+var _tip: PanelContainer
+var _tip_label: Label
 var _start_btn: BigButton
 var _left_label: Label
 var _running := false
@@ -462,14 +464,15 @@ func start_collide() -> void:
 		strip.add_child(b)
 		_badge_icons[f] = [ic, l]
 	col.add_child(strip)
-	var bar_row := HBoxContainer.new()
-	bar_row.add_theme_constant_override("separation", 16)
+	var bar_row := VBoxContainer.new()
+	bar_row.add_theme_constant_override("separation", 6)
 	_progress_label = _plain("", UiTheme.SIZE_SMALL, "medium", UiTheme.SCIENCE)
-	_progress_label.custom_minimum_size = Vector2(330, 0)
+	_progress_label.custom_minimum_size = Vector2(PANEL_W, 0)
+	_progress_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	bar_row.add_child(_progress_label)
 	_progress = ProgressBar.new()
 	_progress.show_percentage = false
-	_progress.custom_minimum_size = Vector2(PANEL_W - 346, 26)
+	_progress.custom_minimum_size = Vector2(PANEL_W, 22)
 	_progress.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_progress.add_theme_stylebox_override("background", UiTheme.box(Color(1, 1, 1, 0.08), Color(0, 0, 0, 0), 0, 13))
 	_progress.add_theme_stylebox_override("fill", UiTheme.box(UiTheme.SCIENCE, Color(0, 0, 0, 0), 0, 13))
@@ -477,10 +480,23 @@ func start_collide() -> void:
 	bar_row.add_child(_progress)
 	bar_row.modulate.a = 0.0
 	col.add_child(bar_row)
-	_info = _plain(tr("GAL_COLLIDE_TASK"), UiTheme.SIZE_SMALL, "regular", UiTheme.TEXT)
+	_info = _plain(tr("GAL_COLLIDE_TASK"), UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.TEXT)
 	_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_info.custom_minimum_size = Vector2(PANEL_W, 0)
 	col.add_child(_info)
+	# Tip after a collision without a new badge: stands out in its own coloured box.
+	_tip = PanelContainer.new()
+	_tip.add_theme_stylebox_override("panel", UiTheme.box(Color(UiTheme.SCIENCE, 0.14), Color(UiTheme.SCIENCE, 0.7), 2, 18))
+	var tip_row := HBoxContainer.new()
+	tip_row.add_theme_constant_override("separation", 14)
+	_tip.add_child(tip_row)
+	tip_row.add_child(UiTheme.icon("lightbulb", 44, UiTheme.SCIENCE))
+	_tip_label = _plain("", UiTheme.SIZE_SMALL, "semibold", UiTheme.SCIENCE)
+	_tip_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_tip_label.custom_minimum_size = Vector2(PANEL_W - 110, 0)
+	tip_row.add_child(_tip_label)
+	_tip.visible = false
+	col.add_child(_tip)
 	var done := BigButton.make("GAL_DONE", "check", false, int(PANEL_W))
 	done.pressed.connect(_finish)
 	col.add_child(done)
@@ -632,7 +648,10 @@ func _run_collision() -> void:
 	_view.show_encounter(_model)
 	_view.play()
 	_info.text = tr("GAL_RUNNING")
-	# The analysis runs on the CPU while the GPU shows the collision.
+	_info.add_theme_color_override("font_color", UiTheme.TEXT)
+	_tip.visible = false
+	# The analysis runs on the CPU while the GPU shows the collision: the whole collision is
+	# computed once more in the background with test stars; the result is shown at the end.
 	if _thread and _thread.is_started():
 		_thread.wait_to_finish()
 	_thread = Thread.new()
@@ -671,10 +690,12 @@ func _on_collision_finished() -> void:
 		if float(found[f]) >= 0.0:
 			seen.append(tr("GAL_FEATURE_" + f.to_upper()))
 	_info.text = (tr("GAL_SEEN") % ", ".join(seen)) if not seen.is_empty() else tr("GAL_SEEN_NONE")
+	_info.add_theme_color_override("font_color", UiTheme.SUCCESS if not seen.is_empty() else UiTheme.ACCENT_HI)
 	if fresh.is_empty():
-		var hint := CollideLogic.recipe_hint(_badges)
+		var hint := CollideLogic.recipe_hint(_badges, str(_target.id))
 		if hint != "":
-			_info.text += "\n" + tr(hint)
+			_tip_label.text = hint
+			_tip.visible = true
 		Audio.play("tick")
 	else:
 		Audio.play("success")

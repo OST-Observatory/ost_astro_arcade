@@ -58,7 +58,8 @@ func test_deterministic() -> void:
 func test_collide_logic() -> void:
 	var fresh := CollideLogic.new_badges({"tails": 30.0, "bridge": -1.0, "ring": 50.0, "merger": -1.0}, ["ring"])
 	assert_eq(fresh, ["tails"] as Array[String])
-	assert_eq(CollideLogic.recipe_hint(["tails", "merger", "ring", "bridge"]), "")
+	assert_eq(CollideLogic.recipe_hint(["tails", "merger", "ring", "bridge"], "milkyway"), "")
+	assert_true(CollideLogic.recipe_hint(["tails", "merger"], "ddo154") != "")
 	assert_eq(CollideLogic.stars(true, 3), 3)
 	assert_eq(CollideLogic.stars(false, 0), 1)
 	assert_true(CollideLogic.total_points(500, 2, "pro") > CollideLogic.total_points(500, 2, "explorer"))
@@ -77,3 +78,21 @@ func test_gallery_saves_only_stable_galaxies() -> void:
 	f.close()
 	assert_eq(GalaxyGalleryStore.new(path).entries.size(), 0, "a broken file loads as empty")
 	DirAccess.remove_absolute(path)
+
+
+func test_every_recipe_gives_its_shape() -> void:
+	# The hints promise a shape for each target galaxy: check them with the game's star count.
+	for target_id in CollideLogic.RECIPES:
+		var me := GalaxyTemplates.get_target(target_id)
+		for f in CollideLogic.RECIPES[target_id]:
+			var r: Array = CollideLogic.RECIPES[target_id][f]
+			var partner := ""
+			for p in GalaxyTemplates.PARTNERS:
+				if p[0] == r[0]:
+					partner = p[1]
+			var pt := GalaxyTemplates.get_target(partner)
+			var m := EncounterModel.new()
+			m.setup({"pot": me.reference, "target": me, "spin": 1.0 if int(r[2]) >= 0 else -1.0},
+				{"pot": pt.reference, "target": pt, "spin": 1.0}, r[1])
+			m.run_stars(GAME_STARS)
+			assert_true(float(FeatureDetector.detect(m)[f]) >= 0.0, "%s: %s with %s %s" % [target_id, f, r[0], r[1]])
