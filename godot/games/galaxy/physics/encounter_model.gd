@@ -263,23 +263,36 @@ func run_stars(n_per_galaxy := 500, dt := DT_CPU) -> void:
 
 # --- GPU stars -----------------------------------------------------------------------------------
 
-## Like run_stars(), but on the graphics card (encounter_stars.glsl): many more stars in a
-## fraction of the time, so faint shapes (e.g. rings with little contrast) stand out from
-## the noise. Returns false where there is no RenderingDevice (headless, compatibility
-## renderer) – then run_stars() is the fallback.
-func run_stars_gpu(n_per_galaxy := 8000, dt := DT) -> bool:
+## Like run_stars(), but on the graphics card (encounter_stars.glsl): tens of thousands of
+## stars in a fraction of the time. Snapshots hold a subsample (`sub` stars per galaxy, for
+## tails, bridges and the merger), and `ring_hist` the counts of all stars per snapshot,
+## galaxy, direction and radius in the galaxy's disk plane (for rings, see FeatureDetector).
+## Returns false where there is no RenderingDevice (headless, compatibility renderer) – then
+## run_stars() is the fallback.
+const HIST_DIRS := 12
+const HIST_BINS := 160
+const HIST_REACH := 4.5      # counted out to this many r0
+var ring_hist := PackedInt32Array()
+var ring_r0 := [1.0, 1.0]
+var ring_baseline := [0.0, 0.0]   # ripple coherence each galaxy shows on its own (see baseline())
+
+
+func run_stars_gpu(n_per_galaxy := 30000, sub := 3000, dt := DT) -> bool:
 	var rd := RenderingServer.create_local_rendering_device()
 	if rd == null:
 		return false
 	_done = [0]
-	_total = 1
+	_total = 3
+	sub = mini(sub, n_per_galaxy)
 	var init := PackedFloat32Array()
+	init.resize(2 * n_per_galaxy * 8)
 	var owner := PackedByteArray()
 	for g in 2:
 		var setup: Dictionary = gal[g].setup
 		var pot: GalaxyPotential = gal[g].pot
 		var c := center(g, 0.0)
 		var cv := center_velocity(g, 0.0)
+		var dists := PackedFloat32Array()
 		for i in n_per_galaxy:
 			if cancelled:
 				rd.free()
@@ -287,11 +300,20 @@ func run_stars_gpu(n_per_galaxy := 8000, dt := DT) -> bool:
 			var s := StarSampler.sample(i + g * 1000003, setup)
 			var x := c + pot.basis * (s[0] as Vector3)
 			var v := cv + pot.basis * (s[1] as Vector3)
-			init.append_array([x.x, x.y, x.z, float(g), v.x, v.y, v.z, 0.0])
-			owner.append(g)
+			var o := (g * n_per_galaxy + i) * 8
+			init[o] = x.x
+			init[o + 1] = x.y
+			init[o + 2] = x.z
+			init[o + 4] = v.x
+			init[o + 5] = v.y
+			init[o + 6] = v.z
+			if i < sub:
+				owner.append(g)
+				dists.append((x - c).length())
+		dists.sort()
+		ring_r0[g] = maxf(float(dists[int(dists.size() * 0.9)]), 0.1)   # as FeatureDetector._initial_radii()
 		_done = [g + 1]
-		_total = 3
-	var n := owner.size()
+	var n := 2 * n_per_galaxy
 	var steps := int(ceil(t_end / dt))
 	var every := maxi(1, int(round(SNAPSHOT_EVERY / dt)))
 	var count := 1 + steps / every
@@ -301,6 +323,8 @@ func run_stars_gpu(n_per_galaxy := 8000, dt := DT) -> bool:
 	for g in 2:
 		var b: Basis = (gal[g].pot as GalaxyPotential).basis
 		params.append_array([b.x.x, b.x.y, b.x.z, b.y.x, b.y.y, b.y.z, b.z.x, b.z.y, b.z.z])
+	params.append_array([float(n_per_galaxy), float(sub), 0.5 * ring_r0[0], 0.5 * ring_r0[1],
+		HIST_REACH * ring_r0[0], HIST_REACH * ring_r0[1]])
 	var centers := PackedFloat32Array()
 	centers.resize(steps * 8)
 	for k in steps:
@@ -310,14 +334,26 @@ func run_stars_gpu(n_per_galaxy := 8000, dt := DT) -> bool:
 			centers[k * 8 + g * 4] = cp.x
 			centers[k * 8 + g * 4 + 1] = cp.y
 			centers[k * 8 + g * 4 + 2] = cp.z
+	var snap_c := PackedFloat32Array()
+	snap_c.resize(count * 8)
+	for j in count:
+		for g in 2:
+			var cp := center(g, j * every * dt)
+			snap_c[j * 8 + g * 4] = cp.x
+			snap_c[j * 8 + g * 4 + 1] = cp.y
+			snap_c[j * 8 + g * 4 + 2] = cp.z
+	var hist_n := count * 2 * HIST_DIRS * HIST_BINS
 	var shader_file: RDShaderFile = load("res://games/galaxy/physics/encounter_stars.glsl")
 	var shader := rd.shader_create_from_spirv(shader_file.get_spirv())
 	var bufs := []
 	var uniforms := []
-	var out_bytes := count * n * 16
-	for k in 4:
-		var bytes: PackedByteArray = [params.to_byte_array(), centers.to_byte_array(), init.to_byte_array(), PackedByteArray()][k]
-		var buf := rd.storage_buffer_create(out_bytes if k == 3 else bytes.size(), bytes)
+	var zeros := PackedByteArray()
+	zeros.resize(hist_n * 4)
+	var datas: Array = [params.to_byte_array(), centers.to_byte_array(), init.to_byte_array(), PackedByteArray(), zeros,
+		snap_c.to_byte_array()]
+	for k in datas.size():
+		var bytes: PackedByteArray = datas[k]
+		var buf := rd.storage_buffer_create(count * 2 * sub * 16 if k == 3 else bytes.size(), bytes)
 		bufs.append(buf)
 		var u := RDUniform.new()
 		u.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
@@ -334,17 +370,39 @@ func run_stars_gpu(n_per_galaxy := 8000, dt := DT) -> bool:
 	rd.submit()
 	rd.sync()
 	var out := rd.buffer_get_data(bufs[3]).to_float32_array()
+	ring_hist = rd.buffer_get_data(bufs[4]).to_int32_array()
 	for r in [pipeline, uset] + bufs + [shader]:
 		rd.free_rid(r)
 	rd.free()
 	snapshots = []
+	var m := 2 * sub
 	for k in count:
 		var tk := minf(k * every * dt, t_end)
 		var pos := PackedVector3Array()
-		pos.resize(n)
-		var base := k * n * 4
-		for i in n:
+		pos.resize(m)
+		var base := k * m * 4
+		for i in m:
 			pos[i] = Vector3(out[base + i * 4], out[base + i * 4 + 1], out[base + i * 4 + 2])
 		snapshots.append({"t": tk, "c": [center(0, tk), center(1, tk)], "stars": pos, "owner": owner})
 	_done = [3]
 	return true
+
+
+## How much concentric rippling each galaxy shows on its own, without the partner: the same
+## stars and steps with the partner made massless (its centre then stays put). A ring from
+## the collision has to stand out above this (FeatureDetector._ring_counts).
+func baseline(n_per_galaxy := 30000) -> void:
+	for g in 2:
+		var alone := EncounterModel.new()
+		var g1 := {"pot": (gal[0].pot as GalaxyPotential) if g == 0 else GalaxyPotential.new(), "target": gal[0].target,
+			"spin": float(gal[0].setup.spin)}
+		var g2 := {"pot": (gal[1].pot as GalaxyPotential) if g == 1 else GalaxyPotential.new(), "target": gal[1].target,
+			"spin": float(gal[1].setup.spin)}
+		alone.setup(g1, g2, approach)
+		alone.t_end = t_end
+		if cancelled or not alone.run_stars_gpu(n_per_galaxy, 1):
+			return
+		var best := 0.0
+		for j in range(2, alone.snapshots.size()):
+			best = maxf(best, FeatureDetector.pair_coherence(alone, j, g))
+		ring_baseline[g] = best

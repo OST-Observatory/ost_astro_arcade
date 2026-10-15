@@ -7,7 +7,7 @@ class_name StarSampler
 extends RefCounted
 
 const MASK := 0xFFFFFFFF
-const VTAB := 32
+const VTAB := 128
 const BULGE := 0
 const DISK := 1
 const GAS := 2
@@ -74,9 +74,14 @@ static func sample(index: int, g: Dictionary) -> Array:
 		var th := TAU * u[2]
 		var zh := sc * (0.06 if kind == DISK else 0.025)
 		var h := (2.0 * u[3] - 1.0) * zh
-		var disp := 1.0 + 0.1 * (u[4] - 0.5)
 		pos = Vector3(rr * cos(th), h, rr * sin(th))
-		vel = Vector3(-sin(th), 0.0, cos(th)) * (vtab_at(g, rr) * disp * float(g.spin))
+		# A little random motion around the circular orbit (epicycle), each star at its own
+		# phase of it: 5 % radial, 3.5 % along the orbit (ratio of a flat rotation curve).
+		# All stars at the same phase would swing in step and draw rings that are not there.
+		var ph := TAU * u[4]
+		var vc := vtab_at(g, rr)
+		vel = Vector3(-sin(th), 0.0, cos(th)) * (vc * (1.0 + 0.035 * cos(ph)) * float(g.spin)) \
+			+ Vector3(cos(th), 0.0, sin(th)) * (vc * 0.05 * sin(ph))
 	return [pos, vel, kind]
 
 

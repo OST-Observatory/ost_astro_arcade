@@ -10,7 +10,7 @@ const int MAX_STEPS = 24;
 uniform int n_first = 100000;          // particles [0, n_first) belong to galaxy 0
 uniform float pot[32];                 // 16 per galaxy, see GalaxyPotential.to_uniforms()
 uniform mat3 basis[2];                 // disk frame -> world
-uniform float vtab[64];                // 32 circular speeds per galaxy, r = 0 .. vtab_rmax
+uniform float vtab[256];               // 128 circular speeds per galaxy, r = 0 .. vtab_rmax (StarSampler.VTAB)
 uniform float vtab_rmax[2];
 uniform float f_bulge[2];
 uniform float f_gas[2];
@@ -45,9 +45,9 @@ uint hash_u(uint x) {
 }
 
 float vtab_at(int g, float r) {
-	float f = clamp(r / vtab_rmax[g] * 31.0, 0.0, 30.999);
+	float f = clamp(r / vtab_rmax[g] * 127.0, 0.0, 126.999);
 	int i = int(f);
-	return mix(vtab[g * 32 + i], vtab[g * 32 + i + 1], f - float(i));
+	return mix(vtab[g * 128 + i], vtab[g * 128 + i + 1], f - float(i));
 }
 
 vec3 mn_accel(vec3 p, float m, float a, float b) {
@@ -125,9 +125,12 @@ void start() {
 		float th = 6.28318530718 * u[2];
 		float zh = sc * (kind == 1 ? 0.06 : 0.025);
 		float h = (2.0 * u[3] - 1.0) * zh;
-		float disp = 1.0 + 0.1 * (u[4] - 0.5);
 		pos = vec3(rr * cos(th), h, rr * sin(th));
-		vel = vec3(-sin(th), 0.0, cos(th)) * (vtab_at(g, rr) * disp * spin[g]);
+		// Epicycle at a random phase per star (see StarSampler).
+		float ph = 6.28318530718 * u[4];
+		float vc = vtab_at(g, rr);
+		vel = vec3(-sin(th), 0.0, cos(th)) * (vc * (1.0 + 0.035 * cos(ph)) * spin[g])
+			+ vec3(cos(th), 0.0, sin(th)) * (vc * 0.05 * sin(ph));
 		frac = clamp(rr / rmax, 0.0, 1.0);
 	}
 	TRANSFORM = mat4(1.0);

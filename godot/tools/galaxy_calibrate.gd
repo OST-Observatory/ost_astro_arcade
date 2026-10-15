@@ -2,7 +2,7 @@
 ## prints closest approach, merger, detected features and timings. Used to tune the friction,
 ## approach presets and feature thresholds.
 ##   godot --headless --path godot --script res://tools/galaxy_calibrate.gd
-##   GPU=1 godot --path godot --script res://tools/galaxy_calibrate.gd      (8000 stars on the GPU)
+##   GPU=1 godot --path godot --script res://tools/galaxy_calibrate.gd      (50000 stars on the GPU)
 extends SceneTree
 
 
@@ -22,7 +22,8 @@ func _init() -> void:
 					{"pot": pt.reference, "target": pt, "spin": 1.0}, approach)
 				var t1 := Time.get_ticks_msec()
 				if gpu:
-					m.run_stars_gpu(8000)
+					m.run_stars_gpu(50000)
+					m.baseline(50000)
 				else:
 					m.run_stars(n)
 				var t2 := Time.get_ticks_msec()

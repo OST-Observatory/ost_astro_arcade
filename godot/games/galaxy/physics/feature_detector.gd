@@ -22,6 +22,10 @@ const EDGE_DIRS := 12
 const EDGE_BINS := 40
 const EDGE_FOUND := 8           # directions with a bright edge
 const EDGE_SMOOTH := 6          # neighbouring edge points at similar radii (a closed loop)
+const COHERENCE := 0.25         # rings in the GPU counts: the same bumps at the same radii in
+                                # neighbouring quarters, two snapshots in a row on average
+                                # (undisturbed or only stretched disks stay below 0.15) ...
+const ABOVE_ALONE := 0.15       # ... and this much above what the galaxy shows on its own
 
 
 static func detect(m: EncounterModel) -> Dictionary:
@@ -31,7 +35,8 @@ static func detect(m: EncounterModel) -> Dictionary:
 	var r0 := _initial_radii(m)
 	var first: Dictionary = m.snapshots[0]
 	var best := {"tails": 0.0, "bridge": 0.0, "ring": 0.0}
-	for snap in m.snapshots.slice(1):
+	for j in range(1, m.snapshots.size()):
+		var snap: Dictionary = m.snapshots[j]
 		var s := _tails(m, snap, r0)
 		if s > best.tails:
 			best.tails = s
@@ -40,8 +45,10 @@ static func detect(m: EncounterModel) -> Dictionary:
 		if s > best.bridge:
 			best.bridge = s
 			out.bridge = snap.t
-		if snap.stars.size() >= 2 * MANY_STARS:
-			s = _ring_edges(snap, m, r0)   # whole run: undisturbed disks show no edges
+		if not m.ring_hist.is_empty():
+			s = _ring_counts(m, j)   # whole run: undisturbed disks show neither edges nor ripples
+		elif snap.stars.size() >= 2 * MANY_STARS:
+			s = _ring_edges(snap, m, r0)
 		else:
 			s = _ring(m, snap, first, r0) if snap.t <= m.t_peri + RING_WINDOW else 0.0
 		if s > best.ring:
@@ -197,18 +204,8 @@ static func _ring(m: EncounterModel, snap: Dictionary, first: Dictionary, r0: Ar
 static func _ring_edges(snap: Dictionary, m: EncounterModel, r0: Array) -> float:
 	var best := 0.0
 	for g in 2:
-		var radii := _edge_radii(snap, g, snap.c[g], (m.gal[g].pot as GalaxyPotential).basis, float(r0[g]))
-		var found := 0
-		var smooth := 0
-		for k in EDGE_DIRS:
-			var a: float = radii[k]
-			var b: float = radii[(k + 1) % EDGE_DIRS]
-			if a > 0.0:
-				found += 1
-			if a > 0.0 and b > 0.0 and maxf(a, b) / minf(a, b) < 1.4:
-				smooth += 1
-		if found >= EDGE_FOUND and smooth >= EDGE_SMOOTH:
-			best = maxf(best, float(found + smooth))
+		if _edges_closed(_edge_radii(snap, g, snap.c[g], (m.gal[g].pot as GalaxyPotential).basis, float(r0[g]))):
+			best = 1.0
 	return best
 
 
@@ -231,6 +228,11 @@ static func _edge_radii(snap: Dictionary, g: int, c: Vector3, basis: Basis, r0: 
 			continue
 		var d := int(fposmod(atan2(p.z, p.x), TAU) / TAU * EDGE_DIRS) % EDGE_DIRS
 		cnt[d * EDGE_BINS + int(rr / rmax * EDGE_BINS)] += 1.0
+	return _edges_from_counts(cnt, r0, rmax)
+
+
+## Bright edge per direction from counts [direction * EDGE_BINS + radial bin] out to rmax.
+static func _edges_from_counts(cnt: PackedFloat32Array, r0: float, rmax: float) -> PackedFloat32Array:
 	var radii := PackedFloat32Array()
 	radii.resize(EDGE_DIRS)
 	for d in EDGE_DIRS:
@@ -267,6 +269,105 @@ static func _edge_radii(snap: Dictionary, g: int, c: Vector3, basis: Basis, r0: 
 				best = score
 				radii[d] = rk
 	return radii
+
+
+static func _edges_closed(radii: PackedFloat32Array) -> bool:
+	var found := 0
+	var smooth := 0
+	for k in EDGE_DIRS:
+		var a: float = radii[k]
+		var b: float = radii[(k + 1) % EDGE_DIRS]
+		if a > 0.0:
+			found += 1
+		if a > 0.0 and b > 0.0 and maxf(a, b) / minf(a, b) < 1.4:
+			smooth += 1
+	return found >= EDGE_FOUND and smooth >= EDGE_SMOOTH
+
+
+## Rings from the GPU counts of all stars (EncounterModel.ring_hist) at snapshot j:
+## a closed bright edge (as _ring_edges), or fine concentric ripples – the surface density
+## per quarter, relative to its own smooth trend, rises and falls at the same radii in all
+## four quarters (mean correlation >= COHERENCE; spiral arms and noise do not line up).
+static func _ring_counts(m: EncounterModel, j: int) -> float:
+	var dirs := EncounterModel.HIST_DIRS
+	var bins := EncounterModel.HIST_BINS
+	var best := 0.0
+	for g in 2:
+		var base := (j * 2 + g) * dirs * bins
+		var r0 := float(m.ring_r0[g])
+		var rmax := EncounterModel.HIST_REACH * r0
+		# Bright edge: the counts rebinned to EDGE_BINS per direction.
+		var cnt := PackedFloat32Array()
+		cnt.resize(EDGE_DIRS * EDGE_BINS)
+		var fine := bins / EDGE_BINS
+		for d in dirs:
+			for b in bins:
+				cnt[d * EDGE_BINS + b / fine] += m.ring_hist[base + d * bins + b]
+		var closed := _edges_closed(_edges_from_counts(cnt, r0, rmax))
+		var coh := pair_coherence(m, j, g)
+		if closed or coh >= maxf(COHERENCE, float(m.ring_baseline[g]) + ABOVE_ALONE):
+			best = maxf(best, 1.0 + coh)
+	return best
+
+
+## Ripple coherence of galaxy g at snapshot j, averaged with the snapshot before (real rings
+## last, noise does not).
+static func pair_coherence(m: EncounterModel, j: int, g: int) -> float:
+	if j < 2:
+		return 0.0
+	var dirs := EncounterModel.HIST_DIRS
+	var bins := EncounterModel.HIST_BINS
+	var start := g * dirs * bins
+	var base := (j * 2 + g) * dirs * bins
+	# Stay well inside the disk's outer edge (a sharp edge that moves would look like a ring).
+	var r_hi := minf(2.6, 0.7 * float(m.gal[g].setup.r_max) / float(m.ring_r0[g]))
+	return 0.5 * (_coherence(m.ring_hist, base, start, dirs, bins, r_hi)
+		+ _coherence(m.ring_hist, base - 2 * dirs * bins, start, dirs, bins, r_hi))
+
+
+## Mean correlation of the density ripples of neighbouring quarters, from 0.15 r0 to r_hi (r0). The density is
+## taken relative to the galaxy's own start (counts at `start`), so structure that was there
+## from the beginning – a sharp disk edge, say – does not count.
+static func _coherence(h: PackedInt32Array, base: int, start: int, dirs: int, bins: int, r_hi := 2.6) -> float:
+	var b_lo := int(0.15 / EncounterModel.HIST_REACH * bins)
+	var b_hi := maxi(int(r_hi / EncounterModel.HIST_REACH * bins), b_lo + 30)
+	var nb := b_hi - b_lo
+	var res := []
+	for q in 4:
+		var sig := PackedFloat32Array()
+		sig.resize(nb)
+		for k in nb:
+			var b := b_lo + k
+			var c := 0.0
+			var c0 := 0.0
+			for d in range(q * dirs / 4, (q + 1) * dirs / 4):
+				c += h[base + d * bins + b]
+				c0 += h[start + d * bins + b]
+			sig[k] = (c + 1.0) / (c0 + 1.0)
+		var r := PackedFloat32Array()
+		r.resize(nb)
+		for k in nb:
+			var a := 0.0
+			var n := 0
+			for i in range(maxi(0, k - 7), mini(nb, k + 8)):
+				a += sig[i]
+				n += 1
+			r[k] = sig[k] / maxf(a / n, 1e-9) - 1.0
+		res.append(r)
+	# Neighbouring quarters only: a ring is the same all round, a tidally stretched oval
+	# matches only opposite quarters.
+	var corr := 0.0
+	for a in 4:
+		var b := (a + 1) % 4
+		var sab := 0.0
+		var saa := 0.0
+		var sbb := 0.0
+		for k in range(7, nb - 7):
+			sab += res[a][k] * res[b][k]
+			saa += res[a][k] * res[a][k]
+			sbb += res[b][k] * res[b][k]
+		corr += sab / sqrt(maxf(saa * sbb, 1e-12))
+	return corr / 4.0
 
 
 ## Star density per ring (24 radial bins) and counts per ring and direction sector (flat,
