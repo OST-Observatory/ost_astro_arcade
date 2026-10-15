@@ -273,9 +273,9 @@ GAL_QUIZ_GO,Weiter,Continue,Seguir
 GAL_COLLIDE_TITLE,Galaxien-Zusammenstoß,Galaxy collision,Choque de galaxias
 GAL_COLLIDE_TASK,Wähle einen Partner und wie sich die Galaxien begegnen. Welche Formen entstehen? Sammle alle vier!,Choose a partner and how the galaxies meet. Which shapes appear? Collect all four!,Elige una compañera y cómo se encuentran las galaxias. ¿Qué formas aparecen? ¡Consigue las cuatro!
 GAL_PARTNER,Partner,Partner,Compañera
-GAL_PARTNER_DWARF,Zwerggalaxie,Dwarf galaxy,Galaxia enana
-GAL_PARTNER_SPIRAL,Spiralgalaxie,Spiral galaxy,Galaxia espiral
-GAL_PARTNER_TWIN,Zwilling,Twin,Gemela
+GAL_PARTNER_DWARF,Zwerggalaxie DDO 154,Dwarf galaxy DDO 154,Galaxia enana DDO 154
+GAL_PARTNER_SPIRAL,Spiralgalaxie NGC 3198,Spiral galaxy NGC 3198,Galaxia espiral NGC 3198
+GAL_PARTNER_TWIN,Milchstraße,Milky Way,Vía Láctea
 GAL_PARTNER_GALLERY,Galaxie von %s,Galaxy by %s,Galaxia de %s
 GAL_APPROACH,Begegnung,Encounter,Encuentro
 GAL_APPROACH_HEADON,Frontal,Head-on,Frontal
@@ -520,3 +520,78 @@ GAL_RECIPE,"Tipp für „%s“:
 %s","Pista para «%s»:
 %s"
 GAL_YOURS,Deine Galaxie,Your galaxy,Tu galaxia
+GAL_Q_BH_LIGHT_Q,Warum heißt ein Schwarzes Loch „schwarz“?,Why is a black hole called “black”?,¿Por qué un agujero negro se llama «negro»?
+GAL_Q_BH_LIGHT_A0,Nicht einmal Licht kann ihm entkommen,Not even light can escape from it,Ni siquiera la luz puede escapar de él
+GAL_Q_BH_LIGHT_A1,Es ist mit Ruß bedeckt,It is covered in soot,Está cubierto de hollín
+GAL_Q_BH_LIGHT_A2,Man kann es nur nachts sehen,It can only be seen at night,Solo se puede ver de noche
+GAL_Q_BH_LIGHT_EXPL,"Seine Schwerkraft ist so stark, dass hinter dem Ereignishorizont nicht einmal Licht entkommt. Man erkennt es nur an seiner Wirkung auf die Umgebung, etwa an Sternen, die es umkreisen.","Its gravity is so strong that not even light escapes from inside the event horizon. We only notice it by its effect on its surroundings, such as stars orbiting it.","Su gravedad es tan fuerte que ni siquiera la luz escapa del interior del horizonte de sucesos. Solo se nota por su efecto en el entorno, por ejemplo en las estrellas que lo orbitan."
+GAL_Q_BH_IMAGE_Q,Wie entstand 2022 das erste Bild des Schwarzen Lochs im Zentrum der Milchstraße?,How was the first image of the black hole at the centre of the Milky Way made in 2022?,¿Cómo se obtuvo en 2022 la primera imagen del agujero negro del centro de la Vía Láctea?
+GAL_Q_BH_IMAGE_A0,"Mit Radioteleskopen auf der ganzen Erde, zusammengeschaltet","With radio telescopes all over the Earth, working together",Con radiotelescopios de toda la Tierra trabajando juntos
+GAL_Q_BH_IMAGE_A1,"Mit einer Raumsonde, die hingeflogen ist",With a space probe that flew there,Con una sonda espacial que viajó hasta allí
+GAL_Q_BH_IMAGE_A2,Mit einer einzigen Kamera auf dem Mond,With a single camera on the Moon,Con una sola cámara en la Luna
+GAL_Q_BH_IMAGE_EXPL,Das Event Horizon Telescope schaltet Radioteleskope rund um die Welt zu einem Teleskop so groß wie die Erde zusammen. Zu sehen ist der leuchtende Ring aus heißem Gas um den Schatten des Schwarzen Lochs.,The Event Horizon Telescope links radio telescopes around the world into one telescope as large as the Earth. The image shows the glowing ring of hot gas around the shadow of the black hole.,El Event Horizon Telescope une radiotelescopios de todo el mundo en un telescopio tan grande como la Tierra. La imagen muestra el anillo brillante de gas caliente alrededor de la sombra del agujero negro.
+GAL_Q_BH_STARS_Q,"Woher weiß man, wie schwer das Schwarze Loch im Zentrum der Milchstraße ist?",How do we know how heavy the black hole at the centre of the Milky Way is?,¿Cómo sabemos cuánto pesa el agujero negro del centro de la Vía Láctea?
+GAL_Q_BH_STARS_A0,"Aus den Bahnen von Sternen, die es umkreisen",From the orbits of stars that circle it,Por las órbitas de las estrellas que giran a su alrededor
+GAL_Q_BH_STARS_A1,Aus seiner Helligkeit,From how bright it is,Por su brillo
+GAL_Q_BH_STARS_A2,Aus seiner Temperatur,From its temperature,Por su temperatura
+GAL_Q_BH_STARS_EXPL,Der Stern S2 umrundet es in nur 16 Jahren. Aus solchen Bahnen folgen rund 4 Millionen Sonnenmassen. Reinhard Genzel und Andrea Ghez erhielten dafür 2020 den Nobelpreis für Physik.,The star S2 goes round it in only 16 years. Orbits like this give about 4 million solar masses. Reinhard Genzel and Andrea Ghez received the 2020 Nobel Prize in Physics for this.,La estrella S2 lo rodea en solo 16 años. De órbitas así se deducen unos 4 millones de masas solares. Reinhard Genzel y Andrea Ghez recibieron por ello el Premio Nobel de Física de 2020.
+GAL_Q_BH_SIZE_Q,Wie groß ist das Schwarze Loch im Zentrum der Milchstraße (sein Ereignishorizont)?,How large is the black hole at the centre of the Milky Way (its event horizon)?,¿Qué tamaño tiene el agujero negro del centro de la Vía Láctea (su horizonte de sucesos)?
+GAL_Q_BH_SIZE_A0,Etwa 25 Millionen Kilometer – kleiner als die Bahn des Merkur,About 25 million kilometres – smaller than the orbit of Mercury,Unos 25 millones de kilómetros: más pequeño que la órbita de Mercurio
+GAL_Q_BH_SIZE_A1,So groß wie die Erde,As large as the Earth,Tan grande como la Tierra
+GAL_Q_BH_SIZE_A2,So groß wie die halbe Milchstraße,Half as large as the Milky Way,La mitad de la Vía Láctea
+GAL_Q_BH_SIZE_EXPL,4 Millionen Sonnenmassen passen in eine Kugel von etwa 25 Millionen Kilometern Durchmesser. Das ist kleiner als die Bahn des Merkur um die Sonne – winzig im Vergleich zur Galaxie.,4 million solar masses fit into a sphere about 25 million kilometres across. That is smaller than the orbit of Mercury around the Sun – tiny compared with the galaxy.,4 millones de masas solares caben en una esfera de unos 25 millones de kilómetros de diámetro. Es más pequeña que la órbita de Mercurio alrededor del Sol: diminuta comparada con la galaxia.
+GAL_Q_STARS_SUN_Q,Was ist unsere Sonne?,What is our Sun?,¿Qué es nuestro Sol?
+GAL_Q_STARS_SUN_A0,Ein ganz normaler Stern der Milchstraße,A quite ordinary star of the Milky Way,Una estrella bastante normal de la Vía Láctea
+GAL_Q_STARS_SUN_A1,Der größte Stern der Milchstraße,The largest star of the Milky Way,La estrella más grande de la Vía Láctea
+GAL_Q_STARS_SUN_A2,Der Mittelpunkt der Milchstraße,The centre of the Milky Way,El centro de la Vía Láctea
+GAL_Q_STARS_SUN_EXPL,Die Sonne ist ein durchschnittlicher Stern. Sie kreist rund 26.000 Lichtjahre vom Zentrum entfernt in der Scheibe und braucht für eine Runde etwa 230 Millionen Jahre.,"The Sun is an average star. It orbits in the disk about 26,000 light-years from the centre and takes about 230 million years for one lap.",El Sol es una estrella corriente. Gira en el disco a unos 26 000 años luz del centro y tarda unos 230 millones de años en dar una vuelta.
+GAL_Q_STARS_BULGE_Q,"Wie heißt die dichte, rundliche Sternansammlung im Zentrum einer Spiralgalaxie?","What is the dense, roundish crowd of stars at the centre of a spiral galaxy called?",¿Cómo se llama la aglomeración densa y redondeada de estrellas en el centro de una galaxia espiral?
+GAL_Q_STARS_BULGE_A0,Bulge,Bulge,Bulbo
+GAL_Q_STARS_BULGE_A1,Spiralarm,Spiral arm,Brazo espiral
+GAL_Q_STARS_BULGE_A2,Nebel,Nebula,Nebulosa
+GAL_Q_STARS_BULGE_EXPL,Der Bulge (englisch für „Ausbuchtung“) enthält vor allem alte Sterne. In der Milchstraße ist er zu einem Balken gestreckt.,The bulge holds mostly old stars. In the Milky Way it is stretched into a bar.,El bulbo contiene sobre todo estrellas viejas. En la Vía Láctea está estirado en forma de barra.
+GAL_Q_STARS_ARMS_Q,Warum leuchten die Spiralarme so hell?,Why do the spiral arms shine so brightly?,¿Por qué brillan tanto los brazos espirales?
+GAL_Q_STARS_ARMS_A0,"Dort entstehen gerade viele junge, heiße Sterne","Many young, hot stars are forming there",Allí se forman muchas estrellas jóvenes y calientes
+GAL_Q_STARS_ARMS_A1,Dort stehen fast alle Sterne der Galaxie,Almost all the stars of the galaxy are there,Allí están casi todas las estrellas de la galaxia
+GAL_Q_STARS_ARMS_A2,Dort ist die Dunkle Materie am dichtesten,Dark matter is densest there,Allí la materia oscura es más densa
+GAL_Q_STARS_ARMS_EXPL,"In den Armen wird Gas verdichtet, und es bilden sich viele junge, blaue, sehr helle Sterne. Sterne gibt es aber überall in der Scheibe – die Arme fallen nur durch die hellen jungen Sterne auf.","In the arms gas is compressed and many young, blue, very bright stars form. But there are stars everywhere in the disk – the arms stand out only because of the bright young stars.","En los brazos el gas se comprime y se forman muchas estrellas jóvenes, azules y muy brillantes. Pero hay estrellas en todo el disco: los brazos destacan solo por las estrellas jóvenes y brillantes."
+GAL_Q_STARS_AGE_Q,Wie alt sind die ältesten Sterne der Milchstraße ungefähr?,Roughly how old are the oldest stars of the Milky Way?,¿Qué edad tienen aproximadamente las estrellas más viejas de la Vía Láctea?
+GAL_Q_STARS_AGE_A0,Gut 13 Milliarden Jahre,Just over 13 billion years,Algo más de 13 000 millones de años
+GAL_Q_STARS_AGE_A1,"4,6 Milliarden Jahre",4.6 billion years,4600 millones de años
+GAL_Q_STARS_AGE_A2,Eine Million Jahre,A million years,Un millón de años
+GAL_Q_STARS_AGE_EXPL,"Die ältesten Sterne entstanden kurz nach dem Urknall, vor gut 13 Milliarden Jahren. Unsere Sonne ist mit 4,6 Milliarden Jahren vergleichsweise jung.","The oldest stars formed soon after the Big Bang, just over 13 billion years ago. At 4.6 billion years our Sun is comparatively young.","Las estrellas más viejas se formaron poco después del Big Bang, hace algo más de 13 000 millones de años. Con 4600 millones de años, nuestro Sol es relativamente joven."
+GAL_Q_GAS_HYDROGEN_Q,Woraus besteht das Gas in Galaxien vor allem?,What is the gas in galaxies mostly made of?,¿De qué está hecho sobre todo el gas de las galaxias?
+GAL_Q_GAS_HYDROGEN_A0,Aus Wasserstoff,Hydrogen,De hidrógeno
+GAL_Q_GAS_HYDROGEN_A1,Aus Sauerstoff,Oxygen,De oxígeno
+GAL_Q_GAS_HYDROGEN_A2,Aus Eisen,Iron,De hierro
+GAL_Q_GAS_HYDROGEN_EXPL,"Etwa drei Viertel der Masse ist Wasserstoff, fast der ganze Rest Helium – die Elemente aus dem Urknall. Alle schwereren Elemente entstanden später in Sternen.",About three quarters of the mass is hydrogen and almost all the rest helium – the elements from the Big Bang. All heavier elements were made later in stars.,"Unas tres cuartas partes de la masa son hidrógeno y casi todo lo demás helio, los elementos del Big Bang. Todos los elementos más pesados se formaron después en las estrellas."
+GAL_Q_GAS_21CM_Q,"Wie misst man kaltes Wasserstoffgas weit draußen in Galaxien, wo kaum Sterne leuchten?","How do we measure cold hydrogen gas far out in galaxies, where few stars shine?","¿Cómo se mide el hidrógeno frío en las afueras de las galaxias, donde apenas brillan estrellas?"
+GAL_Q_GAS_21CM_A0,Mit Radioteleskopen: Es sendet Strahlung mit 21 cm Wellenlänge,With radio telescopes: it sends out radiation with a 21 cm wavelength,Con radiotelescopios: emite radiación de 21 cm de longitud de onda
+GAL_Q_GAS_21CM_A1,Gar nicht – es ist unsichtbar,Not at all – it is invisible,De ninguna manera: es invisible
+GAL_Q_GAS_21CM_A2,Nur mit Röntgenteleskopen,Only with X-ray telescopes,Solo con telescopios de rayos X
+GAL_Q_GAS_21CM_EXPL,"Neutraler Wasserstoff sendet Radiostrahlung mit 21 cm Wellenlänge. Daraus misst man, wie schnell das Gas kreist – so reichen Rotationskurven wie die von NGC 3198 weit über die Sterne hinaus.",Neutral hydrogen sends out radio waves with a 21 cm wavelength. From them we measure how fast the gas orbits – that is how rotation curves like that of NGC 3198 reach far beyond the stars.,"El hidrógeno neutro emite ondas de radio de 21 cm. Con ellas se mide la velocidad a la que gira el gas: así las curvas de rotación, como la de NGC 3198, llegan mucho más allá de las estrellas."
+GAL_Q_GAS_HOT_Q,"Um Galaxien liegt auch sehr dünnes, heißes Gas. Wie heiß ist es ungefähr?","Galaxies are also surrounded by very thin, hot gas. Roughly how hot is it?",Las galaxias también están rodeadas de gas caliente y muy tenue. ¿Qué temperatura tiene aproximadamente?
+GAL_Q_GAS_HOT_A0,Etwa eine bis zwei Millionen Grad,About one to two million degrees,Entre uno y dos millones de grados
+GAL_Q_GAS_HOT_A1,Etwa 20 Grad,About 20 degrees,Unos 20 grados
+GAL_Q_GAS_HOT_A2,Etwa eine Milliarde Grad,About a billion degrees,Unos mil millones de grados
+GAL_Q_GAS_HOT_EXPL,"Dieses heiße Gas leuchtet nur im Röntgenlicht und reicht weit über die Scheibe hinaus. Es ist so dünn verteilt, dass es für die Rotationskurve kaum zählt – im Modell steckt es mit im kugelförmigen Halo.",This hot gas shines only in X-rays and reaches far beyond the disk. It is spread so thinly that it hardly counts for the rotation curve – in the model it is part of the round halo.,Este gas caliente solo brilla en rayos X y se extiende mucho más allá del disco. Está tan disperso que apenas cuenta para la curva de rotación: en el modelo forma parte del halo esférico.
+GAL_Q_GAS_DUST_Q,Wozu ist Staub in Galaxien wichtig?,Why does dust matter in galaxies?,¿Por qué es importante el polvo en las galaxias?
+GAL_Q_GAS_DUST_A0,"Er hilft Gaswolken abzukühlen, damit Sterne und Planeten entstehen",It helps gas clouds cool down so that stars and planets can form,Ayuda a que las nubes de gas se enfríen para que se formen estrellas y planetas
+GAL_Q_GAS_DUST_A1,Er erzeugt das meiste Licht der Galaxie,It makes most of the light of the galaxy,Produce la mayor parte de la luz de la galaxia
+GAL_Q_GAS_DUST_A2,Er hält die Galaxie zusammen,It holds the galaxy together,Mantiene unida la galaxia
+GAL_Q_GAS_DUST_EXPL,"Staubkörner strahlen Wärme ab und schirmen Wolken vor Sternenlicht ab. Erst wenn eine Wolke kalt genug ist, fällt sie zu Sternen zusammen. Aus Staub entstehen auch Planeten.",Dust grains radiate heat away and shield clouds from starlight. Only when a cloud is cold enough does it collapse into stars. Planets also form from dust.,Los granos de polvo irradian calor y protegen las nubes de la luz de las estrellas. Solo cuando una nube está lo bastante fría colapsa y forma estrellas. Los planetas también se forman a partir del polvo.
+GAL_Q_HALO_SEE_Q,Warum heißt Dunkle Materie „dunkel“?,Why is dark matter called “dark”?,¿Por qué la materia oscura se llama «oscura»?
+GAL_Q_HALO_SEE_A0,Sie sendet kein Licht aus und verschluckt auch keins,It gives off no light and does not absorb any either,No emite luz y tampoco la absorbe
+GAL_Q_HALO_SEE_A1,Sie ist schwarz gefärbt,It is coloured black,Es de color negro
+GAL_Q_HALO_SEE_A2,Sie gibt es nur nachts,It only exists at night,Solo existe de noche
+GAL_Q_HALO_SEE_EXPL,"Dunkle Materie ist unsichtbar: Kein Teleskop sieht sie direkt. Man bemerkt sie nur an ihrer Schwerkraft – etwa daran, wie schnell die Sterne außen in einer Galaxie kreisen.",Dark matter is invisible: no telescope sees it directly. We notice it only by its gravity – for example by how fast the stars orbit in the outer parts of a galaxy.,"La materia oscura es invisible: ningún telescopio la ve directamente. Solo se nota por su gravedad, por ejemplo por la velocidad a la que giran las estrellas en las afueras de una galaxia."
+GAL_Q_HALO_LENSING_Q,"Wie kann man Dunkle Materie noch nachweisen, außer an der Bewegung der Sterne?","How else can dark matter be detected, apart from the motion of stars?","¿De qué otra forma se puede detectar la materia oscura, además del movimiento de las estrellas?"
+GAL_Q_HALO_LENSING_A0,Ihre Schwerkraft verbiegt das Licht von Galaxien dahinter,Its gravity bends the light of galaxies behind it,Su gravedad curva la luz de las galaxias que están detrás
+GAL_Q_HALO_LENSING_A1,Sie leuchtet im Infrarotlicht,It glows in infrared light,Brilla en luz infrarroja
+GAL_Q_HALO_LENSING_A2,Man sieht sie unter dem Mikroskop,You can see it under a microscope,Se ve con un microscopio
+GAL_Q_HALO_LENSING_EXPL,"Masse lenkt Licht ab – der Gravitationslinseneffekt. Aus den verzerrten Bildern ferner Galaxien lässt sich berechnen, wie viel Masse davorliegt, auch unsichtbare.","Mass bends light – gravitational lensing. From the distorted images of distant galaxies one can work out how much mass lies in front of them, including invisible mass.","La masa desvía la luz: el efecto de lente gravitacional. Con las imágenes deformadas de galaxias lejanas se puede calcular cuánta masa hay delante, incluida la invisible."
+GAL_Q_HALO_SHAPE_Q,Welche Form hat der Halo aus Dunkler Materie um eine Galaxie?,What shape is the dark-matter halo around a galaxy?,¿Qué forma tiene el halo de materia oscura que rodea una galaxia?
+GAL_Q_HALO_SHAPE_A0,"Eine riesige, ungefähr kugelförmige Wolke, viel größer als die Scheibe","A huge, roughly round cloud, much larger than the disk","Una nube enorme, más o menos esférica, mucho mayor que el disco"
+GAL_Q_HALO_SHAPE_A1,Eine dünne Scheibe wie die der Sterne,A thin disk like that of the stars,Un disco delgado como el de las estrellas
+GAL_Q_HALO_SHAPE_A2,Ein schmaler Ring am Rand,A narrow ring at the edge,Un anillo estrecho en el borde
+GAL_Q_HALO_SHAPE_EXPL,"Der Halo umhüllt die Galaxie wie eine riesige Kugel und reicht weit über die sichtbare Scheibe hinaus. Er ist überall dünn, aber so groß, dass er insgesamt am meisten wiegt.","The halo wraps the galaxy like a huge sphere and reaches far beyond the visible disk. It is thin everywhere, but so large that in total it weighs the most.","El halo envuelve la galaxia como una enorme esfera y se extiende mucho más allá del disco visible. Es tenue en todas partes, pero tan grande que en total es lo que más pesa."

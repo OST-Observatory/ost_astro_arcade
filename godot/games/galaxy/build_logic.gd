@@ -6,14 +6,15 @@ extends RefCounted
 const STABLE := {"explorer": 90.0, "researcher": 90.0, "pro": 95.0}
 const QUIZ_RIGHT := 100
 const QUIZ_WRONG := 40
-## Knowledge questions per building block (keys GAL_Q_<id>_Q/_A0/_A1/_A2/_EXPL, A0 is right;
-## the answers are shuffled for display).
+## Knowledge questions per building block and level (0 explorer, 1 researcher, 2 pro; keys
+## GAL_Q_<id>_Q/_A0/_A1/_A2/_EXPL, A0 is right; the answers are shuffled for display).
 const QUESTIONS := {
-	"bh": ["bh_center", "bh_mass"],
-	"stars": ["stars_count", "stars_disk"],
-	"gas": ["gas_birth", "gas_vs_stars"],
-	"halo": ["halo_mass", "halo_rubin", "halo_without"],
+	"bh": [["bh_center", "bh_light"], ["bh_mass", "bh_image"], ["bh_stars", "bh_size"]],
+	"stars": [["stars_disk", "stars_sun"], ["stars_count", "stars_bulge"], ["stars_arms", "stars_age"]],
+	"gas": [["gas_birth", "gas_hydrogen"], ["gas_vs_stars", "gas_21cm"], ["gas_hot", "gas_dust"]],
+	"halo": [["halo_mass", "halo_see"], ["halo_rubin", "halo_without"], ["halo_lensing", "halo_shape"]],
 }
+const LEVEL := {"explorer": 0, "researcher": 1, "pro": 2}
 const MULT := {"explorer": 1.0, "researcher": 1.5, "pro": 2.5}
 
 
@@ -30,11 +31,15 @@ static func is_stable(match: float, diff: String) -> bool:
 	return match >= float(STABLE.get(diff, 90.0))
 
 
-## One question per building block, picked at random.
-static func pick_questions(rng: RandomNumberGenerator) -> Dictionary:
+## One question per building block, picked at random from the player's level and – for
+## researchers and pros – the level below (more variety, still fitting).
+static func pick_questions(rng: RandomNumberGenerator, diff := "researcher") -> Dictionary:
+	var level: int = LEVEL.get(diff, 1)
 	var out := {}
 	for c in QUESTIONS:
-		var pool: Array = QUESTIONS[c]
+		var pool: Array = []
+		for l in range(maxi(0, level - 1), level + 1):
+			pool.append_array(QUESTIONS[c][l])
 		out[c] = pool[rng.randi_range(0, pool.size() - 1)]
 	return out
 

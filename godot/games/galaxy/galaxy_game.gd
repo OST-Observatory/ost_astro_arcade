@@ -167,7 +167,7 @@ func start_build(target_id: String) -> void:
 	_quiz_points = 0
 	_badges = []
 	_collisions = 0
-	_questions = BuildLogic.pick_questions(_rng)
+	_questions = BuildLogic.pick_questions(_rng, diff)
 	_make_view()
 	var title := _plain(tr("GAL_BUILD_TITLE") % tr("GAL_T_" + str(_target.id).to_upper()), UiTheme.SIZE_H2 - 4, "serif", UiTheme.TEXT)
 	title.position = Vector2(200, 52)

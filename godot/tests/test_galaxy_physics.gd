@@ -95,3 +95,31 @@ func test_sampler_puts_stars_inside_the_galaxy() -> void:
 		assert_true(Vector2(p.x, p.z).length() <= float(g.r_max) * 1.001, "star %d inside r_max" % i)
 	assert_almost(kinds[0] / 3000.0, float(t.look.f_bulge), 0.03, "bulge fraction")
 	assert_almost(kinds[2] / 3000.0, float(t.look.f_gas), 0.03, "gas fraction")
+
+
+func test_quiz_questions_complete() -> void:
+	# Every question of every level exists in all three languages, and each level offers a
+	# choice of at least two per building block.
+	var csv := FileAccess.get_file_as_string("res://locale/ui.csv")
+	for c in BuildLogic.QUESTIONS:
+		assert_eq((BuildLogic.QUESTIONS[c] as Array).size(), 3, "%s: three levels" % c)
+		for level in BuildLogic.QUESTIONS[c]:
+			assert_true((level as Array).size() >= 2, "%s: at least two questions per level" % c)
+			for q in level:
+				for part in ["Q", "A0", "A1", "A2", "EXPL"]:
+					var key := "GAL_Q_%s_%s," % [str(q).to_upper(), part]
+					var at := csv.find("\n" + key)
+					assert_true(at >= 0, "missing " + key)
+					var line := csv.substr(at + 1, csv.find("\n", at + 1) - at - 1)
+					assert_true(line.count(",") >= 3, "three languages: " + key)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 3
+	for diff in ["explorer", "researcher", "pro"]:
+		var q := BuildLogic.pick_questions(rng, diff)
+		assert_eq(q.size(), 4, diff)
+		var lvl: int = BuildLogic.LEVEL[diff]
+		for c in q:
+			var allowed: Array = []
+			for l in range(maxi(0, lvl - 1), lvl + 1):
+				allowed.append_array(BuildLogic.QUESTIONS[c][l])
+			assert_true(q[c] in allowed, "%s %s: %s fits the level" % [diff, c, q[c]])
