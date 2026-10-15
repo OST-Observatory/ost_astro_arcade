@@ -260,6 +260,10 @@ func _ready() -> void:
 						gg._knobs = GalaxyTemplates.reference_knobs(gg._target)
 						gg._rebuild_blocks()
 						gg._on_knob()
+						if OS.get_environment("RUN") != "":   # close the intro, let the stars move
+							for b in gg.find_children("*", "BigButton", true, false):
+								if b.text_key == "GAL_INTRO_GO":
+									b.pressed.emit()
 					elif scenario == "gal_quiz":
 						gg._unlock("bh")
 				"gal_collide", "gal_badge", "gal_partners", "gal_none":

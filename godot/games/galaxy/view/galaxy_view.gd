@@ -31,6 +31,13 @@ var _cam_dist := 30.0
 var _cam_angle := 0.6
 var _radius := 8.0
 var _centers := PackedVector3Array()
+var _build_target := {}
+var gestures := TouchGestures.new()
+var user_zoom := 1.0               # pinch / wheel on top of the automatic framing
+var _elev := deg_to_rad(38.0)
+var _idle := 100.0                 # seconds since the visitor last turned the view
+var _labels: CanvasLayer
+var _names: Array[Label] = []
 
 
 func _ready() -> void:
@@ -96,34 +103,83 @@ func _ready() -> void:
 	add_child(_cam)
 	_cam.make_current()
 	_centers.resize(2 * MAX_STEPS)
+	gestures.dragged.connect(func(d: Vector2):
+		_cam_angle += d.x * 0.006
+		_elev = clampf(_elev + d.y * 0.006, -1.45, 1.45)
+		_idle = 0.0)
+	gestures.pinched.connect(func(f: float, _c: Vector2):
+		user_zoom = clampf(user_zoom / f, 0.25, 4.0)
+		_idle = 0.0)
+	# Names over the galaxies in a collision: whose galaxy is whose.
+	_labels = CanvasLayer.new()
+	add_child(_labels)
+	for i in 2:
+		var l := UiTheme.label("", UiTheme.SIZE_SMALL, "semibold", UiTheme.ACCENT_HI if i == 0 else UiTheme.TEXT)
+		l.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+		l.add_theme_constant_override("outline_size", 10)
+		l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		l.visible = false
+		_labels.add_child(l)
+		_names.append(l)
 
 
 # --- set-up ------------------------------------------------------------------------------------
 
 ## Act 1: the player's galaxy (target look and measured speeds) in the player's potential.
-func show_build(target: Dictionary, pot: GalaxyPotential) -> void:
+func show_build(target: Dictionary, pot: GalaxyPotential, match_pct := 0.0) -> void:
 	mode = "build"
 	model = null
+	_build_target = target
+	set_names([])
 	_radius = float(target.r_last)
-	var setup := GalaxyTemplates.star_setup(target, pot, true)
+	var setup := GalaxyTemplates.star_setup(target, pot, true, 1.0, _blend(match_pct))
 	_apply_galaxies([{"pot": pot, "setup": setup, "target": target}], [Vector3.ZERO], [Vector3.ZERO])
 	_t_end = LOOP_T
 	_cam_dist = _radius * 2.6
 	_restart()
 
 
-## Act 1: a knob changed – new gravity, same stars, run the loop again.
-func set_potential(pot: GalaxyPotential) -> void:
+## Act 1: a knob changed – new gravity, same stars, run the loop again. The start speeds move
+## from the measured ones towards the model's own as the match gets good (see star_setup).
+func set_potential(pot: GalaxyPotential, match_pct := 0.0) -> void:
 	var u := PackedFloat32Array(pot.to_uniforms())
 	u.append_array(GalaxyPotential.new().to_uniforms())
 	_mat.set_shader_parameter("pot", u)
+	if not _build_target.is_empty():
+		var tab: PackedFloat32Array = GalaxyTemplates.star_setup(_build_target, pot, true, 1.0, _blend(match_pct)).vtab
+		var both := tab.duplicate()
+		both.append_array(tab)
+		_mat.set_shader_parameter("vtab", both)
 	_restart()
+
+
+static func _blend(match_pct: float) -> float:
+	return smoothstep(88.0, 96.0, match_pct)
+
+
+## Names over the two galaxies ([] hides them): the player's in orange.
+func set_names(names: Array) -> void:
+	for i in 2:
+		_names[i].text = str(names[i]) if i < names.size() else ""
+		_names[i].visible = i < names.size()
+
+
+## Feeds an input event; offset = position of the view on screen. True if it was used.
+func handle_input(event: InputEvent, offset: Vector2) -> bool:
+	if event is InputEventMouseButton and event.pressed and gestures.area.has_point(event.position - offset):
+		if event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+			user_zoom = clampf(user_zoom * (1.0 / 1.15 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.15), 0.25, 4.0)
+			_idle = 0.0
+			return true
+	return gestures.handle(event.xformed_by(Transform2D(0.0, -offset)))
 
 
 ## Act 2: two galaxies of an EncounterModel (setup() must have been called).
 func show_encounter(m: EncounterModel) -> void:
 	mode = "collide"
 	model = m
+	_build_target = {}
 	_radius = maxf(m.radius(0), m.radius(1))
 	_apply_galaxies(m.gal, [m.center(0, 0.0), m.center(1, 0.0)], [m.center_velocity(0, 0.0), m.center_velocity(1, 0.0)])
 	_t_end = m.t_end
@@ -213,6 +269,7 @@ func _restart() -> void:
 # --- time ------------------------------------------------------------------------------------
 
 func _process(delta: float) -> void:
+	_idle += delta
 	if _hold > 0:
 		_hold -= 1
 		_push(0)
@@ -266,16 +323,40 @@ func _update_scene() -> void:
 	for g in 2:
 		if _cores[g].visible:
 			_cores[g].position = model.center(g, t) if model else Vector3.ZERO
-	_cam_angle += 0.0025 if playing else 0.0005
+	if _idle > 8.0 and not gestures.active():   # turns slowly by itself unless the visitor turned it
+		_cam_angle += 0.0025 if playing else 0.0005
 	var target_dist := _cam_dist
 	if model:
 		target_dist = _frame_dist(model.rel_at(t).length())
 	_cam_dist = lerpf(_cam_dist, target_dist, 0.03)
-	var elev := deg_to_rad(38.0)
-	_cam.position = Vector3(cos(_cam_angle) * cos(elev), sin(elev), sin(_cam_angle) * cos(elev)) * _cam_dist
+	var d := _cam_dist * user_zoom
+	_cam.position = Vector3(cos(_cam_angle) * cos(_elev), sin(_elev), sin(_cam_angle) * cos(_elev)) * d
 	_cam.look_at(Vector3.ZERO)
+	_place_names()
 	# Stars keep about the same size on screen however far the camera is.
-	_quad.size = Vector2.ONE * _cam_dist * 0.0024
+	_quad.size = Vector2.ONE * d * 0.0024
+
+
+func _place_names() -> void:
+	if not model:
+		return
+	var up := _cam.global_basis.y
+	var screen := []
+	for g in 2:
+		var c := model.center(g, t)
+		var p := c + up * model.radius(g) * 0.55
+		screen.append(Vector2(-1e6, -1e6) if _cam.is_position_behind(p) else _cam.unproject_position(p))
+	for g in 2:
+		var l := _names[g]
+		if l.text == "":
+			continue
+		var at: Vector2 = screen[g]
+		l.visible = at.x > -1e5
+		# Once the two have merged only the player's name stays.
+		if g == 1 and (at - (screen[0] as Vector2)).length() < 140.0:
+			l.visible = false
+		var size := l.get_combined_minimum_size()
+		l.position = at - Vector2(size.x / 2.0, size.y)
 
 
 static func _radial_texture(size: int, mid: float) -> GradientTexture2D:

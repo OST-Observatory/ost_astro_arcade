@@ -73,6 +73,12 @@ func _ready() -> void:
 		await _pick_target()
 
 
+## One finger turns the 3D view, two fingers (or the wheel) zoom.
+func _unhandled_input(event: InputEvent) -> void:
+	if _view and is_instance_valid(_view) and _view.handle_input(event, VIEW.position):
+		get_viewport().set_input_as_handled()
+
+
 func _exit_tree() -> void:
 	if _analysis:
 		_analysis.cancelled = true   # leaving: don't wait for the whole analysis
@@ -211,12 +217,12 @@ func start_build(target_id: String) -> void:
 	var restart := BigButton.make("GAL_RESTART_SIM", "refresh", false, 0)
 	restart.position = VIEW.end - Vector2(620, 130)
 	restart.pressed.connect(func():
-		_view.set_potential(_current_pot())
+		_view.set_potential(_current_pot(), _match)
 		_view.play())
 	add_child(restart)
 
 	_rebuild_blocks()
-	_view.show_build(_target, _current_pot())
+	_view.show_build(_target, _current_pot(), _match)
 	_refresh()
 	_show_intro()
 	Router.step("build")
@@ -265,6 +271,7 @@ func _make_view() -> void:
 	vp.add_child(sv)
 	_view = GalaxyView.new()
 	sv.add_child(_view)
+	_view.gestures.area = Rect2(Vector2.ZERO, VIEW.size)
 	_view.finished.connect(_on_collision_finished)
 
 
@@ -347,8 +354,8 @@ func _formatter(comp: String, stepped: int) -> Callable:
 
 
 func _on_knob() -> void:
-	_view.set_potential(_current_pot())
 	_refresh()
+	_view.set_potential(_current_pot(), _match)
 
 
 func _refresh() -> void:
@@ -535,6 +542,13 @@ func _mark_choices() -> void:
 
 
 ## All partner options: [id, target id, label].
+func _partner_text() -> String:
+	for o in _partner_options():
+		if o[0] == _partner:
+			return str(o[2])
+	return ""
+
+
 func _partner_options() -> Array:
 	var out := []
 	for p in GalaxyTemplates.PARTNERS:
@@ -632,6 +646,7 @@ func _new_model() -> EncounterModel:
 func _preview_encounter() -> void:
 	_model = _new_model()
 	_view.show_encounter(_model)
+	_view.set_names([tr("GAL_YOURS"), _partner_text()])
 	_view.stop()
 	_time_label.text = tr("GAL_BEFORE")
 
@@ -647,6 +662,7 @@ func _run_collision() -> void:
 	Audio.play("whoosh", "SFX", 0.6)
 	_model = _new_model()
 	_view.show_encounter(_model)
+	_view.set_names([tr("GAL_YOURS"), _partner_text()])
 	_view.play()
 	_info.text = tr("GAL_RUNNING")
 	_info.add_theme_color_override("font_color", UiTheme.TEXT)

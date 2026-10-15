@@ -79,7 +79,11 @@ static func reference_knobs(t: Dictionary) -> Dictionary:
 
 ## Galaxy description for StarSampler / the shader. `vtab` holds circular speeds from r = 0 to
 ## vtab_rmax: the measured curve where there is data (act 1) or the model curve (act 2).
-static func star_setup(t: Dictionary, pot: GalaxyPotential, measured: bool, spin := 1.0) -> Dictionary:
+## blend (act 1 only): 0 = the measured speeds, 1 = the speeds of the player's own model. The
+## better the model fits, the closer the stars start to its speeds – otherwise the few per cent
+## left between model and data make all stars at one radius swing in step (rings that would
+## not be there in a galaxy in balance).
+static func star_setup(t: Dictionary, pot: GalaxyPotential, measured: bool, spin := 1.0, blend := 0.0) -> Dictionary:
 	var ref: GalaxyPotential = t.reference
 	var rmax := float(t.r_last)
 	var vtab_rmax := rmax * 1.25
@@ -87,7 +91,7 @@ static func star_setup(t: Dictionary, pot: GalaxyPotential, measured: bool, spin
 	tab.resize(StarSampler.VTAB)
 	for i in StarSampler.VTAB:
 		var r := vtab_rmax * i / float(StarSampler.VTAB - 1)
-		tab[i] = measured_v(t, r) if measured else pot.v_circ(r)
+		tab[i] = lerpf(measured_v(t, r), pot.v_circ(r), blend) if measured else pot.v_circ(r)
 	return {"f_bulge": t.look.f_bulge, "f_gas": t.look.f_gas, "r_max": rmax, "a_bulge": maxf(ref.a_bulge, 0.05),
 		"r_disk": maxf(ref.a_disk * 0.9, 0.1), "r_gas": maxf(ref.a_gas * 0.6, 0.15), "spin": spin,
 		"vtab": tab, "vtab_rmax": vtab_rmax}
