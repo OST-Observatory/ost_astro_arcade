@@ -5,7 +5,7 @@ var sc: AsteroidScenario
 
 func before_each() -> void:
 	var idx := AsteroidScenario.load_index()
-	assert_true(not idx.is_empty(), "scenario index is empty – run tools/asteroid/build_scenarios.py")
+	assert_true(not idx.is_empty(), "scenario index is empty, run tools/asteroid/build_scenarios.py")
 	sc = AsteroidScenario.load_by_id(idx[0].id)
 
 

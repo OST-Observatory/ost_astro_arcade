@@ -1,6 +1,6 @@
 """Catalogue of the named bodies in the solar-system explorer: Sun, planets, big moons, dwarf
 planets and famous comets with names, type and a short text (de/en/es), physical data and –
-for dwarf planets and comets – orbital elements from the JPL Small-Body Database.
+for dwarf planets and comets, orbital elements from the JPL Small-Body Database.
 Planet and dwarf-planet texts come from the old Kivy app (astro_mini_games/locales), the
 others are written here. Planet orbits are computed in the game (Kepler.PLANETS).
 Output: godot/assets/data/solar/bodies.json
@@ -62,7 +62,7 @@ NAMES = {
     "ceres": ("Ceres", "Ceres", "Ceres"), "pluto": ("Pluto", "Pluto", "Plutón"), "haumea": ("Haumea", "Haumea", "Haumea"),
     "makemake": ("Makemake", "Makemake", "Makemake"), "eris": ("Eris", "Eris", "Eris"), "sedna": ("Sedna", "Sedna", "Sedna"),
     "halley": ("Halleyscher Komet", "Halley's Comet", "cometa Halley"),
-    "67p": ("67P/Tschurjumow-Gerassimenko", "67P/Churyumov–Gerasimenko", "67P/Churiumov-Guerasimenko"),
+    "67p": ("67P/Tschurjumow-Gerassimenko", "67P/Churyumov-Gerasimenko", "67P/Churiumov-Guerasimenko"),
     "halebopp": ("Hale-Bopp", "Hale-Bopp", "Hale-Bopp"),
     "encke": ("Enckescher Komet", "Comet Encke", "cometa Encke"),
 }
@@ -85,8 +85,8 @@ TEXTS = {
     "europa": ("Unter seiner Eiskruste liegt vermutlich ein Ozean aus flüssigem Wasser.",
                "Beneath its icy crust there is probably an ocean of liquid water.",
                "Bajo su corteza de hielo probablemente hay un océano de agua líquida."),
-    "ganymede": ("Der größte Mond im Sonnensystem – größer als der Planet Merkur.",
-                 "The largest moon in the solar system – bigger than the planet Mercury.",
+    "ganymede": ("Der größte Mond im Sonnensystem, größer als der Planet Merkur.",
+                 "The largest moon in the solar system, bigger than the planet Mercury.",
                  "La luna más grande del sistema solar, mayor que el planeta Mercurio."),
     "callisto": ("Einer der am dichtesten mit Kratern übersäten Himmelskörper überhaupt.",
                  "One of the most heavily cratered bodies of all.",
@@ -94,14 +94,14 @@ TEXTS = {
     "titan": ("Saturns größter Mond hat eine dichte Atmosphäre und Seen aus flüssigem Methan.",
               "Saturn's largest moon has a thick atmosphere and lakes of liquid methane.",
               "La mayor luna de Saturno tiene una atmósfera densa y lagos de metano líquido."),
-    "halley": ("Der berühmteste Komet. Er kehrt etwa alle 76 Jahre zurück – das nächste Mal 2061.",
-               "The most famous comet. It returns about every 76 years – next time in 2061.",
+    "halley": ("Der berühmteste Komet. Er kehrt etwa alle 76 Jahre zurück, das nächste Mal 2061.",
+               "The most famous comet. It returns about every 76 years, next time in 2061.",
                "El cometa más famoso. Vuelve aproximadamente cada 76 años; la próxima vez, en 2061."),
     "67p": ("Die Raumsonde Rosetta hat diesen Kometen umkreist, 2014 landete Philae auf ihm. Die OST hat ihn 2015 fotografiert.",
             "The spacecraft Rosetta orbited this comet, and Philae landed on it in 2014. The OST photographed it in 2015.",
             "La sonda Rosetta orbitó este cometa y Philae aterrizó en él en 2014. El OST lo fotografió en 2015."),
-    "halebopp": ("Einer der hellsten Kometen des 20. Jahrhunderts – 1997 monatelang mit bloßem Auge zu sehen.",
-                 "One of the brightest comets of the 20th century – visible to the naked eye for months in 1997.",
+    "halebopp": ("Einer der hellsten Kometen des 20. Jahrhunderts, 1997 monatelang mit bloßem Auge zu sehen.",
+                 "One of the brightest comets of the 20th century, visible to the naked eye for months in 1997.",
                  "Uno de los cometas más brillantes del siglo XX, visible a simple vista durante meses en 1997."),
     "encke": ("Hat eine der kürzesten Umlaufzeiten aller Kometen: nur etwa 3,3 Jahre.",
               "Has one of the shortest orbital periods of all comets: only about 3.3 years.",

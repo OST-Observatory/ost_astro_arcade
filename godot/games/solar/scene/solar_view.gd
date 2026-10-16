@@ -245,7 +245,7 @@ func _build_orbits() -> void:
 
 ## The Moon's path from half a month before to half a month after the date. Its orbit is no
 ## fixed ellipse (the Sun pulls on it, the perigee turns round in 9 years), so the track is
-## drawn anew as time goes on – the Moon is always in the middle of it.
+## drawn anew as time goes on, the Moon is always in the middle of it.
 func _moon_track() -> PackedVector3Array:
 	_moon_orbit_jd = jd
 	var pts := PackedVector3Array()
@@ -367,11 +367,11 @@ func nice_dist(id: String) -> float:
 
 
 ## Flies the camera to a body (it becomes the focus); d < 0: nice_dist(). Two kinds of flight:
-##   zoom   – the scale changes a lot and the target is close compared with it (the jump
+##   zoom  , the scale changes a lot and the target is close compared with it (the jump
 ##            buttons, Planets <-> Milky Way): like zooming with the fingers, the camera moves
 ##            back or in, the point it looks at drifts to the target in step with the scale,
 ##            and at the scale of the Milky Way it turns above the disk (see _galaxy_weight)
-##   travel – to a body elsewhere (Earth -> Mars): the camera first turns towards the target,
+##   travel, to a body elsewhere (Earth -> Mars): the camera first turns towards the target,
 ##            then flies straight at it, so the approach never goes sideways
 ## Big changes of scale take longer.
 func fly_to(id: String, d := -1.0) -> void:
@@ -395,7 +395,7 @@ func fly_to(id: String, d := -1.0) -> void:
 
 
 ## Zoom flight: the scene origin is the point looked at, which moves from the old to the new
-## focus in proportion to the change of distance – so on screen it drifts in smoothly
+## focus in proportion to the change of distance, so on screen it drifts in smoothly
 ## instead of panning sideways.
 func _zoom_step() -> void:
 	var s := float(_fly.t)

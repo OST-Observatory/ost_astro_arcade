@@ -1,4 +1,4 @@
-## Step 5 – measure the positions: each exposure is shown strongly magnified around the
+## Step 5, measure the positions: each exposure is shown strongly magnified around the
 ## asteroid. Tap its centre as precisely as possible. Astrometry like this is what turns
 ## a discovery into an orbit; the accuracy decides how sharp the orbit in step 6 is.
 class_name MeasureStep

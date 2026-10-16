@@ -1,4 +1,4 @@
-## Step 2 – align the telescope: a finder chart of real bright stars around the target.
+## Step 2, align the telescope: a finder chart of real bright stars around the target.
 ## Drag the sky until the predicted asteroid position sits inside the camera field
 ## (rectangle). The ring shows "warmer/colder". Where you aim is where the images are taken.
 class_name AlignStep

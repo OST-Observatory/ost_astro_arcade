@@ -1,5 +1,5 @@
 ## The named bodies of the solar-system explorer (assets/data/solar/bodies.json): names and
-## texts per language, physical data and heliocentric positions at any date – planets from
+## texts per language, physical data and heliocentric positions at any date, planets from
 ## Kepler.PLANETS, moons from Moons, dwarf planets and comets from their SBDB elements.
 ## Positions: heliocentric ecliptic J2000 in AU (Kepler.to_godot() for scene axes).
 class_name BodyCatalog

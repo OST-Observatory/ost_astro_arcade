@@ -140,7 +140,7 @@ func show_build(target: Dictionary, pot: GalaxyPotential, match_pct := 0.0) -> v
 	_restart()
 
 
-## Act 1: a knob changed – new gravity, same stars, run the loop again. The start speeds move
+## Act 1: a knob changed, new gravity, same stars, run the loop again. The start speeds move
 ## from the measured ones towards the model's own as the match gets good (see star_setup).
 func set_potential(pot: GalaxyPotential, match_pct := 0.0) -> void:
 	var u := PackedFloat32Array(pot.to_uniforms())

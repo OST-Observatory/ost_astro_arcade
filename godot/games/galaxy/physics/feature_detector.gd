@@ -1,9 +1,9 @@
 ## Finds the shapes a collision produced, from the CPU snapshots of an EncounterModel:
-##   tails   – a one-sided, coherent stream of stars far from both galaxies
-##   bridge  – a continuous band of stars between two separated galaxies
-##   ring    – a closed ring of stars with a hollow inside, in a disk's own plane (the shape
+##   tails  , a one-sided, coherent stream of stars far from both galaxies
+##   bridge , a continuous band of stars between two separated galaxies
+##   ring   , a closed ring of stars with a hollow inside, in a disk's own plane (the shape
 ##             counts, however it formed: a partner punching through, or tidal arms closing)
-##   merger  – the two centres have come together for good
+##   merger , the two centres have come together for good
 ## Each feature returns the time it was seen best (or -1).
 class_name FeatureDetector
 extends RefCounted
@@ -196,10 +196,10 @@ static func _ring(m: EncounterModel, snap: Dictionary, first: Dictionary, r0: Ar
 
 
 ## Ring as the eye sees it, for many stars: in each of EDGE_DIRS directions around a galaxy's
-## centre (in its disk plane, out to 4.5 r0) look for a bright edge – a local maximum of the
+## centre (in its disk plane, out to 4.5 r0) look for a bright edge, a local maximum of the
 ## smoothed surface density, clearly brighter than further out (x1.6) and than further in
 ## (x1.25). A ring: edges in >= EDGE_FOUND directions that join up smoothly (neighbours at
-## radii within x1.4) – so off-centre and oval rings count too, wound-up arms or a ragged
+## radii within x1.4), so off-centre and oval rings count too, wound-up arms or a ragged
 ## disk do not. Undisturbed disks show no such edges (checked at the start of every recipe).
 static func _ring_edges(snap: Dictionary, m: EncounterModel, r0: Array) -> float:
 	var best := 0.0
@@ -285,7 +285,7 @@ static func _edges_closed(radii: PackedFloat32Array) -> bool:
 
 
 ## Rings from the GPU counts of all stars (EncounterModel.ring_hist) at snapshot j:
-## a closed bright edge (as _ring_edges), or fine concentric ripples – the surface density
+## a closed bright edge (as _ring_edges), or fine concentric ripples, the surface density
 ## per quarter, relative to its own smooth trend, rises and falls at the same radii in all
 ## four quarters (mean correlation >= COHERENCE; spiral arms and noise do not line up).
 static func _ring_counts(m: EncounterModel, j: int) -> float:
@@ -327,7 +327,7 @@ static func pair_coherence(m: EncounterModel, j: int, g: int) -> float:
 
 ## Mean correlation of the density ripples of neighbouring quarters, from 0.15 r0 to r_hi (r0). The density is
 ## taken relative to the galaxy's own start (counts at `start`), so structure that was there
-## from the beginning – a sharp disk edge, say – does not count.
+## from the beginning, a sharp disk edge, say, does not count.
 static func _coherence(h: PackedInt32Array, base: int, start: int, dirs: int, bins: int, r_hi := 2.6) -> float:
 	var b_lo := int(0.15 / EncounterModel.HIST_REACH * bins)
 	var b_hi := maxi(int(r_hi / EncounterModel.HIST_REACH * bins), b_lo + 30)

@@ -23,7 +23,7 @@ func test_days_off_points_to_the_window() -> void:
 
 
 func test_saturn_windows_from_today_are_solvable() -> void:
-	# From 2026 on there are 3-star windows (Saturn within its Hill sphere) – and also
+	# From 2026 on there are 3-star windows (Saturn within its Hill sphere), and also
 	# windows that cannot reach Saturn at all, so the choice matters.
 	var ws := MissionLogic.jupiter_windows(2461322.5)
 	assert_true(ws.size() >= 15, "about one window a year: %d" % ws.size())
@@ -79,7 +79,7 @@ func test_encounter_is_the_minimum_around_the_orbit_crossing() -> void:
 
 
 func test_encounter_moves_smoothly() -> void:
-	# No jumps when the pass distance changes a little – in any launch window, on both sides.
+	# No jumps when the pass distance changes a little, in any launch window, on both sides.
 	# Where the date moves fast (an orbit just touching Saturn's distance) a ten times finer
 	# step must give a ten times smaller change, i.e. the change is steep but continuous.
 	var ws := MissionLogic.jupiter_windows(2461326.5, 20.0)

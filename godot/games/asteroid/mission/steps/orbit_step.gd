@@ -1,4 +1,4 @@
-## Step 6 – the orbit (the "wow" moment): the inner solar system in 3D with the real orbit
+## Step 6, the orbit (the "wow" moment): the inner solar system in 3D with the real orbit
 ## of the observed asteroid. A faint bundle of neighbouring orbits shows how well the
 ## orbit is determined: the more precise the measurement, the narrower the bundle.
 ## (Honest simplification: the game matches the measurements to the known JPL orbit.)

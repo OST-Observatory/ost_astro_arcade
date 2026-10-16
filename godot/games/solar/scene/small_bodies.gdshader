@@ -1,7 +1,7 @@
 // Asteroids and Kuiper-belt objects: every instance carries its orbit, the vertex shader
 // solves Kepler's equation and draws a round dot of constant pixel size.
 //   instance basis column 0: P * a (towards perihelion), column 1: Q * a * sqrt(1 - e^2)
-//   (scene axes, read from MODEL_MATRIX – the node transform stays identity)
+//   (scene axes, read from MODEL_MATRIX, the node transform stays identity)
 //   INSTANCE_CUSTOM: e, mean anomaly at the epoch (rad), mean motion (rad/day), class index
 shader_type spatial;
 render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled;

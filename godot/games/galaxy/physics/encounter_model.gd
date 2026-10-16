@@ -267,7 +267,7 @@ func run_stars(n_per_galaxy := 500, dt := DT_CPU) -> void:
 ## stars in a fraction of the time. Snapshots hold a subsample (`sub` stars per galaxy, for
 ## tails, bridges and the merger), and `ring_hist` the counts of all stars per snapshot,
 ## galaxy, direction and radius in the galaxy's disk plane (for rings, see FeatureDetector).
-## Returns false where there is no RenderingDevice (headless, compatibility renderer) – then
+## Returns false where there is no RenderingDevice (headless, compatibility renderer), then
 ## run_stars() is the fallback.
 const HIST_DIRS := 12
 const HIST_BINS := 160

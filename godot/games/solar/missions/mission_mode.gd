@@ -1,6 +1,6 @@
 ## Missions in the 3D solar system (see MissionLogic): explorer → Mars, researcher → Jupiter,
 ## pro → Saturn with a Jupiter swing-by. Planning happens at the launch date with the
-## transfer orbit, the target where it will be on arrival (ghost) and – for the swing-by –
+## transfer orbit, the target where it will be on arrival (ghost) and, for the swing-by –
 ## the path after Jupiter and the closest approach to Saturn always on screen. Then the
 ## flight runs in time-lapse (tap = faster).
 class_name MissionMode
@@ -369,7 +369,7 @@ func _update_preview() -> void:
 		var now := int(round(MissionLogic.phase(planet, _jd)))
 		var ideal := MissionLogic.ideal_phase(planet, _jd)
 		if diff == "researcher":
-			# No answer given: how far Jupiter moves on during the flight – the rest is 180° minus that.
+			# No answer given: how far Jupiter moves on during the flight, the rest is 180° minus that.
 			lines.append(tr("SOL_PHASE_RESEARCH") % [pname, now, pname, int(round(180.0 - ideal))])
 		else:
 			lines.append(tr("SOL_PHASE_NOW") % [pname, now, int(round(ideal))])

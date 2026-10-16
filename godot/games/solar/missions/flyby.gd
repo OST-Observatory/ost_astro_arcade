@@ -60,7 +60,7 @@ func escapes() -> bool:
 
 
 ## Closest approach to a planet within `years` after the swing-by: [distance AU, jd, true
-## approach?]. Only real approaches count – moments when the distance stops shrinking and
+## approach?]. Only real approaches count, moments when the distance stops shrinking and
 ## grows again; the smallest of them wins. Without any (the probe only moves away, or is
 ## still coming closer at the end) the closest edge of the time span is returned.
 func closest_to(target_planet: String, years := 20.0) -> Array:
@@ -93,7 +93,7 @@ func closest_to(target_planet: String, years := 20.0) -> Array:
 
 ## The probe's chance to meet a planet farther out, as a mission is planned: on the probe's
 ## first way out after the swing-by, the moment it reaches the planet's distance from the
-## Sun – or, if it falls short, the moment it comes closest to that distance – and the
+## Sun, or, if it falls short, the moment it comes closest to that distance, and the
 ## closest approach within ±ENCOUNTER_DAYS of it. Only the first way out counts, and the two
 ## reference moments merge exactly when the orbit just touches the planet's distance, so
 ## the result changes smoothly with the pass distance (searching later orbits or a fixed
@@ -141,7 +141,7 @@ func encounter(target_planet: String, years := 20.0) -> Array:
 	# hardly changes or even has a hump around the reference moment, and "nearest" flips
 	# between before and after. So the search reach shrinks with the miss: full ±2 years
 	# below 1.5 AU (where stars are won), none above 3 AU (the reference moment itself),
-	# smoothly in between – the result never jumps.
+	# smoothly in between, the result never jumps.
 	var d_ref := _dist(target_planet, t_ref)
 	var w := 1.0 - smoothstep(1.5, 3.0, d_ref)
 	var reach := ENCOUNTER_DAYS * w
@@ -173,7 +173,7 @@ func encounter(target_planet: String, years := 20.0) -> Array:
 	return [best, best_jd, reached, t_ref]
 
 
-## Planet positions on the coarse time grid after the swing-by – the same for every pass
+## Planet positions on the coarse time grid after the swing-by, the same for every pass
 ## distance and side of one launch window, so they are kept (moving a slider stays smooth).
 static var _grids := {}
 

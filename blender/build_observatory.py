@@ -5,10 +5,10 @@ reference photos in docs/reference/observatory/ and exports it as glTF for Godot
 
 Units are metres, Blender Z up (glTF/Godot convert to Y up). Animated parts are separate
 objects whose origin is their pivot:
-  DomeRotator (dome shell, shutter, slit) – turns about the vertical axis
-  Shutter       – opens over the zenith (rotation about the local X axis)
-  RA_Axis       – polar axis, tilted to the latitude 52.4 deg, pointing north (+Y)
-  Dec_Axis      – declination axis, child of RA_Axis; OTA (CDK20) is its child
+  DomeRotator (dome shell, shutter, slit), turns about the vertical axis
+  Shutter      , opens over the zenith (rotation about the local X axis)
+  RA_Axis      , polar axis, tilted to the latitude 52.4 deg, pointing north (+Y)
+  Dec_Axis     , declination axis, child of RA_Axis; OTA (CDK20) is its child
 Materials only carry names and base factors; the look is finished in Godot.
 """
 

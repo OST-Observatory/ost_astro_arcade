@@ -1,5 +1,5 @@
 ## Constellations: the stick figure is shown on the left; find the pattern in the real sky
-## (Hipparcos stars) on the right and connect its stars with a finger – drag from star to
+## (Hipparcos stars) on the right and connect its stars with a finger, drag from star to
 ## star or tap one star after the other. Three constellations per game; explorers see faint
 ## guide lines, higher levels show more (fainter) stars and place the figure off-centre.
 extends Control
@@ -206,7 +206,7 @@ func _process(delta: float) -> void:
 ## One finger draws. Touch indices are not always 0 (X11 numbers touches on and on),
 ## so the first finger down is remembered and others are ignored until it is lifted.
 ## Tap a star to select it; tapping a second star connects the two if that is a line of
-## the figure, otherwise the selection simply moves there (no penalty) – that is how to
+## the figure, otherwise the selection simply moves there (no penalty), that is how to
 ## continue somewhere else in the figure. Tapping empty sky clears the selection.
 ## Dragging from star to star draws; only releasing on a wrong star counts as a miss.
 func _unhandled_input(event: InputEvent) -> void:

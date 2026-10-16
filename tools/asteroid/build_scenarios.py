@@ -221,7 +221,7 @@ def auto_candidates() -> list[tuple[int, str]]:
             return r.json()["data"]
         rows = cached_json(f"sbdb_query/{cls}_{hmin}_{hmax}.json", fetch)
         for row in rnd.sample(rows, min(n, len(rows))):
-            out.append((int(row[0]), f"{row[1] or row[0]} ({cls}, H={row[2]}) – auto"))
+            out.append((int(row[0]), f"{row[1] or row[0]} ({cls}, H={row[2]}), auto"))
     return out
 
 

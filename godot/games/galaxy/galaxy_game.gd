@@ -1,8 +1,8 @@
 ## Galaxy builder.
-##   Act 1 – build: pick a real galaxy with a measured rotation curve. Its stars move as fast as
+##   Act 1, build: pick a real galaxy with a measured rotation curve. Its stars move as fast as
 ##   measured; the player adds black hole, stars, gas and dark matter (each unlocked by a short
 ##   knowledge question) until the model curve matches the data and the galaxy holds together.
-##   Act 2 – collide: up to three collisions with a partner (or a visitor's galaxy); the shapes
+##   Act 2, collide: up to three collisions with a partner (or a visitor's galaxy); the shapes
 ##   that form (tails, bridge, ring, merger) earn badges next to real photos.
 extends Control
 

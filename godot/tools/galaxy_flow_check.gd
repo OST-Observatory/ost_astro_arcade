@@ -1,5 +1,5 @@
 ## Dev tool: plays the galaxy collision act automatically (two recipes, badge pop-ups closed,
-## then "done") and prints badges and state – catches flow bugs that unit tests miss.
+## then "done") and prints badges and state, catches flow bugs that unit tests miss.
 ##   godot --path godot -s res://tools/galaxy_flow_check.gd      (needs a GPU window)
 extends SceneTree
 func _initialize() -> void:

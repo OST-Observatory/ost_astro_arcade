@@ -1,6 +1,6 @@
-## Dev tool: plays the solar system automatically – one explore round (a wrong tap, then the
+## Dev tool: plays the solar system automatically, one explore round (a wrong tap, then the
 ## right body for every task, small bodies included), a camera flight, and every mission
-## with a good launch – and prints what happened. Catches flow bugs unit tests miss.
+## with a good launch, and prints what happened. Catches flow bugs unit tests miss.
 ##   OST_DATA_DIR=/tmp/ost_flow godot --path godot -s res://tools/solar_flow_check.gd   (needs a GPU window)
 extends SceneTree
 

@@ -1,9 +1,9 @@
 ## Beyond the planets, for the "journey outwards" of the solar-system explorer:
-##   Oort cloud  – presumed shell of icy bodies, 2,000–100,000 AU (inner part flattened);
+##   Oort cloud , presumed shell of icy bodies, 2,000–100,000 AU (inner part flattened);
 ##                 drawn schematically, it has never been observed directly
-##   nearby stars – real positions (J2000 RA/Dec) and distances of the nearest and of some
+##   nearby stars, real positions (J2000 RA/Dec) and distances of the nearest and of some
 ##                 famous bright stars
-##   Milky Way    – schematic model: bar, four spiral arms (log spirals, pitch 12°) and the
+##   Milky Way   , schematic model: bar, four spiral arms (log spirals, pitch 12°) and the
 ##                 Orion spur with the Sun 8.2 kpc from the centre, tilted to the ecliptic as
 ##                 in the sky (galactic pole and centre from the IAU definition, J2000)
 ## Positions are heliocentric ecliptic AU like everything else; the nodes live under the
@@ -13,7 +13,7 @@ extends Node3D
 
 const LY := 63241.077          # AU per light-year
 const KPC := 206264806.2       # AU per kiloparsec
-const R0_KPC := 8.2            # Sun – galactic centre
+const R0_KPC := 8.2            # Sun, galactic centre
 const ARM_PITCH := 12.0        # deg
 const ARMS := ["scutum", "outer", "perseus", "sagittarius"]   # k = 0..3, see arm_point()
 ## id, name (de, en, es), RA deg, Dec deg, light-years, class (M, K, G, F, A, giant), own text

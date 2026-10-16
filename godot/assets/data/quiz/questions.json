@@ -126,8 +126,8 @@
     ]
    },
    "explain": {
-    "de": "Saturns Ringe bestehen aus unzähligen Eis- und Gesteinsbrocken – schon im kleinen Teleskop sichtbar.",
-    "en": "Saturn's rings are made of countless chunks of ice and rock – visible even in a small telescope.",
+    "de": "Saturns Ringe bestehen aus unzähligen Eis- und Gesteinsbrocken, schon im kleinen Teleskop sichtbar.",
+    "en": "Saturn's rings are made of countless chunks of ice and rock, visible even in a small telescope.",
     "es": "Los anillos de Saturno están formados por innumerables trozos de hielo y roca; se ven incluso con un telescopio pequeño."
    },
    "image": "res://assets/quiz/images/Saturn_on_October_1998.jpg",
@@ -164,8 +164,8 @@
     ]
    },
    "explain": {
-    "de": "Merkur umkreist die Sonne in nur 88 Tagen – auf seiner Tagseite wird es über 400 °C heiß.",
-    "en": "Mercury circles the Sun in only 88 days – its day side gets hotter than 400 °C.",
+    "de": "Merkur umkreist die Sonne in nur 88 Tagen, auf seiner Tagseite wird es über 400 °C heiß.",
+    "en": "Mercury circles the Sun in only 88 days. Its day side gets hotter than 400 °C.",
     "es": "Mercurio da la vuelta al Sol en solo 88 días; en su lado diurno se superan los 400 °C."
    },
    "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
@@ -202,8 +202,8 @@
     ]
    },
    "explain": {
-    "de": "Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus und Neptun – Pluto zählt seit 2006 zu den Zwergplaneten.",
-    "en": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune – since 2006 Pluto counts as a dwarf planet.",
+    "de": "Merkur, Venus, Erde, Mars, Jupiter, Saturn, Uranus und Neptun. Pluto zählt seit 2006 zu den Zwergplaneten.",
+    "en": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune. Since 2006 Pluto counts as a dwarf planet.",
     "es": "Mercurio, Venus, Tierra, Marte, Júpiter, Saturno, Urano y Neptuno; desde 2006 Plutón es un planeta enano."
    },
    "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
@@ -240,8 +240,8 @@
     ]
    },
    "explain": {
-    "de": "Eisenoxid – also Rost – im Staub färbt die Marsoberfläche rötlich.",
-    "en": "Iron oxide – rust – in its dust gives Mars its reddish colour.",
+    "de": "Eisenoxid, also Rost, im Staub färbt die Marsoberfläche rötlich.",
+    "en": "Iron oxide (rust) in its dust gives Mars its reddish colour.",
     "es": "El óxido de hierro (herrumbre) del polvo da a Marte su color rojizo."
    },
    "image": "res://assets/quiz/images/OSIRIS_Mars_true_color.jpg",
@@ -392,8 +392,8 @@
     ]
    },
    "explain": {
-    "de": "Galaxien enthalten Milliarden von Sternen, zusammengehalten von der Schwerkraft – und von viel Dunkler Materie.",
-    "en": "Galaxies contain billions of stars held together by gravity – and by a lot of dark matter.",
+    "de": "Galaxien enthalten Milliarden von Sternen und viel Dunkle Materie, zusammengehalten von der Schwerkraft.",
+    "en": "Galaxies contain billions of stars and a lot of dark matter, held together by gravity.",
     "es": "Las galaxias contienen miles de millones de estrellas unidas por la gravedad y por mucha materia oscura."
    },
    "image": "res://assets/quiz/images/m81_LRGBcomposite.jpg",
@@ -430,8 +430,8 @@
     ]
    },
    "explain": {
-    "de": "Das Licht legt die 150 Millionen km zur Erde in gut 8 Minuten zurück – wir sehen die Sonne also so, wie sie vor 8 Minuten war.",
-    "en": "Light covers the 150 million km to Earth in just over 8 minutes – we see the Sun as it was 8 minutes ago.",
+    "de": "Das Licht legt die 150 Millionen km zur Erde in gut 8 Minuten zurück. Wir sehen die Sonne also so, wie sie vor 8 Minuten war.",
+    "en": "Light covers the 150 million km to Earth in just over 8 minutes. We see the Sun as it was 8 minutes ago.",
     "es": "La luz recorre los 150 millones de km hasta la Tierra en algo más de 8 minutos: vemos el Sol como era hace 8 minutos."
    },
    "image": "res://assets/quiz/images/sunearthpanel_sts129_big.jpg",
@@ -468,8 +468,8 @@
     ]
    },
    "explain": {
-    "de": "Sirius ist der hellste Stern am Nachthimmel – er ist nur 8,6 Lichtjahre entfernt.",
-    "en": "Sirius is the brightest star in the night sky – only 8.6 light-years away.",
+    "de": "Sirius ist der hellste Stern am Nachthimmel. Er ist nur 8,6 Lichtjahre entfernt.",
+    "en": "Sirius is the brightest star in the night sky, only 8.6 light-years away.",
     "es": "Sirio es la estrella más brillante del cielo nocturno; está a solo 8,6 años luz."
    },
    "image": "res://assets/quiz/images/Sirius_A_and_B_Hubble_photo.jpg",
@@ -506,8 +506,8 @@
     ]
    },
    "explain": {
-    "de": "Saturn hat inzwischen mehr als 270 bekannte Monde – die meisten sind nur wenige Kilometer groß.",
-    "en": "Saturn now has more than 270 known moons – most of them only a few kilometres across.",
+    "de": "Saturn hat inzwischen mehr als 270 bekannte Monde. Die meisten sind nur wenige Kilometer groß.",
+    "en": "Saturn now has more than 270 known moons, most of them only a few kilometres across.",
     "es": "Saturno tiene ya más de 270 lunas conocidas; la mayoría miden solo unos pocos kilómetros."
    },
    "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
@@ -658,8 +658,8 @@
     ]
    },
    "explain": {
-    "de": "Nahe der Sonne verdampft das Eis eines Kometen – Gas und Staub bilden dann den leuchtenden Schweif.",
-    "en": "Near the Sun a comet's ice evaporates – gas and dust then form the glowing tail.",
+    "de": "Nahe der Sonne verdampft das Eis eines Kometen. Gas und Staub bilden dann den leuchtenden Schweif.",
+    "en": "Near the Sun a comet's ice evaporates. Gas and dust then form the glowing tail.",
     "es": "Cerca del Sol el hielo de un cometa se evapora; el gas y el polvo forman entonces la cola brillante."
    },
    "image": "res://assets/quiz/images/C2022E3ZTF.jpg",
@@ -772,8 +772,8 @@
     ]
    },
    "explain": {
-    "de": "Diese Definition stammt von 2006 – Pluto erfüllt den dritten Punkt nicht und ist deshalb ein Zwergplanet.",
-    "en": "This definition dates from 2006 – Pluto fails the third point and is therefore a dwarf planet.",
+    "de": "Diese Definition stammt von 2006. Pluto erfüllt den dritten Punkt nicht und ist deshalb ein Zwergplanet.",
+    "en": "This definition dates from 2006. Pluto fails the third point and is therefore a dwarf planet.",
     "es": "Esta definición es de 2006; Plutón no cumple el tercer punto y por eso es un planeta enano."
    },
    "image": "res://assets/quiz/images/Solar_System_collage_background.jpg",
@@ -810,8 +810,8 @@
     ]
    },
    "explain": {
-    "de": "In Sternen verschmelzen Atomkerne – bei der Sonne Wasserstoff zu Helium – und setzen dabei riesige Energie frei.",
-    "en": "In stars atomic nuclei fuse – in the Sun hydrogen into helium – releasing enormous energy.",
+    "de": "In Sternen verschmelzen Atomkerne (bei der Sonne Wasserstoff zu Helium) und setzen dabei riesige Energie frei.",
+    "en": "In stars atomic nuclei fuse (in the Sun hydrogen into helium), releasing enormous energy.",
     "es": "En las estrellas se fusionan núcleos atómicos (en el Sol, hidrógeno en helio) liberando una enorme energía."
    },
    "image": "res://assets/quiz/images/Star-sizes.jpg",
@@ -848,8 +848,8 @@
     ]
    },
    "explain": {
-    "de": "Orbit kommt vom lateinischen „orbis“ – Kreis, Bahn.",
-    "en": "'Orbit' comes from the Latin 'orbis' – circle, track.",
+    "de": "Orbit kommt vom lateinischen „orbis“: Kreis, Bahn.",
+    "en": "'Orbit' comes from the Latin 'orbis': circle, track.",
     "es": "«Órbita» viene del latín «orbis»: círculo, camino."
    },
    "image": "res://assets/quiz/images/Ceres_Orbit_de.jpg",
@@ -886,8 +886,8 @@
     ]
    },
    "explain": {
-    "de": "Das Magnetfeld lenkt die geladenen Teilchen des Sonnenwinds ab – an den Polen erzeugen sie Polarlichter.",
-    "en": "The magnetic field deflects the charged particles of the solar wind – near the poles they create auroras.",
+    "de": "Das Magnetfeld lenkt die geladenen Teilchen des Sonnenwinds ab. An den Polen erzeugen sie Polarlichter.",
+    "en": "The magnetic field deflects the charged particles of the solar wind. Near the poles they create auroras.",
     "es": "El campo magnético desvía las partículas cargadas del viento solar; cerca de los polos producen auroras."
    },
    "image": "res://assets/quiz/images/ISS046-E-26820_-_View_of_Earth.jpg",
@@ -924,8 +924,8 @@
     ]
    },
    "explain": {
-    "de": "Merkur ist der kleinste Planet – sogar kleiner als der Jupitermond Ganymed.",
-    "en": "Mercury is the smallest planet – even smaller than Jupiter's moon Ganymede.",
+    "de": "Merkur ist der kleinste Planet, sogar kleiner als der Jupitermond Ganymed.",
+    "en": "Mercury is the smallest planet, even smaller than Jupiter's moon Ganymede.",
     "es": "Mercurio es el planeta más pequeño, incluso menor que Ganímedes, la luna de Júpiter."
    },
    "image": "res://assets/quiz/images/Mercury_in_color_-_Prockter07_centered.jpg",
@@ -962,8 +962,8 @@
     ]
    },
    "explain": {
-    "de": "Methan in Neptuns Atmosphäre verschluckt rotes Licht – deshalb erscheint er blau.",
-    "en": "Methane in Neptune's atmosphere absorbs red light – so it looks blue.",
+    "de": "Methan in Neptuns Atmosphäre verschluckt rotes Licht, deshalb erscheint er blau.",
+    "en": "Methane in Neptune's atmosphere absorbs red light, so it looks blue.",
     "es": "El metano de la atmósfera de Neptuno absorbe la luz roja; por eso se ve azul."
    },
    "image": "res://assets/quiz/images/Neptune_Voyager2_color_calibrated.jpg",
@@ -1152,8 +1152,8 @@
     ]
    },
    "explain": {
-    "de": "Ein Venustag dauert 243 Erdtage – länger als ihr Jahr mit 225 Tagen! Außerdem dreht sie sich rückwärts.",
-    "en": "A day on Venus lasts 243 Earth days – longer than its 225-day year! It also spins backwards.",
+    "de": "Ein Venustag dauert 243 Erdtage, länger als ihr Jahr mit 225 Tagen! Außerdem dreht sie sich rückwärts.",
+    "en": "A day on Venus lasts 243 Earth days, longer than its 225-day year! It also spins backwards.",
     "es": "Un día en Venus dura 243 días terrestres, ¡más que su año de 225 días! Además gira al revés."
    },
    "image": "res://assets/quiz/images/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_(cropped).jpg",
@@ -1190,8 +1190,8 @@
     ]
    },
    "explain": {
-    "de": "Die Sonne ist ein ganz normaler Stern – ein gelber Zwerg, rund 4,6 Milliarden Jahre alt.",
-    "en": "The Sun is a perfectly ordinary star – a yellow dwarf about 4.6 billion years old.",
+    "de": "Die Sonne ist ein ganz normaler Stern: ein gelber Zwerg, rund 4,6 Milliarden Jahre alt.",
+    "en": "The Sun is a perfectly ordinary star: a yellow dwarf about 4.6 billion years old.",
     "es": "El Sol es una estrella normal: una enana amarilla de unos 4.600 millones de años."
    },
    "image": "res://assets/quiz/images/sun_full_disk.jpg",
@@ -1228,8 +1228,8 @@
     ]
    },
    "explain": {
-    "de": "Seit seiner Entdeckung 1846 hat Neptun die Sonne erst einmal umrundet – 2011 war es so weit.",
-    "en": "Since its discovery in 1846 Neptune has orbited the Sun only once – completed in 2011.",
+    "de": "Seit seiner Entdeckung 1846 hat Neptun die Sonne erst einmal umrundet. 2011 war es so weit.",
+    "en": "Since its discovery in 1846 Neptune has orbited the Sun only once. It completed the lap in 2011.",
     "es": "Desde su descubrimiento en 1846, Neptuno ha dado una sola vuelta al Sol, completada en 2011."
    },
    "image": "res://assets/quiz/images/Neptune_Voyager2_color_calibrated.jpg",
@@ -1267,7 +1267,7 @@
    },
    "explain": {
     "de": "Ein Marstag (Sol) ist mit 24 Stunden 37 Minuten fast so lang wie ein Erdentag.",
-    "en": "A Martian day (sol) lasts 24 hours 37 minutes – almost as long as an Earth day.",
+    "en": "A Martian day (sol) lasts 24 hours 37 minutes, almost as long as an Earth day.",
     "es": "Un día marciano (sol) dura 24 horas y 37 minutos, casi lo mismo que un día terrestre."
    },
    "image": "res://assets/quiz/images/OSIRIS_Mars_true_color.jpg",
@@ -1304,8 +1304,8 @@
     ]
    },
    "explain": {
-    "de": "Pluto teilt seine Bahn mit vielen anderen Objekten im Kuipergürtel – deshalb gilt er seit 2006 als Zwergplanet.",
-    "en": "Pluto shares its orbit with many other Kuiper-belt objects – so since 2006 it counts as a dwarf planet.",
+    "de": "Pluto teilt seine Bahn mit vielen anderen Objekten im Kuipergürtel, deshalb gilt er seit 2006 als Zwergplanet.",
+    "en": "Pluto shares its orbit with many other Kuiper-belt objects, so since 2006 it counts as a dwarf planet.",
     "es": "Plutón comparte su órbita con muchos objetos del cinturón de Kuiper; por eso desde 2006 es un planeta enano."
    },
    "image": "res://assets/quiz/images/Pluto.jpg",
@@ -1342,8 +1342,8 @@
     ]
    },
    "explain": {
-    "de": "Offiziell anerkannt sind Ceres, Pluto, Haumea, Makemake und Eris – es gibt aber viele weitere Kandidaten.",
-    "en": "Officially recognised are Ceres, Pluto, Haumea, Makemake and Eris – but there are many more candidates.",
+    "de": "Offiziell anerkannt sind Ceres, Pluto, Haumea, Makemake und Eris, es gibt aber viele weitere Kandidaten.",
+    "en": "Officially recognised are Ceres, Pluto, Haumea, Makemake and Eris, but there are many more candidates.",
     "es": "Están reconocidos oficialmente Ceres, Plutón, Haumea, Makemake y Eris, pero hay muchos más candidatos."
    },
    "image": "res://assets/quiz/images/Zwergplaneten.jpg",
@@ -1380,8 +1380,8 @@
     ]
    },
    "explain": {
-    "de": "Eris ist fast genauso groß wie Pluto – ihre Entdeckung 2005 löste die Debatte um Plutos Status aus.",
-    "en": "Eris is almost as large as Pluto – its discovery in 2005 started the debate about Pluto's status.",
+    "de": "Eris ist fast genauso groß wie Pluto. Ihre Entdeckung 2005 löste die Debatte um Plutos Status aus.",
+    "en": "Eris is almost as large as Pluto. Its discovery in 2005 started the debate about Pluto's status.",
     "es": "Eris es casi tan grande como Plutón; su descubrimiento en 2005 desató el debate sobre Plutón."
    },
    "image": "res://assets/quiz/images/225088_Gonggong_(2007_OR10)_and_Eris_orbits,_Jan2018,_top_view.jpg",
@@ -1570,8 +1570,8 @@
     ]
    },
    "explain": {
-    "de": "Die ersten Trojaner wurden ab 1906 in Heidelberg entdeckt – die NASA-Sonde Lucy fliegt gerade zu ihnen.",
-    "en": "The first Trojans were discovered from 1906 in Heidelberg – NASA's Lucy probe is on its way to them.",
+    "de": "Die ersten Trojaner wurden ab 1906 in Heidelberg entdeckt. Die NASA-Sonde Lucy fliegt gerade zu ihnen.",
+    "en": "The first Trojans were discovered from 1906 in Heidelberg. NASA's Lucy probe is on its way to them.",
     "es": "Los primeros troyanos se descubrieron a partir de 1906 en Heidelberg; la sonda Lucy de la NASA viaja hacia ellos."
    },
    "image": "res://assets/quiz/images/Orbita_aquiles.jpg",
@@ -1608,8 +1608,8 @@
     ]
    },
    "explain": {
-    "de": "Sterne eines Haufens sind gleich alt – die Plejaden sind ein bekanntes Beispiel.",
-    "en": "The stars in a cluster are the same age – the Pleiades are a well-known example.",
+    "de": "Sterne eines Haufens sind gleich alt. Die Plejaden sind ein bekanntes Beispiel.",
+    "en": "The stars in a cluster are the same age. The Pleiades are a well-known example.",
     "es": "Las estrellas de un cúmulo tienen la misma edad; las Pléyades son un ejemplo conocido."
    },
    "image": "res://assets/quiz/images/Messier92_LRGB.jpg",
@@ -1646,8 +1646,8 @@
     ]
    },
    "explain": {
-    "de": "Der Kuipergürtel ist ein Ring aus eisigen Körpern jenseits des Neptun – Pluto ist sein bekanntestes Mitglied.",
-    "en": "The Kuiper belt is a ring of icy bodies beyond Neptune – Pluto is its best-known member.",
+    "de": "Der Kuipergürtel ist ein Ring aus eisigen Körpern jenseits des Neptun. Pluto ist sein bekanntestes Mitglied.",
+    "en": "The Kuiper belt is a ring of icy bodies beyond Neptune. Pluto is its best-known member.",
     "es": "El cinturón de Kuiper es un anillo de cuerpos helados más allá de Neptuno; Plutón es su miembro más conocido."
    },
    "image": "res://assets/quiz/images/Kuiper_belt_-_Oort_cloud-de.svg.jpg",
@@ -1684,8 +1684,8 @@
     ]
    },
    "explain": {
-    "de": "Die Oortsche Wolke reicht vermutlich bis zu einem Lichtjahr weit – von dort kommen langperiodische Kometen.",
-    "en": "The Oort cloud probably extends up to a light-year away – long-period comets come from there.",
+    "de": "Die Oortsche Wolke reicht vermutlich bis zu einem Lichtjahr weit. Von dort kommen langperiodische Kometen.",
+    "en": "The Oort cloud probably extends up to a light-year away. Long-period comets come from there.",
     "es": "La nube de Oort probablemente se extiende hasta un año luz; de allí vienen los cometas de periodo largo."
    },
    "image": "res://assets/quiz/images/Kuiper_belt_-_Oort_cloud-de.svg.jpg",
@@ -1760,8 +1760,8 @@
     ]
    },
    "explain": {
-    "de": "Pulsare drehen sich bis zu hunderte Male pro Sekunde – ihr Strahl streift die Erde wie ein Leuchtturm.",
-    "en": "Pulsars spin up to hundreds of times per second – their beam sweeps past Earth like a lighthouse.",
+    "de": "Pulsare drehen sich bis zu hunderte Male pro Sekunde. Ihr Strahl streift die Erde wie ein Leuchtturm.",
+    "en": "Pulsars spin up to hundreds of times per second. Their beam sweeps past Earth like a lighthouse.",
     "es": "Los púlsares giran hasta cientos de veces por segundo; su haz barre la Tierra como un faro."
    },
    "image": "res://assets/quiz/images/Lightsmall-optimised.jpg",
@@ -1836,8 +1836,8 @@
     ]
    },
    "explain": {
-    "de": "Magnetare haben die stärksten bekannten Magnetfelder – billiardenfach stärker als das der Erde.",
-    "en": "Magnetars have the strongest known magnetic fields – a million billion times stronger than Earth's.",
+    "de": "Magnetare haben die stärksten bekannten Magnetfelder, billiardenfach stärker als das der Erde.",
+    "en": "Magnetars have the strongest known magnetic fields: a million billion times stronger than Earth's.",
     "es": "Los magnetares tienen los campos magnéticos más intensos conocidos: miles de billones de veces el terrestre."
    },
    "image": "res://assets/quiz/images/Artists_impression_of_the_magnetar_in_the_star_cluster_Westerlund_1.jpg",
@@ -1874,8 +1874,8 @@
     ]
    },
    "explain": {
-    "de": "Innerhalb des Ereignishorizonts müsste etwas schneller als Licht sein, um zu entkommen – also kann nichts heraus.",
-    "en": "Inside the event horizon you would need to move faster than light to escape – so nothing gets out.",
+    "de": "Innerhalb des Ereignishorizonts müsste etwas schneller als Licht sein, um zu entkommen, also kann nichts heraus.",
+    "en": "Inside the event horizon you would need to move faster than light to escape, so nothing gets out.",
     "es": "Dentro del horizonte de sucesos habría que ir más rápido que la luz para escapar, así que nada sale."
    },
    "image": "res://assets/quiz/images/Black_hole_-_Messier_87.jpg",
@@ -1912,8 +1912,8 @@
     ]
    },
    "explain": {
-    "de": "Sagittarius A* hat rund 4 Millionen Sonnenmassen – 2022 wurde sein „Schatten“ erstmals abgebildet.",
-    "en": "Sagittarius A* has about 4 million solar masses – its 'shadow' was first imaged in 2022.",
+    "de": "Sagittarius A* hat rund 4 Millionen Sonnenmassen. 2022 wurde sein „Schatten“ erstmals abgebildet.",
+    "en": "Sagittarius A* has about 4 million solar masses. Its 'shadow' was first imaged in 2022.",
     "es": "Sagitario A* tiene unos 4 millones de masas solares; su «sombra» se fotografió por primera vez en 2022."
    },
    "image": "res://assets/quiz/images/Orbits_of_stars_around_black_hole_at_the_heart_of_the_Milky_Way_(eso1825d).jpg",
@@ -1950,8 +1950,8 @@
     ]
    },
    "explain": {
-    "de": "Bei einem Blazar schauen wir genau in den Teilchenstrahl – deshalb wirkt er besonders hell und veränderlich.",
-    "en": "With a blazar we look straight down the jet – so it appears especially bright and variable.",
+    "de": "Bei einem Blazar schauen wir genau in den Teilchenstrahl, deshalb wirkt er besonders hell und veränderlich.",
+    "en": "With a blazar we look straight down the jet, so it appears especially bright and variable.",
     "es": "En un blazar miramos directamente al chorro; por eso parece especialmente brillante y variable."
    },
    "image": "res://assets/quiz/images/Blazar-illustration.jpg",
@@ -1988,8 +1988,8 @@
     ]
    },
    "explain": {
-    "de": "Aktive Galaxienkerne strahlen von Radiowellen bis zu Gammastrahlung – im gesamten Spektrum.",
-    "en": "Active galactic nuclei shine from radio waves to gamma rays – across the whole spectrum.",
+    "de": "Aktive Galaxienkerne strahlen im gesamten Spektrum, von Radiowellen bis zu Gammastrahlung.",
+    "en": "Active galactic nuclei shine across the whole spectrum, from radio waves to gamma rays.",
     "es": "Los núcleos galácticos activos emiten desde ondas de radio hasta rayos gamma, en todo el espectro."
    },
    "image": "res://assets/quiz/images/Artists_impression_of_quasar_J0313-1806.jpg",
@@ -2140,8 +2140,8 @@
     ]
    },
    "explain": {
-    "de": "Die äußeren Sterne kreisen zu schnell für die sichtbare Masse – unsichtbare Dunkle Materie liefert zusätzliche Schwerkraft.",
-    "en": "The outer stars orbit too fast for the visible mass – invisible dark matter adds extra gravity.",
+    "de": "Die äußeren Sterne kreisen zu schnell für die sichtbare Masse. Unsichtbare Dunkle Materie liefert zusätzliche Schwerkraft.",
+    "en": "The outer stars orbit too fast for the visible mass. Invisible dark matter adds extra gravity.",
     "es": "Las estrellas exteriores giran demasiado rápido para la masa visible; la materia oscura aporta gravedad extra."
    },
    "image": "res://assets/quiz/images/Comparison_of_rotating_disc_galaxies_in_the_distant_Universe_and_the_present_day.jpg",
@@ -2178,8 +2178,8 @@
     ]
    },
    "explain": {
-    "de": "Die Erdachse beschreibt in rund 26.000 Jahren einen Kreis – in ferner Zukunft wird Wega unser Polarstern sein.",
-    "en": "Earth's axis traces a circle every 26,000 years – one day Vega will be our pole star.",
+    "de": "Die Erdachse beschreibt in rund 26.000 Jahren einen Kreis. In ferner Zukunft wird Wega unser Polarstern sein.",
+    "en": "Earth's axis traces a circle every 26,000 years. One day Vega will be our pole star.",
     "es": "El eje terrestre describe un círculo cada 26.000 años; algún día Vega será nuestra estrella polar."
    },
    "image": "res://assets/quiz/images/Gyroscope_precession.jpg",
@@ -2216,7 +2216,7 @@
     ]
    },
    "explain": {
-    "de": "Ein Beispiel ist die Venus, die sich entgegen den meisten Planeten dreht – oder Monde, die „rückwärts“ kreisen.",
+    "de": "Ein Beispiel ist die Venus, die sich entgegen den meisten Planeten dreht, oder Monde, die „rückwärts“ kreisen.",
     "en": "Examples are Venus, which spins the other way round from most planets, or moons orbiting 'backwards'.",
     "es": "Ejemplos son Venus, que gira al revés que la mayoría de planetas, o lunas que orbitan «hacia atrás»."
    },
@@ -2368,8 +2368,8 @@
     ]
    },
    "explain": {
-    "de": "Rund 68 % sind Dunkle Energie, 27 % Dunkle Materie und nur 5 % normale Materie. Dunkle Energie treibt die beschleunigte Ausdehnung an – was sie ist, weiß noch niemand.",
-    "en": "About 68 % is dark energy, 27 % dark matter and only 5 % normal matter. Dark energy drives the accelerating expansion – nobody yet knows what it is.",
+    "de": "Rund 68 % sind Dunkle Energie, 27 % Dunkle Materie und nur 5 % normale Materie. Dunkle Energie treibt die beschleunigte Ausdehnung an. Was sie ist, weiß noch niemand.",
+    "en": "About 68 % is dark energy, 27 % dark matter and only 5 % normal matter. Dark energy drives the accelerating expansion. Nobody yet knows what it is.",
     "es": "Alrededor del 68 % es energía oscura, el 27 % materia oscura y solo el 5 % materia normal. La energía oscura impulsa la expansión acelerada; nadie sabe aún qué es."
    },
    "image": "res://assets/quiz/images/CMB_universe_expansion.jpg",
@@ -2482,8 +2482,8 @@
     ]
    },
    "explain": {
-    "de": "Große Massen wie Galaxienhaufen krümmen den Raum – das Licht dahinterliegender Galaxien wird zu Bögen verzerrt.",
-    "en": "Large masses such as galaxy clusters curve space – light from galaxies behind them is bent into arcs.",
+    "de": "Große Massen wie Galaxienhaufen krümmen den Raum. Das Licht dahinterliegender Galaxien wird zu Bögen verzerrt.",
+    "en": "Large masses such as galaxy clusters curve space. Light from galaxies behind them is bent into arcs.",
     "es": "Grandes masas como los cúmulos de galaxias curvan el espacio; la luz de galaxias más lejanas se deforma en arcos."
    },
    "image": "res://assets/quiz/images/Gravitational_lens-full.jpg",
@@ -2558,8 +2558,8 @@
     ]
    },
    "explain": {
-    "de": "Die Klassen O, B, A, F, G, K, M reichen von heiß bis kühl – unsere Sonne ist ein G-Stern.",
-    "en": "The classes O, B, A, F, G, K, M run from hot to cool – our Sun is a G star.",
+    "de": "Die Klassen O, B, A, F, G, K, M reichen von heiß bis kühl. Unsere Sonne ist ein G-Stern.",
+    "en": "The classes O, B, A, F, G, K, M run from hot to cool. Our Sun is a G star.",
     "es": "Las clases O, B, A, F, G, K, M van de calientes a frías; nuestro Sol es una estrella de tipo G."
    },
    "image": "res://assets/quiz/images/Morgan-Keenan_spectral_classification.svg.jpg",
@@ -2596,8 +2596,8 @@
     ]
    },
    "explain": {
-    "de": "Ein Weißer Zwerg ist so groß wie die Erde, aber so schwer wie die Sonne – ein Teelöffel wiegt Tonnen.",
-    "en": "A white dwarf is the size of Earth but as heavy as the Sun – a teaspoon of it weighs tonnes.",
+    "de": "Ein Weißer Zwerg ist so groß wie die Erde, aber so schwer wie die Sonne. Ein Teelöffel davon wiegt Tonnen.",
+    "en": "A white dwarf is the size of Earth but as heavy as the Sun. A teaspoon of it weighs tonnes.",
     "es": "Una enana blanca tiene el tamaño de la Tierra pero la masa del Sol: una cucharadita pesa toneladas."
    },
    "image": "res://assets/quiz/images/m97.jpg",
@@ -2634,8 +2634,8 @@
     ]
    },
    "explain": {
-    "de": "Wenn der Wasserstoff im Kern verbraucht ist, bläht sich ein Stern auf – auch unsere Sonne in etwa 5 Milliarden Jahren.",
-    "en": "When the hydrogen in its core runs out, a star swells up – our Sun will too in about 5 billion years.",
+    "de": "Wenn der Wasserstoff im Kern verbraucht ist, bläht sich ein Stern auf. Das passiert auch unserer Sonne in etwa 5 Milliarden Jahren.",
+    "en": "When the hydrogen in its core runs out, a star swells up. Our Sun will too, in about 5 billion years.",
     "es": "Cuando se agota el hidrógeno del núcleo, la estrella se hincha; nuestro Sol lo hará en unos 5.000 millones de años."
    },
    "image": "res://assets/quiz/images/Red_giant_simulation_4_(cropped).jpg",
@@ -2748,8 +2748,8 @@
     ]
    },
    "explain": {
-    "de": "Braune Zwerge sind zu leicht für dauerhafte Wasserstofffusion – „gescheiterte Sterne“.",
-    "en": "Brown dwarfs are too light for lasting hydrogen fusion – 'failed stars'.",
+    "de": "Braune Zwerge sind zu leicht für dauerhafte Wasserstofffusion: „gescheiterte Sterne“.",
+    "en": "Brown dwarfs are too light for lasting hydrogen fusion: 'failed stars'.",
     "es": "Las enanas marrones son demasiado ligeras para fusionar hidrógeno de forma estable: «estrellas fallidas»."
    },
    "image": "res://assets/quiz/images/Brown_Dwarf_Comparison_2020.jpg",
@@ -2786,8 +2786,8 @@
     ]
    },
    "explain": {
-    "de": "Für Astronominnen und Astronomen ist alles schwerer als Helium ein „Metall“ – auch Sauerstoff oder Kohlenstoff.",
-    "en": "For astronomers, everything heavier than helium is a 'metal' – even oxygen or carbon.",
+    "de": "Für Astronominnen und Astronomen ist alles schwerer als Helium ein „Metall“, auch Sauerstoff oder Kohlenstoff.",
+    "en": "For astronomers, everything heavier than helium is a 'metal', even oxygen or carbon.",
     "es": "Para los astrónomos todo lo más pesado que el helio es un «metal», incluso el oxígeno o el carbono."
    },
    "image": "res://assets/quiz/images/Messier92_LRGB.jpg",
@@ -2824,8 +2824,8 @@
     ]
    },
    "explain": {
-    "de": "Manche Sterne pulsieren, andere werden von einem Begleiter verdeckt – beides kann man mit dem OST-Teleskop messen.",
-    "en": "Some stars pulsate, others are eclipsed by a companion – both can be measured with the OST telescope.",
+    "de": "Manche Sterne pulsieren, andere werden von einem Begleiter verdeckt. Beides kann man mit dem OST-Teleskop messen.",
+    "en": "Some stars pulsate, others are eclipsed by a companion. Both can be measured with the OST telescope.",
     "es": "Algunas estrellas pulsan y otras son eclipsadas por una compañera; ambas cosas se miden con el telescopio OST."
    },
    "image": "res://assets/quiz/images/Eso2003c.jpg",
@@ -2862,8 +2862,8 @@
     ]
    },
    "explain": {
-    "de": "Junge heiße Sterne regen das Gas zum Leuchten an – wie in einer Leuchtstoffröhre.",
-    "en": "Young hot stars make the gas glow – like in a fluorescent tube.",
+    "de": "Junge heiße Sterne regen das Gas zum Leuchten an, wie in einer Leuchtstoffröhre.",
+    "en": "Young hot stars make the gas glow, like in a fluorescent tube.",
     "es": "Las estrellas jóvenes y calientes hacen brillar el gas, como en un tubo fluorescente."
    },
    "image": "res://assets/quiz/images/m42SHO.jpg",
@@ -2900,8 +2900,8 @@
     ]
    },
    "explain": {
-    "de": "Trotz des Namens hat er nichts mit Planeten zu tun – er ist die abgestoßene Hülle eines sterbenden Sterns.",
-    "en": "Despite the name it has nothing to do with planets – it is the ejected shell of a dying star.",
+    "de": "Trotz des Namens hat er nichts mit Planeten zu tun. Er ist die abgestoßene Hülle eines sterbenden Sterns.",
+    "en": "Despite the name it has nothing to do with planets. It is the ejected shell of a dying star.",
     "es": "Pese al nombre no tiene nada que ver con planetas: es la envoltura expulsada de una estrella moribunda."
    },
    "image": "res://assets/quiz/images/M57.jpg",
@@ -2938,8 +2938,8 @@
     ]
    },
    "explain": {
-    "de": "In den Spiralarmen entstehen besonders viele junge, helle Sterne – deshalb leuchten sie so deutlich.",
-    "en": "Many young, bright stars form in the spiral arms – that is why they stand out.",
+    "de": "In den Spiralarmen entstehen besonders viele junge, helle Sterne, deshalb leuchten sie so deutlich.",
+    "en": "Many young, bright stars form in the spiral arms. That is why they stand out.",
     "es": "En los brazos espirales se forman muchas estrellas jóvenes y brillantes; por eso destacan tanto."
    },
    "image": "res://assets/quiz/images/ngc891.jpg",
@@ -2976,8 +2976,8 @@
     ]
    },
    "explain": {
-    "de": "Fast jede große Galaxie hat ein supermassereiches Schwarzes Loch – auch unsere Milchstraße.",
-    "en": "Almost every large galaxy has a supermassive black hole – our Milky Way too.",
+    "de": "Fast jede große Galaxie hat ein supermassereiches Schwarzes Loch, auch unsere Milchstraße.",
+    "en": "Almost every large galaxy has a supermassive black hole, and so does our Milky Way.",
     "es": "Casi todas las grandes galaxias tienen un agujero negro supermasivo, también nuestra Vía Láctea."
    },
    "image": "res://assets/quiz/images/A_view_of_the_Milky_Way_supermassive_black_hole_Sagittarius_A__in_polarised_light_(eso2406a).jpg",
@@ -3052,8 +3052,8 @@
     ]
    },
    "explain": {
-    "de": "Zur Lokalen Gruppe gehören über 80 Galaxien – die größten sind Andromeda und unsere Milchstraße.",
-    "en": "The Local Group contains more than 80 galaxies – the largest are Andromeda and our Milky Way.",
+    "de": "Zur Lokalen Gruppe gehören über 80 Galaxien. Die größten sind Andromeda und unsere Milchstraße.",
+    "en": "The Local Group contains more than 80 galaxies. The largest are Andromeda and our Milky Way.",
     "es": "El Grupo Local tiene más de 80 galaxias; las mayores son Andrómeda y nuestra Vía Láctea."
    },
    "image": "res://assets/quiz/images/Lokale_Gruppe_3D_Nachbarschaft.svg.jpg",
@@ -3090,8 +3090,8 @@
     ]
    },
    "explain": {
-    "de": "Angeregter Wasserstoff leuchtet bei der „H-alpha“-Linie tiefrot – daher die rote Farbe vieler Nebel.",
-    "en": "Excited hydrogen glows deep red at the 'H-alpha' line – hence the red colour of many nebulae.",
+    "de": "Angeregter Wasserstoff leuchtet bei der „H-alpha“-Linie tiefrot, daher die rote Farbe vieler Nebel.",
+    "en": "Excited hydrogen glows deep red at the 'H-alpha' line. That is why many nebulae are red.",
     "es": "El hidrógeno excitado brilla en rojo intenso en la línea «H-alfa»; de ahí el color de muchas nebulosas."
    },
    "image": "res://assets/quiz/images/NGC2264_2022_03_07.jpg",
@@ -3204,8 +3204,8 @@
     ]
    },
    "explain": {
-    "de": "Die Sonne ist 400-mal größer als der Mond, aber auch 400-mal weiter weg – deshalb passt er genau davor.",
-    "en": "The Sun is 400 times larger than the Moon but also 400 times farther away – so the Moon fits right in front.",
+    "de": "Die Sonne ist 400-mal größer als der Mond, aber auch 400-mal weiter weg, deshalb passt er genau davor.",
+    "en": "The Sun is 400 times larger than the Moon but also 400 times farther away, so the Moon fits right in front.",
     "es": "El Sol es 400 veces mayor que la Luna, pero está 400 veces más lejos; por eso la Luna lo tapa justo."
    },
    "image": "res://assets/quiz/images/solar_eclipse_c.jpg",
@@ -3242,8 +3242,8 @@
     ]
    },
    "explain": {
-    "de": "Bei einer Mondfinsternis färbt sich der Mond oft kupferrot – durch Sonnenlicht, das die Erdatmosphäre umlenkt.",
-    "en": "During a lunar eclipse the Moon often turns copper-red – from sunlight bent by Earth's atmosphere.",
+    "de": "Bei einer Mondfinsternis färbt sich der Mond oft kupferrot. Das liegt an Sonnenlicht, das die Erdatmosphäre umlenkt.",
+    "en": "During a lunar eclipse the Moon often turns copper-red. This comes from sunlight bent by Earth's atmosphere.",
     "es": "En un eclipse lunar la Luna suele volverse rojiza, por la luz solar desviada por la atmósfera terrestre."
    },
    "image": "res://assets/quiz/images/Lunar_eclipse_March_2007.jpg",
@@ -3280,8 +3280,8 @@
     ]
    },
    "explain": {
-    "de": "Mond und Sonne ziehen unterschiedlich stark an den Ozeanen – das Wasser türmt sich zu Ebbe und Flut.",
-    "en": "The Moon and the Sun pull differently on the oceans – the water piles up into tides.",
+    "de": "Mond und Sonne ziehen unterschiedlich stark an den Ozeanen. Das Wasser türmt sich zu Ebbe und Flut.",
+    "en": "The Moon and the Sun pull differently on the oceans. The water piles up into tides.",
     "es": "La Luna y el Sol atraen de forma distinta a los océanos; el agua se acumula en mareas."
    },
    "image": "res://assets/quiz/images/00_3536_Auswirkung_der_Gezeiten_(Niedrigwasser).jpg",
@@ -3318,8 +3318,8 @@
     ]
    },
    "explain": {
-    "de": "Die Erde kreuzt jedes Jahr die Staubspur eines Kometen – z. B. im August bei den Perseiden.",
-    "en": "Each year Earth crosses a comet's dust trail – e.g. in August during the Perseids.",
+    "de": "Die Erde kreuzt jedes Jahr die Staubspur eines Kometen, z. B. im August bei den Perseiden.",
+    "en": "Each year Earth crosses a comet's dust trail, e.g. in August during the Perseids.",
     "es": "Cada año la Tierra cruza el rastro de polvo de un cometa, por ejemplo en agosto con las Perseidas."
    },
    "image": "res://assets/quiz/images/Leonids-1833.jpg",
@@ -3356,8 +3356,8 @@
     ]
    },
    "explain": {
-    "de": "Teilchen von der Sonne bringen Sauerstoff und Stickstoff in der Hochatmosphäre zum Leuchten – grün und rot.",
-    "en": "Particles from the Sun make oxygen and nitrogen in the upper atmosphere glow – green and red.",
+    "de": "Teilchen von der Sonne bringen Sauerstoff und Stickstoff in der Hochatmosphäre zum Leuchten: grün und rot.",
+    "en": "Particles from the Sun make oxygen and nitrogen in the upper atmosphere glow green and red.",
     "es": "Partículas del Sol hacen brillar el oxígeno y el nitrógeno de la alta atmósfera, en verde y rojo."
    },
    "image": "res://assets/quiz/images/aurora_borealis_next_to_dome.jpg",
@@ -3394,8 +3394,8 @@
     ]
    },
    "explain": {
-    "de": "Beim Transit wird der Stern ein winziges bisschen dunkler – so wurden Tausende Exoplaneten entdeckt.",
-    "en": "During a transit the star dims very slightly – that is how thousands of exoplanets were found.",
+    "de": "Beim Transit wird der Stern ein winziges bisschen dunkler. So wurden Tausende Exoplaneten entdeckt.",
+    "en": "During a transit the star dims very slightly. That is how thousands of exoplanets were found.",
     "es": "Durante un tránsito la estrella se oscurece muy levemente; así se han descubierto miles de exoplanetas."
    },
    "image": "res://assets/quiz/images/SDO's_Ultra-high_Definition_View_of_2012_Venus_Transit_--_Path_Sequence.jpg",
@@ -3432,8 +3432,8 @@
     ]
    },
    "explain": {
-    "de": "Bis heute sind über 5.000 Exoplaneten bekannt – der erste um einen sonnenähnlichen Stern wurde 1995 entdeckt.",
-    "en": "More than 5,000 exoplanets are known today – the first around a Sun-like star was found in 1995.",
+    "de": "Bis heute sind über 5.000 Exoplaneten bekannt. Der erste um einen sonnenähnlichen Stern wurde 1995 entdeckt.",
+    "en": "More than 5,000 exoplanets are known today. The first around a Sun-like star was found in 1995.",
     "es": "Hoy se conocen más de 5.000 exoplanetas; el primero alrededor de una estrella como el Sol se halló en 1995."
    },
    "image": "res://assets/quiz/images/Kepler-62f_with_62e_as_Morning_Star.jpg",
@@ -3470,8 +3470,8 @@
     ]
    },
    "explain": {
-    "de": "Die Erde erreicht ihr Perihel Anfang Januar – im Nordwinter sind wir der Sonne am nächsten.",
-    "en": "Earth reaches perihelion in early January – we are closest to the Sun in northern winter.",
+    "de": "Die Erde erreicht ihr Perihel Anfang Januar: Im Nordwinter sind wir der Sonne am nächsten.",
+    "en": "Earth reaches perihelion in early January: we are closest to the Sun in northern winter.",
     "es": "La Tierra llega al perihelio a principios de enero: estamos más cerca del Sol en el invierno boreal."
    },
    "image": "res://assets/quiz/images/Closed_orbits.jpg",
@@ -3508,8 +3508,8 @@
     ]
    },
    "explain": {
-    "de": "In Opposition steht ein Planet die ganze Nacht am Himmel und ist besonders hell – ideal zum Beobachten.",
-    "en": "At opposition a planet is up all night and especially bright – ideal for observing.",
+    "de": "In Opposition steht ein Planet die ganze Nacht am Himmel und ist besonders hell, ideal zum Beobachten.",
+    "en": "At opposition a planet is up all night and especially bright: ideal for observing.",
     "es": "En oposición un planeta está toda la noche en el cielo y muy brillante: ideal para observar."
    },
    "image": "res://assets/quiz/images/Close_encounter-_Mars_at_opposition_(opo0534l).jpg",
@@ -3546,8 +3546,8 @@
     ]
    },
    "explain": {
-    "de": "Im All gibt es kein Luftflimmern, keine Wolken – und man sieht auch Licht, das die Atmosphäre verschluckt.",
-    "en": "In space there is no air shimmer, no clouds – and you can see light that the atmosphere absorbs.",
+    "de": "Im All gibt es kein Luftflimmern, keine Wolken, und man sieht auch Licht, das die Atmosphäre verschluckt.",
+    "en": "In space there is no air shimmer, no clouds, and you can see light that the atmosphere absorbs.",
     "es": "En el espacio no hay turbulencia ni nubes, y se ve luz que la atmósfera absorbe."
    },
    "image": "res://assets/quiz/images/Hubble_Space_Telescope_(27946391011).jpg",
@@ -3584,8 +3584,8 @@
     ]
    },
    "explain": {
-    "de": "Radioteleskope empfangen Radiowellen von Gaswolken, Pulsaren oder Galaxien – sogar tagsüber.",
-    "en": "Radio telescopes pick up radio waves from gas clouds, pulsars or galaxies – even in daytime.",
+    "de": "Radioteleskope empfangen Radiowellen von Gaswolken, Pulsaren oder Galaxien, sogar tagsüber.",
+    "en": "Radio telescopes pick up radio waves from gas clouds, pulsars or galaxies, even in daytime.",
     "es": "Los radiotelescopios captan ondas de radio de nubes de gas, púlsares o galaxias, incluso de día."
    },
    "image": "res://assets/quiz/images/Very_Large_Array,_2012.jpg",
@@ -3698,8 +3698,8 @@
     ]
    },
    "explain": {
-    "de": "Alles Warme strahlt Infrarot ab – ein ungekühltes Teleskop würde sich selbst „sehen“.",
-    "en": "Everything warm emits infrared – an uncooled telescope would 'see' itself.",
+    "de": "Alles Warme strahlt Infrarot ab. Ein ungekühltes Teleskop würde sich selbst „sehen“.",
+    "en": "Everything warm emits infrared. An uncooled telescope would 'see' itself.",
     "es": "Todo lo que está caliente emite infrarrojo; un telescopio sin enfriar «se vería» a sí mismo."
    },
    "image": "res://assets/quiz/images/James_Webb_Space_Telescope_2009_top.jpg",
@@ -3736,8 +3736,8 @@
     ]
    },
    "explain": {
-    "de": "Ein Parsec sind 3,26 Lichtjahre – die Entfernung, bei der die Parallaxe genau eine Bogensekunde beträgt.",
-    "en": "One parsec is 3.26 light-years – the distance at which the parallax is exactly one arcsecond.",
+    "de": "Ein Parsec sind 3,26 Lichtjahre: die Entfernung, bei der die Parallaxe genau eine Bogensekunde beträgt.",
+    "en": "One parsec is 3.26 light-years: the distance at which the parallax is exactly one arcsecond.",
     "es": "Un pársec son 3,26 años luz: la distancia a la que la paralaje es exactamente un segundo de arco."
    },
    "image": "res://assets/quiz/images/Parsec-fr.svg.jpg",
@@ -3812,8 +3812,8 @@
     ]
    },
    "explain": {
-    "de": "Je kleiner die Magnitude, desto heller – Sirius hat −1,5 mag, die schwächsten Sterne im OST-Bild etwa 18 mag.",
-    "en": "The smaller the magnitude, the brighter – Sirius is −1.5 mag, the faintest stars in an OST image about 18 mag.",
+    "de": "Je kleiner die Magnitude, desto heller. Sirius hat −1,5 mag, die schwächsten Sterne im OST-Bild etwa 18 mag.",
+    "en": "The smaller the magnitude, the brighter. Sirius is −1.5 mag, the faintest stars in an OST image about 18 mag.",
     "es": "Cuanto menor es la magnitud, más brillo: Sirio tiene −1,5 mag y las estrellas más débiles de una imagen OST, unas 18 mag."
    },
    "image": "res://assets/quiz/images/65Cyb-LB3-apmag.jpg",
@@ -3850,8 +3850,8 @@
     ]
    },
    "explain": {
-    "de": "So lassen sich Sterne fair vergleichen – als stünden alle in derselben Entfernung von 10 Parsec.",
-    "en": "This lets us compare stars fairly – as if they were all at the same distance of 10 parsecs.",
+    "de": "So lassen sich Sterne fair vergleichen, als stünden alle in derselben Entfernung von 10 Parsec.",
+    "en": "This lets us compare stars fairly, as if they were all at the same distance of 10 parsecs.",
     "es": "Así se comparan las estrellas de forma justa, como si todas estuvieran a la misma distancia de 10 pársecs."
    },
    "image": "res://assets/quiz/images/Abell_1367_with_Manually_added_Galaxy_distances.jpg",
@@ -3888,8 +3888,8 @@
     ]
    },
    "explain": {
-    "de": "Halte einen Daumen vor das Gesicht und schließe abwechselnd die Augen – so funktioniert Parallaxe.",
-    "en": "Hold up a thumb and close each eye in turn – that is how parallax works.",
+    "de": "Halte einen Daumen vor das Gesicht und schließe abwechselnd die Augen. So funktioniert Parallaxe.",
+    "en": "Hold up a thumb and close each eye in turn. That is how parallax works.",
     "es": "Pon un pulgar delante de la cara y cierra un ojo y luego el otro: así funciona la paralaje."
    },
    "image": "res://assets/quiz/images/Stellarparallax_parsec_de.svg.jpg",
@@ -3926,8 +3926,8 @@
     ]
    },
    "explain": {
-    "de": "Cepheiden pulsieren umso langsamer, je heller sie sind – damit werden sie zu kosmischen Maßbändern.",
-    "en": "The brighter a Cepheid, the slower it pulsates – which turns them into cosmic measuring tapes.",
+    "de": "Cepheiden pulsieren umso langsamer, je heller sie sind. Damit werden sie zu kosmischen Maßbändern.",
+    "en": "The brighter a Cepheid, the slower it pulsates. This turns them into cosmic measuring tapes.",
     "es": "Cuanto más brillante es una cefeida, más lento pulsa; eso las convierte en cintas métricas cósmicas."
    },
    "image": "res://assets/quiz/images/Comparison_of_Hubble_and_Webb_views_of_a_Cepheid_variable_star_(weic2408b).jpg",

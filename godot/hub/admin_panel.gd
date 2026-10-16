@@ -116,7 +116,7 @@ func _show_main(message := "") -> void:
 	_msg = UiTheme.label(message, UiTheme.SIZE_BODY, "medium", UiTheme.SUCCESS)
 	_content.add_child(_msg)
 	if Settings.uses_default_pin():
-		_content.add_child(UiTheme.label("⚠ Standard-PIN aktiv – bitte unten ändern.", UiTheme.SIZE_BODY, "semibold", UiTheme.DANGER))
+		_content.add_child(UiTheme.label("⚠ Standard-PIN aktiv, bitte unten ändern.", UiTheme.SIZE_BODY, "semibold", UiTheme.DANGER))
 
 	_section("Heute (%s)" % ScoreStore.today())
 	var stats := Telemetry.sessions.summary(ScoreStore.today())
@@ -148,7 +148,7 @@ func _show_main(message := "") -> void:
 		for e in Scores.top(g.id, 10, true):
 			var gid: String = g.id
 			var eid: String = e.id
-			_row([UiTheme.label("%s – %s (%d)" % [tr(g.title), e.name, e.score]),
+			_row([UiTheme.label("%s, %s (%d)" % [tr(g.title), e.name, e.score]),
 				_action(Icons.get_char("delete") + " Löschen", func():
 					Scores.store.remove(gid, eid)
 					_show_main("Eintrag gelöscht."))])

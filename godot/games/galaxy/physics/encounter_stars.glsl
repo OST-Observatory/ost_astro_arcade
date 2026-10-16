@@ -4,7 +4,7 @@
 // drift steps in the same potentials as EncounterModel.run_stars() and galaxy_stars.gdshader,
 // one invocation per star. Every `every` steps a snapshot: the positions of a subsample (for
 // tails and bridges) and, for all stars, counts in each galaxy's disk plane by direction and
-// radius (for rings – with tens of thousands of stars faint rings stand out).
+// radius (for rings, with tens of thousands of stars faint rings stand out).
 
 layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 

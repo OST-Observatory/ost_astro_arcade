@@ -1,4 +1,4 @@
-## Step 2 – open the dome: the observatory in 3D at the chosen night. One big button opens
+## Step 2, open the dome: the observatory in 3D at the chosen night. One big button opens
 ## the shutter; the camera moves inside and the telescope slews to the asteroid's real
 ## position (hour angle/declination at the chosen time), the dome turning along with it.
 class_name DomeStep

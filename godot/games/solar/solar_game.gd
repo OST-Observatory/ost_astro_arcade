@@ -1,7 +1,7 @@
 ## Solar system: one 3D scene (SolarView) for two modes, chosen on a menu after the start
 ## screen:
-##   explore – fly through the solar system, tap bodies for info, solve five "find …" tasks
-##   mission – explorer: Mars, researcher: Jupiter, pro: Saturn via a Jupiter swing-by
+##   explore, fly through the solar system, tap bodies for info, solve five "find …" tasks
+##   mission, explorer: Mars, researcher: Jupiter, pro: Saturn via a Jupiter swing-by
 extends Control
 
 const VIEW := Rect2(40, 170, 1700, 1230)

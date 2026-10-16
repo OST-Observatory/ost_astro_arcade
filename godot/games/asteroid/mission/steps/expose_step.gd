@@ -1,4 +1,4 @@
-## Step 3 – expose: choose the exposure time, then watch the three images build up.
+## Step 3, expose: choose the exposure time, then watch the three images build up.
 ## Short = fainter asteroid (harder, more points), long = deeper image (easier, fewer
 ## points because telescope time is precious). 0.75 mag = factor 2 in exposure time.
 class_name ExposeStep

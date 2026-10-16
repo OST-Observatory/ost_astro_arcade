@@ -1,5 +1,5 @@
 ## Dev tool: checks every hint recipe (CollideLogic.RECIPES) with the analysis the game uses
-## – 50000 stars per galaxy on the graphics card – and with the CPU fallback (250 stars).
+##, 50000 stars per galaxy on the graphics card, and with the CPU fallback (250 stars).
 ## The unit tests can only run the CPU part (headless has no graphics card).
 ##   godot --path godot -s res://tools/galaxy_recipe_check.gd
 extends SceneTree

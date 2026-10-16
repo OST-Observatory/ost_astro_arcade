@@ -31,8 +31,8 @@ static func is_stable(match: float, diff: String) -> bool:
 	return match >= float(STABLE.get(diff, 90.0))
 
 
-## One question per building block, picked at random from the player's level and – for
-## researchers and pros – the level below (more variety, still fitting).
+## One question per building block, picked at random from the player's level and, for
+## researchers and pros, the level below (more variety, still fitting).
 static func pick_questions(rng: RandomNumberGenerator, diff := "researcher") -> Dictionary:
 	var level: int = LEVEL.get(diff, 1)
 	var out := {}

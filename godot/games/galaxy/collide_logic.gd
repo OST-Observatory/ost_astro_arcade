@@ -25,7 +25,7 @@ static func new_badges(found: Dictionary, have: Array) -> Array[String]:
 
 
 ## A recipe per target galaxy and shape: [partner, approach, spin (0: either)]. Taken from
-## the recipe matrix of tools/galaxy_calibrate.gd – each one gives the shape with the
+## the recipe matrix of tools/galaxy_calibrate.gd, each one gives the shape with the
 ## graphics-card analysis (8000 stars) and with the CPU fallback (250 stars).
 const RECIPES := {
 	"milkyway": {"tails": ["spiral", "grazing", 0], "merger": ["twin", "headon", 0],

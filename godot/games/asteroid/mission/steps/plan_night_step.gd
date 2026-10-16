@@ -1,4 +1,4 @@
-## Step 1 – plan the night: drag the time cursor across the night. The chart shows the
+## Step 1, plan the night: drag the time cursor across the night. The chart shows the
 ## asteroid's altitude, the Moon and twilight; a good choice (high, dark, little
 ## moonlight) gives points AND a darker, less noisy sky in the images later.
 class_name PlanNightStep
@@ -108,9 +108,13 @@ func _draw() -> void:
 	for i in range(_first, _last):
 		if not mission.quality_at(i).ok:
 			draw_rect(Rect2(_x_for(i), CHART.position.y, _x_for(i + 1) - _x_for(i) + 1, CHART.size.y), Color(0, 0, 0, 0.35))
-	# Legend.
-	draw_string(font, Vector2(CHART.position.x + 16, CHART.position.y + 44), tr("PLAN_LEGEND_TARGET"), HORIZONTAL_ALIGNMENT_LEFT, -1, 34, UiTheme.SCIENCE)
-	draw_string(font, Vector2(CHART.position.x + 16, CHART.position.y + 88), tr("PLAN_LEGEND_MOON") % int(round(float(track[_first].moon_illum) * 100)), HORIZONTAL_ALIGNMENT_LEFT, -1, 34, moon_col)
+	# Legend: the line styles of the chart, then their names.
+	var lx := CHART.position.x + 16
+	draw_line(Vector2(lx, CHART.position.y + 32), Vector2(lx + 44, CHART.position.y + 32), UiTheme.SCIENCE, 5.0, true)
+	for k in 3:
+		draw_line(Vector2(lx + k * 16, CHART.position.y + 76), Vector2(lx + k * 16 + 9, CHART.position.y + 76), moon_col, 3.0, true)
+	draw_string(font, Vector2(lx + 58, CHART.position.y + 44), tr("PLAN_LEGEND_TARGET"), HORIZONTAL_ALIGNMENT_LEFT, -1, 34, UiTheme.SCIENCE)
+	draw_string(font, Vector2(lx + 58, CHART.position.y + 88), tr("PLAN_LEGEND_MOON") % int(round(float(track[_first].moon_illum) * 100)), HORIZONTAL_ALIGNMENT_LEFT, -1, 34, moon_col)
 	# Cursor.
 	var cx := _x_for(_cursor)
 	var s := mission.sample(_cursor)

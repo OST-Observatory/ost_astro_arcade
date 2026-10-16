@@ -1,6 +1,6 @@
 ## Raw touch gestures for 3D views: one finger drags (rotate), two fingers pinch (zoom),
 ## a short touch without movement is a tap, two taps close together a double tap.
-## Touches are kept by index in a dictionary – X11 numbers touches on and on, so index 0
+## Touches are kept by index in a dictionary, X11 numbers touches on and on, so index 0
 ## must never be assumed. Mouse input arrives here too (emulate_touch_from_mouse).
 ## Feed events with handle(); positions are in the caller's coordinates, `area` limits where
 ## a gesture may start.

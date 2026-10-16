@@ -1,8 +1,8 @@
 ## Positions of the big moons relative to their planet (ecliptic J2000 axes, AU):
-##   Moon      – Meeus, Astronomical Algorithms ch. 47, main terms (about 0.3 deg, 1000 km)
-##   Io, Europa, Ganymede, Callisto – circular orbits in Jupiter's equator with Meeus' mean
+##   Moon     , Meeus, Astronomical Algorithms ch. 47, main terms (about 0.3 deg, 1000 km)
+##   Io, Europa, Ganymede, Callisto, circular orbits in Jupiter's equator with Meeus' mean
 ##              motions (ch. 44, low accuracy)
-##   Titan     – circular orbit in Saturn's equator
+##   Titan    , circular orbit in Saturn's equator
 class_name Moons
 extends RefCounted
 

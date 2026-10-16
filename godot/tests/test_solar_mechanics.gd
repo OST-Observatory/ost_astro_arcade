@@ -44,7 +44,7 @@ func test_galilean_moons_periods() -> void:
 
 func test_uranus_lies_on_its_side() -> void:
 	# The IAU north pole of Uranus is 82 deg from the ecliptic normal and it spins backwards
-	# (negative W rate) – i.e. an axial tilt of about 98 deg.
+	# (negative W rate), i.e. an axial tilt of about 98 deg.
 	var tilt := rad_to_deg(acos(Rotation.pole("uranus").dot(Vector3(0, 0, 1))))
 	assert_true(tilt > 75.0 and tilt < 90.0, "Uranus pole from the ecliptic normal: %f" % tilt)
 	assert_true(float(Rotation.POLES.uranus[3]) < 0.0, "retrograde spin")
@@ -97,7 +97,7 @@ func test_flyby_physics() -> void:
 
 func test_saturn_via_jupiter_is_reachable() -> void:
 	# The Jupiter windows of 2033–2036 lead to Saturn (conjunction around 2040) within its
-	# Hill sphere (0.43 AU) – and so did the Voyager windows of 1976/77.
+	# Hill sphere (0.43 AU), and so did the Voyager windows of 1976/77.
 	for start in [2463900.5, 2442800.5]:   # end of 2033 (-> 2034 window), mid 1976
 		var w := HohmannTransfer.next_window("jupiter", start, start + 450.0)
 		var t := HohmannTransfer.compute("jupiter", w)

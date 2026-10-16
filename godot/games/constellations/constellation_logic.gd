@@ -1,5 +1,5 @@
 ## Constellation tracing: data (real stars to 6 mag, stick figures), the sky projection and
-## the rules – which constellations a difficulty gets, how much help there is, edge checks,
+## the rules, which constellations a difficulty gets, how much help there is, edge checks,
 ## points and stars. Data: tools/constellations/build_constellations.py (d3-celestial).
 class_name ConstellationLogic
 extends RefCounted

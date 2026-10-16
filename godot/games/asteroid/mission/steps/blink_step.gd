@@ -1,4 +1,4 @@
-## Step 4 – the blink comparator (the core of the asteroid hunt).
+## Step 4, the blink comparator (the core of the asteroid hunt).
 ## The three exposures are shown in turn. Stars stay put, the asteroid jumps. Tap it!
 ## Holding a finger shows a loupe; wrong taps get an explanation (cosmic ray, hot pixel,
 ## variable star, satellite, star). Hints after a while, the third one reveals it.

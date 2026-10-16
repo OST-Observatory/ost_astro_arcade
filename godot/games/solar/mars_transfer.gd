@@ -1,6 +1,6 @@
 ## Hohmann transfer from Earth to Mars, using the real planet positions (Kepler elements):
 ## the spacecraft leaves Earth's orbit, flies half an ellipse around the Sun and arrives on the
-## opposite side at Mars' orbit. It only meets Mars if Mars is there at that moment – which
+## opposite side at Mars' orbit. It only meets Mars if Mars is there at that moment, which
 ## happens about every 26 months (the launch windows).
 ## Honest simplification: both orbits are treated as lying in one plane (Mars is tilted by
 ## 1.85 deg), and the launch is exactly tangential.

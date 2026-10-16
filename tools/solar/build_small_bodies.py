@@ -18,7 +18,7 @@ REPO = TOOLS.parent
 CACHE = TOOLS / ".cache/solar"
 OUT = REPO / "godot/assets/data/solar/small_bodies.json"
 SEED = 2026
-# (SBDB orbit class, H min, H max, how many) – H limits keep the larger, known objects.
+# (SBDB orbit class, H min, H max, how many), H limits keep the larger, known objects.
 SAMPLE = [
     ("MBA", 0, 14.0, 8000), ("IMB", 0, 15.0, 500), ("OMB", 0, 13.0, 1500),
     ("TJN", 0, 14.0, 1500), ("TNO", 0, 8.0, 800), ("APO", 0, 18.0, 250),

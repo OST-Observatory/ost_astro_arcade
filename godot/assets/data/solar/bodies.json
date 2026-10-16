@@ -84,8 +84,8 @@
     "es": "Planeta rocoso"
    },
    "text": {
-    "de": "Unser Heimatplanet – der einzige mit flüssigem Wasser an der Oberfläche.",
-    "en": "Our home world—the only one known with liquid water on its surface.",
+    "de": "Unser Heimatplanet, der einzige mit flüssigem Wasser an der Oberfläche.",
+    "en": "Our home world, the only one known with liquid water on its surface.",
     "es": "Nuestro hogar: el único conocido con agua líquida en la superficie."
    }
   },
@@ -106,7 +106,7 @@
     "es": "Planeta rocoso"
    },
    "text": {
-    "de": "Der Rote Planet – mit dem höchsten Vulkan des Sonnensystems, dem Olympus Mons.",
+    "de": "Der Rote Planet, mit dem höchsten Vulkan des Sonnensystems, dem Olympus Mons.",
     "en": "The Red Planet, home to Olympus Mons, the tallest volcano in the solar system.",
     "es": "El planeta rojo; alberga el volcán más alto del sistema solar, el Olympus Mons."
    }
@@ -172,8 +172,8 @@
     "es": "Gigante de hielo"
    },
    "text": {
-    "de": "Ein Eisriese, der stark gekippt rotiert – vermutlich durch einen Zusammenstoß mit einem anderen Himmelskörper.",
-    "en": "An ice giant rotating on its side—likely knocked over by an ancient impact.",
+    "de": "Ein Eisriese, der stark gekippt rotiert, vermutlich durch einen Zusammenstoß mit einem anderen Himmelskörper.",
+    "en": "An ice giant rotating on its side, likely knocked over by an ancient impact.",
     "es": "Un gigante de hielo rotando de lado, quizá por un antiguo impacto."
    }
   },
@@ -282,8 +282,8 @@
     "es": "Luna"
    },
    "text": {
-    "de": "Der größte Mond im Sonnensystem – größer als der Planet Merkur.",
-    "en": "The largest moon in the solar system – bigger than the planet Mercury.",
+    "de": "Der größte Mond im Sonnensystem, größer als der Planet Merkur.",
+    "en": "The largest moon in the solar system, bigger than the planet Mercury.",
     "es": "La luna más grande del sistema solar, mayor que el planeta Mercurio."
    }
   },
@@ -540,8 +540,8 @@
     "es": "Cometa"
    },
    "text": {
-    "de": "Der berühmteste Komet. Er kehrt etwa alle 76 Jahre zurück – das nächste Mal 2061.",
-    "en": "The most famous comet. It returns about every 76 years – next time in 2061.",
+    "de": "Der berühmteste Komet. Er kehrt etwa alle 76 Jahre zurück, das nächste Mal 2061.",
+    "en": "The most famous comet. It returns about every 76 years, next time in 2061.",
     "es": "El cometa más famoso. Vuelve aproximadamente cada 76 años; la próxima vez, en 2061."
    },
    "elements": {
@@ -563,7 +563,7 @@
    "mass_kg": 10000000000000.0,
    "name": {
     "de": "67P/Tschurjumow-Gerassimenko",
-    "en": "67P/Churyumov–Gerasimenko",
+    "en": "67P/Churyumov-Gerasimenko",
     "es": "67P/Churiumov-Guerasimenko"
    },
    "type": {
@@ -604,8 +604,8 @@
     "es": "Cometa"
    },
    "text": {
-    "de": "Einer der hellsten Kometen des 20. Jahrhunderts – 1997 monatelang mit bloßem Auge zu sehen.",
-    "en": "One of the brightest comets of the 20th century – visible to the naked eye for months in 1997.",
+    "de": "Einer der hellsten Kometen des 20. Jahrhunderts, 1997 monatelang mit bloßem Auge zu sehen.",
+    "en": "One of the brightest comets of the 20th century, visible to the naked eye for months in 1997.",
     "es": "Uno de los cometas más brillantes del siglo XX, visible a simple vista durante meses en 1997."
    },
    "elements": {

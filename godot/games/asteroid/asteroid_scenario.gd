@@ -57,7 +57,7 @@ static func pick(difficulty: String, rng: RandomNumberGenerator, exclude: Array 
 	return load_by_id(pool[-1].id)
 
 
-## "(3) Juno" – the usual way to write a numbered minor planet.
+## "(3) Juno", the usual way to write a numbered minor planet.
 func display_name() -> String:
 	var n: String = data.facts.get("name", "")
 	if n == "" or n.is_valid_int():

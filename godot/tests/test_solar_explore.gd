@@ -12,7 +12,7 @@ func test_every_task_target_exists() -> void:
 
 
 func test_task_facts() -> void:
-	# The texts claim these facts – check them against the data.
+	# The texts claim these facts, check them against the data.
 	var jd := 2461000.5
 	assert_true(BodyCatalog.radius_km("ganymede") > BodyCatalog.radius_km("mercury"), "Ganymede > Mercury")
 	assert_true(BodyCatalog.radius_km("titan") > BodyCatalog.radius_km("mercury"), "Titan > Mercury")

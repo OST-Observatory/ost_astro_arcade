@@ -1,7 +1,7 @@
 ## Rules of the solar-system missions (no UI):
-##   explorer   – Mars, Hohmann transfer, launch day on a slider (ghost Mars shown)
-##   researcher – Jupiter directly, launch day over about three years (ghost Jupiter shown)
-##   pro        – Saturn via a Jupiter swing-by: launch window, side and distance of the pass;
+##   explorer  , Mars, Hohmann transfer, launch day on a slider (ghost Mars shown)
+##   researcher, Jupiter directly, launch day over about three years (ghost Jupiter shown)
+##   pro       , Saturn via a Jupiter swing-by: launch window, side and distance of the pass;
 ##                the resulting path and the closest approach to Saturn are always shown.
 class_name MissionLogic
 extends RefCounted
@@ -109,7 +109,7 @@ static func days_off(planet: String, jd: float) -> float:
 
 ## How far Saturn is ahead (+) or behind (-) the probe, in degrees around the Sun, at the
 ## moment that counts (see Flyby.encounter). Every later Jupiter window makes it about 20°
-## smaller – that is how the right window can be worked out.
+## smaller, that is how the right window can be worked out.
 static func saturn_offset(plan: Dictionary) -> float:
 	var t := float(plan.jd_ref)
 	var pr := (plan.flyby as Flyby).position(t)

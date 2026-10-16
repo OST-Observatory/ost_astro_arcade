@@ -14,7 +14,7 @@ godot/games/galaxy/physics/galaxy_potential.gd):
 The visible matter is set independently of the observed curve: for the Milky Way from the
 literature (Bland-Hawthorn & Gerhard 2016), for SPARC galaxies by fitting the measured gas
 and stellar contributions (3.6 µm mass-to-light ratio 0.5). Only the dark halo is fitted to
-the observed rotation curve – just as astronomers found that something is missing.
+the observed rotation curve, just as astronomers found that something is missing.
 Output: godot/assets/data/galaxy/rotation_curves.json (kpc, km/s, solar masses)
 
     uv run galaxy/build_rotation_curves.py
