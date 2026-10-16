@@ -12,6 +12,8 @@ const SHOTS := {
 	"inside": [Vector3(-1.6, 1.55, -1.8), Vector3(0.3, 2.3, 0.6)],
 	"sky": [Vector3(0, 1.8, -0.2), Vector3(0, 6, 4)],
 }
+## Flights that bow through a point (quadratic Bézier), e.g. up over the building edge.
+const VIA := {"street>roof": Vector3(-4.5, 2.5, -20.0)}
 
 var night := 0.0
 var camera: Camera3D
@@ -74,7 +76,7 @@ func _ready() -> void:
 	stair.light_color = Color(1.0, 0.85, 0.6)
 	stair.omni_range = 4.0
 	stair.shadow_enabled = true
-	stair.position = Vector3(5.0, 2.3, -2.3)
+	stair.position = Vector3(1.6, 2.3, 4.0)
 	add_child(stair)
 	_red_lights.append(stair)
 
@@ -109,7 +111,8 @@ func set_dome_azimuth(deg: float) -> void:
 
 ## 0 = closed, 1 = open (the shutter slides back over the zenith).
 func set_shutter(open: float) -> void:
-	_shutter.rotation.x = deg_to_rad(-100.0 * clampf(open, 0.0, 1.0))
+	# The shutter slides up over the top of the dome to its back.
+	_shutter.rotation.x = deg_to_rad(90.0 * clampf(open, 0.0, 1.0))
 
 
 ## Hour angle (deg, + = west) and declination (deg) of the telescope.
@@ -151,9 +154,10 @@ func set_shot(name: String) -> void:
 func fly(from: String, to: String, seconds: float) -> void:
 	var a: Array = SHOTS[from]
 	var b: Array = SHOTS[to]
+	var via: Vector3 = VIA.get(from + ">" + to, ((a[0] as Vector3) + b[0]) / 2.0)
 	var tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tw.tween_method(func(t: float):
-		camera.position = (a[0] as Vector3).lerp(b[0], t)
+		camera.position = (a[0] as Vector3).lerp(via, t).lerp(via.lerp(b[0], t), t)
 		camera.look_at((a[1] as Vector3).lerp(b[1], t)), 0.0, 1.0, seconds)
 	await tw.finished
 

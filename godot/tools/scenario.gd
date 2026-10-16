@@ -3,6 +3,7 @@
 ## UI_LANG=en|es switches the language for any scenario.
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
+## obs_day takes SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -306,10 +307,13 @@ func _ready() -> void:
 			match scenario:
 				"obs_day":
 					obs.set_night(0.1)
-					obs.set_shot("roof")
+					obs.set_shutter(float(OS.get_environment("SHUTTER")) if OS.get_environment("SHUTTER") != "" else 0.0)
+					obs.set_shot(OS.get_environment("SHOT") if OS.get_environment("SHOT") != "" else "roof")
 				"obs_street":
 					obs.set_night(0.45)
 					obs.set_shot("street")
+					if OS.get_environment("FLY") != "":   # the intro flight up to the roof
+						obs.fly("street", "roof", float(OS.get_environment("FLY")))
 				"obs_dusk":
 					obs.set_night(0.55)
 					obs.set_dome_azimuth(160.0)

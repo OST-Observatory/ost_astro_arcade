@@ -118,6 +118,21 @@ def hemisphere_shell(name, r, thickness, material):
     return assign(o, material)
 
 
+# Intro flight of the camera (ObservatoryScene SHOTS "street" -> "roof", Blender axes):
+# no tree may stand in its way.
+FLIGHT = (Vector((-2.0, 48.0, -12.5)), Vector((-7.0, 6.5, 1.7)))
+
+
+def in_flight_path(center, radii, margin=1.4):
+    a, b = FLIGHT
+    for k in range(201):
+        p = a.lerp(b, k / 200)
+        q = sum(((p[j] - center[j]) / radii[j]) ** 2 for j in range(3))
+        if q < margin * margin:
+            return True
+    return False
+
+
 def rod(name, a, b, r, material, parent=None, verts=8):
     a, b = Vector(a), Vector(b)
     d = b - a
@@ -173,14 +188,15 @@ def build():
         for h in rail_h:
             rod(f"Rail{i}_{h}", (a.x, a.y, h), (b.x, b.y, h), 0.025, M["galv"], root)
     # Antenna masts with guy wires, stair house, small boxes.
-    for name, x, y in (("MastA", -5.5, 3.5), ("MastB", 5.8, -3.8)):
+    for name, x, y in (("MastA", -5.5, 3.5), ("MastB", 5.9, 2.6)):
         rod(name, (x, y, 0), (x, y, 6.5), 0.025, M["galv"], root)
         for ang in (0, 120, 240):
             dx, dy = math.cos(math.radians(ang)) * 1.6, math.sin(math.radians(ang)) * 1.6
             rod(f"{name}_wire{ang}", (x, y, 4.0), (x + dx, y + dy, 0.0), 0.006, M["galv"], root, verts=4)
             cyl(f"{name}_foot{ang}", 0.18, 0.2, (x + dx, y + dy, 0.1), M["concrete"], root, verts=12)
-    box("StairHouse", (3.2, 2.6, 2.7), (5.6, 4.3, 1.35), M["gold"], root)
-    box("StairDoor", (1.0, 0.05, 2.1), (5.0, 2.98, 1.05), M["dark"], root)
+    # Stair house right of the dome door (seen from the door), its door facing the dome side.
+    box("StairHouse", (2.6, 2.6, 2.7), (3.6, -4.3, 1.35), M["gold"], root)
+    box("StairDoor", (0.05, 1.0, 2.1), (2.28, -4.0, 1.05), M["dark"], root)
     box("WeatherBox", (0.4, 0.3, 0.5), (-7.3, -2.0, 1.4), M["paint"], root)
 
     # Dome base (open cylinder with door) and interior floor.
@@ -196,8 +212,9 @@ def build():
     for i, ang in enumerate((40, 130, 220, 310)):
         x, y = math.cos(math.radians(ang)) * (BASE_R - 0.1), math.sin(math.radians(ang)) * (BASE_R - 0.1)
         cyl(f"RedLamp{i}", 0.06, 0.12, (x * 0.97, y * 0.97, 1.85), M["lamp"], root, verts=12)
-    box("Cabinet", (1.2, 0.6, 0.9), (-1.3, 1.6, 0.45), M["cabinet"], root, rot=(0, 0, math.radians(-35)))
-    box("FlatfieldBox", (0.9, 0.6, 0.6), (1.4, 1.5, 1.2), M["cabinet"], root, rot=(0, 0, math.radians(30)))
+    # Furniture along the wall (long side tangential), clear of the base wall (r = 2.44).
+    box("Cabinet", (1.2, 0.6, 0.9), (-1.23, 1.52, 0.45), M["cabinet"], root, rot=(0, 0, math.radians(39)))
+    box("FlatfieldBox", (0.9, 0.6, 0.6), (1.33, 1.43, 1.2), M["cabinet"], root, rot=(0, 0, math.radians(-43)))
     box("ToolTrolley", (0.6, 0.45, 1.0), (1.8, -1.0, 0.5), M["dark"], root, rot=(0, 0, math.radians(60)))
     box("ControlCabinet", (0.6, 0.3, 0.8), (-1.9, -0.9, 1.3), M["galv"], root, rot=(0, 0, math.radians(110)))
 
@@ -267,6 +284,8 @@ def build():
         d = rnd.uniform(28, 70)
         x, y = math.cos(ang) * d, math.sin(ang) * d
         h = rnd.uniform(9, 16)
+        if in_flight_path((x, y, -14 + h * 0.75), (h * 0.38, h * 0.38, h * 0.38 * 1.35)):
+            continue
         bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2, radius=h * 0.38, location=(x, y, -14 + h * 0.75))
         t = bpy.context.active_object
         t.name = f"Tree{i}"
