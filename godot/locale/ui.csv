@@ -28,9 +28,9 @@ NAME_TOO_SHORT,Mindestens 2 Zeichen bitte.,At least 2 characters please.,"Al men
 DIFF_TITLE,Wie schwer soll es sein?,How hard should it be?,¿Qué dificultad quieres?
 DIFF_EXPLORER,Entdecker,Explorer,Explorador
 DIFF_EXPLORER_DESC,Für Kinder und Einsteiger,For kids and beginners,Para niños y principiantes
-DIFF_RESEARCHER,Forscher,Researcher,Investigador
+DIFF_RESEARCHER,Beobachter,Observer,Observador
 DIFF_RESEARCHER_DESC,Die normale Mission,The standard mission,La misión normal
-DIFF_PRO,Profi,Pro,Experto
+DIFF_PRO,Experte,Expert,Experto
 DIFF_PRO_DESC,Für alle mit Vorwissen,For those who know a bit,Para quien ya sabe algo
 GAME_ASTEROID,Asteroiden-Jagd,Asteroid Hunt,Caza de asteroides
 GAME_ASTEROID_DESC,Entdecke einen Asteroiden mit dem OST-Teleskop,Discover an asteroid with the OST telescope,Descubre un asteroide con el telescopio OST
