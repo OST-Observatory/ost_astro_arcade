@@ -1,7 +1,11 @@
 ## The OST observatory in 3D (model: blender/build_observatory.py) with sky, lights and
 ## animation helpers: time of day, dome azimuth, shutter, telescope axes, camera shots.
+## With set_sky_time() the real sky of that moment (RealSky); with look_enabled the visitor
+## looks around by dragging, zooms with two fingers and taps the sky (sky_tapped).
 class_name ObservatoryScene
 extends Node3D
+
+signal sky_tapped(dir: Vector3)
 
 const MODEL := "res://assets/models/observatory.glb"
 ## Camera shots: [position, look_at] in metres (scene space, y up).
@@ -15,8 +19,18 @@ const SHOTS := {
 ## Flights that bow through a point (quadratic Bézier), e.g. up over the building edge.
 const VIA := {"street>roof": Vector3(-4.5, 2.5, -20.0)}
 
+const FOV := 55.0
+const FOV_MIN := 18.0
+const PITCH_MIN := -30.0
+const PITCH_MAX := 86.0
+
 var night := 0.0
 var camera: Camera3D
+var sky: RealSky
+var look_enabled := false
+var gestures := TouchGestures.new()
+var _yaw := 0.0     # viewing azimuth (deg)
+var _pitch := 0.0   # viewing altitude (deg)
 var _env: Environment
 var _sky_mat: ShaderMaterial
 var _sun: DirectionalLight3D
@@ -81,11 +95,16 @@ func _ready() -> void:
 	_red_lights.append(stair)
 
 	camera = Camera3D.new()
-	camera.fov = 55
+	camera.fov = FOV
 	camera.far = 2000
 	add_child(camera)
 	set_shot("roof")
 	set_night(0.0)
+	gestures.dragged.connect(_on_drag)
+	gestures.pinched.connect(func(f: float, _c: Vector2): _zoom(1.0 / f))
+	gestures.tapped.connect(func(pos: Vector2):
+		if look_enabled:
+			sky_tapped.emit(camera.project_ray_normal(pos)))
 
 
 # --- public API -------------------------------------------------------------------------
@@ -99,6 +118,8 @@ func set_night(v: float) -> void:
 	_sun.light_color = Color(1.0, 0.75, 0.55).lerp(Color(1, 0.95, 0.9), clampf(elev / 14.0, 0.0, 1.0))
 	_sun.visible = _sun.light_energy > 0.001
 	_sky_mat.set_shader_parameter("night", smoothstep(0.35, 0.95, night))
+	if sky:
+		sky.set_alpha(smoothstep(0.55, 0.95, night))
 	_env.ambient_light_energy = lerpf(1.0, 0.08, night)
 	_env.tonemap_exposure = lerpf(1.0, 1.25, night)
 	for l in _red_lights:
@@ -150,16 +171,84 @@ func set_shot(name: String) -> void:
 	camera.look_at(s[1])
 
 
-## Smooth camera move between shots (or explicit [pos, target] pairs).
+## Smooth camera move between shots ("" as `from`: from wherever the camera is now).
 func fly(from: String, to: String, seconds: float) -> void:
-	var a: Array = SHOTS[from]
+	var a: Array = SHOTS[from] if from != "" else [camera.position, camera.position - camera.global_basis.z * 8.0]
 	var b: Array = SHOTS[to]
 	var via: Vector3 = VIA.get(from + ">" + to, ((a[0] as Vector3) + b[0]) / 2.0)
+	var fov0 := camera.fov
 	var tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tw.tween_method(func(t: float):
 		camera.position = (a[0] as Vector3).lerp(via, t).lerp(via.lerp(b[0], t), t)
+		camera.fov = lerpf(fov0, FOV, t)
 		camera.look_at((a[1] as Vector3).lerp(b[1], t)), 0.0, 1.0, seconds)
 	await tw.finished
+
+
+# --- real sky and looking around ----------------------------------------------------------
+
+## Shows the real sky (stars, Moon, Milky Way band) at a Julian date (UT).
+func set_sky_time(jd: float) -> void:
+	if sky == null:
+		sky = RealSky.new()
+		sky.follow = camera
+		add_child(sky)
+		_sky_mat.set_shader_parameter("star_brightness", 0.3)   # only faint filler stars
+	sky.set_time(jd)
+	_sky_mat.set_shader_parameter("galactic_pole", sky.galactic_pole())
+	sky.set_alpha(smoothstep(0.55, 0.95, night))
+
+
+## Turns looking around on or off; starts from the current camera direction.
+func set_look(on: bool) -> void:
+	look_enabled = on
+	if on:
+		var aa := RealSky.alt_az(-camera.global_basis.z)
+		_pitch = clampf(aa.x, PITCH_MIN, PITCH_MAX)
+		_yaw = aa.y
+
+
+## Viewing direction as Vector2(alt, az) in degrees.
+func view_alt_az() -> Vector2:
+	return Vector2(_pitch, _yaw)
+
+
+## Screen position of a direction, or null when it is behind the camera.
+func screen_pos(dir: Vector3) -> Variant:
+	var p := camera.global_position + dir.normalized() * 100.0
+	if camera.is_position_behind(p):
+		return null
+	return camera.unproject_position(p)
+
+
+## Feed with the input events of the view; positions relative to the viewport.
+func handle_input(event: InputEvent) -> bool:
+	if not look_enabled:
+		return false
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index in [MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN]:
+			_zoom(0.9 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1.0 / 0.9)
+			return true
+	return gestures.handle(event)
+
+
+func _on_drag(d: Vector2) -> void:
+	if not look_enabled:
+		return
+	# The sky follows the finger: degrees per pixel from the vertical field of view.
+	var k := camera.fov / maxf(get_viewport().get_visible_rect().size.y, 1.0)
+	_yaw = fposmod(_yaw - d.x * k, 360.0)
+	_pitch = clampf(_pitch + d.y * k, PITCH_MIN, PITCH_MAX)
+	_apply_look()
+
+
+func _zoom(f: float) -> void:
+	if look_enabled:
+		camera.fov = clampf(camera.fov * f, FOV_MIN, FOV)
+
+
+func _apply_look() -> void:
+	camera.look_at(camera.global_position + RealSky.horizon_dir(_pitch, _yaw))
 
 
 # --- materials --------------------------------------------------------------------------
@@ -220,7 +309,16 @@ func _material_for(name: String, src: Material) -> Material:
 		"glass_dark":
 			m.metallic = 0.6
 			m.roughness = 0.08
-		"tree", "hill":
+		"tree", "tree_light", "tree_dark", "tree_pine":
+			# Leaves: fine mottling, a little sheen where the sun catches them.
+			m.albedo_texture = _noise_tex(0.6, 256)
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3(0.7, 0.7, 0.7)
+			m.roughness = 0.75
+		"bark", "bark_pine":
+			m.albedo_texture = _noise_tex(0.3, 128, Vector2(1.0, 6.0))
+			m.uv1_triplanar = true
+		"hill":
 			m.albedo_texture = _noise_tex(0.15, 256)
 			m.uv1_triplanar = true
 	_materials[name] = m

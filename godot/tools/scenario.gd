@@ -3,7 +3,8 @@
 ## UI_LANG=en|es switches the language for any scenario.
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
-## obs_day takes SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight.
+## obs_day takes SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
+## dome_open TAP=miss|hit for a tap in the pointing phase, dome FIGURES=1 and LOOK=alt,az.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -77,8 +78,31 @@ func _ready() -> void:
 				g.skip_intro = false
 			add_child(g)
 			await get_tree().create_timer(0.6).timeout
+			if scenario == "dome":
+				# FIGURES=1 shows the constellations, LOOK=alt,az turns the view.
+				var dstep: DomeStep = g._step
+				dstep._obs.sky.show_figures(OS.get_environment("FIGURES") != "")
+				if OS.get_environment("LOOK") == "moon":
+					var md := RealSky.alt_az(dstep._obs.sky._moon.position)
+					print("MOON alt/az ", md, " visible ", dstep._obs.sky._moon.visible)
+					dstep._obs._pitch = md.x
+					dstep._obs._yaw = md.y
+					dstep._obs.camera.fov = 20.0
+					dstep._obs._apply_look()
+				elif OS.get_environment("LOOK") != "":
+					var la := OS.get_environment("LOOK").split(",")
+					dstep._obs._pitch = float(la[0])
+					dstep._obs._yaw = float(la[1])
+					dstep._obs._apply_look()
 			if scenario == "dome_open":
 				g._step._open()
+				# TAP=miss|hit: one tap next to / onto the predicted position once inside.
+				if OS.get_environment("TAP") != "":
+					var ds: DomeStep = g._step
+					while ds._phase != "point":
+						await get_tree().process_frame
+					var off := ds._target.cross(Vector3.UP).normalized() * 0.6 if OS.get_environment("TAP") == "miss" else Vector3.ZERO
+					ds._on_sky_tap((ds._target + off).normalized())
 			if scenario == "briefing":
 				for c in g.get_children():
 					if c is GameStartScreen:

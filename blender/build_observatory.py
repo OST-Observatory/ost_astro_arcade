@@ -17,7 +17,7 @@ from pathlib import Path
 
 import bpy
 import bmesh
-from mathutils import Euler, Matrix, Vector
+from mathutils import Euler, Matrix, Vector, noise
 
 REPO = Path(__file__).resolve().parents[1]
 OUT = REPO / "godot/assets/models/observatory.glb"
@@ -142,6 +142,67 @@ def rod(name, a, b, r, material, parent=None, verts=8):
     return link(o, parent)
 
 
+def foliage(name, r, loc, scale, material, seed, parts):
+    """A lumpy ball of leaves: an ico sphere pushed in and out by fractal noise."""
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2, radius=r, location=loc)
+    o = bpy.context.active_object
+    o.name = name
+    o.scale = scale
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    off = Vector((seed, seed * 0.7, seed * 1.3))
+    for v in o.data.vertices:
+        n = noise.fractal(v.co * (1.6 / r) + off, 0.6, 2.0, 3)
+        v.co += v.normal * n * r * 0.32
+    bpy.ops.object.shade_smooth()
+    parts.append(assign(o, material))
+
+
+def tree(name, kind, base, h, rnd, seed, crown, M, parent):
+    """Broad-leaved tree (several lumps of leaves), columnar tree (poplar, hornbeam) or
+    Scots pine (long bare trunk, flat crown on top): all common around Golm."""
+    x, y, z = base
+    parts = []
+    if kind == "pine":
+        trunk_h, crown_mat, bark = h * 0.78, M["tree_pine"], M["bark_pine"]
+    elif kind == "column":
+        trunk_h, crown_mat, bark = h * 0.3, crown, M["bark"]
+    else:
+        trunk_h, crown_mat, bark = h * 0.45, crown, M["bark"]
+    r_trunk = h * 0.022
+    parts.append(cyl(f"{name}_trunk", r_trunk, trunk_h, (x, y, z + trunk_h / 2), bark, verts=8, r2=r_trunk * 0.6))
+    if kind == "broad":
+        R = h * 0.3
+        cz = z + h - R * 1.05
+        for k in range(rnd.randint(5, 7)):
+            a = rnd.uniform(0, math.tau)
+            rr = rnd.uniform(0.2, 0.6) * R
+            p = (x + math.cos(a) * rr, y + math.sin(a) * rr, cz + rnd.uniform(-0.45, 0.4) * R)
+            foliage(f"{name}_c{k}", R * rnd.uniform(0.5, 0.7), p, (1, 1, rnd.uniform(0.8, 1.0)), crown_mat, seed + k, parts)
+    elif kind == "column":
+        R = h * 0.15
+        n = rnd.randint(3, 4)
+        for k in range(n):
+            t = (k + 0.5) / n
+            p = (x + rnd.uniform(-0.2, 0.2) * R, y + rnd.uniform(-0.2, 0.2) * R, z + h * (0.3 + 0.62 * t))
+            foliage(f"{name}_c{k}", R * (1.15 - 0.45 * abs(t - 0.4)), p, (1, 1, 1.5), crown_mat, seed + k, parts)
+    else:
+        R = h * 0.17
+        for k in range(rnd.randint(3, 5)):
+            a = rnd.uniform(0, math.tau)
+            rr = rnd.uniform(0.1, 0.7) * R
+            p = (x + math.cos(a) * rr, y + math.sin(a) * rr, z + h * rnd.uniform(0.8, 0.93))
+            foliage(f"{name}_c{k}", R * rnd.uniform(0.55, 0.8), p, (1, 1, 0.55), crown_mat, seed + k, parts)
+    # One object per tree.
+    bpy.ops.object.select_all(action="DESELECT")
+    for o in parts:
+        o.select_set(True)
+    bpy.context.view_layer.objects.active = parts[0]
+    bpy.ops.object.join()
+    t = bpy.context.active_object
+    t.name = name
+    return link(t, parent)
+
+
 # --- the model ----------------------------------------------------------------------------
 
 def build():
@@ -161,6 +222,11 @@ def build():
         "orange": mat("plaster_orange", (0.85, 0.48, 0.22), 0.85),
         "roof": mat("roof_red", (0.55, 0.16, 0.1), 0.7),
         "tree": mat("tree", (0.13, 0.25, 0.1), 0.9),
+        "tree_light": mat("tree_light", (0.19, 0.31, 0.12), 0.9),
+        "tree_dark": mat("tree_dark", (0.09, 0.19, 0.08), 0.9),
+        "tree_pine": mat("tree_pine", (0.07, 0.15, 0.09), 0.9),
+        "bark": mat("bark", (0.22, 0.17, 0.13), 0.95),
+        "bark_pine": mat("bark_pine", (0.42, 0.24, 0.15), 0.9),
         "hill": mat("hill", (0.1, 0.17, 0.08), 0.95),
         "lamp": mat("lamp_red", (1.0, 0.1, 0.05), 0.5),
         "cabinet": mat("cabinet_white", (0.85, 0.86, 0.85), 0.5),
@@ -279,18 +345,17 @@ def build():
     link(assign(r, M["roof"]), root)
     import random
     rnd = random.Random(7)
-    for i in range(40):
+    crowns = [M["tree"], M["tree_light"], M["tree_dark"]]
+    for i in range(46):
         ang = rnd.uniform(0, math.tau)
         d = rnd.uniform(28, 70)
         x, y = math.cos(ang) * d, math.sin(ang) * d
         h = rnd.uniform(9, 16)
-        if in_flight_path((x, y, -14 + h * 0.75), (h * 0.38, h * 0.38, h * 0.38 * 1.35)):
+        kind = rnd.choices(["broad", "column", "pine"], weights=(5, 2, 3))[0]
+        seed = rnd.random() * 100.0
+        if in_flight_path((x, y, -14 + h * 0.6), (h * 0.38, h * 0.38, h * 0.55)):
             continue
-        bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2, radius=h * 0.38, location=(x, y, -14 + h * 0.75))
-        t = bpy.context.active_object
-        t.name = f"Tree{i}"
-        t.scale = (1, 1, 1.35)
-        link(assign(t, M["tree"]), root)
+        tree(f"Tree{i}", kind, (x, y, -14.0), h, rnd, seed, rnd.choice(crowns), M, root)
     for i, (x, y, rr) in enumerate(((-140, 160, 90), (60, 220, 120), (220, 40, 100))):
         bpy.ops.mesh.primitive_uv_sphere_add(radius=rr, location=(x, y, -14 - rr * 0.82))
         hl = bpy.context.active_object

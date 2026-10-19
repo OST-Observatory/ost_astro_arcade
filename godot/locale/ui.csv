@@ -172,11 +172,41 @@ PUZZLE_RESULT,%d Teile in %d:%02d min,%d pieces in %d:%02d min,%d piezas en %d:%
 PUZZLE_AGAIN,Neues Bild,New picture,Nueva imagen
 STEP_DOME,Kuppel,Dome,Cúpula
 DOME_TITLE,Öffne die Sternwarte,Open the observatory,Abre el observatorio
-DOME_TASK,Es ist dunkel geworden. Öffne die Kuppel. Das Teleskop fährt dann automatisch zum Asteroiden.,It has got dark. Open the dome. The telescope then moves to the asteroid automatically.,Ya es de noche. Abre la cúpula: el telescopio irá automáticamente hacia el asteroide.
+DOME_TASK,"Es ist dunkel geworden. Wische über das Bild, um dich umzuschauen, mit zwei Fingern zoomst du. Dann öffne die Kuppel.","It has got dark. Swipe across the picture to look around, zoom with two fingers. Then open the dome.",Ya es de noche. Desliza el dedo por la imagen para mirar alrededor y haz zoom con dos dedos. Luego abre la cúpula.
 DOME_OPEN,Kuppel öffnen,Open the dome,Abrir la cúpula
 DOME_OPENING,Der Spalt öffnet sich …,The slit is opening …,La rendija se abre…
-DOME_SLEWING,"Das Teleskop fährt zum Asteroiden, die Kuppel dreht sich mit …","The telescope is moving to the asteroid, the dome turns along …",El telescopio se mueve hacia el asteroide y la cúpula gira con él…
+DOME_SLEWING,"Gut gezielt! Die Kuppel dreht sich, das Teleskop fährt zur vorhergesagten Position …","Well aimed! The dome turns, the telescope moves to the predicted position …",¡Buena puntería! La cúpula gira y el telescopio se mueve a la posición prevista…
 DOME_READY,"Bereit! Höhe %d°, Richtung %d° (Süden = 180°)","Ready! Altitude %d°, direction %d° (south = 180°)","¡Listo! Altura %d°, dirección %d° (sur = 180°)"
+DOME_POINT,"Wo steht dein Asteroid? Laut Bahnvorhersage %s. Schau dich um und tippe in diese Richtung, dann dreht sich die Kuppel dorthin.","Where is your asteroid? According to its orbit it is %s. Look around and tap in that direction, then the dome turns there.",¿Dónde está tu asteroide? Según su órbita está %s. Mira alrededor y toca en esa dirección: la cúpula girará hacia allí.
+DOME_WHERE,"%s, %d° über dem Horizont","%s, %d° above the horizon","%s, a %d° sobre el horizonte"
+DOME_WHERE_PRO,"bei Azimut %d° (Norden = 0°, Osten = 90°) und %d° Höhe","at azimuth %d° (north = 0°, east = 90°) and %d° altitude","en azimut %d° (norte = 0°, este = 90°) y %d° de altura"
+DOME_MISS,Nicht ganz. Der Asteroid steht %s.,Not quite. The asteroid is %s.,Casi. El asteroide está %s.
+DOME_HINT_RIGHT,weiter rechts,further right,más a la derecha
+DOME_HINT_LEFT,weiter links,further left,más a la izquierda
+DOME_HINT_UP,höher,higher,más arriba
+DOME_HINT_DOWN,tiefer,lower,más abajo
+DOME_AND,und,and,y
+DOME_MARK,Asteroid (Vorhersage),Asteroid (predicted),Asteroide (previsto)
+DOME_MARK_HELP,Tipp: Der orange Kreis zeigt die vorhergesagte Position.,Tip: the orange circle shows the predicted position.,Pista: el círculo naranja muestra la posición prevista.
+DOME_LOOK,Schau dich in Ruhe in der Kuppel und am Himmel um. Danach richtest du das Teleskop genau aus.,Take your time to look around the dome and the sky. Then you will align the telescope exactly.,Tómate tu tiempo para mirar la cúpula y el cielo. Después alinearás el telescopio con precisión.
+DOME_NEXT,Weiter zum Ausrichten,On to aligning,Seguir con la alineación
+DOME_FIGURES,Sternbilder,Constellations,Constelaciones
+DIR8_0,im Norden,in the north,al norte
+DIR8_1,im Nordosten,in the north-east,al noreste
+DIR8_2,im Osten,in the east,al este
+DIR8_3,im Südosten,in the south-east,al sureste
+DIR8_4,im Süden,in the south,al sur
+DIR8_5,im Südwesten,in the south-west,al suroeste
+DIR8_6,im Westen,in the west,al oeste
+DIR8_7,im Nordwesten,in the north-west,al noroeste
+DIR8S_0,N,N,N
+DIR8S_1,NO,NE,NE
+DIR8S_2,O,E,E
+DIR8S_3,SO,SE,SE
+DIR8S_4,S,S,S
+DIR8S_5,SW,SW,SO
+DIR8S_6,W,W,O
+DIR8S_7,NW,NW,NO
 CON_FIND,FINDE AM HIMMEL UND VERBINDE,FIND IN THE SKY AND CONNECT,ENCUENTRA EN EL CIELO Y UNE
 CON_HOW,"Zieh mit dem Finger von Stern zu Stern oder tippe die Sterne nacheinander an. Um woanders weiterzumachen, tippe einfach einen anderen Stern an.","Drag your finger from star to star or tap the stars one after the other. To continue somewhere else, just tap another star.","Arrastra el dedo de estrella en estrella o toca las estrellas una tras otra. Para seguir en otro sitio, toca otra estrella."
 CON_HINT,Tipp (kostet Punkte),Hint (costs points),Pista (cuesta puntos)
