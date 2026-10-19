@@ -14,6 +14,8 @@ var _obs: ObservatoryScene
 var _btn: BigButton
 var _next: BigButton
 var _figures: BigButton
+var _go_out: BigButton
+var _go_in: BigButton
 var _task: Label
 var _status: Label
 var _overlay: Control
@@ -75,6 +77,19 @@ func _ready() -> void:
 		_obs.sky.show_figures(not _obs.sky.figures_shown())
 		Audio.play("tap"))
 	add_child(_figures)
+	_go_out = BigButton.make("DOME_GO_OUT", "zoom_out", false, 360)
+	_go_in = BigButton.make("DOME_GO_IN", "zoom_in", false, 360)
+	for b in [_go_out, _go_in]:
+		b.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL + 4)
+		b.position = Vector2(2140, 450)
+		b.visible = false
+		add_child(b)
+	_go_out.pressed.connect(func(): _obs.switch_view("roof"))
+	_go_in.pressed.connect(func(): _obs.switch_view("inside"))
+	_obs.view_changed.connect(func(_n: String):
+		if _status.text == tr("DOME_OUT_HINT"):
+			_status.text = ""
+		_update_view_buttons())
 	_btn = BigButton.make("DOME_OPEN", "power", true, 620)
 	_btn.custom_minimum_size.y = 150
 	_btn.add_theme_font_size_override("font_size", 54)
@@ -117,6 +132,15 @@ func _open() -> void:
 	_obs.set_look(true)
 	_phase = "point"
 	_task.text = tr("DOME_POINT") % _where()
+	_status.text = tr("DOME_OUT_HINT")
+	_update_view_buttons()
+
+
+## Inside the dome "go outside", on the roof "into the dome" (after opening).
+func _update_view_buttons() -> void:
+	var open := _phase in ["point", "slewing", "ready"]
+	_go_out.visible = open and _obs.view_name == "inside"
+	_go_in.visible = open and _obs.view_name == "roof"
 
 
 ## Where the asteroid stands, in words (explorer, observer) or as azimuth (expert).

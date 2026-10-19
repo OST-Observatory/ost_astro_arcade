@@ -4,7 +4,7 @@
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 ## obs_day takes SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
-## dome_open TAP=miss|hit for a tap in the pointing phase, dome FIGURES=1 and LOOK=alt,az.
+## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, dome FIGURES=1 and LOOK=alt,az.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -103,6 +103,11 @@ func _ready() -> void:
 						await get_tree().process_frame
 					var off := ds._target.cross(Vector3.UP).normalized() * 0.6 if OS.get_environment("TAP") == "miss" else Vector3.ZERO
 					ds._on_sky_tap((ds._target + off).normalized())
+				if OS.get_environment("VIEW") != "":   # VIEW=roof: out of the dome once inside
+					var dv: DomeStep = g._step
+					while dv._phase != "point":
+						await get_tree().process_frame
+					dv._obs.switch_view(OS.get_environment("VIEW"))
 			if scenario == "briefing":
 				for c in g.get_children():
 					if c is GameStartScreen:

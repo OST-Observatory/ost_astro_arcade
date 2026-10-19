@@ -191,6 +191,9 @@ DOME_MARK_HELP,Tipp: Der orange Kreis zeigt die vorhergesagte Position.,Tip: the
 DOME_LOOK,Schau dich in Ruhe in der Kuppel und am Himmel um. Danach richtest du das Teleskop genau aus.,Take your time to look around the dome and the sky. Then you will align the telescope exactly.,Tómate tu tiempo para mirar la cúpula y el cielo. Después alinearás el telescopio con precisión.
 DOME_NEXT,Weiter zum Ausrichten,On to aligning,Seguir con la alineación
 DOME_FIGURES,Sternbilder,Constellations,Constelaciones
+DOME_GO_OUT,Nach draußen,Go outside,Salir
+DOME_GO_IN,In die Kuppel,Into the dome,Entrar en la cúpula
+DOME_OUT_HINT,"Tipp: Zoome heraus oder tippe auf „Nach draußen“, dann siehst du den ganzen Himmel.",Tip: zoom out or tap “Go outside” to see the whole sky.,Pista: aleja el zoom o toca «Salir» para ver todo el cielo.
 DIR8_0,im Norden,in the north,al norte
 DIR8_1,im Nordosten,in the north-east,al noreste
 DIR8_2,im Osten,in the east,al este

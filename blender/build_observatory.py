@@ -118,15 +118,18 @@ def hemisphere_shell(name, r, thickness, material):
     return assign(o, material)
 
 
-# Intro flight of the camera (ObservatoryScene SHOTS "street" -> "roof", Blender axes):
-# no tree may stand in its way.
-FLIGHT = (Vector((-2.0, 48.0, -12.5)), Vector((-7.0, 6.5, 1.7)))
+# Intro flight of the camera (ObservatoryScene SHOTS "street" -> "roof" through VIA, a
+# quadratic Bezier, Blender axes): no tree may stand in its way.
+FLIGHT = (Vector((-26.0, 44.0, -12.3)), Vector((-14.0, 22.0, 5.0)), Vector((-7.0, 1.5, 1.7)))
+# Institute building (x0, x1, y0, y1): the dome stands 9 m from the corner (+x, +y).
+BUILDING = (-66.0, 9.0, -21.0, 9.0)
 
 
 def in_flight_path(center, radii, margin=1.4):
-    a, b = FLIGHT
+    a, v, b = FLIGHT
     for k in range(201):
-        p = a.lerp(b, k / 200)
+        t = k / 200
+        p = a.lerp(v, t).lerp(v.lerp(b, t), t)
         q = sum(((p[j] - center[j]) / radii[j]) ** 2 for j in range(3))
         if q < margin * margin:
             return True
@@ -157,7 +160,7 @@ def foliage(name, r, loc, scale, material, seed, parts):
     parts.append(assign(o, material))
 
 
-def tree(name, kind, base, h, rnd, seed, crown, M, parent):
+def tree(name, kind, base, h, rnd, seed, crown, M, parent, bark_mat=None):
     """Broad-leaved tree (several lumps of leaves), columnar tree (poplar, hornbeam) or
     Scots pine (long bare trunk, flat crown on top): all common around Golm."""
     x, y, z = base
@@ -166,9 +169,14 @@ def tree(name, kind, base, h, rnd, seed, crown, M, parent):
         trunk_h, crown_mat, bark = h * 0.78, M["tree_pine"], M["bark_pine"]
     elif kind == "column":
         trunk_h, crown_mat, bark = h * 0.3, crown, M["bark"]
+    elif kind == "ball":
+        trunk_h, crown_mat, bark = h * 0.42, crown, M["bark"]
+    elif kind == "birch":
+        trunk_h, crown_mat, bark = h * 0.75, crown, M["bark_birch"]
     else:
         trunk_h, crown_mat, bark = h * 0.45, crown, M["bark"]
-    r_trunk = h * 0.022
+    bark = bark_mat or bark
+    r_trunk = h * (0.03 if kind == "ball" else 0.022)
     parts.append(cyl(f"{name}_trunk", r_trunk, trunk_h, (x, y, z + trunk_h / 2), bark, verts=8, r2=r_trunk * 0.6))
     if kind == "broad":
         R = h * 0.3
@@ -178,6 +186,21 @@ def tree(name, kind, base, h, rnd, seed, crown, M, parent):
             rr = rnd.uniform(0.2, 0.6) * R
             p = (x + math.cos(a) * rr, y + math.sin(a) * rr, cz + rnd.uniform(-0.45, 0.4) * R)
             foliage(f"{name}_c{k}", R * rnd.uniform(0.5, 0.7), p, (1, 1, rnd.uniform(0.8, 1.0)), crown_mat, seed + k, parts)
+    elif kind == "ball":
+        # Ball maple: one dense, slightly flattened crown on a short trunk.
+        R = h * 0.36
+        for k in range(3):
+            p = (x + rnd.uniform(-0.15, 0.15) * R, y + rnd.uniform(-0.15, 0.15) * R, z + h - R * 0.85 + k * 0.1)
+            foliage(f"{name}_c{k}", R * rnd.uniform(0.8, 0.95), p, (1, 1, 0.75), crown_mat, seed + k, parts)
+    elif kind == "birch":
+        # Birch: tall white trunk, loose narrow crown of small lumps.
+        R = h * 0.13
+        for k in range(rnd.randint(6, 8)):
+            t = rnd.uniform(0.35, 0.95)
+            a = rnd.uniform(0, math.tau)
+            rr = rnd.uniform(0.3, 1.0) * R * (1.2 - t * 0.6)
+            p = (x + math.cos(a) * rr, y + math.sin(a) * rr, z + h * t)
+            foliage(f"{name}_c{k}", R * rnd.uniform(0.45, 0.7), p, (1, 1, 1.2), crown_mat, seed + k, parts)
     elif kind == "column":
         R = h * 0.15
         n = rnd.randint(3, 4)
@@ -225,18 +248,26 @@ def build():
         "tree_light": mat("tree_light", (0.19, 0.31, 0.12), 0.9),
         "tree_dark": mat("tree_dark", (0.09, 0.19, 0.08), 0.9),
         "tree_pine": mat("tree_pine", (0.07, 0.15, 0.09), 0.9),
-        "bark": mat("bark", (0.22, 0.17, 0.13), 0.95),
-        "bark_pine": mat("bark_pine", (0.42, 0.24, 0.15), 0.9),
+        "bark": mat("bark", (0.17, 0.15, 0.13), 0.95),
+        "bark_pine": mat("bark_pine", (0.3, 0.2, 0.15), 0.9),
         "hill": mat("hill", (0.1, 0.17, 0.08), 0.95),
+        "grass": mat("grass", (0.16, 0.25, 0.1), 0.95),
+        "pavement": mat("pavement", (0.36, 0.37, 0.39), 0.9),
+        "asphalt": mat("asphalt", (0.1, 0.1, 0.11), 0.9),
+        "water": mat("water", (0.03, 0.06, 0.08), 0.05),
+        "stair": mat("stair_gold", (0.62, 0.5, 0.3), 0.55, 0.6),
+        "bark_birch": mat("bark_birch", (0.85, 0.84, 0.8), 0.8),
+        "lamp_head": mat("lamp_head", (1.0, 0.85, 0.6), 0.5),
         "lamp": mat("lamp_red", (1.0, 0.1, 0.05), 0.5),
         "cabinet": mat("cabinet_white", (0.85, 0.86, 0.85), 0.5),
     }
     root = empty("Observatory")
 
     # Building below the roof (golden perforated facade) and the roof terrace.
-    box("Building", (46, 18, 14), (-8, 2, -7.05), M["gold"], root)
-    for z in (-3.0, -8.0):
-        box(f"WindowBand{z}", (46.2, 18.2, 1.0), (-8, 2, z), M["glass"], root)
+    # (Panels and windows of the facade are a texture made in Godot, ObservatoryScene.)
+    x0, x1, y0, y1 = BUILDING
+    box("Building", (x1 - x0, y1 - y0, 14), ((x0 + x1) / 2, (y0 + y1) / 2, -7.05), M["gold"], root)
+    box("RoofTop", (x1 - x0 - 0.2, y1 - y0 - 0.2, 0.1), ((x0 + x1) / 2, (y0 + y1) / 2, -0.05), M["concrete"], root)
     box("RoofSlab", (16, 12, 0.3), (0, 0, -0.15), M["concrete"], root)
     box("Parapet", (16.4, 12.4, 0.35), (0, 0, 0.0), M["concrete"], root)
     box("ParapetInner", (15.6, 11.6, 0.6), (0, 0, 0.05), M["concrete"], root)  # removed below
@@ -261,7 +292,7 @@ def build():
             rod(f"{name}_wire{ang}", (x, y, 4.0), (x + dx, y + dy, 0.0), 0.006, M["galv"], root, verts=4)
             cyl(f"{name}_foot{ang}", 0.18, 0.2, (x + dx, y + dy, 0.1), M["concrete"], root, verts=12)
     # Stair house right of the dome door (seen from the door), its door facing the dome side.
-    box("StairHouse", (2.6, 2.6, 2.7), (3.6, -4.3, 1.35), M["gold"], root)
+    box("StairHouse", (2.6, 2.6, 2.7), (3.6, -4.3, 1.35), M["stair"], root)
     box("StairDoor", (0.05, 1.0, 2.1), (2.28, -4.0, 1.05), M["dark"], root)
     box("WeatherBox", (0.4, 0.3, 0.5), (-7.3, -2.0, 1.4), M["paint"], root)
 
@@ -335,34 +366,93 @@ def build():
     box("Camera_QHY600", (0.16, 0.16, 0.14), (0.4, 0, -0.63), M["black"], ota)
     cyl("Guidescope", 0.04, 0.38, (0.75, 0, 0.1), M["paint"], ota, verts=16)
 
-    # Surroundings (very simplified, for the intro shot).
-    box("DarkBuilding", (22, 14, 15), (-34, -22, -6.5), M["dark"], root)
-    box("StellwerkHouse", (16, 8, 8), (24, 22, -10), M["orange"], root)
-    bpy.ops.mesh.primitive_cone_add(vertices=4, radius1=11.5, radius2=0, depth=4, location=(24, 22, -4), rotation=(0, 0, math.radians(45)))
+    # Surroundings after photos of the campus: the corner plaza with ball-shaped maples, a
+    # water basin and flag poles, rows of columnar hornbeams along the facades, a lawn, birches
+    # by the road, the glass building across the road. Ground level z = -14.
+    import random
+    rnd = random.Random(7)
+    g = -14.0
+    for name, (ax0, ax1, ay0, ay1), m in (
+            ("PathFacade", (x0, x1 + 6, y1, y1 + 7), M["pavement"]),
+            ("PathSide", (x1, x1 + 6, y0, y1), M["pavement"]),
+            ("PlazaA", (x1, 44, y1 + 7, 40), M["pavement"]),
+            ("PlazaB", (x1 + 6, 44, -6, y1 + 7), M["pavement"]),
+            ("RoadA", (44, 52, -120, 120), M["asphalt"]),
+            ("RoadB", (-120, 44, 40, 48), M["asphalt"])):
+        box(name, (ax1 - ax0, ay1 - ay0, 0.06), ((ax0 + ax1) / 2, (ay0 + ay1) / 2, g + 0.03), m, root)
+    box("BasinRim", (12.6, 4.6, 0.45), (30, 26, g + 0.22), M["concrete"], root)
+    box("Water", (12, 4, 0.1), (30, 26, g + 0.4), M["water"], root)
+    for k in range(3):
+        cyl(f"Flagpole{k}", 0.07, 10, (14 + k * 1.6, 34, g + 5), M["galv"], root, verts=12)
+    for k, (bx, by) in enumerate(((22, 20), (34, 20), (22, 31), (38, 31), (26, 12), (36, 12))):
+        cyl(f"Bench{k}", 0.25, 1.8, (bx + 2.5, by - 1.5, g + 0.25), M["concrete"], root, rot=(0, math.pi / 2, 0), verts=6)
+    # Street lights: the empty "StreetLight*" at the lamp head gets a light in Godot.
+    lights = ((-55, y1 + 7.5), (-35, y1 + 7.5), (-15, y1 + 7.5), (5, y1 + 7.5), (x1 + 6.5, -15), (x1 + 6.5, 0),
+              (43, -2), (43, 18), (43, 36), (24, 39))
+    for k, (lx, ly) in enumerate(lights):
+        cyl(f"LampPole{k}", 0.07, 4.2, (lx, ly, g + 2.1), M["galv"], root, verts=8)
+        cyl(f"LampHead{k}", 0.35, 0.25, (lx, ly, g + 4.3), M["lamp_head"], root, verts=16)
+        empty(f"StreetLight{k}", (lx, ly, g + 4.0), root)
+
+    crowns = [M["tree"], M["tree_light"], M["tree_dark"]]
+    planted = []
+
+    def plant(name, kind, x, y, h, crown=None, bark=None):
+        if in_flight_path((x, y, g + h * 0.6), (h * 0.38, h * 0.38, h * 0.55)):
+            return
+        tree(name, kind, (x, y, g), h, rnd, rnd.random() * 100.0, crown or rnd.choice(crowns), M, root, bark)
+        planted.append((x, y))
+
+    k = 0
+    for x in range(int(x0) + 4, int(x1), 7):      # hornbeams along the long facade
+        plant(f"Hornbeam{k}", "column", x + rnd.uniform(-0.3, 0.3), y1 + 3.5, rnd.uniform(10.5, 13.0))
+        k += 1
+    for y in range(int(y0) + 3, int(y1), 7):      # and along the short side
+        plant(f"Hornbeam{k}", "column", x1 + 3.5, y + rnd.uniform(-0.3, 0.3), rnd.uniform(10.5, 13.0))
+        k += 1
+    for k, (bx, by) in enumerate(((20, 22), (28, 22), (36, 22), (20, 33), (30, 34), (38, 33), (22, 8), (31, 8), (39, 8))):
+        plant(f"Maple{k}", "ball", bx, by, rnd.uniform(4.5, 5.5))
+    for k, (bx, by) in enumerate(((40, -14), (41.5, -8), (39, -3), (42, -20))):
+        plant(f"Birch{k}", "birch", bx, by, rnd.uniform(12, 15), M["tree_light"], M["bark_birch"])
+    for k in range(3):                             # loose trees on the lawn in front
+        plant(f"LawnTree{k}", "broad", rnd.uniform(-62, -40), rnd.uniform(22, 34), rnd.uniform(9, 13))
+
+    def free(x, y, pad):
+        if x0 - pad < x < x1 + pad and y0 - pad < y < y1 + pad:
+            return False
+        if x1 - pad < x < 56 + pad and -10 - pad < y < 48 + pad:      # plaza and roads
+            return False
+        if -120 < x < 52 and 38 < y < 50:
+            return False
+        return all((x - px) ** 2 + (y - py) ** 2 > 36 for px, py in planted)
+
+    n = 0
+    while n < 70:
+        ang = rnd.uniform(0, math.tau)
+        d = rnd.uniform(30, 130)
+        x, y = math.cos(ang) * d - 20, math.sin(ang) * d
+        if not free(x, y, 6):
+            continue
+        kind = rnd.choices(["broad", "column", "pine"], weights=(6, 1, 3))[0]
+        plant(f"Tree{n}", kind, x, y, rnd.uniform(10, 18))
+        n += 1
+
+    box("GlassBuilding", (24, 34, 18), (66, -4, g + 9), M["dark"], root)
+    for z in range(4):
+        box(f"GlassBand{z}", (24.2, 34.2, 1.6), (66, -4, g + 3.5 + z * 4.0), M["glass"], root)
+    box("StellwerkHouse", (16, 8, 8), (-30, 56, g + 4), M["orange"], root)
+    bpy.ops.mesh.primitive_cone_add(vertices=4, radius1=11.5, radius2=0, depth=4, location=(-30, 56, g + 10), rotation=(0, 0, math.radians(45)))
     r = bpy.context.active_object
     r.name = "StellwerkRoof"
     r.scale = (1.0, 0.5, 1.0)
     link(assign(r, M["roof"]), root)
-    import random
-    rnd = random.Random(7)
-    crowns = [M["tree"], M["tree_light"], M["tree_dark"]]
-    for i in range(46):
-        ang = rnd.uniform(0, math.tau)
-        d = rnd.uniform(28, 70)
-        x, y = math.cos(ang) * d, math.sin(ang) * d
-        h = rnd.uniform(9, 16)
-        kind = rnd.choices(["broad", "column", "pine"], weights=(5, 2, 3))[0]
-        seed = rnd.random() * 100.0
-        if in_flight_path((x, y, -14 + h * 0.6), (h * 0.38, h * 0.38, h * 0.55)):
-            continue
-        tree(f"Tree{i}", kind, (x, y, -14.0), h, rnd, seed, rnd.choice(crowns), M, root)
     for i, (x, y, rr) in enumerate(((-140, 160, 90), (60, 220, 120), (220, 40, 100))):
         bpy.ops.mesh.primitive_uv_sphere_add(radius=rr, location=(x, y, -14 - rr * 0.82))
         hl = bpy.context.active_object
         hl.name = f"Hill{i}"
         hl.scale = (1.6, 1.0, 1.0)
         link(assign(hl, M["hill"]), root)
-    box("Ground", (600, 600, 1), (0, 0, -14.5), M["hill"], root)
+    box("Ground", (600, 600, 1), (0, 0, -14.5), M["grass"], root)
 
 
 def export():

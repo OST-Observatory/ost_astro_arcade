@@ -6,18 +6,23 @@ class_name ObservatoryScene
 extends Node3D
 
 signal sky_tapped(dir: Vector3)
+signal view_changed(name: String)
 
 const MODEL := "res://assets/models/observatory.glb"
 ## Camera shots: [position, look_at] in metres (scene space, y up).
 const SHOTS := {
-	"street": [Vector3(-2, -12.5, -48), Vector3(0, 0, 0)],
-	"roof": [Vector3(-7.0, 1.7, -6.5), Vector3(0, 2.6, 0)],
+	"street": [Vector3(-26, -12.3, -44), Vector3(0, 2, 0)],
+	"roof": [Vector3(-7.0, 1.7, -1.5), Vector3(0, 2.6, 0)],
 	"dome_close": [Vector3(-3.2, 2.2, -5.2), Vector3(0, 3.2, 0)],
 	"inside": [Vector3(-1.6, 1.55, -1.8), Vector3(0.3, 2.3, 0.6)],
 	"sky": [Vector3(0, 1.8, -0.2), Vector3(0, 6, 4)],
 }
 ## Flights that bow through a point (quadratic Bézier), e.g. up over the building edge.
-const VIA := {"street>roof": Vector3(-4.5, 2.5, -20.0)}
+const VIA := {"street>roof": Vector3(-14, 5, -22)}
+## Places to look around from (switch_view): in the dome and on the roof terrace.
+const VIEWS := ["inside", "roof"]
+## Facade texture: one tile is 16 m wide and the building's 14 m high, 64 px per metre.
+const FACADE_TILE := Vector2(16.0, 14.0)
 
 const FOV := 55.0
 const FOV_MIN := 18.0
@@ -29,8 +34,14 @@ var camera: Camera3D
 var sky: RealSky
 var look_enabled := false
 var gestures := TouchGestures.new()
+var view_name := ""
 var _yaw := 0.0     # viewing azimuth (deg)
 var _pitch := 0.0   # viewing altitude (deg)
+var _pull := 1.0    # zooming out beyond the widest view, inside the dome
+var _switching := false
+var _fade: ColorRect
+var _street_lights: Array[OmniLight3D] = []
+var _moonlight: DirectionalLight3D
 var _env: Environment
 var _sky_mat: ShaderMaterial
 var _sun: DirectionalLight3D
@@ -73,10 +84,26 @@ func _ready() -> void:
 	we.environment = _env
 	add_child(we)
 
+	_env.ambient_light_color = Color(0.32, 0.38, 0.55)
+	# City light near the horizon (Potsdam, Berlin): the campus stands out against it.
+	_sky_mat.set_shader_parameter("night_horizon", Color(0.05, 0.055, 0.085))
+
 	_sun = DirectionalLight3D.new()
 	_sun.shadow_enabled = true
 	_sun.directional_shadow_max_distance = 80.0
 	add_child(_sun)
+	# Faint bluish light from above at night, so the setting can be made out.
+	_moonlight = DirectionalLight3D.new()
+	_moonlight.light_color = Color(0.6, 0.7, 1.0)
+	_moonlight.rotation_degrees = Vector3(-55.0, 130.0, 0.0)
+	add_child(_moonlight)
+	for n in model.find_children("StreetLight*", "Node3D", true, false):
+		var l := OmniLight3D.new()
+		l.light_color = Color(1.0, 0.78, 0.5)
+		l.omni_range = 16.0
+		l.omni_attenuation = 1.2
+		n.add_child(l)
+		_street_lights.append(l)
 	for lamp in ["RedLamp0", "RedLamp1", "RedLamp2", "RedLamp3"]:
 		var n: Node3D = model.find_child(lamp, true, false)
 		if n:
@@ -98,6 +125,13 @@ func _ready() -> void:
 	camera.fov = FOV
 	camera.far = 2000
 	add_child(camera)
+	var layer := CanvasLayer.new()
+	add_child(layer)
+	_fade = ColorRect.new()
+	_fade.color = Color(0, 0, 0, 0)
+	_fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	layer.add_child(_fade)
 	set_shot("roof")
 	set_night(0.0)
 	gestures.dragged.connect(_on_drag)
@@ -120,8 +154,19 @@ func set_night(v: float) -> void:
 	_sky_mat.set_shader_parameter("night", smoothstep(0.35, 0.95, night))
 	if sky:
 		sky.set_alpha(smoothstep(0.55, 0.95, night))
-	_env.ambient_light_energy = lerpf(1.0, 0.08, night)
+	_env.ambient_light_energy = lerpf(1.0, 0.5, night)
+	_env.ambient_light_sky_contribution = lerpf(1.0, 0.25, smoothstep(0.3, 0.9, night))
 	_env.tonemap_exposure = lerpf(1.0, 1.25, night)
+	var dark := smoothstep(0.4, 0.8, night)
+	_moonlight.light_energy = 0.22 * dark
+	_moonlight.visible = dark > 0.0
+	for l in _street_lights:
+		l.light_energy = 1.6 * dark
+		l.visible = dark > 0.0
+	if _materials.has("facade_gold"):
+		(_materials["facade_gold"] as BaseMaterial3D).emission_energy_multiplier = 1.4 * dark
+	if _materials.has("lamp_head"):
+		(_materials["lamp_head"] as BaseMaterial3D).emission_energy_multiplier = 0.2 + 5.0 * dark
 	for l in _red_lights:
 		l.light_energy = lerpf(0.0, 0.45, smoothstep(0.4, 0.8, night))
 
@@ -169,6 +214,7 @@ func set_shot(name: String) -> void:
 	var s: Array = SHOTS[name]
 	camera.position = s[0]
 	camera.look_at(s[1])
+	view_name = name
 
 
 ## Smooth camera move between shots ("" as `from`: from wherever the camera is now).
@@ -183,6 +229,26 @@ func fly(from: String, to: String, seconds: float) -> void:
 		camera.fov = lerpf(fov0, FOV, t)
 		camera.look_at((a[1] as Vector3).lerp(b[1], t)), 0.0, 1.0, seconds)
 	await tw.finished
+	view_name = to
+
+
+## Jumps (with a short fade) to another place to look around from, keeping the direction.
+func switch_view(name: String) -> void:
+	if name == view_name or _switching:
+		return
+	_switching = true
+	var tw := create_tween()
+	tw.tween_property(_fade, "color:a", 1.0, 0.25)
+	await tw.finished
+	camera.position = SHOTS[name][0]
+	camera.fov = FOV
+	view_name = name
+	_apply_look()
+	view_changed.emit(name)
+	tw = create_tween()
+	tw.tween_property(_fade, "color:a", 0.0, 0.35)
+	await tw.finished
+	_switching = false
 
 
 # --- real sky and looking around ----------------------------------------------------------
@@ -243,8 +309,17 @@ func _on_drag(d: Vector2) -> void:
 
 
 func _zoom(f: float) -> void:
-	if look_enabled:
-		camera.fov = clampf(camera.fov * f, FOV_MIN, FOV)
+	if not look_enabled:
+		return
+	# Zooming out further than the widest view takes you out of the dome onto the roof.
+	if f > 1.0 and camera.fov >= FOV - 0.01 and view_name == "inside":
+		_pull *= f
+		if _pull > 1.35:
+			_pull = 1.0
+			switch_view("roof")
+		return
+	_pull = 1.0
+	camera.fov = clampf(camera.fov * f, FOV_MIN, FOV)
 
 
 func _apply_look() -> void:
@@ -276,6 +351,49 @@ func _noise_tex(freq: float, size := 512, stretch := Vector2.ONE) -> NoiseTextur
 	return t
 
 
+## Albedo and night-emission textures of the institute's facade: golden perforated panels
+## (1.6 m x 0.875 m) and some window strips with sunshades, four storeys of 3.5 m.
+func _facade_textures() -> Array:
+	const PX := 64
+	var w := int(FACADE_TILE.x * PX)
+	var h := int(FACADE_TILE.y * PX)
+	var alb := Image.create(w, h, false, Image.FORMAT_RGB8)
+	var emi := Image.create(w, h, false, Image.FORMAT_RGB8)
+	emi.fill(Color(0, 0, 0))
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 11
+	var gold := Color(0.66, 0.53, 0.32)
+	var pw := w / 10
+	var ph := h / 16
+	for i in 10:
+		for j in 16:
+			alb.fill_rect(Rect2i(i * pw, j * ph, pw, ph), gold * rng.randf_range(0.9, 1.08))
+	# Lamellas of the perforated metal, then the joints between panels.
+	for y in range(0, h, 6):
+		alb.fill_rect(Rect2i(0, y, w, 2), gold * 0.78)
+	for i in 11:
+		alb.fill_rect(Rect2i(i * pw - 2, 0, 4, h), gold * 0.5)
+	for j in 17:
+		alb.fill_rect(Rect2i(0, j * ph - 2, w, 4), gold * 0.55)
+	# Window strips: per storey a few, 2 to 4 panels wide, with a dark sunshade above.
+	var storey := h / 4
+	for f in 4:
+		for k in rng.randi_range(0, 2):
+			var n := rng.randi_range(2, 4)
+			var x := rng.randi_range(0, 10 - n) * pw
+			var y := f * storey + int(storey * 0.35)
+			var r := Rect2i(x + 4, y, n * pw - 8, int(PX * 1.2))
+			alb.fill_rect(r, Color(0.07, 0.09, 0.12))
+			for m in range(1, n):
+				alb.fill_rect(Rect2i(x + m * pw - 3, y, 6, r.size.y), Color(0.3, 0.3, 0.3))
+			alb.fill_rect(Rect2i(x, y - 14, n * pw, 12), gold * 0.35)
+			if rng.randf() < 0.6:
+				emi.fill_rect(r.grow(-4), Color(1.0, 0.8, 0.52) * rng.randf_range(0.6, 1.0))
+	alb.generate_mipmaps()
+	emi.generate_mipmaps()
+	return [ImageTexture.create_from_image(alb), ImageTexture.create_from_image(emi)]
+
+
 func _material_for(name: String, src: Material) -> Material:
 	if _materials.has(name):
 		return _materials[name]
@@ -303,9 +421,37 @@ func _material_for(name: String, src: Material) -> Material:
 			m.emission = Color(1.0, 0.1, 0.04)
 			m.emission_energy_multiplier = 4.0
 		"facade_gold":
+			# Perforated golden panels with a few windows, lit at night (see _facade_textures).
+			var tex := _facade_textures()
+			m.albedo_color = Color(1, 1, 1)
+			m.albedo_texture = tex[0]
+			m.emission_enabled = true
+			m.emission = Color(1, 1, 1)
+			m.emission_texture = tex[1]
+			m.emission_energy_multiplier = 0.0
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3(1.0 / FACADE_TILE.x, 1.0 / FACADE_TILE.y, 1.0 / FACADE_TILE.x)
+			m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+			m.metallic = 0.45
+		"stair_gold":
 			m.albedo_texture = _noise_tex(0.4, 256)
 			m.uv1_triplanar = true
 			m.uv1_scale = Vector3(0.5, 0.5, 0.5)
+		"grass":
+			m.albedo_texture = _noise_tex(0.05, 512)
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3(0.08, 0.08, 0.08)
+		"pavement", "asphalt":
+			m.albedo_texture = _noise_tex(0.3, 256)
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3(0.25, 0.25, 0.25)
+		"water":
+			m.metallic = 0.3
+			m.roughness = 0.04
+		"lamp_head":
+			m.emission_enabled = true
+			m.emission = Color(1.0, 0.82, 0.55)
+			m.emission_energy_multiplier = 0.2
 		"glass_dark":
 			m.metallic = 0.6
 			m.roughness = 0.08
