@@ -15,6 +15,8 @@ var _quality_label: Label
 var _hint: Label
 var _ok_btn: BigButton
 var _dragging := false
+var _best := 0                       # index of the best quality of the night
+var _best_alt := 0                   # index of the highest usable altitude
 
 
 func _ready() -> void:
@@ -26,6 +28,17 @@ func _ready() -> void:
 		if float(track[i].sun_alt) < -6.0:
 			_first = mini(_first, i)
 			_last = i
+	# The best the night has to offer, to compare every choice with.
+	_best = _first
+	_best_alt = _first
+	for i in range(_first, _last + 1):
+		var q := mission.quality_at(i)
+		if not q.ok:
+			continue
+		if q.q > mission.quality_at(_best).q or not mission.quality_at(_best).ok:
+			_best = i
+		if float(track[i].alt) > float(track[_best_alt].alt) or not mission.quality_at(_best_alt).ok:
+			_best_alt = i
 	# Start in early evening twilight so the player has to look for a better time.
 	_cursor = float(_first + 2)
 	_build_side_panel()
@@ -151,16 +164,34 @@ func _update() -> void:
 	_quality_label.text = "%d" % int(round(q.q * 100))
 	_info.text = tr("PLAN_INFO") % [Kepler.local_time_hhmm(s.t), int(round(float(s.alt))),
 		int(round(float(s.sun_alt))), tr("PLAN_MOON_UP") if float(s.moon_alt) > 0 else tr("PLAN_MOON_DOWN")]
-	if not q.ok:
-		_hint.text = tr("PLAN_HINT_TWILIGHT") if float(s.sun_alt) >= -12.0 else tr("PLAN_HINT_LOW")
-	elif q.q_alt < 0.5:
-		_hint.text = tr("PLAN_HINT_HIGHER")
-	elif q.q_moon < 0.6:
-		_hint.text = tr("PLAN_HINT_MOON")
-	else:
-		_hint.text = tr("PLAN_HINT_GOOD")
+	_hint.text = _hint_for(i, s, q)
 	_ok_btn.disabled = not q.ok
 	queue_redraw()
+
+
+## What would make the choice better, measured against the best time of this night:
+## the factor (altitude, Moon, darkness) that loses most, and whether later or earlier helps.
+func _hint_for(i: float, s: Dictionary, q: Dictionary) -> String:
+	if not q.ok:
+		return tr("PLAN_HINT_TWILIGHT") if float(s.sun_alt) >= -12.0 else tr("PLAN_HINT_LOW")
+	var b := mission.quality_at(_best)
+	if q.q >= b.q - 0.03:
+		return tr("PLAN_HINT_GOOD") if q.q > 0.7 else tr("PLAN_HINT_BEST")
+	var loss := {
+		"alt": 0.5 * (float(b.q_alt) - float(q.q_alt)),
+		"moon": 0.3 * (float(b.q_moon) - float(q.q_moon)),
+		"dark": 0.2 * (float(b.q_dark) - float(q.q_dark)),
+	}
+	var worst: String = loss.keys().reduce(func(a, k): return k if loss[k] > loss[a] else a, "alt")
+	var target := _best_alt if worst == "alt" else _best
+	var when := tr("PLAN_LATER") if target > i else tr("PLAN_EARLIER")
+	match worst:
+		"alt":
+			return tr("PLAN_HINT_HIGHER") % [when, int(round(float(mission.sample(_best_alt).alt)))]
+		"moon":
+			return tr("PLAN_HINT_MOON") % when
+		_:
+			return tr("PLAN_HINT_DARKER") % when
 
 
 func _confirm() -> void:

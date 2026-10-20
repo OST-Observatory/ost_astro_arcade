@@ -102,9 +102,13 @@ PLAN_MOON_UP,über dem Horizont,above the horizon,sobre el horizonte
 PLAN_MOON_DOWN,untergegangen,below the horizon,bajo el horizonte
 PLAN_HINT_TWILIGHT,"Noch zu hell. Warte, bis es richtig dunkel ist.",Still too bright. Wait until it is really dark.,Aún hay demasiada luz: espera a que esté bien oscuro.
 PLAN_HINT_LOW,Der Asteroid steht hier zu tief.,The asteroid is too low here.,Aquí el asteroide está demasiado bajo.
-PLAN_HINT_HIGHER,"Gut! Noch besser, wenn er höher steht: Dann blicken wir durch weniger Luft.",Good! Even better when it is higher: then we look through less air.,¡Bien! Mejor aún si está más alto: así miramos a través de menos aire.
-PLAN_HINT_MOON,"Der Mond hellt den Himmel auf. Findest du eine Zeit, in der er tiefer steht?",The Moon brightens the sky. Can you find a time when it is lower?,La Luna ilumina el cielo. ¿Encuentras un momento en que esté más baja?
-PLAN_HINT_GOOD,Hervorragende Bedingungen!,Excellent conditions!,¡Condiciones excelentes!
+PLAN_HINT_HIGHER,Gut! %s steht er höher (bis %d°): Dann blicken wir durch weniger Luft.,Good! %s it is higher (up to %d°): then we look through less air.,¡Bien! %s está más alto (hasta %d°): así miramos a través de menos aire.
+PLAN_HINT_MOON,Der Mond hellt den Himmel auf. %s stört er weniger.,The Moon brightens the sky. %s it disturbs less.,La Luna ilumina el cielo. %s molesta menos.
+PLAN_HINT_GOOD,Hervorragend! Besser wird es in dieser Nacht nicht.,Excellent! It does not get any better this night.,¡Excelente! Esta noche no mejora más.
+PLAN_HINT_DARKER,Gut! %s ist der Himmel noch dunkler.,Good! %s the sky is even darker.,¡Bien! %s el cielo está aún más oscuro.
+PLAN_HINT_BEST,Sehr gut gewählt! Besser wird es in dieser Nacht nicht.,Well chosen! It does not get any better this night.,¡Bien elegido! Esta noche no mejora más.
+PLAN_LATER,Später,Later,Más tarde
+PLAN_EARLIER,Früher,Earlier,Antes
 PLAN_OK,Diese Zeit nehmen,Take this time,Elegir esta hora
 PLAN_LEGEND_TARGET,Höhe des Asteroiden,Altitude of the asteroid,Altura del asteroide
 PLAN_LEGEND_MOON,Mond (%d %% beleuchtet),Moon (%d %% illuminated),Luna (%d %% iluminada)

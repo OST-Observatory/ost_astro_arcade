@@ -9,6 +9,8 @@ extends MissionStep
 ## Pointing tolerance (deg) per difficulty; after a few misses the marker helps everyone.
 const TOLERANCE := {"explorer": 30.0, "researcher": 22.0, "pro": 15.0}
 const MISSES_FOR_MARKER := 2
+## Dome parked with the slit towards the roof view, so the visitor sees it open.
+const PARK_AZ := 290.0
 
 var _obs: ObservatoryScene
 var _btn: BigButton
@@ -45,6 +47,7 @@ func _ready() -> void:
 	_obs.set_sky_time(Kepler.jd_from_iso(_sample.t))
 	_obs.set_shutter(0.0)
 	_obs.point_to(0.0, 90.0)   # parked at the pole
+	_obs.set_dome_azimuth(PARK_AZ)
 	_obs.set_shot("roof")
 	_obs.set_look(true)
 	_obs.sky_tapped.connect(_on_sky_tap)
@@ -189,8 +192,12 @@ func _slew() -> void:
 	var jd := Kepler.jd_from_iso(_sample.t)
 	var ha := wrapf(ObservatoryScene.lst_deg(jd) - float(_sample.ra), -180.0, 180.0)
 	var dec := float(_sample.dec)
+	_obs.set_telescope(ha, dec)
+	var az_end := _obs.tube_azimuth()
 	var slew := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	slew.tween_method(func(t: float): _obs.point_to(ha * t, lerpf(90.0, dec, t)), 0.0, 1.0, 5.0)
+	slew.tween_method(func(t: float):
+		_obs.set_telescope(ha * t, lerpf(90.0, dec, t))
+		_obs.set_dome_azimuth(rad_to_deg(lerp_angle(deg_to_rad(PARK_AZ), deg_to_rad(az_end), t))), 0.0, 1.0, 5.0)
 	Audio.play("whoosh", "SFX", 0.45)
 	await slew.finished
 	_phase = "ready"
