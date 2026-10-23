@@ -49,6 +49,7 @@ var _red_lights: Array[OmniLight3D] = []
 var _dome: Node3D
 var _shutter: Node3D
 var _flap: Node3D
+var _door: Node3D
 var _ra: Node3D
 var _dec: Node3D
 var _ra0: Basis
@@ -63,6 +64,7 @@ func _ready() -> void:
 	_dome = model.find_child("DomeRotator", true, false)
 	_shutter = model.find_child("Shutter", true, false)
 	_flap = model.find_child("ShutterFlap", true, false)
+	_door = model.find_child("DomeDoor", true, false)
 	_ra = model.find_child("RA_Axis", true, false)
 	_dec = model.find_child("Dec_Axis", true, false)
 	# The model's polar axis points to its -Z; turn the mount to the real north.
@@ -193,6 +195,11 @@ func set_shutter(open: float) -> void:
 	_flap.rotation.x = deg_to_rad(-95.0 * smoothstep(0.35, 1.0, o))
 
 
+## 0 = closed, 1 = open: the dome door swings outwards to the south (hinge at its south edge).
+func set_door(open: float) -> void:
+	_door.rotation.y = deg_to_rad(-100.0 * clampf(open, 0.0, 1.0))
+
+
 ## Hour angle (deg, + = west) and declination (deg) of the telescope.
 func set_telescope(hour_angle_deg: float, dec_deg: float) -> void:
 	_ra.transform.basis = _ra0 * Basis(Vector3(0, 1, 0), deg_to_rad(-hour_angle_deg))
@@ -226,6 +233,8 @@ func set_shot(name: String) -> void:
 	camera.position = s[0]
 	camera.look_at(s[1])
 	view_name = name
+	if name == "inside":
+		set_door(1.0)   # whoever is inside came through the door
 
 
 ## Smooth camera move between shots ("" as `from`: from wherever the camera is now).
@@ -241,6 +250,8 @@ func fly(from: String, to: String, seconds: float) -> void:
 		camera.look_at((a[1] as Vector3).lerp(b[1], t)), 0.0, 1.0, seconds)
 	await tw.finished
 	view_name = to
+	if to == "inside":
+		set_door(1.0)
 
 
 ## Jumps (with a short fade) to another place to look around from, keeping the direction
@@ -255,6 +266,8 @@ func switch_view(name: String, to_shot := false) -> void:
 	camera.position = SHOTS[name][0]
 	camera.fov = FOV
 	view_name = name
+	if name == "inside":
+		set_door(1.0)
 	if to_shot:
 		camera.look_at(SHOTS[name][1])
 		var was := look_enabled
@@ -445,6 +458,7 @@ func _material_for(name: String, src: Material) -> Material:
 			m.albedo_color = Color(0.5, 0.5, 0.49)
 		"wood_floor":
 			m.albedo_texture = _noise_tex(0.02)
+			m.albedo_color = Color(0.8, 0.55, 0.34)   # the noise darkens it by about half
 			m.uv1_triplanar = true
 			m.uv1_scale = Vector3(4.0, 0.25, 4.0)
 		"dome_white", "paint_white":
