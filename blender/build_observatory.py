@@ -120,9 +120,11 @@ def hemisphere_shell(name, r, thickness, material):
 
 # Intro flight of the camera (ObservatoryScene SHOTS "street" -> "roof" through VIA, a
 # quadratic Bezier, Blender axes): no tree may stand in its way.
-FLIGHT = (Vector((-26.0, 44.0, -12.3)), Vector((-14.0, 22.0, 5.0)), Vector((-7.0, 1.5, 1.7)))
-# Institute building (x0, x1, y0, y1): the dome stands 9 m from the corner (+x, +y).
-BUILDING = (-66.0, 9.0, -21.0, 9.0)
+FLIGHT = (Vector((-42.0, -58.0, -12.3)), Vector((-22.0, -24.0, 6.0)), Vector((-7.0, 1.5, 1.7)))
+# Institute building (x0, x1, y0, y1): long towards -y, the dome terrace at its +y end, 9 m
+# from the -x facade and 8 m from the +y facade (towards the road and the Stellwerk).
+BUILDING = (-9.0, 30.0, -90.0, 8.0)
+ROOF_Z = -0.3       # top of the building box; gravel roof a little above, terrace at z = 0
 
 
 def in_flight_path(center, radii, margin=1.4):
@@ -134,6 +136,50 @@ def in_flight_path(center, radii, margin=1.4):
         if q < margin * margin:
             return True
     return False
+
+
+def railing(name, points, material, parent, heights=(0.22, 0.48, 0.74, 1.05), z0=0.0):
+    """Galvanised railing along a polyline: posts every ~1.6 m and four bars."""
+    for i in range(len(points) - 1):
+        a, b = Vector((*points[i], z0)), Vector((*points[i + 1], z0))
+        n = max(1, int((b - a).length / 1.6))
+        for k in range(n + 1):
+            p = a.lerp(b, k / n)
+            box(f"{name}Post{i}_{k}", (0.05, 0.05, 1.08), (p.x, p.y, z0 + 0.54), material, parent)
+        for h in heights:
+            rod(f"{name}Bar{i}_{h}", (a.x, a.y, z0 + h), (b.x, b.y, z0 + h), 0.022, material, parent)
+
+
+def at_wall(angle_deg, depth, gap=0.05, r_wall=BASE_R - 0.06):
+    """Centre (x, y) and z rotation of furniture standing at the inner base wall."""
+    a = math.radians(angle_deg)
+    r = r_wall - depth / 2 - gap
+    return (math.cos(a) * r, math.sin(a) * r), a + math.pi / 2
+
+
+def desk(name, angle, width, M, parent, top_z=0.82):
+    """Desk at the wall with a drawer block on one side (white, golden handles)."""
+    (x, y), rz = at_wall(angle, 0.62)
+    t = Vector((math.cos(rz), math.sin(rz), 0))
+    box(f"{name}Top", (width, 0.62, 0.04), (x, y, top_z), M["desk"], parent, rot=(0, 0, rz))
+    dx = t * (width / 2 - 0.27)
+    box(f"{name}Drawers", (0.5, 0.58, top_z - 0.04), (x + dx.x, y + dx.y, (top_z - 0.04) / 2), M["cabinet"], parent, rot=(0, 0, rz))
+    for k, h in enumerate((0.62, 0.32)):
+        box(f"{name}Handle{k}", (0.36, 0.64, 0.025), (x + dx.x, y + dx.y, h), M["brass"], parent, rot=(0, 0, rz))
+    lx = t * -(width / 2 - 0.04)
+    box(f"{name}Leg", (0.04, 0.58, top_z - 0.04), (x + lx.x, y + lx.y, (top_z - 0.04) / 2), M["galv"], parent, rot=(0, 0, rz))
+    return (x, y), rz
+
+
+def hip_roof(name, w, d, h, loc, material, parent):
+    """Pyramid roof w x d (x, y) and h high, base centred at loc."""
+    bpy.ops.mesh.primitive_cone_add(vertices=4, radius1=1.0, radius2=0, depth=1.0, rotation=(0, 0, math.radians(45)))
+    o = bpy.context.active_object
+    o.name = name
+    bpy.ops.object.transform_apply(location=False, rotation=True, scale=False)
+    o.scale = (w / math.sqrt(2), d / math.sqrt(2), h)
+    o.location = (loc[0], loc[1], loc[2] + h / 2)
+    return link(assign(o, material), parent)
 
 
 def rod(name, a, b, r, material, parent=None, verts=8):
@@ -260,60 +306,142 @@ def build():
         "lamp_head": mat("lamp_head", (1.0, 0.85, 0.6), 0.5),
         "lamp": mat("lamp_red", (1.0, 0.1, 0.05), 0.5),
         "cabinet": mat("cabinet_white", (0.85, 0.86, 0.85), 0.5),
+        "desk": mat("desk_top", (0.62, 0.63, 0.62), 0.6),
+        "brass": mat("brass", (0.75, 0.6, 0.3), 0.35, 1.0),
+        "blue": mat("box_blue", (0.08, 0.28, 0.65), 0.5),
+        "gravel": mat("gravel", (0.55, 0.53, 0.5), 0.95),
+        "coping": mat("coping", (0.64, 0.62, 0.56), 0.85),
+        "plaster": mat("plaster_white", (0.85, 0.85, 0.83), 0.8),
+        "brick": mat("brick", (0.42, 0.22, 0.16), 0.9),
+        "train": mat("train_red", (0.72, 0.07, 0.06), 0.45, 0.3),
+        "ballast": mat("ballast", (0.36, 0.33, 0.3), 0.95),
     }
     root = empty("Observatory")
 
-    # Building below the roof (golden perforated facade) and the roof terrace.
+    # Building below the roof (golden perforated facade), the gravel roof and, at its +y end,
+    # the raised dome terrace (photos 2026-10: terrace with railing, the golden stair house with
+    # its door towards the terrace, a ventilation box in front, lightning masts with guy wires).
     # (Panels and windows of the facade are a texture made in Godot, ObservatoryScene.)
     x0, x1, y0, y1 = BUILDING
-    box("Building", (x1 - x0, y1 - y0, 14), ((x0 + x1) / 2, (y0 + y1) / 2, -7.05), M["gold"], root)
-    box("RoofTop", (x1 - x0 - 0.2, y1 - y0 - 0.2, 0.1), ((x0 + x1) / 2, (y0 + y1) / 2, -0.05), M["concrete"], root)
-    box("RoofSlab", (16, 12, 0.3), (0, 0, -0.15), M["concrete"], root)
-    box("Parapet", (16.4, 12.4, 0.35), (0, 0, 0.0), M["concrete"], root)
-    box("ParapetInner", (15.6, 11.6, 0.6), (0, 0, 0.05), M["concrete"], root)  # removed below
-    parapet = bpy.data.objects["Parapet"]
-    boolean(parapet, bpy.data.objects["ParapetInner"])
-    # Railing: posts and two rails around the terrace.
-    rail_h = (0.5, 1.05)
-    corners = [(-7.6, -5.6), (7.6, -5.6), (7.6, 5.6), (-7.6, 5.6)]
-    for i in range(4):
-        a, b = Vector((*corners[i], 0)), Vector((*corners[(i + 1) % 4], 0))
-        n = int((b - a).length / 1.6)
-        for k in range(n + 1):
-            p = a.lerp(b, k / n)
-            cyl(f"Post{i}_{k}", 0.025, 1.05, (p.x, p.y, 0.53), M["galv"], root, verts=8)
-        for h in rail_h:
-            rod(f"Rail{i}_{h}", (a.x, a.y, h), (b.x, b.y, h), 0.025, M["galv"], root)
-    # Antenna masts with guy wires, stair house, small boxes.
-    for name, x, y in (("MastA", -5.5, 3.5), ("MastB", 5.9, 2.6)):
+    h = 14.0 + ROOF_Z
+    box("Building", (x1 - x0, y1 - y0, h), ((x0 + x1) / 2, (y0 + y1) / 2, -14.0 + h / 2), M["gold"], root)
+    box("RoofTop", (x1 - x0 - 0.2, y1 - y0 - 0.2, 0.05), ((x0 + x1) / 2, (y0 + y1) / 2, ROOF_Z + 0.025), M["gravel"], root)
+    for name, sx, sy, cx, cy in (("CopingN", x1 - x0, 0.5, (x0 + x1) / 2, y1 - 0.25), ("CopingS", x1 - x0, 0.5, (x0 + x1) / 2, y0 + 0.25),
+                                 ("CopingW", 0.5, y1 - y0, x0 + 0.25, (y0 + y1) / 2), ("CopingE", 0.5, y1 - y0, x1 - 0.25, (y0 + y1) / 2)):
+        box(name, (sx, sy, 0.6), (cx, cy, ROOF_Z + 0.3), M["coping"], root)
+    box("Walkway", (0.7, 78, 0.04), (1.5, -48, ROOF_Z + 0.07), M["pavement"], root)
+    # Terrace: around the dome and up to the stair house (L-shaped).
+    box("Terrace", (11.9, 16.1, -ROOF_Z), (-2.65, -0.45, ROOF_Z / 2), M["concrete"], root)
+    box("TerraceB", (4.2, 8.6, -ROOF_Z), (5.4, 3.3, ROOF_Z / 2), M["concrete"], root)
+    railing("Rail", [(3.3, -8.3), (-8.3, -8.3), (-8.3, 7.0), (7.3, 7.0), (7.3, -0.9)], M["galv"], root)
+    # Stair house: a large block of plain golden panels, door towards the terrace.
+    box("StairHouse", (4.0, 8.5, 3.7), (5.3, -5.25, ROOF_Z + 1.85), M["stair"], root)
+    box("StairDoor", (0.06, 1.05, 2.15), (3.28, -2.4, 1.08), M["dark"], root)
+    cyl("StairLampHousing", 0.13, 0.06, (3.25, -1.6, 2.35), M["paint"], root, rot=(0, math.pi / 2, 0), verts=16)
+    box("StairAlarm", (0.04, 0.08, 0.08), (3.27, -0.9, 2.4), M["lamp"], root)
+    # Higher part of the building further along the roof, with a band of clerestory windows.
+    box("UpperBlock", (16, 56, 3.8), (20, -42, ROOF_Z + 1.9), M["stair"], root)
+    box("UpperWindows", (16.1, 56.1, 0.9), (20, -42, ROOF_Z + 0.9), M["glass"], root)
+    box("UpperRoof", (15.8, 55.8, 0.06), (20, -42, ROOF_Z + 3.82), M["gravel"], root)
+    # Ventilation box in front of the terrace, skylights and a cooling unit on the gravel.
+    box("VentBox", (4.6, 1.0, 1.1), (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root)
+    cyl("VentDuct", 0.48, 1.4, (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root, rot=(0, math.pi / 2, 0), verts=24)
+    for k, y in enumerate((-16, -21, -26, -31, -36)):
+        box(f"SkylightBase{k}", (1.5, 1.5, 0.35), (-3.0, y, ROOF_Z + 0.2), M["concrete"], root)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.68, segments=16, ring_count=8, location=(-3.0, y, ROOF_Z + 0.37))
+        sky = bpy.context.active_object
+        sky.name = f"Skylight{k}"
+        sky.scale = (1, 1, 0.35)
+        link(assign(sky, M["paint"]), root)
+    box("CoolingUnit", (3.2, 1.7, 1.0), (7.0, -18.0, ROOF_Z + 1.0), M["cabinet"], root)
+    for k in range(4):
+        cyl(f"CoolingLeg{k}", 0.05, 0.5, (5.6 + 2.8 * (k % 2), -18.7 + 1.4 * (k // 2), ROOF_Z + 0.25), M["galv"], root, verts=6)
+    # Lightning masts with guy wires on tripod feet, a weather box at the railing.
+    for name, x, y in (("MastA", -5.5, 3.5), ("MastB", 5.9, 2.6), ("MastC", -7.4, -5.8)):
         rod(name, (x, y, 0), (x, y, 6.5), 0.025, M["galv"], root)
         for ang in (0, 120, 240):
-            dx, dy = math.cos(math.radians(ang)) * 1.6, math.sin(math.radians(ang)) * 1.6
-            rod(f"{name}_wire{ang}", (x, y, 4.0), (x + dx, y + dy, 0.0), 0.006, M["galv"], root, verts=4)
-            cyl(f"{name}_foot{ang}", 0.18, 0.2, (x + dx, y + dy, 0.1), M["concrete"], root, verts=12)
-    # Stair house right of the dome door (seen from the door), its door facing the dome side.
-    box("StairHouse", (2.6, 2.6, 2.7), (3.6, -4.3, 1.35), M["stair"], root)
-    box("StairDoor", (0.05, 1.0, 2.1), (2.28, -4.0, 1.05), M["dark"], root)
-    box("WeatherBox", (0.4, 0.3, 0.5), (-7.3, -2.0, 1.4), M["paint"], root)
+            dx, dy = math.cos(math.radians(ang)) * 1.4, math.sin(math.radians(ang)) * 1.4
+            rod(f"{name}_wire{ang}", (x, y, 3.2), (x + dx, y + dy, 0.0), 0.006, M["galv"], root, verts=4)
+            rod(f"{name}_leg{ang}", (x, y, 0.4), (x + dx * 0.5, y + dy * 0.5, 0.02), 0.02, M["galv"], root, verts=6)
+        cyl(f"{name}_foot", 0.22, 0.3, (x, y, 0.15), M["concrete"], root, verts=12)
+    box("WeatherBox", (0.4, 0.3, 0.5), (-8.6, 0.5, 1.2), M["paint"], root)
+    rod("WeatherPost", (-8.6, 0.65, 0.0), (-8.6, 0.65, 1.4), 0.03, M["galv"], root)
 
-    # Dome base (open cylinder with door) and interior floor.
+    # Dome base (open cylinder with door, a flared foot ring) and interior floor.
     base = cyl("DomeBase", BASE_R, BASE_H, (0, 0, BASE_H / 2), M["paint"], root, verts=96)
     inner = cyl("BaseInner", BASE_R - 0.06, BASE_H + 0.2, (0, 0, BASE_H / 2), M["paint"], verts=96)
     boolean(base, inner)
     door_cut = box("DoorCut", (0.9, 0.5, 1.9), (0.0, -BASE_R, 0.95 + 0.05), M["paint"])
     boolean(base, door_cut)
     box("Door", (0.9, 0.04, 1.9), (0.0, -BASE_R - 0.02, 1.0), M["paint"], root)
+    box("DoorHandle", (0.14, 0.04, 0.03), (0.3, -BASE_R - 0.06, 1.0), M["steel"], root)
+    foot = cyl("BaseFoot", BASE_R + 0.07, 0.12, (0, 0, 0.06), M["paint"], root, verts=96)
+    boolean(foot, cyl("BaseFootHole", BASE_R - 0.05, 0.3, (0, 0, 0.06), M["paint"], verts=96))
+    boolean(foot, box("FootDoorCut", (0.9, 0.6, 0.4), (0.0, -BASE_R, 0.06), M["paint"]))
     cyl("Floor", BASE_R - 0.06, 0.04, (0, 0, 0.02), M["wood"], root, verts=96)
+    # Inside: the ring ledge with the dome drive boxes, a rail around the wall, red lamps.
     ledge = cyl("Ledge", BASE_R - 0.02, 0.06, (0, 0, BASE_H - 0.05), M["interior"], root, verts=96)
     boolean(ledge, cyl("LedgeHole", BASE_R - 0.32, 0.2, (0, 0, BASE_H - 0.05), M["interior"], verts=96))
+    for i, ang in enumerate((25, 145, 265)):
+        a = math.radians(ang)
+        box(f"DriveBox{i}", (0.42, 0.28, 0.3), (math.cos(a) * (BASE_R - 0.2), math.sin(a) * (BASE_R - 0.2), BASE_H + 0.12),
+            M["cabinet"], root, rot=(0, 0, a + math.pi / 2))
+    rail = cyl("WallRail", BASE_R - 0.07, 0.05, (0, 0, 1.75), M["interior"], root, verts=96)
+    boolean(rail, cyl("WallRailHole", BASE_R - 0.12, 0.2, (0, 0, 1.75), M["interior"], verts=96))
+    boolean(rail, box("RailDoorCut", (1.0, 0.6, 0.4), (0.0, -BASE_R, 1.75), M["interior"]))
     for i, ang in enumerate((40, 130, 220, 310)):
         x, y = math.cos(math.radians(ang)) * (BASE_R - 0.1), math.sin(math.radians(ang)) * (BASE_R - 0.1)
         cyl(f"RedLamp{i}", 0.06, 0.12, (x * 0.97, y * 0.97, 1.85), M["lamp"], root, verts=12)
-    # Furniture along the wall (long side tangential), clear of the base wall (r = 2.44).
-    box("Cabinet", (1.2, 0.6, 0.9), (-1.23, 1.52, 0.45), M["cabinet"], root, rot=(0, 0, math.radians(39)))
-    box("FlatfieldBox", (0.9, 0.6, 0.6), (1.33, 1.43, 1.2), M["cabinet"], root, rot=(0, 0, math.radians(-43)))
-    box("ToolTrolley", (0.6, 0.45, 1.0), (1.8, -1.0, 0.5), M["dark"], root, rot=(0, 0, math.radians(60)))
-    box("ControlCabinet", (0.6, 0.3, 0.8), (-1.9, -0.9, 1.3), M["galv"], root, rot=(0, 0, math.radians(110)))
+    # Furniture (photos 2026-10), going round from the door (-y), right of it seen from inside:
+    # electrical cabinet and inverter on the wall, desk with the observatory management box
+    # above it, two chairs, the black tool trolley, the tall cabinet with the platform ladder in
+    # front, the desk with the white flat-field box.
+    (x, y), rz = at_wall(-114, 0.22, 0.0)
+    box("ElectricCabinet", (0.55, 0.22, 0.75), (x, y, 1.3), M["cabinet"], root, rot=(0, 0, rz))
+    (x, y), rz = at_wall(-128, 0.14, 0.0)
+    box("Inverter", (0.3, 0.14, 0.45), (x, y, 1.35), M["blue"], root, rot=(0, 0, rz))
+    desk("OmsDesk", -158, 1.2, M, root)
+    (x, y), rz = at_wall(-156, 0.3, 0.0)
+    box("ManagementBox", (0.7, 0.3, 0.55), (x, y, 1.25), M["steel"], root, rot=(0, 0, rz))
+    for k, ang in enumerate((176, 190)):
+        (x, y), rz = at_wall(ang, 0.45, 0.25)
+        box(f"ChairSeat{k}", (0.45, 0.42, 0.04), (x, y, 0.45), M["steel"], root, rot=(0, 0, rz))
+        o = Vector((-math.cos(math.radians(ang)), -math.sin(math.radians(ang)), 0)) * -0.2
+        box(f"ChairBack{k}", (0.45, 0.03, 0.38), (x + o.x, y + o.y, 0.7), M["steel"], root, rot=(0, 0, rz))
+        for j in range(4):
+            jx, jy = (0.19 if j % 2 else -0.19), (0.17 if j // 2 else -0.17)
+            px = x + jx * math.cos(rz) - jy * math.sin(rz)
+            py = y + jx * math.sin(rz) + jy * math.cos(rz)
+            rod(f"ChairLeg{k}_{j}", (px, py, 0.0), (px, py, 0.44), 0.012, M["steel"], root, verts=6)
+    (x, y), rz = at_wall(146, 0.45)
+    box("ToolTrolley", (0.55, 0.45, 0.95), (x, y, 0.5), M["black"], root, rot=(0, 0, rz))
+    (x, y), rz = at_wall(118, 0.5, 0.02)
+    box("TallCabinet", (0.95, 0.5, 1.95), (x, y, 0.975), M["cabinet"], root, rot=(0, 0, rz))
+    # Platform ladder in front of the cabinet: platform, two steps, handrails (aluminium).
+    a = math.radians(100)
+    out = Vector((math.cos(a), math.sin(a), 0))
+    side = Vector((-out.y, out.x, 0))
+    c = out * 1.5
+    box("LadderPlatform", (0.55, 0.5, 0.04), (c.x, c.y, 0.8), M["galv"], root, rot=(0, 0, a + math.pi / 2))
+    for k, z in enumerate((0.54, 0.27)):           # upper step next to the platform
+        p = c - out * (0.37 + 0.24 * k)
+        box(f"LadderStep{k}", (0.5, 0.22, 0.03), (p.x, p.y, z), M["galv"], root, rot=(0, 0, a + math.pi / 2))
+    for sgn in (-1, 1):
+        s0 = side * (0.27 * sgn)
+        back, front = c + out * 0.25 + s0, c - out * 0.85 + s0
+        rod(f"LadderStile{sgn}", (front.x, front.y, 0.0), (c.x - out.x * 0.25 + s0.x, c.y - out.y * 0.25 + s0.y, 0.8), 0.02, M["galv"], root)
+        rod(f"LadderLegB{sgn}", (back.x, back.y, 0.0), (back.x, back.y, 1.75), 0.02, M["galv"], root)
+        top_front = c - out * 0.2 + s0
+        rod(f"LadderRailF{sgn}", (top_front.x, top_front.y, 0.8), (top_front.x, top_front.y, 1.75), 0.02, M["galv"], root)
+        rod(f"LadderRailT{sgn}", (top_front.x, top_front.y, 1.75), (back.x, back.y, 1.75), 0.02, M["galv"], root)
+        rod(f"LadderRailM{sgn}", (top_front.x, top_front.y, 1.3), (back.x, back.y, 1.3), 0.015, M["galv"], root)
+    (x, y), rz = desk("FlatDesk", 72, 1.3, M, root)
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=0.42, location=(x, y, 0.84 + 0.26))
+    ff = bpy.context.active_object
+    ff.name = "FlatfieldBox"
+    ff.scale = (1.0, 0.8, 0.62)
+    ff.rotation_euler = (0, 0, rz)
+    link(assign(ff, M["cabinet"]), root)
 
     # Rotating dome with slit and shutter. Slit faces +Y (towards the telescope's south side
     # is handled by turning the whole DomeRotator in Godot).
@@ -323,12 +451,30 @@ def build():
     boolean(shell, slit)
     shell.location = (0, 0, 0)
     shell.parent = rot
-    # Shutter: a strip of a slightly larger shell, covering the slit when closed.
-    shutter = hemisphere_shell("ShutterShell", DOME_R + 0.06, 0.05, M["dome"])
-    keep = box("ShutterKeep", (SLIT_W + 0.24, 3.4, 3.4), (0, 1.55, 1.7 + 0.3), M["dome"])
-    boolean(shutter, keep, "INTERSECT")
+    # Shutter in two parts like the Baader dome: the upper part slides over the top to the
+    # back (pivot "Shutter" at the centre), the lower flap swings out at its lower edge
+    # ("ShutterFlap"). The upper part ends in a hood just beyond the zenith.
+    split = 1.3   # height (local z) where upper part and flap meet
+    upper = hemisphere_shell("ShutterShell", DOME_R + 0.06, 0.05, M["dome"])
+    boolean(upper, box("ShutterKeep", (SLIT_W + 0.24, 3.4, 3.4 - split), (0, 1.55, split + (3.4 - split) / 2), M["dome"]), "INTERSECT")
+    hood = hemisphere_shell("ShutterHood", DOME_R + 0.14, 0.1, M["dome"])
+    boolean(hood, box("HoodKeep", (SLIT_W + 0.34, 0.5, 0.5), (0, -0.05, DOME_R), M["dome"]), "INTERSECT")
     shutter_pivot = empty("Shutter", (0, 0, 0), rot)
-    shutter.parent = shutter_pivot
+    for o in (upper, hood):
+        o.parent = shutter_pivot
+    flap = hemisphere_shell("ShutterFlapShell", DOME_R + 0.06, 0.05, M["dome"])
+    boolean(flap, box("FlapKeep", (SLIT_W + 0.24, 3.4, split - 0.3), (0, 1.55, 0.3 + (split - 0.3) / 2), M["dome"]), "INTERSECT")
+    hinge = Vector((0.0, math.sqrt((DOME_R + 0.06) ** 2 - 0.3 ** 2), 0.3))
+    flap.data.transform(Matrix.Translation(-hinge))
+    flap_pivot = empty("ShutterFlap", tuple(hinge), rot)
+    flap.parent = flap_pivot
+    flap.location = (0, 0, 0)
+    # Ribs on the inside of the dome (not across the slit).
+    for k, ang in enumerate((20, 160, 205, 250, 295, 340)):
+        a = math.radians(ang)
+        rib = hemisphere_shell(f"Rib{k}", DOME_R - 0.05, 0.06, M["interior"])
+        boolean(rib, box(f"RibKeep{k}", (3.0, 0.07, 2.3), (math.cos(a) * 1.6, math.sin(a) * 1.6, 1.15), M["interior"], rot=(0, 0, a)), "INTERSECT")
+        rib.parent = rot
     # Slit side frames (the white arches visible on the photos).
     for sx in (-1, 1):
         arch = hemisphere_shell(f"SlitFrame{sx}", DOME_R + 0.02, 0.08, M["paint"])
@@ -366,29 +512,64 @@ def build():
     box("Camera_QHY600", (0.16, 0.16, 0.14), (0.4, 0, -0.63), M["black"], ota)
     cyl("Guidescope", 0.04, 0.38, (0.75, 0, 0.1), M["paint"], ota, verts=16)
 
-    # Surroundings after photos of the campus: the corner plaza with ball-shaped maples, a
-    # water basin and flag poles, rows of columnar hornbeams along the facades, a lawn, birches
-    # by the road, the glass building across the road. Ground level z = -14.
+    # Surroundings after photos of the campus (2026-10): across the road (+y) the orange
+    # "Stellwerk" with the railway behind it; to the west (-x) a lawn with birches, the corner
+    # plaza with ball-shaped maples, a water basin and flag poles, and the black building; far
+    # west the white office building with two chimneys; columnar hornbeams along the long
+    # facades. Ground level z = -14.
     import random
     rnd = random.Random(7)
     g = -14.0
     for name, (ax0, ax1, ay0, ay1), m in (
-            ("PathFacade", (x0, x1 + 6, y1, y1 + 7), M["pavement"]),
-            ("PathSide", (x1, x1 + 6, y0, y1), M["pavement"]),
-            ("PlazaA", (x1, 44, y1 + 7, 40), M["pavement"]),
-            ("PlazaB", (x1 + 6, 44, -6, y1 + 7), M["pavement"]),
-            ("RoadA", (44, 52, -120, 120), M["asphalt"]),
-            ("RoadB", (-120, 44, 40, 48), M["asphalt"])):
+            ("PathAround", (x0 - 6, x1 + 6, y0 - 6, y1 + 6), M["pavement"]),
+            ("Plaza", (-48, x0 - 6, -2, y1 + 6), M["pavement"]),
+            ("Road", (-200, 200, 15, 23), M["asphalt"]),
+            ("Railway", (-200, 200, 44, 56), M["ballast"])):
         box(name, (ax1 - ax0, ay1 - ay0, 0.06), ((ax0 + ax1) / 2, (ay0 + ay1) / 2, g + 0.03), m, root)
-    box("BasinRim", (12.6, 4.6, 0.45), (30, 26, g + 0.22), M["concrete"], root)
-    box("Water", (12, 4, 0.1), (30, 26, g + 0.4), M["water"], root)
+    for t, ty in enumerate((47.5, 52.5)):
+        for r, dy in enumerate((-0.72, 0.72)):
+            box(f"Rail{t}_{r}", (400, 0.08, 0.16), (0, ty + dy, g + 0.14), M["steel"], root)
+    for k, mx in enumerate(range(-180, 200, 36)):
+        for side, my in enumerate((45.0, 55.0)):
+            box(f"Catenary{k}_{side}", (0.35, 0.35, 8.5), (mx, my, g + 4.25), M["galv"], root)
+        rod(f"CatenaryBeam{k}", (mx, 45.0, g + 8.2), (mx, 55.0, g + 8.2), 0.06, M["galv"], root, verts=6)
+    for t, ty in enumerate((47.5, 52.5)):
+        rod(f"Contact{t}", (-200, ty, g + 6.3), (200, ty, g + 6.3), 0.015, M["black"], root, verts=4)
+    # The red regional train standing at the station.
+    box("Train", (64, 2.9, 3.4), (-6, 47.5, g + 2.3), M["train"], root)
+    box("TrainWindows", (64.1, 2.95, 0.9), (-6, 47.5, g + 2.7), M["glass"], root)
+    box("TrainRoof", (63, 2.6, 0.35), (-6, 47.5, g + 4.15), M["galv"], root)
+    # The Stellwerk: orange, three storeys, red tiled hip roof, windows towards the campus.
+    sx, sy = -14.0, 33.0
+    box("StellwerkHouse", (22, 11, 9.5), (sx, sy, g + 4.75), M["orange"], root)
+    hip_roof("StellwerkRoof", 23, 12, 4.8, (sx, sy, g + 9.5), M["roof"], root)
+    for fl in range(3):
+        for k in range(9):
+            box(f"StellwerkWin{fl}_{k}", (1.1, 0.1, 1.4), (sx - 9.6 + k * 2.4, sy - 5.52, g + 1.9 + fl * 3.0), M["glass"], root)
+    # Houses with red roofs beyond the railway.
+    for k, (hx, hy, hw) in enumerate(((-50, 72, 10), (-22, 70, 9), (18, 74, 12), (45, 68, 9), (70, 76, 11))):
+        box(f"House{k}", (hw, 8, 6.5), (hx, hy, g + 3.25), M["plaster"], root)
+        hip_roof(f"HouseRoof{k}", hw + 1, 9, 3.6, (hx, hy, g + 6.5), M["roof"], root)
+    # The black building with big framed windows, facing the plaza and our building.
+    box("BlackBuilding", (26, 52, 18), (-66, -16, g + 9), M["dark"], root)
+    for k, (wy, wz, ww, wh) in enumerate(((-30, 9, 12, 4), (-8, 6, 7, 3), (4, 12.5, 8, 4))):
+        box(f"BlackFrame{k}", (0.5, ww + 0.6, wh + 0.6), (-52.8, wy, g + wz), M["coping"], root)
+        box(f"BlackGlass{k}", (0.6, ww, wh), (-52.8, wy, g + wz), M["glass"], root)
+    # The white office building far west with window bands, and two brick chimneys.
+    box("OfficeBuilding", (30, 55, 17), (-115, -75, g + 8.5), M["plaster"], root)
+    for k in range(4):
+        box(f"OfficeBand{k}", (30.2, 55.2, 1.3), (-115, -75, g + 3.5 + k * 3.6), M["glass"], root)
+    for k, cx in enumerate((-108, -100)):
+        cyl(f"Chimney{k}", 0.9, 28, (cx, -32, g + 14), M["brick"], root, verts=16)
+    # Plaza: water basin, flag poles, benches; street lights around.
+    box("BasinRim", (12.6, 4.6, 0.45), (-30, 8, g + 0.22), M["concrete"], root)
+    box("Water", (12, 4, 0.1), (-30, 8, g + 0.4), M["water"], root)
     for k in range(3):
-        cyl(f"Flagpole{k}", 0.07, 10, (14 + k * 1.6, 34, g + 5), M["galv"], root, verts=12)
-    for k, (bx, by) in enumerate(((22, 20), (34, 20), (22, 31), (38, 31), (26, 12), (36, 12))):
-        cyl(f"Bench{k}", 0.25, 1.8, (bx + 2.5, by - 1.5, g + 0.25), M["concrete"], root, rot=(0, math.pi / 2, 0), verts=6)
-    # Street lights: the empty "StreetLight*" at the lamp head gets a light in Godot.
-    lights = ((-55, y1 + 7.5), (-35, y1 + 7.5), (-15, y1 + 7.5), (5, y1 + 7.5), (x1 + 6.5, -15), (x1 + 6.5, 0),
-              (43, -2), (43, 18), (43, 36), (24, 39))
+        cyl(f"Flagpole{k}", 0.07, 10, (-44, 12 - k * 1.6, g + 5), M["galv"], root, verts=12)
+    for k, (bx, by) in enumerate(((-38, 2), (-22, 2), (-38, 14), (-22, 14))):
+        cyl(f"Bench{k}", 0.25, 1.8, (bx, by, g + 0.25), M["concrete"], root, rot=(0, math.pi / 2, 0), verts=6)
+    lights = ((x0 - 4, -60), (x0 - 4, -30), (x0 - 4, 0), (x1 + 4, -60), (x1 + 4, -30), (x1 + 4, 0),
+              (-40, 0), (-20, 13), (0, y1 + 5), (20, y1 + 5))
     for k, (lx, ly) in enumerate(lights):
         cyl(f"LampPole{k}", 0.07, 4.2, (lx, ly, g + 2.1), M["galv"], root, verts=8)
         cyl(f"LampHead{k}", 0.35, 0.25, (lx, ly, g + 4.3), M["lamp_head"], root, verts=16)
@@ -400,52 +581,43 @@ def build():
     def plant(name, kind, x, y, h, crown=None, bark=None):
         if in_flight_path((x, y, g + h * 0.6), (h * 0.38, h * 0.38, h * 0.55)):
             return
+        v = Vector((x, y)) - FLIGHT[0].xy                     # keep the start view open
+        if v.length < 35.0 and v.angle(-FLIGHT[0].xy, 0.0) < math.radians(40):
+            return
         tree(name, kind, (x, y, g), h, rnd, rnd.random() * 100.0, crown or rnd.choice(crowns), M, root, bark)
         planted.append((x, y))
 
     k = 0
-    for x in range(int(x0) + 4, int(x1), 7):      # hornbeams along the long facade
-        plant(f"Hornbeam{k}", "column", x + rnd.uniform(-0.3, 0.3), y1 + 3.5, rnd.uniform(10.5, 13.0))
-        k += 1
-    for y in range(int(y0) + 3, int(y1), 7):      # and along the short side
-        plant(f"Hornbeam{k}", "column", x1 + 3.5, y + rnd.uniform(-0.3, 0.3), rnd.uniform(10.5, 13.0))
-        k += 1
-    for k, (bx, by) in enumerate(((20, 22), (28, 22), (36, 22), (20, 33), (30, 34), (38, 33), (22, 8), (31, 8), (39, 8))):
+    for y in range(int(y0) + 4, int(y1), 7):      # hornbeams along both long facades
+        for x in (x0 - 3.5, x1 + 3.5):
+            plant(f"Hornbeam{k}", "column", x + rnd.uniform(-0.3, 0.3), y, rnd.uniform(10.5, 13.0))
+            k += 1
+    for k, (bx, by) in enumerate(((-40, 6), (-34, 13), (-26, 13), (-20, 6), (-40, -1), (-12.5, 13))):
         plant(f"Maple{k}", "ball", bx, by, rnd.uniform(4.5, 5.5))
-    for k, (bx, by) in enumerate(((40, -14), (41.5, -8), (39, -3), (42, -20))):
-        plant(f"Birch{k}", "birch", bx, by, rnd.uniform(12, 15), M["tree_light"], M["bark_birch"])
-    for k in range(3):                             # loose trees on the lawn in front
-        plant(f"LawnTree{k}", "broad", rnd.uniform(-62, -40), rnd.uniform(22, 34), rnd.uniform(9, 13))
+    for k in range(10):                             # birches on the lawn towards the black building
+        plant(f"Birch{k}", "birch", rnd.uniform(-48, -20), rnd.uniform(-40, -8), rnd.uniform(12, 15), M["tree_light"], M["bark_birch"])
+    for k in range(6):                              # trees along the road and by the Stellwerk
+        plant(f"RoadTree{k}", "broad", rnd.uniform(-60, 60), rnd.choice((13.0, 25.5)), rnd.uniform(9, 13))
 
     def free(x, y, pad):
-        if x0 - pad < x < x1 + pad and y0 - pad < y < y1 + pad:
+        if x0 - pad - 6 < x < x1 + pad + 6 and y0 - pad - 6 < y < y1 + pad + 6:
             return False
-        if x1 - pad < x < 56 + pad and -10 - pad < y < 48 + pad:      # plaza and roads
-            return False
-        if -120 < x < 52 and 38 < y < 50:
-            return False
+        for bx0, bx1, by0, by1 in ((-80, -52, -42, 10), (-130, -100, -103, -47), (-26, -2, 27, 39),
+                                   (-200, 200, 13, 58), (-50, -9, -4, 16)):
+            if bx0 - pad < x < bx1 + pad and by0 - pad < y < by1 + pad:
+                return False
         return all((x - px) ** 2 + (y - py) ** 2 > 36 for px, py in planted)
 
     n = 0
-    while n < 70:
+    while n < 80:
         ang = rnd.uniform(0, math.tau)
-        d = rnd.uniform(30, 130)
-        x, y = math.cos(ang) * d - 20, math.sin(ang) * d
-        if not free(x, y, 6):
+        d = rnd.uniform(25, 150)
+        x, y = math.cos(ang) * d + 10, math.sin(ang) * d - 30
+        if not free(x, y, 3):
             continue
         kind = rnd.choices(["broad", "column", "pine"], weights=(6, 1, 3))[0]
         plant(f"Tree{n}", kind, x, y, rnd.uniform(10, 18))
         n += 1
-
-    box("GlassBuilding", (24, 34, 18), (66, -4, g + 9), M["dark"], root)
-    for z in range(4):
-        box(f"GlassBand{z}", (24.2, 34.2, 1.6), (66, -4, g + 3.5 + z * 4.0), M["glass"], root)
-    box("StellwerkHouse", (16, 8, 8), (-30, 56, g + 4), M["orange"], root)
-    bpy.ops.mesh.primitive_cone_add(vertices=4, radius1=11.5, radius2=0, depth=4, location=(-30, 56, g + 10), rotation=(0, 0, math.radians(45)))
-    r = bpy.context.active_object
-    r.name = "StellwerkRoof"
-    r.scale = (1.0, 0.5, 1.0)
-    link(assign(r, M["roof"]), root)
     for i, (x, y, rr) in enumerate(((-140, 160, 90), (60, 220, 120), (220, 40, 100))):
         bpy.ops.mesh.primitive_uv_sphere_add(radius=rr, location=(x, y, -14 - rr * 0.82))
         hl = bpy.context.active_object

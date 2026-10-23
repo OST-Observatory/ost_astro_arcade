@@ -11,14 +11,14 @@ signal view_changed(name: String)
 const MODEL := "res://assets/models/observatory.glb"
 ## Camera shots: [position, look_at] in metres (scene space, y up).
 const SHOTS := {
-	"street": [Vector3(-26, -12.3, -44), Vector3(0, 2, 0)],
+	"street": [Vector3(-42, -12.3, 58), Vector3(0, 2, 0)],
 	"roof": [Vector3(-7.0, 1.7, -1.5), Vector3(0, 2.6, 0)],
 	"dome_close": [Vector3(-3.2, 2.2, -5.2), Vector3(0, 3.2, 0)],
-	"inside": [Vector3(-1.6, 1.55, -1.8), Vector3(0.3, 2.3, 0.6)],
+	"inside": [Vector3(0.6, 1.6, 1.9), Vector3(-0.3, 2.3, -0.6)],
 	"sky": [Vector3(0, 1.8, -0.2), Vector3(0, 6, 4)],
 }
 ## Flights that bow through a point (quadratic Bézier), e.g. up over the building edge.
-const VIA := {"street>roof": Vector3(-14, 5, -22)}
+const VIA := {"street>roof": Vector3(-22, 6, 24)}
 ## Places to look around from (switch_view): in the dome and on the roof terrace.
 const VIEWS := ["inside", "roof"]
 ## Facade texture: one tile is 16 m wide and the building's 14 m high, 64 px per metre.
@@ -48,6 +48,7 @@ var _sun: DirectionalLight3D
 var _red_lights: Array[OmniLight3D] = []
 var _dome: Node3D
 var _shutter: Node3D
+var _flap: Node3D
 var _ra: Node3D
 var _dec: Node3D
 var _ra0: Basis
@@ -61,6 +62,7 @@ func _ready() -> void:
 	_apply_materials(model)
 	_dome = model.find_child("DomeRotator", true, false)
 	_shutter = model.find_child("Shutter", true, false)
+	_flap = model.find_child("ShutterFlap", true, false)
 	_ra = model.find_child("RA_Axis", true, false)
 	_dec = model.find_child("Dec_Axis", true, false)
 	_ra0 = _ra.transform.basis
@@ -96,6 +98,8 @@ func _ready() -> void:
 	_moonlight = DirectionalLight3D.new()
 	_moonlight.light_color = Color(0.6, 0.7, 1.0)
 	_moonlight.rotation_degrees = Vector3(-55.0, 130.0, 0.0)
+	_moonlight.shadow_enabled = true
+	_moonlight.directional_shadow_max_distance = 60.0
 	add_child(_moonlight)
 	for n in model.find_children("StreetLight*", "Node3D", true, false):
 		var l := OmniLight3D.new()
@@ -109,7 +113,7 @@ func _ready() -> void:
 		if n:
 			var l := OmniLight3D.new()
 			l.light_color = Color(1.0, 0.12, 0.05)
-			l.omni_range = 3.2
+			l.omni_range = 4.2
 			l.shadow_enabled = true  # keeps the red light inside the dome
 			n.add_child(l)
 			_red_lights.append(l)
@@ -117,7 +121,7 @@ func _ready() -> void:
 	stair.light_color = Color(1.0, 0.85, 0.6)
 	stair.omni_range = 4.0
 	stair.shadow_enabled = true
-	stair.position = Vector3(1.6, 2.3, 4.0)
+	stair.position = Vector3(2.6, 2.5, 2.4)
 	add_child(stair)
 	_red_lights.append(stair)
 
@@ -154,11 +158,13 @@ func set_night(v: float) -> void:
 	_sky_mat.set_shader_parameter("night", smoothstep(0.35, 0.95, night))
 	if sky:
 		sky.set_alpha(smoothstep(0.55, 0.95, night))
-	_env.ambient_light_energy = lerpf(1.0, 0.5, night)
-	_env.ambient_light_sky_contribution = lerpf(1.0, 0.25, smoothstep(0.3, 0.9, night))
+	# Little ambient light at night (it would reach into the dome and wash out the red
+	# light); the setting outside is lit by the moonlight (with shadows, so not inside).
+	_env.ambient_light_energy = lerpf(1.0, 0.16, night)
+	_env.ambient_light_sky_contribution = lerpf(1.0, 0.4, smoothstep(0.3, 0.9, night))
 	_env.tonemap_exposure = lerpf(1.0, 1.25, night)
 	var dark := smoothstep(0.4, 0.8, night)
-	_moonlight.light_energy = 0.22 * dark
+	_moonlight.light_energy = 0.45 * dark
 	_moonlight.visible = dark > 0.0
 	for l in _street_lights:
 		l.light_energy = 1.6 * dark
@@ -168,7 +174,7 @@ func set_night(v: float) -> void:
 	if _materials.has("lamp_head"):
 		(_materials["lamp_head"] as BaseMaterial3D).emission_energy_multiplier = 0.2 + 5.0 * dark
 	for l in _red_lights:
-		l.light_energy = lerpf(0.0, 0.45, smoothstep(0.4, 0.8, night))
+		l.light_energy = lerpf(0.0, 1.2, smoothstep(0.4, 0.8, night))
 
 
 func set_dome_azimuth(deg: float) -> void:
@@ -177,8 +183,11 @@ func set_dome_azimuth(deg: float) -> void:
 
 ## 0 = closed, 1 = open (the shutter slides back over the zenith).
 func set_shutter(open: float) -> void:
-	# The shutter slides up over the top of the dome to its back.
-	_shutter.rotation.x = deg_to_rad(90.0 * clampf(open, 0.0, 1.0))
+	# The upper shutter slides over the top of the dome to its back, then the lower flap
+	# swings out on its struts (Baader dome).
+	var o := clampf(open, 0.0, 1.0)
+	_shutter.rotation.x = deg_to_rad(66.0 * smoothstep(0.0, 0.7, o))
+	_flap.rotation.x = deg_to_rad(-95.0 * smoothstep(0.35, 1.0, o))
 
 
 ## Hour angle (deg, + = west) and declination (deg) of the telescope.
@@ -232,8 +241,9 @@ func fly(from: String, to: String, seconds: float) -> void:
 	view_name = to
 
 
-## Jumps (with a short fade) to another place to look around from, keeping the direction.
-func switch_view(name: String) -> void:
+## Jumps (with a short fade) to another place to look around from, keeping the direction
+## (or turning to the shot's own target with `to_shot`).
+func switch_view(name: String, to_shot := false) -> void:
 	if name == view_name or _switching:
 		return
 	_switching = true
@@ -243,7 +253,13 @@ func switch_view(name: String) -> void:
 	camera.position = SHOTS[name][0]
 	camera.fov = FOV
 	view_name = name
-	_apply_look()
+	if to_shot:
+		camera.look_at(SHOTS[name][1])
+		var was := look_enabled
+		set_look(true)
+		look_enabled = was
+	else:
+		_apply_look()
 	view_changed.emit(name)
 	tw = create_tween()
 	tw.tween_property(_fade, "color:a", 0.0, 0.35)
@@ -394,6 +410,23 @@ func _facade_textures() -> Array:
 	return [ImageTexture.create_from_image(alb), ImageTexture.create_from_image(emi)]
 
 
+## Panels of the roof structures: 1.6 m x 0.9 m, one tile 3.2 m x 1.8 m, 128 px per metre.
+func _panel_texture() -> ImageTexture:
+	var img := Image.create(410, 230, false, Image.FORMAT_RGB8)
+	var gold := Color(0.78, 0.66, 0.42)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 5
+	for i in 2:
+		for j in 2:
+			img.fill_rect(Rect2i(i * 205, j * 115, 205, 115), gold * rng.randf_range(0.92, 1.06))
+	for i in 3:
+		img.fill_rect(Rect2i(i * 205 - 2, 0, 4, 230), gold * 0.35)
+	for j in 3:
+		img.fill_rect(Rect2i(0, j * 115 - 2, 410, 4), gold * 0.4)
+	img.generate_mipmaps()
+	return ImageTexture.create_from_image(img)
+
+
 func _material_for(name: String, src: Material) -> Material:
 	if _materials.has(name):
 		return _materials[name]
@@ -434,9 +467,17 @@ func _material_for(name: String, src: Material) -> Material:
 			m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 			m.metallic = 0.45
 		"stair_gold":
-			m.albedo_texture = _noise_tex(0.4, 256)
+			# Large plain brass-coloured panels with dark joints (the roof structures).
+			m.albedo_color = Color(1, 1, 1)
+			m.albedo_texture = _panel_texture()
 			m.uv1_triplanar = true
-			m.uv1_scale = Vector3(0.5, 0.5, 0.5)
+			m.uv1_scale = Vector3(1.0 / 3.2, 1.0 / 1.8, 1.0 / 3.2)
+			m.metallic = 0.5
+			m.roughness = 0.45
+		"gravel", "coping", "ballast":
+			m.albedo_texture = _noise_tex(0.9 if name != "coping" else 0.1, 256)
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3(0.3, 0.3, 0.3)
 		"grass":
 			m.albedo_texture = _noise_tex(0.05, 512)
 			m.uv1_triplanar = true

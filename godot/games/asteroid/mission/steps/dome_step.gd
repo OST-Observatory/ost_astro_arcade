@@ -131,7 +131,7 @@ func _open() -> void:
 	tw.tween_method(_obs.set_shutter, 0.0, 1.0, 3.0).set_trans(Tween.TRANS_SINE)
 	await tw.finished
 	_status.text = ""
-	await _obs.fly("roof", "inside", 3.0)
+	await _obs.switch_view("inside", true)
 	_obs.set_look(true)
 	_phase = "point"
 	_task.text = tr("DOME_POINT") % _where()
