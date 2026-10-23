@@ -14,7 +14,7 @@ const SHOTS := {
 	"street": [Vector3(-42, -12.3, 58), Vector3(0, 2, 0)],
 	"roof": [Vector3(-7.0, 1.7, -1.5), Vector3(0, 2.6, 0)],
 	"dome_close": [Vector3(-3.2, 2.2, -5.2), Vector3(0, 3.2, 0)],
-	"inside": [Vector3(0.6, 1.6, 1.9), Vector3(-0.3, 2.3, -0.6)],
+	"inside": [Vector3(0.6, 1.6, 1.9), Vector3(-1.0, 1.25, -1.2)],
 	"sky": [Vector3(0, 1.8, -0.2), Vector3(0, 6, 4)],
 }
 ## Flights that bow through a point (quadratic Bézier), e.g. up over the building edge.

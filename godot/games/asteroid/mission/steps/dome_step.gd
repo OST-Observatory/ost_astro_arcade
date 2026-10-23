@@ -21,6 +21,7 @@ var _go_in: BigButton
 var _task: Label
 var _status: Label
 var _overlay: Control
+var _shade: ColorRect
 var _phase := "outside"     # outside, opening, point, slewing, ready
 var _sample := {}
 var _target := Vector3.UP   # predicted asteroid direction
@@ -59,12 +60,12 @@ func _ready() -> void:
 	_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_overlay.draw.connect(_draw_overlay)
 	add_child(_overlay)
-	var shade := ColorRect.new()
-	shade.color = Color(0, 0, 0, 0.35)
-	shade.position = Vector2(0, 0)
-	shade.size = Vector2(2560, 300)
-	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(shade)
+	_shade = ColorRect.new()
+	_shade.color = Color(0, 0, 0, 0.35)
+	_shade.position = Vector2(0, 0)
+	_shade.size = Vector2(2560, 300)
+	_shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_shade)
 	_task = add_header("DOME_TITLE", "DOME_TASK").get_child(1) as Label
 	_task.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_task.text = tr("DOME_TASK")
@@ -90,8 +91,6 @@ func _ready() -> void:
 	_go_out.pressed.connect(func(): _obs.switch_view("roof"))
 	_go_in.pressed.connect(func(): _obs.switch_view("inside"))
 	_obs.view_changed.connect(func(_n: String):
-		if _status.text == tr("DOME_OUT_HINT"):
-			_status.text = ""
 		_update_view_buttons())
 	_btn = BigButton.make("DOME_OPEN", "power", true, 620)
 	_btn.custom_minimum_size.y = 150
@@ -145,8 +144,7 @@ func _open() -> void:
 	await _obs.switch_view("inside", true)
 	_obs.set_look(true)
 	_phase = "point"
-	_task.text = tr("DOME_POINT") % _where()
-	_status.text = tr("DOME_OUT_HINT")
+	_set_task(tr("DOME_POINT") % _where())
 	_update_view_buttons()
 
 
@@ -155,6 +153,13 @@ func _update_view_buttons() -> void:
 	var open := _phase in ["point", "slewing", "ready"]
 	_go_out.visible = open and _obs.view_name == "inside"
 	_go_in.visible = open and _obs.view_name == "roof"
+
+
+## New task text; the dark band behind the header grows with it.
+func _set_task(text: String) -> void:
+	_task.text = text
+	await get_tree().process_frame
+	_shade.size.y = maxf(300.0, _task.get_global_rect().end.y + 30.0)
 
 
 ## Where the asteroid stands, in words (explorer, observer) or as azimuth (expert).
@@ -213,7 +218,7 @@ func _slew() -> void:
 	await slew.finished
 	_phase = "ready"
 	_status.text = tr("DOME_READY") % [int(round(float(_sample.alt))), int(round(_obs.tube_azimuth()))]
-	_task.text = tr("DOME_LOOK")
+	_set_task(tr("DOME_LOOK"))
 	_next.visible = true
 	Audio.play("tick")
 

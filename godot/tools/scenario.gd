@@ -3,7 +3,7 @@
 ## UI_LANG=en|es switches the language for any scenario.
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
-## obs_day takes SHOT=<shot>, CAM=px,py,pz,tx,ty,tz and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
+## obs_* take CAM=px,py,pz,tx,ty,tz, obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
 ## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
 extends Control
 
@@ -340,10 +340,6 @@ func _ready() -> void:
 					obs.set_night(0.1)
 					obs.set_shutter(float(OS.get_environment("SHUTTER")) if OS.get_environment("SHUTTER") != "" else 0.0)
 					obs.set_shot(OS.get_environment("SHOT") if OS.get_environment("SHOT") != "" else "roof")
-					if OS.get_environment("CAM") != "":   # CAM=px,py,pz,tx,ty,tz: free camera
-						var c := Array(OS.get_environment("CAM").split(",")).map(func(v): return float(v))
-						obs.camera.position = Vector3(c[0], c[1], c[2])
-						obs.camera.look_at(Vector3(c[3], c[4], c[5]))
 				"obs_street":
 					obs.set_night(0.45)
 					obs.set_shot("street")
@@ -365,6 +361,10 @@ func _ready() -> void:
 					obs.set_shutter(1.0)
 					obs.point_to(-20.0, 20.0)
 					obs.set_shot("inside")
+			if OS.get_environment("CAM") != "":   # CAM=px,py,pz,tx,ty,tz: free camera
+				var c := Array(OS.get_environment("CAM").split(",")).map(func(v): return float(v))
+				obs.camera.position = Vector3(c[0], c[1], c[2])
+				obs.camera.look_at(Vector3(c[3], c[4], c[5]))
 		"psf":
 			# PSF test chart: stars from 3 to 15 mag in a row, through the real CCD display.
 			var stars := []
