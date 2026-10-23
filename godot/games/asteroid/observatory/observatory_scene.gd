@@ -65,6 +65,8 @@ func _ready() -> void:
 	_flap = model.find_child("ShutterFlap", true, false)
 	_ra = model.find_child("RA_Axis", true, false)
 	_dec = model.find_child("Dec_Axis", true, false)
+	# The model's polar axis points to its -Z; turn the mount to the real north.
+	_ra.transform = Transform3D(Basis(Vector3.UP, RealSky.COMPASS_YAW), Vector3.ZERO) * _ra.transform
 	_ra0 = _ra.transform.basis
 	_dec0 = _dec.transform.basis
 
@@ -178,7 +180,8 @@ func set_night(v: float) -> void:
 
 
 func set_dome_azimuth(deg: float) -> void:
-	_dome.rotation.y = deg_to_rad(-deg)
+	# The slit of the model faces its -Z; azimuth grows clockwise seen from above.
+	_dome.rotation.y = deg_to_rad(RealSky.alt_az(Vector3(0, 0, -1)).y - deg)
 
 
 ## 0 = closed, 1 = open (the shutter slides back over the zenith).
@@ -204,8 +207,7 @@ func tube_direction() -> Vector3:
 
 ## Azimuth (deg, from north over east) of the tube; used to make the dome follow.
 func tube_azimuth() -> float:
-	var d := tube_direction()
-	return fposmod(rad_to_deg(atan2(d.x, -d.z)), 360.0)
+	return RealSky.alt_az(tube_direction()).y
 
 
 ## Points the telescope and turns the dome slit to it, like the real dome automation.

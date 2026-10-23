@@ -1,7 +1,8 @@
 ## The real night sky above the OST at a given time: the 5000 stars to 6 mag of the
 ## constellation game, optional stick figures with names, and the Moon with its phase.
 ## Lives at a large radius around the camera (follows it), so the dome and the trees hide it.
-## Scene axes: north = -Z, east = +X, up = +Y; azimuth from north over east.
+## Compass frame: north = -Z, east = +X, up = +Y, azimuth from north over east; turned into
+## the scene by COMPASS_YAW (the campus is not aligned with north).
 class_name RealSky
 extends Node3D
 
@@ -11,6 +12,10 @@ const RADIUS := 900.0
 const OBLIQUITY := 23.4393
 ## North galactic pole (J2000), for the Milky Way band of the sky shader.
 const GAL_POLE := Vector2(192.85948, 27.12825)
+
+## Compass frame -> scene: rotation about the vertical. South points to the black building
+## (scene -X), so north is +X, east +Z and the road with the railway lies to the west.
+const COMPASS_YAW := -PI / 2
 
 var follow: Camera3D
 var _stars: MultiMeshInstance3D
@@ -29,12 +34,20 @@ var _figures := false
 static func horizon_dir(alt: float, az: float) -> Vector3:
 	var a := deg_to_rad(alt)
 	var z := deg_to_rad(az)
-	return Vector3(sin(z) * cos(a), sin(a), -cos(z) * cos(a))
+	return to_scene(Vector3(sin(z) * cos(a), sin(a), -cos(z) * cos(a)))
+
+
+static func to_scene(v: Vector3) -> Vector3:
+	return v.rotated(Vector3.UP, COMPASS_YAW)
+
+
+static func to_compass(v: Vector3) -> Vector3:
+	return v.rotated(Vector3.UP, -COMPASS_YAW)
 
 
 ## Altitude/azimuth (deg) of a unit vector, as Vector2(alt, az).
 static func alt_az(d: Vector3) -> Vector2:
-	var v := d.normalized()
+	var v := to_compass(d).normalized()
 	return Vector2(rad_to_deg(asin(clampf(v.y, -1.0, 1.0))), fposmod(rad_to_deg(atan2(v.x, -v.z)), 360.0))
 
 
@@ -48,7 +61,7 @@ static func equatorial_dir(ra: float, dec: float, lst: float) -> Vector3:
 	var up := Vector3(0, 1, 0)
 	var meridian := -north * sin(p) + up * cos(p)   # hour angle 0 on the equator
 	var pole := north * cos(p) + up * sin(p)
-	return meridian * cos(d) * cos(h) - east * cos(d) * sin(h) + pole * sin(d)
+	return to_scene(meridian * cos(d) * cos(h) - east * cos(d) * sin(h) + pole * sin(d))
 
 
 ## Right ascension/declination (deg) of the Sun, low precision (0.01 deg).

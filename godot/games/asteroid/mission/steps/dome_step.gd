@@ -10,7 +10,7 @@ extends MissionStep
 const TOLERANCE := {"explorer": 30.0, "researcher": 22.0, "pro": 15.0}
 const MISSES_FOR_MARKER := 2
 ## Dome parked with the slit towards the roof view, so the visitor sees it open.
-const PARK_AZ := 290.0
+const PARK_AZ := 200.0
 
 var _obs: ObservatoryScene
 var _btn: BigButton

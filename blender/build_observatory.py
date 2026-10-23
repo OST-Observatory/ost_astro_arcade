@@ -523,31 +523,31 @@ def build():
     for name, (ax0, ax1, ay0, ay1), m in (
             ("PathAround", (x0 - 6, x1 + 6, y0 - 6, y1 + 6), M["pavement"]),
             ("Plaza", (-48, x0 - 6, -2, y1 + 6), M["pavement"]),
-            ("Road", (-200, 200, 15, 23), M["asphalt"]),
-            ("Railway", (-200, 200, 44, 56), M["ballast"])):
+            ("Road", (-200, 200, 28, 36), M["asphalt"]),
+            ("Railway", (-200, 200, 57, 69), M["ballast"])):
         box(name, (ax1 - ax0, ay1 - ay0, 0.06), ((ax0 + ax1) / 2, (ay0 + ay1) / 2, g + 0.03), m, root)
-    for t, ty in enumerate((47.5, 52.5)):
+    for t, ty in enumerate((60.5, 65.5)):
         for r, dy in enumerate((-0.72, 0.72)):
             box(f"Rail{t}_{r}", (400, 0.08, 0.16), (0, ty + dy, g + 0.14), M["steel"], root)
     for k, mx in enumerate(range(-180, 200, 36)):
-        for side, my in enumerate((45.0, 55.0)):
+        for side, my in enumerate((58.0, 68.0)):
             box(f"Catenary{k}_{side}", (0.35, 0.35, 8.5), (mx, my, g + 4.25), M["galv"], root)
-        rod(f"CatenaryBeam{k}", (mx, 45.0, g + 8.2), (mx, 55.0, g + 8.2), 0.06, M["galv"], root, verts=6)
-    for t, ty in enumerate((47.5, 52.5)):
+        rod(f"CatenaryBeam{k}", (mx, 58.0, g + 8.2), (mx, 68.0, g + 8.2), 0.06, M["galv"], root, verts=6)
+    for t, ty in enumerate((60.5, 65.5)):
         rod(f"Contact{t}", (-200, ty, g + 6.3), (200, ty, g + 6.3), 0.015, M["black"], root, verts=4)
     # The red regional train standing at the station.
-    box("Train", (64, 2.9, 3.4), (-6, 47.5, g + 2.3), M["train"], root)
-    box("TrainWindows", (64.1, 2.95, 0.9), (-6, 47.5, g + 2.7), M["glass"], root)
-    box("TrainRoof", (63, 2.6, 0.35), (-6, 47.5, g + 4.15), M["galv"], root)
+    box("Train", (64, 2.9, 3.4), (-6, 60.5, g + 2.3), M["train"], root)
+    box("TrainWindows", (64.1, 2.95, 0.9), (-6, 60.5, g + 2.7), M["glass"], root)
+    box("TrainRoof", (63, 2.6, 0.35), (-6, 60.5, g + 4.15), M["galv"], root)
     # The Stellwerk: orange, three storeys, red tiled hip roof, windows towards the campus.
-    sx, sy = -14.0, 33.0
+    sx, sy = -14.0, 46.0
     box("StellwerkHouse", (22, 11, 9.5), (sx, sy, g + 4.75), M["orange"], root)
     hip_roof("StellwerkRoof", 23, 12, 4.8, (sx, sy, g + 9.5), M["roof"], root)
     for fl in range(3):
         for k in range(9):
             box(f"StellwerkWin{fl}_{k}", (1.1, 0.1, 1.4), (sx - 9.6 + k * 2.4, sy - 5.52, g + 1.9 + fl * 3.0), M["glass"], root)
     # Houses with red roofs beyond the railway.
-    for k, (hx, hy, hw) in enumerate(((-50, 72, 10), (-22, 70, 9), (18, 74, 12), (45, 68, 9), (70, 76, 11))):
+    for k, (hx, hy, hw) in enumerate(((-50, 85, 10), (-22, 83, 9), (18, 87, 12), (45, 81, 9), (70, 89, 11))):
         box(f"House{k}", (hw, 8, 6.5), (hx, hy, g + 3.25), M["plaster"], root)
         hip_roof(f"HouseRoof{k}", hw + 1, 9, 3.6, (hx, hy, g + 6.5), M["roof"], root)
     # The black building with big framed windows, facing the plaza and our building.
@@ -597,13 +597,13 @@ def build():
     for k in range(10):                             # birches on the lawn towards the black building
         plant(f"Birch{k}", "birch", rnd.uniform(-48, -20), rnd.uniform(-40, -8), rnd.uniform(12, 15), M["tree_light"], M["bark_birch"])
     for k in range(6):                              # trees along the road and by the Stellwerk
-        plant(f"RoadTree{k}", "broad", rnd.uniform(-60, 60), rnd.choice((13.0, 25.5)), rnd.uniform(9, 13))
+        plant(f"RoadTree{k}", "broad", rnd.uniform(-60, 60), rnd.choice((24.0, 39.5)), rnd.uniform(9, 13))
 
     def free(x, y, pad):
         if x0 - pad - 6 < x < x1 + pad + 6 and y0 - pad - 6 < y < y1 + pad + 6:
             return False
-        for bx0, bx1, by0, by1 in ((-80, -52, -42, 10), (-130, -100, -103, -47), (-26, -2, 27, 39),
-                                   (-200, 200, 13, 58), (-50, -9, -4, 16)):
+        for bx0, bx1, by0, by1 in ((-80, -52, -42, 10), (-130, -100, -103, -47), (-26, -2, 40, 52),
+                                   (-200, 200, 26, 71), (-50, -9, -4, 16)):
             if bx0 - pad < x < bx1 + pad and by0 - pad < y < by1 + pad:
                 return False
         return all((x - px) ** 2 + (y - py) ** 2 > 36 for px, py in planted)
