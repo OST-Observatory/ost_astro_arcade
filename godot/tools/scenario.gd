@@ -4,7 +4,7 @@
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 ## obs_day takes SHOT=<shot>, CAM=px,py,pz,tx,ty,tz and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
-## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, dome FIGURES=1 and LOOK=alt,az.
+## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -94,6 +94,8 @@ func _ready() -> void:
 					dstep._obs._pitch = float(la[0])
 					dstep._obs._yaw = float(la[1])
 					dstep._obs._apply_look()
+			if scenario == "measure" and OS.get_environment("FRAME") != "":   # FRAME=0..2
+				g._step._show(int(OS.get_environment("FRAME")))
 			if scenario == "dome_open":
 				g._step._open()
 				# TAP=miss|hit: one tap next to / onto the predicted position once inside.

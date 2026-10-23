@@ -27,8 +27,17 @@ func _ready() -> void:
 	_frames = CcdFrames.new()
 	add_child(_frames)
 	_frames.build(ch.stars_px, ch.frames)
+	# One fixed view for all exposures, like the sky itself: the asteroid walks along its
+	# straight path across it. Off-centre, but with the whole path inside the view.
+	var lo: Vector2 = ch.asteroid_px[0]
+	var hi: Vector2 = lo
 	for a in ch.asteroid_px:
-		_centers.append(a + Vector2(mission.rng.randf_range(-18, 18), mission.rng.randf_range(-18, 18)))
+		lo = lo.min(a)
+		hi = hi.max(a)
+	var room := (Vector2.ONE * (SPAN_PX / 2.0 - 14.0) - (hi - lo) / 2.0).max(Vector2.ZERO)
+	var c := (lo + hi) / 2.0 + Vector2(mission.rng.randf_range(-room.x, room.x), mission.rng.randf_range(-room.y, room.y))
+	for a in ch.asteroid_px:
+		_centers.append(c)
 
 	var bg := Panel.new()
 	bg.position = VIEW.position - Vector2(6, 6)

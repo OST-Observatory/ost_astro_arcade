@@ -402,8 +402,9 @@ def build():
         cyl(f"RedLamp{i}", 0.06, 0.12, (x * 0.97, y * 0.97, 1.85), M["lamp"], root, verts=12)
     # Furniture (photos 2026-10), going round from the door (-y), right of it seen from inside:
     # electrical cabinet and inverter on the wall, desk with the observatory management box
-    # above it, two chairs, the black tool trolley, the tall cabinet with the platform ladder in
-    # front, the desk with the white flat-field box.
+    # above it, two chairs, the black tool trolley, the tall cabinet (west wall) with the
+    # platform ladder in front, the desk with the white flat-field box (north side).
+    # Angles: 0 = north, 90 = west, -90 = east (the door), 180 = south.
     (x, y), rz = at_wall(-114, 0.22, 0.0)
     box("ElectricCabinet", (0.55, 0.22, 0.75), (x, y, 1.3), M["cabinet"], root, rot=(0, 0, rz))
     (x, y), rz = at_wall(-128, 0.14, 0.0)
@@ -423,10 +424,10 @@ def build():
             rod(f"ChairLeg{k}_{j}", (px, py, 0.0), (px, py, 0.44), 0.012, M["steel"], root, verts=6)
     (x, y), rz = at_wall(146, 0.45)
     box("ToolTrolley", (0.55, 0.45, 0.95), (x, y, 0.5), M["black"], root, rot=(0, 0, rz))
-    (x, y), rz = at_wall(118, 0.5, 0.02)
+    (x, y), rz = at_wall(90, 0.5, 0.02)          # west wall
     box("TallCabinet", (0.95, 0.5, 1.95), (x, y, 0.975), M["cabinet"], root, rot=(0, 0, rz))
     # Platform ladder in front of the cabinet: platform, two steps, handrails (aluminium).
-    a = math.radians(100)
+    a = math.radians(72)
     out = Vector((math.cos(a), math.sin(a), 0))
     side = Vector((-out.y, out.x, 0))
     c = out * 1.5
@@ -443,7 +444,7 @@ def build():
         rod(f"LadderRailF{sgn}", (top_front.x, top_front.y, 0.8), (top_front.x, top_front.y, 1.75), 0.02, M["galv"], root)
         rod(f"LadderRailT{sgn}", (top_front.x, top_front.y, 1.75), (back.x, back.y, 1.75), 0.02, M["galv"], root)
         rod(f"LadderRailM{sgn}", (top_front.x, top_front.y, 1.3), (back.x, back.y, 1.3), 0.015, M["galv"], root)
-    (x, y), rz = desk("FlatDesk", 72, 1.3, M, root)
+    (x, y), rz = desk("FlatDesk", 0, 1.3, M, root)   # north side
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=0.42, location=(x, y, 0.84 + 0.26))
     ff = bpy.context.active_object
     ff.name = "FlatfieldBox"

@@ -41,6 +41,8 @@ func _briefing() -> void:
 	var obs := ObservatoryScene.new()
 	sv.add_child(obs)
 	obs.set_night(0.3)
+	obs.point_to(0.0, 90.0)                    # parked as in the dome step
+	obs.set_dome_azimuth(DomeStep.PARK_AZ)
 	obs.fly("street", "roof", 12.0)
 	create_tween().tween_method(obs.set_night, 0.3, 0.9, 14.0)
 	var shade := ColorRect.new()

@@ -106,6 +106,17 @@ func _ready() -> void:
 	_next.visible = false
 	_next.pressed.connect(done)
 	add_child(_next)
+	# Fade in from black: hides the first frames while the 3D view starts up.
+	var fade := ColorRect.new()
+	fade.color = Color.BLACK
+	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(fade)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var tw := create_tween()
+	tw.tween_property(fade, "color:a", 0.0, 0.45)
+	tw.tween_callback(fade.queue_free)
 
 
 func _process(delta: float) -> void:
