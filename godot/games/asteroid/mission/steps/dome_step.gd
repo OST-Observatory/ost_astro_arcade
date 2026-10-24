@@ -18,6 +18,7 @@ var _next: BigButton
 var _figures: BigButton
 var _go_out: BigButton
 var _go_in: BigButton
+var _title: Label
 var _task: Label
 var _status: Label
 var _overlay: Control
@@ -66,7 +67,9 @@ func _ready() -> void:
 	_shade.size = Vector2(2560, 300)
 	_shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_shade)
-	_task = add_header("DOME_TITLE", "DOME_TASK").get_child(1) as Label
+	var header := add_header("DOME_TITLE", "DOME_TASK")
+	_title = header.get_child(0) as Label
+	_task = header.get_child(1) as Label
 	_task.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_task.text = tr("DOME_TASK")
 	_status = plain_label("", UiTheme.SIZE_H2 - 6, "semibold", UiTheme.ACCENT_HI)
@@ -144,6 +147,7 @@ func _open() -> void:
 	await _obs.switch_view("inside", true)
 	_obs.set_look(true)
 	_phase = "point"
+	_title.text = "DOME_TITLE_POINT"   # the observatory is open now: next comes the pointing
 	_set_task(tr("DOME_POINT") % _where())
 	_update_view_buttons()
 

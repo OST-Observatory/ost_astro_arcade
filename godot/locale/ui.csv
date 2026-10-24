@@ -112,7 +112,7 @@ PLAN_EARLIER,Früher,Earlier,Antes
 PLAN_OK,Diese Zeit nehmen,Take this time,Elegir esta hora
 PLAN_LEGEND_TARGET,Höhe des Asteroiden,Altitude of the asteroid,Altura del asteroide
 PLAN_LEGEND_MOON,Mond (%d %% beleuchtet),Moon (%d %% illuminated),Luna (%d %% iluminada)
-ALIGN_TITLE,Richte das Teleskop aus,Aim the telescope,Apunta el telescopio
+ALIGN_TITLE,Richte das Teleskop genau aus,Fine-tune the telescope,Ajusta el telescopio con precisión
 ALIGN_TASK,"Verschiebe den Himmel mit dem Finger, bis der orange Kreis (dort sollte der Asteroid laut Bahnvorhersage stehen) im blauen Bildfeld der Kamera liegt.",Drag the sky with your finger until the orange circle (where the orbit says the asteroid should be) sits inside the blue camera field.,Arrastra el cielo con el dedo hasta que el círculo naranja (donde debería estar el asteroide según su órbita) quede dentro del campo azul de la cámara.
 ALIGN_LEGEND,Weiße Punkte: echte Sterne aus dem Gaia-Katalog. Blaues Rechteck: Bildfeld der Kamera (35′ × 24′).,White dots: real stars from the Gaia catalogue. Blue rectangle: the camera's field (35′ × 24′).,Puntos blancos: estrellas reales del catálogo Gaia. Rectángulo azul: campo de la cámara (35′ × 24′).
 ALIGN_NORTH,N,N,N
@@ -176,6 +176,7 @@ PUZZLE_RESULT,%d Teile in %d:%02d min,%d pieces in %d:%02d min,%d piezas en %d:%
 PUZZLE_AGAIN,Neues Bild,New picture,Nueva imagen
 STEP_DOME,Kuppel,Dome,Cúpula
 DOME_TITLE,Öffne die Sternwarte,Open the observatory,Abre el observatorio
+DOME_TITLE_POINT,Richte das Teleskop grob aus,Point the telescope roughly,Apunta el telescopio aproximadamente
 DOME_TASK,"Es ist dunkel geworden. Wische über das Bild, um dich umzuschauen, mit zwei Fingern zoomst du. Dann öffne die Kuppel.","It has got dark. Swipe across the picture to look around, zoom with two fingers. Then open the dome.",Ya es de noche. Desliza el dedo por la imagen para mirar alrededor y haz zoom con dos dedos. Luego abre la cúpula.
 DOME_OPEN,Kuppel öffnen,Open the dome,Abrir la cúpula
 DOME_OPENING,Der Spalt öffnet sich …,The slit is opening …,La rendija se abre…
