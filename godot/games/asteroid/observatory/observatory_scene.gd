@@ -256,20 +256,32 @@ func fly(from: String, to: String, seconds: float) -> void:
 
 ## Jumps (with a short fade) to another place to look around from, keeping the direction
 ## (or turning to the shot's own target with `to_shot`).
-func switch_view(name: String, to_shot := false) -> void:
-	if name == view_name or _switching:
+func switch_view(name: String, to_shot := false, at_dark := Callable()) -> void:
+	if name == view_name:
+		return
+	var look: Variant = SHOTS[name][1] if to_shot else null
+	await view_from(SHOTS[name][0], look, name, FOV, at_dark)
+
+
+## Jumps (with a short fade) to any place to look around from; `look` is a point to turn
+## to (null: keep the direction). `name` says inside ("inside") or outside ("roof"); a wider
+## `fov` than usual narrows back to normal with the first zoom.
+func view_from(pos: Vector3, look: Variant = null, name := "roof", fov := FOV, at_dark := Callable()) -> void:
+	if _switching:
 		return
 	_switching = true
 	var tw := create_tween()
 	tw.tween_property(_fade, "color:a", 1.0, 0.25)
 	await tw.finished
-	camera.position = SHOTS[name][0]
-	camera.fov = FOV
+	if at_dark.is_valid():
+		at_dark.call()   # changes nobody should see happen
+	camera.position = pos
+	camera.fov = fov
 	view_name = name
 	if name == "inside":
 		set_door(1.0)
-	if to_shot:
-		camera.look_at(SHOTS[name][1])
+	if look != null:
+		camera.look_at(look)
 		var was := look_enabled
 		set_look(true)
 		look_enabled = was
@@ -329,6 +341,19 @@ func handle_input(event: InputEvent) -> bool:
 	return gestures.handle(event)
 
 
+## Turns the view smoothly to a direction (scene space), e.g. to show where things happen.
+func turn_to(dir: Vector3, seconds := 1.5) -> void:
+	var aa := RealSky.alt_az(dir)
+	var y0 := _yaw
+	var p0 := _pitch
+	var tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tw.tween_method(func(t: float):
+		_yaw = fposmod(rad_to_deg(lerp_angle(deg_to_rad(y0), deg_to_rad(aa.y), t)), 360.0)
+		_pitch = lerpf(p0, clampf(aa.x, PITCH_MIN, PITCH_MAX), t)
+		_apply_look(), 0.0, 1.0, seconds)
+	await tw.finished
+
+
 func _on_drag(d: Vector2) -> void:
 	if not look_enabled:
 		return
@@ -350,7 +375,7 @@ func _zoom(f: float) -> void:
 			switch_view("roof")
 		return
 	_pull = 1.0
-	camera.fov = clampf(camera.fov * f, FOV_MIN, FOV)
+	camera.fov = clampf(camera.fov * f, FOV_MIN, maxf(FOV, camera.fov))   # a wider view zooms in smoothly
 
 
 func _apply_look() -> void:

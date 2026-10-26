@@ -182,9 +182,10 @@ DOME_OPEN,Kuppel öffnen,Open the dome,Abrir la cúpula
 DOME_OPENING,Der Spalt öffnet sich …,The slit is opening …,La rendija se abre…
 DOME_SLEWING,"Gut gezielt! Die Kuppel dreht sich, das Teleskop fährt zur vorhergesagten Position …","Well aimed! The dome turns, the telescope moves to the predicted position …",¡Buena puntería! La cúpula gira y el telescopio se mueve a la posición prevista…
 DOME_READY,"Bereit! Höhe %d°, Richtung %d° (Süden = 180°)","Ready! Altitude %d°, direction %d° (south = 180°)","¡Listo! Altura %d°, dirección %d° (sur = 180°)"
-DOME_POINT,"Schau dich in Ruhe in der Kuppel um. Richte das Teleskop dann grob aus: Tippe auf die Himmelsregion, in der der Asteroid laut Bahnvorhersage zu erwarten ist (%s). Tipp: Zoome heraus oder tippe auf „Nach draußen“, dann siehst du den ganzen Himmel.",Take your time to look around the dome. Then point the telescope roughly: tap the region of the sky where the orbit prediction expects the asteroid (%s). Tip: zoom out or tap “Go outside” to see the whole sky.,Mira la cúpula con calma. Después orienta el telescopio de forma aproximada: toca la región del cielo donde la órbita predice el asteroide (%s). Pista: aleja el zoom o toca «Salir» para ver todo el cielo.
+DOME_POINT,"Schau dich in Ruhe in der Kuppel um. Richte das Teleskop dann grob aus: Tippe auf die Himmelsregion, in der der Asteroid laut Bahnvorhersage zu erwarten ist:",Take your time to look around the dome. Then point the telescope roughly: tap the region of the sky where the orbit prediction expects the asteroid:,Mira la cúpula con calma. Después orienta el telescopio de forma aproximada: toca la región del cielo donde la órbita predice el asteroide:
+DOME_TIP,"Tipp: Zoome heraus oder tippe auf „Nach draußen“, dann siehst du den ganzen Himmel.",Tip: zoom out or tap “Go outside” to see the whole sky.,Pista: aleja el zoom o toca «Salir» para ver todo el cielo.
 DOME_WHERE,"%s, %d° über dem Horizont","%s, %d° above the horizon","%s, a %d° sobre el horizonte"
-DOME_WHERE_PRO,"Azimut %d°, Höhe %d°; Norden = 0°, Osten = 90°","azimuth %d°, altitude %d°; north = 0°, east = 90°","azimut %d°, altura %d°; norte = 0°, este = 90°"
+DOME_WHERE_PRO,"Azimut %d°, Höhe %d°  (Norden = 0°, Osten = 90°)","Azimuth %d°, altitude %d°  (north = 0°, east = 90°)","Azimut %d°, altura %d°  (norte = 0°, este = 90°)"
 DOME_MISS,Nicht ganz. Der Asteroid steht %s.,Not quite. The asteroid is %s.,Casi. El asteroide está %s.
 DOME_HINT_RIGHT,weiter rechts,further right,más a la derecha
 DOME_HINT_LEFT,weiter links,further left,más a la izquierda
