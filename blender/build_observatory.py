@@ -340,14 +340,15 @@ def build():
         box(name, (sx, sy, 0.6), (cx, cy, ROOF_Z + 0.3), M["coping"], root)
     box("Walkway", (0.7, 78, 0.04), (1.5, -48, ROOF_Z + 0.07), M["pavement"], root)
     # Terrace: around the dome and up to the stair house (L-shaped).
-    box("Terrace", (11.9, 16.1, -ROOF_Z), (-2.65, -0.45, ROOF_Z / 2), M["concrete"], root)
-    box("TerraceB", (4.2, 8.6, -ROOF_Z), (5.4, 3.3, ROOF_Z / 2), M["concrete"], root)
-    railing("Rail", [(3.3, -8.3), (-8.3, -8.3), (-8.3, 7.0), (7.3, 7.0), (7.3, -0.9)], M["galv"], root)
+    # (Stair house 1.2 m clear of the dome: the open shutter flap reaches out about 3.7 m.)
+    box("Terrace", (13.1, 16.1, -ROOF_Z), (-2.05, -0.45, ROOF_Z / 2), M["concrete"], root)
+    box("TerraceB", (4.2, 8.6, -ROOF_Z), (6.6, 3.3, ROOF_Z / 2), M["concrete"], root)
+    railing("Rail", [(4.5, -8.3), (-8.3, -8.3), (-8.3, 7.0), (8.5, 7.0), (8.5, -0.9)], M["galv"], root)
     # Stair house: a large block of plain golden panels, door towards the terrace.
-    box("StairHouse", (4.0, 8.5, 3.7), (5.3, -5.25, ROOF_Z + 1.85), M["stair"], root)
-    box("StairDoor", (0.06, 1.05, 2.15), (3.28, -2.4, 1.08), M["dark"], root)
-    cyl("StairLampHousing", 0.13, 0.06, (3.25, -1.6, 2.35), M["paint"], root, rot=(0, math.pi / 2, 0), verts=16)
-    box("StairAlarm", (0.04, 0.08, 0.08), (3.27, -0.9, 2.4), M["lamp"], root)
+    box("StairHouse", (4.0, 8.5, 3.7), (6.5, -5.25, ROOF_Z + 1.85), M["stair"], root)
+    box("StairDoor", (0.06, 1.05, 2.15), (4.48, -2.4, 1.08), M["dark"], root)
+    cyl("StairLampHousing", 0.13, 0.06, (4.45, -1.6, 2.35), M["paint"], root, rot=(0, math.pi / 2, 0), verts=16)
+    box("StairAlarm", (0.04, 0.08, 0.08), (4.47, -0.9, 2.4), M["lamp"], root)
     # Ventilation box in front of the terrace, skylights and a cooling unit on the gravel.
     box("VentBox", (4.6, 1.0, 1.1), (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root)
     cyl("VentDuct", 0.48, 1.4, (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root, rot=(0, math.pi / 2, 0), verts=24)

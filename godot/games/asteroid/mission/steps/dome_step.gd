@@ -26,6 +26,7 @@ var _header: VBoxContainer
 var _where_box: PanelContainer
 var _where_label: Label
 var _tip: Label
+var _how: Label
 var _bottom: VBoxContainer
 var _bottom_band: ColorRect
 var _taps := []             # [direction, hit, time] of the taps on the sky
@@ -98,6 +99,10 @@ func _ready() -> void:
 	_where_box.visible = false
 	_tip = UiTheme.label("DOME_TIP", UiTheme.SIZE_SMALL + 2, "regular", UiTheme.TEXT_DIM)
 	_tip.visible = false
+	_how = UiTheme.label("DOME_POINT_HOW", UiTheme.SIZE_BODY, "regular", UiTheme.TEXT)
+	_how.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_how.custom_minimum_size = Vector2(1500, 0)
+	_how.visible = false
 	_task.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_task.text = tr("DOME_TASK")
 	_status = plain_label("", UiTheme.SIZE_H2 - 6, "semibold", UiTheme.ACCENT_HI)
@@ -122,7 +127,7 @@ func _ready() -> void:
 	bottom.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bottom)
 	_bottom = bottom
-	for n in [_status, _where_box, _tip]:
+	for n in [_status, _how, _where_box, _tip]:
 		bottom.add_child(n)
 	_figures = BigButton.make("DOME_FIGURES", "auto_awesome", false, 360)
 	_figures.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL + 4)
@@ -204,6 +209,7 @@ func _open() -> void:
 	_where_label.text = _where()
 	_where_box.visible = true
 	_tip.visible = true
+	_how.visible = true
 	_set_task(tr("DOME_POINT"))
 	_update_view_buttons()
 
@@ -271,6 +277,7 @@ func _slew() -> void:
 	_status.text = tr("DOME_SLEWING")
 	_where_box.visible = false
 	_tip.visible = false
+	_how.visible = false
 	# Real pointing for the chosen time: hour angle = local sidereal time - right ascension.
 	var jd := Kepler.jd_from_iso(_sample.t)
 	var ha := wrapf(ObservatoryScene.lst_deg(jd) - float(_sample.ra), -180.0, 180.0)

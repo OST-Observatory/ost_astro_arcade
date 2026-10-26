@@ -131,7 +131,7 @@ func _ready() -> void:
 	stair.light_color = Color(1.0, 0.85, 0.6)
 	stair.omni_range = 4.0
 	stair.shadow_enabled = true
-	stair.position = Vector3(2.6, 2.5, 2.4)
+	stair.position = Vector3(3.8, 2.5, 2.4)
 	add_child(stair)
 	_red_lights.append(stair)
 
