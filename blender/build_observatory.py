@@ -120,11 +120,13 @@ def hemisphere_shell(name, r, thickness, material):
 
 # Intro flight of the camera (ObservatoryScene SHOTS "street" -> "roof" through VIA, a
 # quadratic Bezier, Blender axes): no tree may stand in its way.
-FLIGHT = (Vector((-42.0, -58.0, -12.3)), Vector((-22.0, -24.0, 6.0)), Vector((-7.0, 1.5, 1.7)))
-# Institute building (x0, x1, y0, y1): long towards -y, the dome terrace at its +y end, 9 m
-# from the -x facade and 8 m from the +y facade (towards the road and the Stellwerk).
-BUILDING = (-9.0, 30.0, -90.0, 8.0)
-COURTYARD = (10.0, 22.0, -64.0, -18.0)   # open inner courtyard (x0, x1, y0, y1)
+FLIGHT = (Vector((-45.0, -55.0, -12.3)), Vector((-22.0, -20.0, 6.0)), Vector((-7.0, 1.5, 1.7)))
+# Compass: +x north, -y east (the dome door), -x south (the black building), +y west (the
+# road, the Stellwerk and the railway).
+# Institute building (x0, x1, y0, y1): long from north to south, the dome terrace near its
+# south-west corner, 9 m from the south and 8 m from the west facade.
+BUILDING = (-9.0, 89.0, -31.0, 8.0)
+COURTYARD = (22.0, 70.0, -20.0, -8.0)   # open inner courtyard (x0, x1, y0, y1)
 ROOF_Z = -0.3       # top of the building box; gravel roof a little above, terrace at z = 0
 
 
@@ -338,7 +340,7 @@ def build():
     for name, sx, sy, cx, cy in (("CopingN", x1 - x0, 0.5, (x0 + x1) / 2, y1 - 0.25), ("CopingS", x1 - x0, 0.5, (x0 + x1) / 2, y0 + 0.25),
                                  ("CopingW", 0.5, y1 - y0, x0 + 0.25, (y0 + y1) / 2), ("CopingE", 0.5, y1 - y0, x1 - 0.25, (y0 + y1) / 2)):
         box(name, (sx, sy, 0.6), (cx, cy, ROOF_Z + 0.3), M["coping"], root)
-    box("Walkway", (0.7, 78, 0.04), (1.5, -48, ROOF_Z + 0.07), M["pavement"], root)
+    box("Walkway", (76, 0.7, 0.04), (48, -3, ROOF_Z + 0.07), M["pavement"], root)
     # Terrace: around the dome and up to the stair house (L-shaped).
     # (Stair house 1.2 m clear of the dome: the open shutter flap reaches out about 3.7 m.)
     box("Terrace", (13.1, 16.1, -ROOF_Z), (-2.05, -0.45, ROOF_Z / 2), M["concrete"], root)
@@ -352,16 +354,17 @@ def build():
     # Ventilation box in front of the terrace, skylights and a cooling unit on the gravel.
     box("VentBox", (4.6, 1.0, 1.1), (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root)
     cyl("VentDuct", 0.48, 1.4, (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root, rot=(0, math.pi / 2, 0), verts=24)
-    for k, y in enumerate((-16, -21, -26, -31, -36)):
-        box(f"SkylightBase{k}", (1.5, 1.5, 0.35), (-3.0, y, ROOF_Z + 0.2), M["concrete"], root)
-        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.68, segments=16, ring_count=8, location=(-3.0, y, ROOF_Z + 0.37))
+    for k, x in enumerate((16, 26, 36, 46, 56)):
+        y = -26.0
+        box(f"SkylightBase{k}", (1.5, 1.5, 0.35), (x, y, ROOF_Z + 0.2), M["concrete"], root)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.68, segments=16, ring_count=8, location=(x, y, ROOF_Z + 0.37))
         sky = bpy.context.active_object
         sky.name = f"Skylight{k}"
         sky.scale = (1, 1, 0.35)
         link(assign(sky, M["paint"]), root)
-    box("CoolingUnit", (3.2, 1.7, 1.0), (7.0, -18.0, ROOF_Z + 1.0), M["cabinet"], root)
+    box("CoolingUnit", (3.2, 1.7, 1.0), (14.0, -14.0, ROOF_Z + 1.0), M["cabinet"], root)
     for k in range(4):
-        cyl(f"CoolingLeg{k}", 0.05, 0.5, (5.6 + 2.8 * (k % 2), -18.7 + 1.4 * (k // 2), ROOF_Z + 0.25), M["galv"], root, verts=6)
+        cyl(f"CoolingLeg{k}", 0.05, 0.5, (12.6 + 2.8 * (k % 2), -14.7 + 1.4 * (k // 2), ROOF_Z + 0.25), M["galv"], root, verts=6)
     # Lightning masts with guy wires on tripod feet, a weather box at the railing.
     for name, x, y in (("MastA", -5.5, 3.5), ("MastB", 5.9, 2.6), ("MastC", -7.4, -5.8)):
         rod(name, (x, y, 0), (x, y, 6.5), 0.025, M["galv"], root)
@@ -370,8 +373,6 @@ def build():
             rod(f"{name}_wire{ang}", (x, y, 3.2), (x + dx, y + dy, 0.0), 0.006, M["galv"], root, verts=4)
             rod(f"{name}_leg{ang}", (x, y, 0.4), (x + dx * 0.5, y + dy * 0.5, 0.02), 0.02, M["galv"], root, verts=6)
         cyl(f"{name}_foot", 0.22, 0.3, (x, y, 0.15), M["concrete"], root, verts=12)
-    box("WeatherBox", (0.4, 0.3, 0.5), (-8.6, 0.5, 1.2), M["paint"], root)
-    rod("WeatherPost", (-8.6, 0.65, 0.0), (-8.6, 0.65, 1.4), 0.03, M["galv"], root)
 
     # Dome base (open cylinder with door, a flared foot ring) and interior floor.
     base = cyl("DomeBase", BASE_R, BASE_H, (0, 0, BASE_H / 2), M["paint"], root, verts=96)
@@ -533,18 +534,18 @@ def build():
     for name, (ax0, ax1, ay0, ay1), m in (
             ("PathAround", (x0 - 6, x1 + 6, y0 - 6, y1 + 6), M["pavement"]),
             ("Plaza", (-31, x0 - 6, -19, y1 + 6), M["pavement"]),
-            ("Road", (-200, 200, 28, 36), M["asphalt"]),
-            ("Railway", (-200, 200, 57, 69), M["ballast"])):
+            ("Road", (-1500, 1500, 28, 36), M["asphalt"]),
+            ("Railway", (-1500, 1500, 57, 69), M["ballast"])):
         box(name, (ax1 - ax0, ay1 - ay0, 0.06), ((ax0 + ax1) / 2, (ay0 + ay1) / 2, g + 0.03), m, root)
     for t, ty in enumerate((60.5, 65.5)):
         for r, dy in enumerate((-0.72, 0.72)):
-            box(f"Rail{t}_{r}", (400, 0.08, 0.16), (0, ty + dy, g + 0.14), M["steel"], root)
-    for k, mx in enumerate(range(-180, 200, 36)):
+            box(f"Rail{t}_{r}", (3000, 0.08, 0.16), (0, ty + dy, g + 0.14), M["steel"], root)
+    for k, mx in enumerate(range(-1500, 1500, 40)):   # railway from horizon to horizon
         for side, my in enumerate((58.0, 68.0)):
             box(f"Catenary{k}_{side}", (0.35, 0.35, 8.5), (mx, my, g + 4.25), M["galv"], root)
         rod(f"CatenaryBeam{k}", (mx, 58.0, g + 8.2), (mx, 68.0, g + 8.2), 0.06, M["galv"], root, verts=6)
     for t, ty in enumerate((60.5, 65.5)):
-        rod(f"Contact{t}", (-200, ty, g + 6.3), (200, ty, g + 6.3), 0.015, M["black"], root, verts=4)
+        rod(f"Contact{t}", (-1500, ty, g + 6.3), (1500, ty, g + 6.3), 0.015, M["black"], root, verts=4)
     # The red regional train standing at the station.
     box("Train", (64, 2.9, 3.4), (-6, 60.5, g + 2.3), M["train"], root)
     box("TrainWindows", (64.1, 2.95, 0.9), (-6, 60.5, g + 2.7), M["glass"], root)
@@ -574,8 +575,8 @@ def build():
     box("Water", (4, 12, 0.1), (-23, -3, g + 0.4), M["water"], root)
     for k, (bx, by) in enumerate(((-28, -12), (-28, 6), (-18, -12), (-18, 6))):
         cyl(f"Bench{k}", 0.25, 1.8, (bx, by, g + 0.25), M["concrete"], root, rot=(math.pi / 2, 0, 0), verts=6)
-    lights = ((x0 - 4, -60), (x0 - 4, -30), (x0 - 4, 0), (x1 + 4, -60), (x1 + 4, -30), (x1 + 4, 0),
-              (-30, -17), (-18, 12), (0, y1 + 5), (20, y1 + 5))
+    lights = ((0, y0 - 4), (30, y0 - 4), (60, y0 - 4), (20, y1 + 5), (50, y1 + 5), (80, y1 + 5),
+              (-30, -17), (-18, 12), (x1 + 4, -10), (x0 - 4, -25))
     for k, (lx, ly) in enumerate(lights):
         cyl(f"LampPole{k}", 0.07, 4.2, (lx, ly, g + 2.1), M["galv"], root, verts=8)
         cyl(f"LampHead{k}", 0.35, 0.25, (lx, ly, g + 4.3), M["lamp_head"], root, verts=16)
@@ -594,9 +595,9 @@ def build():
         planted.append((x, y))
 
     k = 0
-    for y in range(int(y0) + 4, int(y1), 7):      # hornbeams along both long facades
-        for x in (x0 - 3.5, x1 + 3.5):
-            plant(f"Hornbeam{k}", "column", x + rnd.uniform(-0.3, 0.3), y, rnd.uniform(10.5, 13.0))
+    for x in range(int(x0) + 4, int(x1), 7):      # hornbeams along both long facades
+        for y in (y0 - 3.5, y1 + 3.5):
+            plant(f"Hornbeam{k}", "column", x, y + rnd.uniform(-0.3, 0.3), rnd.uniform(10.5, 13.0))
             k += 1
     for k, (bx, by) in enumerate(((-29, -15), (-29, -4), (-29, 7), (-17, -16), (-17, 12), (-23, 12))):
         plant(f"Maple{k}", "ball", bx, by, rnd.uniform(4.5, 5.5))
@@ -611,7 +612,7 @@ def build():
         if x0 - pad - 6 < x < x1 + pad + 6 and y0 - pad - 6 < y < y1 + pad + 6:
             return False
         for bx0, bx1, by0, by1 in ((-80, -52, -42, 10), (-130, -100, -103, -47), (-26, -2, 40, 52),
-                                   (-200, 200, 26, 71), (-33, -13, -21, 16)):
+                                   (-1500, 1500, 26, 71), (-33, -13, -21, 16)):
             if bx0 - pad < x < bx1 + pad and by0 - pad < y < by1 + pad:
                 return False
         return all((x - px) ** 2 + (y - py) ** 2 > 36 for px, py in planted)
@@ -626,13 +627,37 @@ def build():
         kind = rnd.choices(["broad", "column", "pine"], weights=(6, 1, 3))[0]
         plant(f"Tree{n}", kind, x, y, rnd.uniform(10, 18))
         n += 1
-    for i, (x, y, rr) in enumerate(((-140, 160, 90), (60, 220, 120), (220, 40, 100))):
+    for i, (x, y, rr) in enumerate(((-170, 230, 90), (60, 230, 120), (240, -170, 100))):   # clear of the railway
         bpy.ops.mesh.primitive_uv_sphere_add(radius=rr, location=(x, y, -14 - rr * 0.82))
         hl = bpy.context.active_object
         hl.name = f"Hill{i}"
         hl.scale = (1.6, 1.0, 1.0)
         link(assign(hl, M["hill"]), root)
-    box("Ground", (600, 600, 1), (0, 0, -14.5), M["grass"], root)
+    box("Ground", (4000, 4000, 1), (0, 0, -14.5), M["grass"], root)
+    join_static(root)
+
+
+def join_static(root):
+    """All parts that never move into two objects, "DomeInterior" (within the dome) and
+    "Campus" (everything else): a few hundred objects cost a draw call each, every frame.
+    Moving parts (dome, shutter, telescope, door) and the red lamps keep their own objects."""
+    inside, outside = [], []
+    for o in list(root.children):
+        if o.type != "MESH" or o.name.startswith("RedLamp"):
+            continue
+        bb = [o.matrix_world @ Vector(c) for c in o.bound_box]
+        far = max(max(abs(v.x), abs(v.y)) for v in bb)   # box within the dome's square
+        if far < 2.8 and max(v.z for v in bb) < 5.6 and min(v.z for v in bb) > -0.5 and not o.name.startswith("BaseFoot"):
+            inside.append(o)
+        else:
+            outside.append(o)
+    for name, group in (("DomeInterior", inside), ("Campus", outside)):
+        bpy.ops.object.select_all(action="DESELECT")
+        for o in group:
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = group[0]
+        bpy.ops.object.join()
+        bpy.context.active_object.name = name
 
 
 def export():

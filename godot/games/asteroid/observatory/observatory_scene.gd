@@ -11,14 +11,14 @@ signal view_changed(name: String)
 const MODEL := "res://assets/models/observatory.glb"
 ## Camera shots: [position, look_at] in metres (scene space, y up).
 const SHOTS := {
-	"street": [Vector3(-42, -12.3, 58), Vector3(0, 2, 0)],
+	"street": [Vector3(-45, -12.3, 55), Vector3(0, 2, 0)],
 	"roof": [Vector3(-7.0, 1.7, -1.5), Vector3(0, 2.6, 0)],
 	"dome_close": [Vector3(-3.2, 2.2, -5.2), Vector3(0, 3.2, 0)],
 	"inside": [Vector3(0.6, 1.6, 1.9), Vector3(-1.0, 1.25, -1.2)],
 	"sky": [Vector3(0, 1.8, -0.2), Vector3(0, 6, 4)],
 }
 ## Flights that bow through a point (quadratic Bézier), e.g. up over the building edge.
-const VIA := {"street>roof": Vector3(-22, 6, 24)}
+const VIA := {"street>roof": Vector3(-22, 6, 20)}
 ## Places to look around from (switch_view): in the dome and on the roof terrace.
 const VIEWS := ["inside", "roof"]
 ## Facade texture: one tile is 16 m wide and the building's 14 m high, 64 px per metre.
@@ -29,6 +29,10 @@ const FACADE_TILE := Vector2(16.0, 14.0)
 const DOME_CENTER := Vector3(0, 2.3, 0)
 const DOME_RADIUS := 2.55
 const OTA_AXIS := Vector3(0.4, 0, 0)
+
+## Render layers: the dome with its contents, and everything else.
+const LAYER_OUTSIDE := 1
+const LAYER_DOME := 2
 
 const FOV := 55.0
 const FOV_MIN := 18.0
@@ -61,6 +65,8 @@ var _dec: Node3D
 var _ra0: Basis
 var _dec0: Basis
 var _materials := {}
+var _fps_time := 0.0
+var _fps_frames := 0
 
 
 func _ready() -> void:
@@ -116,21 +122,26 @@ func _ready() -> void:
 		l.light_color = Color(1.0, 0.78, 0.5)
 		l.omni_range = 16.0
 		l.omni_attenuation = 1.2
+		l.light_cull_mask = LAYER_OUTSIDE
 		n.add_child(l)
 		_street_lights.append(l)
+	# The dome and everything in it on its own render layer: the red lamps light only that
+	# layer, the lamps outside only the rest. That keeps the red light inside without
+	# shadow maps (omni shadows render the scene six times per lamp).
+	_split_layers(model)
 	for lamp in ["RedLamp0", "RedLamp1", "RedLamp2", "RedLamp3"]:
 		var n: Node3D = model.find_child(lamp, true, false)
 		if n:
 			var l := OmniLight3D.new()
 			l.light_color = Color(1.0, 0.12, 0.05)
 			l.omni_range = 4.2
-			l.shadow_enabled = true  # keeps the red light inside the dome
+			l.light_cull_mask = LAYER_DOME
 			n.add_child(l)
 			_red_lights.append(l)
 	var stair := OmniLight3D.new()
 	stair.light_color = Color(1.0, 0.85, 0.6)
 	stair.omni_range = 4.0
-	stair.shadow_enabled = true
+	stair.light_cull_mask = LAYER_OUTSIDE
 	stair.position = Vector3(3.8, 2.5, 2.4)
 	add_child(stair)
 	_red_lights.append(stair)
@@ -153,6 +164,30 @@ func _ready() -> void:
 	gestures.tapped.connect(func(pos: Vector2):
 		if look_enabled:
 			sky_tapped.emit(camera.project_ray_normal(pos)))
+
+
+## Dynamic resolution: below 40 frames per second the 3D view renders smaller (FSR upscaling),
+## with headroom it goes back up to the quality setting. Keeps weaker GPUs smooth.
+func _process(delta: float) -> void:
+	_fps_time += delta
+	_fps_frames += 1
+	if _fps_time < 1.0:
+		return
+	var fps := _fps_frames / _fps_time
+	_fps_time = 0.0
+	_fps_frames = 0
+	var vp := get_viewport()
+	if not vp is SubViewport:
+		return
+	var top: float = Settings.quality_3d().scale
+	var s := vp.scaling_3d_scale
+	if fps < 40.0:
+		s = maxf(0.5, s - 0.1)
+	elif fps > 57.0:
+		s = minf(top, s + 0.05)
+	if not is_equal_approx(s, vp.scaling_3d_scale):
+		vp.scaling_3d_scale = s
+		vp.scaling_3d_mode = Viewport.SCALING_3D_MODE_FSR if s < 0.999 else Viewport.SCALING_3D_MODE_BILINEAR
 
 
 # --- public API -------------------------------------------------------------------------
@@ -399,6 +434,20 @@ func _zoom(f: float) -> void:
 
 func _apply_look() -> void:
 	camera.look_at(camera.global_position + RealSky.horizon_dir(_pitch, _yaw))
+
+
+## Puts every mesh within the dome (base, shell, shutter, door, floor, furniture, telescope)
+## on LAYER_DOME, the rest stays on LAYER_OUTSIDE.
+func _split_layers(model: Node3D) -> void:
+	for mi in model.find_children("*", "MeshInstance3D", true, false):
+		var m := mi as MeshInstance3D
+		var box := m.global_transform * m.get_aabb()
+		var far := 0.0
+		for i in 8:
+			var c := box.get_endpoint(i)
+			far = maxf(far, maxf(absf(c.x), absf(c.z)))   # box within the dome's square
+		if far < 2.8 and box.end.y < 5.6 and box.position.y > -0.5:
+			m.layers = LAYER_DOME
 
 
 # --- materials --------------------------------------------------------------------------
