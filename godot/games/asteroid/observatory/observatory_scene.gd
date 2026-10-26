@@ -24,6 +24,12 @@ const VIEWS := ["inside", "roof"]
 ## Facade texture: one tile is 16 m wide and the building's 14 m high, 64 px per metre.
 const FACADE_TILE := Vector2(16.0, 14.0)
 
+## Dome geometry (model): centre of the hemisphere, its radius, and a point on the tube's
+## optical axis in the OTA node's frame.
+const DOME_CENTER := Vector3(0, 2.3, 0)
+const DOME_RADIUS := 2.55
+const OTA_AXIS := Vector3(0.4, 0, 0)
+
 const FOV := 55.0
 const FOV_MIN := 18.0
 const PITCH_MIN := -30.0
@@ -220,7 +226,20 @@ func tube_azimuth() -> float:
 ## Points the telescope and turns the dome slit to it, like the real dome automation.
 func point_to(hour_angle_deg: float, dec_deg: float) -> void:
 	set_telescope(hour_angle_deg, dec_deg)
-	set_dome_azimuth(tube_azimuth())
+	set_dome_azimuth(slit_azimuth())
+
+
+## Azimuth (deg) the slit must face for the telescope to look through it. The tube sits
+## well off the dome centre on the German mount, so (like a real dome controller) this is
+## where its optical axis meets the dome, not simply the direction it points to.
+func slit_azimuth() -> float:
+	var ota: Node3D = _dec.find_child("OTA", true, false)
+	var p := ota.global_transform * OTA_AXIS - DOME_CENTER
+	var d := tube_direction()
+	# Ray p + s d against the dome sphere |x| = DOME_RADIUS (s > 0).
+	var b := p.dot(d)
+	var s := -b + sqrt(maxf(b * b - (p.length_squared() - DOME_RADIUS * DOME_RADIUS), 0.0))
+	return RealSky.alt_az(p + d * s).y
 
 
 ## Local sidereal time (deg) at the OST for a Julian date.

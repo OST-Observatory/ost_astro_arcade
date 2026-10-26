@@ -3,7 +3,7 @@
 ## UI_LANG=en|es switches the language for any scenario.
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
-## obs_* take CAM=px,py,pz,tx,ty,tz, obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
+## obs_* take CAM=px,py,pz,tx,ty,tz, obs_night POINT=ha,dec[,dome_az], obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
 ## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
 extends Control
 
@@ -350,10 +350,13 @@ func _ready() -> void:
 					obs.set_dome_azimuth(160.0)
 					obs.set_shutter(0.5)
 					obs.set_shot("dome_close")
-				"obs_night":
+				"obs_night":   # POINT=ha,dec[,dome_az] for other telescope positions
 					obs.set_night(1.0)
 					obs.set_shutter(1.0)
-					obs.point_to(-20.0, 20.0)
+					var pt := Array(OS.get_environment("POINT").split(",")).map(func(v): return float(v)) if OS.get_environment("POINT") != "" else [-20.0, 20.0]
+					obs.point_to(pt[0], pt[1])
+					if pt.size() > 2:
+						obs.set_dome_azimuth(pt[2])
 					print("TUBE dir ", obs.tube_direction(), " az ", obs.tube_azimuth())
 					obs.set_shot("roof")
 				"obs_inside":

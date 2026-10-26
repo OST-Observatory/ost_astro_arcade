@@ -26,6 +26,8 @@ var _header: VBoxContainer
 var _where_box: PanelContainer
 var _where_label: Label
 var _tip: Label
+var _bottom: VBoxContainer
+var _bottom_band: ColorRect
 var _taps := []             # [direction, hit, time] of the taps on the sky
 var _status: Label
 var _overlay: Control
@@ -94,17 +96,34 @@ func _ready() -> void:
 	hb.add_child(_where_label)
 	_where_box.add_child(hb)
 	_where_box.visible = false
-	header.add_child(_where_box)
 	_tip = UiTheme.label("DOME_TIP", UiTheme.SIZE_SMALL + 2, "regular", UiTheme.TEXT_DIM)
 	_tip.visible = false
-	header.add_child(_tip)
 	_task.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	_task.text = tr("DOME_TASK")
 	_status = plain_label("", UiTheme.SIZE_H2 - 6, "semibold", UiTheme.ACCENT_HI)
-	_status.position = Vector2(180, 1130)
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_status.custom_minimum_size = Vector2(1500, 0)
-	add_child(_status)
+	# Bottom left, out of the sky's way: messages, where to point, the tip. Grows upwards,
+	# with a dark band behind it while it shows something.
+	_bottom_band = ColorRect.new()
+	_bottom_band.color = Color(0, 0, 0, 0.35)
+	_bottom_band.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_bottom_band.visible = false
+	add_child(_bottom_band)
+	var bottom := VBoxContainer.new()
+	bottom.add_theme_constant_override("separation", 14)
+	bottom.anchor_top = 1.0
+	bottom.anchor_bottom = 1.0
+	bottom.offset_left = 180
+	bottom.offset_right = 1700
+	bottom.offset_bottom = -60
+	bottom.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	bottom.alignment = BoxContainer.ALIGNMENT_END
+	bottom.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(bottom)
+	_bottom = bottom
+	for n in [_status, _where_box, _tip]:
+		bottom.add_child(n)
 	_figures = BigButton.make("DOME_FIGURES", "auto_awesome", false, 360)
 	_figures.add_theme_font_size_override("font_size", UiTheme.SIZE_SMALL + 4)
 	_figures.position = Vector2(2140, 330)
@@ -152,6 +171,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_t += delta
 	_overlay.queue_redraw()
+	var shown := _status.text != "" or _where_box.visible
+	_bottom_band.visible = shown
+	if shown:
+		var top := _bottom.get_global_rect().position.y - 26.0
+		_bottom_band.position = Vector2(0, top)
+		_bottom_band.size = Vector2(size.x, size.y - top)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -246,21 +271,23 @@ func _slew() -> void:
 	_status.text = tr("DOME_SLEWING")
 	_where_box.visible = false
 	_tip.visible = false
-	# From the target's side, a little raised: the slit swings round from the north into
-	# view and the telescope turns out of it, towards the visitor (and the target behind).
-	var aa := RealSky.alt_az(_target)
-	await _obs.view_from(Vector3(0, 3.2, 0) + RealSky.horizon_dir(aa.x * 0.45, aa.y) * 11.0, Vector3(0, 2.9, 0), "roof")
 	# Real pointing for the chosen time: hour angle = local sidereal time - right ascension.
 	var jd := Kepler.jd_from_iso(_sample.t)
 	var ha := wrapf(ObservatoryScene.lst_deg(jd) - float(_sample.ra), -180.0, 180.0)
 	var dec := float(_sample.dec)
 	_obs.set_telescope(ha, dec)
-	var az_end := _obs.tube_azimuth()
+	var az_end := _obs.slit_azimuth()
 	_obs.set_telescope(0.0, 90.0)   # back to park until the slew starts (no one-frame jump)
-	var slew := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# Watched from in front of where the slit will stand, a little raised: the slit swings
+	# round from the north into view, then the telescope turns out of it.
+	var aa := RealSky.alt_az(_target)
+	await _obs.view_from(Vector3(0, 3.2, 0) + RealSky.horizon_dir(aa.x * 0.45, az_end) * 11.0, Vector3(0, 2.9, 0), "roof")
+	var slew := create_tween()
 	slew.tween_method(func(t: float):
-		_obs.set_telescope(ha * t, lerpf(90.0, dec, t))
-		_obs.set_dome_azimuth(rad_to_deg(lerp_angle(deg_to_rad(HOME_AZ), deg_to_rad(az_end), t))), 0.0, 1.0, 6.0)
+		var td := smoothstep(0.0, 0.45, t)
+		var tt := smoothstep(0.4, 1.0, t)
+		_obs.set_dome_azimuth(rad_to_deg(lerp_angle(deg_to_rad(HOME_AZ), deg_to_rad(az_end), td)))
+		_obs.set_telescope(ha * tt, lerpf(90.0, dec, tt)), 0.0, 1.0, 9.0)
 	Audio.play("whoosh", "SFX", 0.45)
 	await slew.finished
 	_phase = "ready"
