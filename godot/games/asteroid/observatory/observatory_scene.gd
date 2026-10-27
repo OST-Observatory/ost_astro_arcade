@@ -21,8 +21,10 @@ const SHOTS := {
 const VIA := {"street>roof": Vector3(-22, 6, 20)}
 ## Places to look around from (switch_view): in the dome and on the roof terrace.
 const VIEWS := ["inside", "roof"]
-## Facade texture: one tile is 16 m wide and the building's 14 m high, 64 px per metre.
-const FACADE_TILE := Vector2(16.0, 14.0)
+## Facade texture: one tile is 15 m wide and 14 m high, 64 px per metre.
+const FACADE_TILE := Vector2(15.0, 14.0)
+## Window bands: one tile is 10 m (eight windows of 1.25 m) by 1.5 m.
+const WINDOW_TILE := Vector2(10.0, 1.5)
 
 ## Dome geometry (model): centre of the hemisphere, its radius, and a point on the tube's
 ## optical axis in the OTA node's frame.
@@ -219,8 +221,8 @@ func set_night(v: float) -> void:
 	for l in _street_lights:
 		l.light_energy = 1.6 * dark
 		l.visible = dark > 0.0
-	if _materials.has("facade_gold"):
-		(_materials["facade_gold"] as BaseMaterial3D).emission_energy_multiplier = 1.4 * dark
+	if _materials.has("window_band"):
+		(_materials["window_band"] as BaseMaterial3D).emission_energy_multiplier = 0.35 * dark
 	if _materials.has("lamp_head"):
 		(_materials["lamp_head"] as BaseMaterial3D).emission_energy_multiplier = 0.2 + 5.0 * dark
 	var lamps_on := smoothstep(0.4, 0.8, night)
@@ -488,44 +490,49 @@ func _noise_tex(freq: float, size := 512, stretch := Vector2.ONE) -> NoiseTextur
 	return t
 
 
-## Albedo and night-emission textures of the institute's facade: golden perforated panels
-## (1.6 m x 0.875 m) and some window strips with sunshades, four storeys of 3.5 m.
-func _facade_textures() -> Array:
+## Texture of the institute's facade: golden perforated panels of 1.25 m x 0.7 m (the
+## windows are geometry in front of it, see the model).
+func _facade_texture() -> ImageTexture:
 	const PX := 64
 	var w := int(FACADE_TILE.x * PX)
 	var h := int(FACADE_TILE.y * PX)
 	var alb := Image.create(w, h, false, Image.FORMAT_RGB8)
-	var emi := Image.create(w, h, false, Image.FORMAT_RGB8)
-	emi.fill(Color(0, 0, 0))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 11
 	var gold := Color(0.66, 0.53, 0.32)
-	var pw := w / 10
-	var ph := h / 16
-	for i in 10:
-		for j in 16:
+	var pw := w / 12
+	var ph := h / 20
+	for i in 12:
+		for j in 20:
 			alb.fill_rect(Rect2i(i * pw, j * ph, pw, ph), gold * rng.randf_range(0.9, 1.08))
 	# Lamellas of the perforated metal, then the joints between panels.
 	for y in range(0, h, 6):
 		alb.fill_rect(Rect2i(0, y, w, 2), gold * 0.78)
-	for i in 11:
+	for i in 13:
 		alb.fill_rect(Rect2i(i * pw - 2, 0, 4, h), gold * 0.5)
-	for j in 17:
+	for j in 21:
 		alb.fill_rect(Rect2i(0, j * ph - 2, w, 4), gold * 0.55)
-	# Window strips: per storey a few, 2 to 4 panels wide, with a dark sunshade above.
-	var storey := h / 4
-	for f in 4:
-		for k in rng.randi_range(0, 2):
-			var n := rng.randi_range(2, 4)
-			var x := rng.randi_range(0, 10 - n) * pw
-			var y := f * storey + int(storey * 0.35)
-			var r := Rect2i(x + 4, y, n * pw - 8, int(PX * 1.2))
-			alb.fill_rect(r, Color(0.07, 0.09, 0.12))
-			for m in range(1, n):
-				alb.fill_rect(Rect2i(x + m * pw - 3, y, 6, r.size.y), Color(0.3, 0.3, 0.3))
-			alb.fill_rect(Rect2i(x, y - 14, n * pw, 12), gold * 0.35)
-			if rng.randf() < 0.6:
-				emi.fill_rect(r.grow(-4), Color(1.0, 0.8, 0.52) * rng.randf_range(0.6, 1.0))
+	alb.generate_mipmaps()
+	return ImageTexture.create_from_image(alb)
+
+
+## Window bands: dark glass with frames every 1.25 m; at night some windows are lit.
+func _window_textures() -> Array:
+	const PX := 64
+	var w := int(WINDOW_TILE.x * PX)
+	var h := int(WINDOW_TILE.y * PX)
+	var alb := Image.create(w, h, false, Image.FORMAT_RGB8)
+	var emi := Image.create(w, h, false, Image.FORMAT_RGB8)
+	alb.fill(Color(0.06, 0.08, 0.11))
+	emi.fill(Color(0, 0, 0))
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 21
+	var pw := w / 8
+	for i in 8:
+		if rng.randf() < 0.4:
+			emi.fill_rect(Rect2i(i * pw + 4, 0, pw - 8, h), Color(1.0, 0.68, 0.36) * rng.randf_range(0.5, 1.0))
+	for i in 9:
+		alb.fill_rect(Rect2i(i * pw - 3, 0, 6, h), Color(0.35, 0.35, 0.36))
 	alb.generate_mipmaps()
 	emi.generate_mipmaps()
 	return [ImageTexture.create_from_image(alb), ImageTexture.create_from_image(emi)]
@@ -576,18 +583,25 @@ func _material_for(name: String, src: Material) -> Material:
 			m.emission = Color(1.0, 0.1, 0.04)
 			m.emission_energy_multiplier = 4.0
 		"facade_gold":
-			# Perforated golden panels with a few windows, lit at night (see _facade_textures).
-			var tex := _facade_textures()
+			# Perforated golden panels (see _facade_texture), also on the window shades.
 			m.albedo_color = Color(1, 1, 1)
-			m.albedo_texture = tex[0]
-			m.emission_enabled = true
-			m.emission = Color(1, 1, 1)
-			m.emission_texture = tex[1]
-			m.emission_energy_multiplier = 0.0
+			m.albedo_texture = _facade_texture()
 			m.uv1_triplanar = true
 			m.uv1_scale = Vector3(1.0 / FACADE_TILE.x, 1.0 / FACADE_TILE.y, 1.0 / FACADE_TILE.x)
 			m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 			m.metallic = 0.45
+		"window_band":
+			var wt := _window_textures()
+			m.albedo_color = Color(1, 1, 1)
+			m.albedo_texture = wt[0]
+			m.emission_enabled = true
+			m.emission = Color(1, 1, 1)
+			m.emission_texture = wt[1]
+			m.emission_energy_multiplier = 0.0
+			m.uv1_triplanar = true
+			m.uv1_scale = Vector3(1.0 / WINDOW_TILE.x, 1.0 / WINDOW_TILE.y, 1.0 / WINDOW_TILE.x)
+			m.roughness = 0.1
+			m.metallic = 0.4
 		"stair_gold":
 			# Large plain brass-coloured panels with dark joints (the roof structures).
 			m.albedo_color = Color(1, 1, 1)

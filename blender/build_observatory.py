@@ -201,6 +201,75 @@ def split_sides(o, inner_name, outer_name, horizontal):
     return parts
 
 
+def _bm_box(bm, c, u, v, w, hu, hv, hw):
+    """Adds a box (centre c, unit axes u, v, w, half sizes) to a bmesh."""
+    vs = [bm.verts.new(c + u * su * hu + v * sv * hv + w * sw * hw)
+          for su in (-1, 1) for sv in (-1, 1) for sw in (-1, 1)]
+    for f in ((0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)):
+        bm.faces.new([vs[i] for i in f])
+
+
+def facade_windows(M, parent):
+    """Three rows of windows on the institute (photos of the south side and the long
+    facades): glass bands in front of the panel facade, and before each window a golden
+    perforated panel, mostly raised and standing out like a sunshade, some lowered over the
+    window. Long facades nearly continuous, the short ones in groups, the courtyard too.
+    Built as two meshes directly (hundreds of parts, one draw call each)."""
+    import random
+    rnd = random.Random(3)
+    x0, x1, y0, y1 = BUILDING
+    cx0, cx1, cy0, cy1 = COURTYARD
+    X, Y, Z = Vector((1, 0, 0)), Vector((0, 1, 0)), Vector((0, 0, 1))
+    # (start, along, outward normal, length, kind)
+    walls = [
+        (Vector((x0, y0, 0)), Y, -X, y1 - y0, "short"), (Vector((x1, y0, 0)), Y, X, y1 - y0, "short"),
+        (Vector((x0, y0, 0)), X, -Y, x1 - x0, "long"), (Vector((x0, y1, 0)), X, Y, x1 - x0, "long"),
+        (Vector((cx0, cy0, 0)), Y, X, cy1 - cy0, "court"), (Vector((cx1, cy0, 0)), Y, -X, cy1 - cy0, "court"),
+        (Vector((cx0, cy0, 0)), X, Y, cx1 - cx0, "court"), (Vector((cx0, cy1, 0)), X, -Y, cx1 - cx0, "court"),
+    ]
+    seg, win_h, angle = 1.25, 1.5, math.radians(62)
+    glass, panels = bmesh.new(), bmesh.new()
+    for start, along, normal, length, kind in walls:
+        n = int((length - 3.0) / seg)
+        first = start + along * (length - n * seg) / 2
+        for row, zb in enumerate((-12.8, -8.6, -4.4)):
+            # Which segments have a window: runs on the short sides, nearly all elsewhere.
+            present = []
+            if kind == "short":
+                while len(present) < n:
+                    present += [True] * rnd.randint(3, 7) + [False] * rnd.randint(2, 5)
+            else:
+                present = [rnd.random() < (0.88 if kind == "long" else 0.8) for _ in range(n)]
+            k = 0
+            while k < n:
+                if not present[k]:
+                    k += 1
+                    continue
+                j = k
+                while j < n and present[j]:
+                    j += 1
+                c = first + along * (k + j) * seg / 2 + normal * 0.03 + Z * (zb + win_h / 2)
+                _bm_box(glass, c, along, normal, Z, (j - k) * seg / 2, 0.02, win_h / 2)
+                for s in range(k, j):
+                    base = first + along * (s + 0.5) * seg + normal * 0.08
+                    if rnd.random() < (0.6 if row == 0 else 0.85):   # raised: hinged at the top
+                        d = -Z * math.cos(angle) + normal * math.sin(angle)
+                        c = base + Z * (zb + win_h) + d * (win_h / 2)
+                        _bm_box(panels, c, along, d, along.cross(d), seg * 0.48, win_h / 2, 0.015)
+                    else:                                              # lowered over the window
+                        _bm_box(panels, base + Z * (zb + win_h / 2), along, normal, Z, seg * 0.48, 0.015, win_h / 2)
+                k = j
+    for name, bm, m in (("WindowBands", glass, M["window"]), ("FacadePanels", panels, M["gold"])):
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+        mesh = bpy.data.meshes.new(name)
+        bm.to_mesh(mesh)
+        bm.free()
+        o = bpy.data.objects.new(name, mesh)
+        bpy.context.collection.objects.link(o)
+        assign(o, m)
+        link(o, parent)
+
+
 def hip_roof(name, w, d, h, loc, material, parent):
     """Pyramid roof w x d (x, y) and h high, base centred at loc."""
     bpy.ops.mesh.primitive_cone_add(vertices=4, radius1=1.0, radius2=0, depth=1.0, rotation=(0, 0, math.radians(45)))
@@ -318,6 +387,7 @@ def build():
         "gold": mat("facade_gold", (0.62, 0.5, 0.3), 0.55, 0.6),
         "dark": mat("facade_dark", (0.07, 0.07, 0.08), 0.3, 0.2),
         "glass": mat("glass_dark", (0.05, 0.07, 0.1), 0.1, 0.0),
+        "window": mat("window_band", (0.05, 0.07, 0.1), 0.1, 0.4),
         "orange": mat("plaster_orange", (0.85, 0.48, 0.22), 0.85),
         "roof": mat("roof_red", (0.55, 0.16, 0.1), 0.7),
         "tree": mat("tree", (0.13, 0.25, 0.1), 0.9),
@@ -351,7 +421,8 @@ def build():
     # Building below the roof (golden perforated facade), the gravel roof and, at its +y end,
     # the raised dome terrace (photos 2026-10: terrace with railing, the golden stair house with
     # its door towards the terrace, a ventilation box in front, lightning masts with guy wires).
-    # (Panels and windows of the facade are a texture made in Godot, ObservatoryScene.)
+    # (The panel pattern is a texture made in Godot, ObservatoryScene; the window rows and the
+    # panels in front of them are geometry, see facade_windows().)
     x0, x1, y0, y1 = BUILDING
     h = 14.0 + ROOF_Z
     building = box("Building", (x1 - x0, y1 - y0, h), ((x0 + x1) / 2, (y0 + y1) / 2, -14.0 + h / 2), M["gold"], root)
@@ -360,6 +431,7 @@ def build():
     cx0, cx1, cy0, cy1 = COURTYARD
     for target in (building, rooftop):
         boolean(target, box("CourtCut", (cx1 - cx0, cy1 - cy0, 16), ((cx0 + cx1) / 2, (cy0 + cy1) / 2, -6.0), M["gold"]))
+    facade_windows(M, root)
     box("CourtFloor", (cx1 - cx0, cy1 - cy0, 0.06), ((cx0 + cx1) / 2, (cy0 + cy1) / 2, -13.97), M["pavement"], root)
     for name, sx, sy, px, py in (("CourtCopN", cx1 - cx0 + 1, 0.5, (cx0 + cx1) / 2, cy1 + 0.25), ("CourtCopS", cx1 - cx0 + 1, 0.5, (cx0 + cx1) / 2, cy0 - 0.25),
                                  ("CourtCopW", 0.5, cy1 - cy0, cx0 - 0.25, (cy0 + cy1) / 2), ("CourtCopE", 0.5, cy1 - cy0, cx1 + 0.25, (cy0 + cy1) / 2)):
