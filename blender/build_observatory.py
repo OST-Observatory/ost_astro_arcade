@@ -381,11 +381,13 @@ def build():
     # Ventilation box in front of the terrace, skylights and a cooling unit on the gravel.
     box("VentBox", (4.6, 1.0, 1.1), (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root)
     cyl("VentDuct", 0.48, 1.4, (-1.6, -9.3, ROOF_Z + 0.6), M["galv"], root, rot=(0, math.pi / 2, 0), verts=24)
-    # Skylights: a row from north to south on the east wing, one from east to west on the
-    # northern part between the courtyard and the north facade.
+    # Skylights: a row from north to south on the east wing, rows from east to west on the
+    # northern part (between courtyard and north facade) and on the southern part (up to
+    # the dome terrace).
     lights_ns = [(x, -26.0) for x in (16, 26, 36, 46, 56)]
     lights_ew = [(78.0, y) for y in (-26, -19, -12, -5, 2)]
-    for k, (x, y) in enumerate(lights_ns + lights_ew):
+    lights_south = [(-3.0, y) for y in (-28, -23, -18, -13)]   # south part, up to the terrace
+    for k, (x, y) in enumerate(lights_ns + lights_ew + lights_south):
         box(f"SkylightBase{k}", (1.5, 1.5, 0.35), (x, y, ROOF_Z + 0.2), M["concrete"], root)
         bpy.ops.mesh.primitive_uv_sphere_add(radius=0.68, segments=16, ring_count=8, location=(x, y, ROOF_Z + 0.37))
         sky = bpy.context.active_object
