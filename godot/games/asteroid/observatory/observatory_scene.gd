@@ -30,9 +30,13 @@ const DOME_CENTER := Vector3(0, 2.3, 0)
 const DOME_RADIUS := 2.55
 const OTA_AXIS := Vector3(0.4, 0, 0)
 
-## Render layers: the dome with its contents, and everything else.
-const LAYER_OUTSIDE := 1
-const LAYER_DOME := 2
+## Render layers (bits) that sort out which light reaches what, without shadow maps:
+## WORLD    lit by sun, moon, street and stair lights: everything outside, including the
+##          outer side of the dome and its shutter, flap and door;
+## DOME_LIT lit by the red lamps only: the inner side of dome and base, everything inside.
+## (Dome shell and base are split into inner and outer side in the model for this.)
+const LAYER_WORLD := 1
+const LAYER_DOME_LIT := 2
 
 const FOV := 55.0
 const FOV_MIN := 18.0
@@ -52,6 +56,7 @@ var _switching := false
 var _fade: ColorRect
 var _street_lights: Array[OmniLight3D] = []
 var _moonlight: DirectionalLight3D
+var _stair_light: OmniLight3D
 var _env: Environment
 var _sky_mat: ShaderMaterial
 var _sun: DirectionalLight3D
@@ -108,6 +113,7 @@ func _ready() -> void:
 
 	_sun = DirectionalLight3D.new()
 	_sun.shadow_enabled = true
+	_sun.light_cull_mask = LAYER_WORLD
 	_sun.directional_shadow_max_distance = 80.0
 	add_child(_sun)
 	# Faint bluish light from above at night, so the setting can be made out.
@@ -116,18 +122,18 @@ func _ready() -> void:
 	_moonlight.rotation_degrees = Vector3(-55.0, 130.0, 0.0)
 	_moonlight.shadow_enabled = true
 	_moonlight.directional_shadow_max_distance = 60.0
+	_moonlight.light_cull_mask = LAYER_WORLD
 	add_child(_moonlight)
 	for n in model.find_children("StreetLight*", "Node3D", true, false):
 		var l := OmniLight3D.new()
 		l.light_color = Color(1.0, 0.78, 0.5)
 		l.omni_range = 16.0
 		l.omni_attenuation = 1.2
-		l.light_cull_mask = LAYER_OUTSIDE
+		l.light_cull_mask = LAYER_WORLD
 		n.add_child(l)
 		_street_lights.append(l)
-	# The dome and everything in it on its own render layer: the red lamps light only that
-	# layer, the lamps outside only the rest. That keeps the red light inside without
-	# shadow maps (omni shadows render the scene six times per lamp).
+	# The red lamps light only the inner side of the dome and what is in it, everything
+	# else only the outside lights: nothing leaks either way and no shadow maps are needed.
 	_split_layers(model)
 	for lamp in ["RedLamp0", "RedLamp1", "RedLamp2", "RedLamp3"]:
 		var n: Node3D = model.find_child(lamp, true, false)
@@ -135,16 +141,15 @@ func _ready() -> void:
 			var l := OmniLight3D.new()
 			l.light_color = Color(1.0, 0.12, 0.05)
 			l.omni_range = 4.2
-			l.light_cull_mask = LAYER_DOME
+			l.light_cull_mask = LAYER_DOME_LIT
 			n.add_child(l)
 			_red_lights.append(l)
-	var stair := OmniLight3D.new()
-	stair.light_color = Color(1.0, 0.85, 0.6)
-	stair.omni_range = 4.0
-	stair.light_cull_mask = LAYER_OUTSIDE
-	stair.position = Vector3(3.8, 2.5, 2.4)
-	add_child(stair)
-	_red_lights.append(stair)
+	_stair_light = OmniLight3D.new()
+	_stair_light.light_color = Color(1.0, 0.85, 0.6)
+	_stair_light.omni_range = 4.0
+	_stair_light.light_cull_mask = LAYER_WORLD
+	_stair_light.position = Vector3(3.8, 2.5, 2.4)
+	add_child(_stair_light)
 
 	camera = Camera3D.new()
 	camera.fov = FOV
@@ -218,8 +223,10 @@ func set_night(v: float) -> void:
 		(_materials["facade_gold"] as BaseMaterial3D).emission_energy_multiplier = 1.4 * dark
 	if _materials.has("lamp_head"):
 		(_materials["lamp_head"] as BaseMaterial3D).emission_energy_multiplier = 0.2 + 5.0 * dark
+	var lamps_on := smoothstep(0.4, 0.8, night)
 	for l in _red_lights:
-		l.light_energy = lerpf(0.0, 1.2, smoothstep(0.4, 0.8, night))
+		l.light_energy = 1.2 * lamps_on
+	_stair_light.light_energy = 1.2 * lamps_on
 
 
 func set_dome_azimuth(deg: float) -> void:
@@ -436,18 +443,24 @@ func _apply_look() -> void:
 	camera.look_at(camera.global_position + RealSky.horizon_dir(_pitch, _yaw))
 
 
-## Puts every mesh within the dome (base, shell, shutter, door, floor, furniture, telescope)
-## on LAYER_DOME, the rest stays on LAYER_OUTSIDE.
+## Render layers per part of the model (see LAYER_*).
 func _split_layers(model: Node3D) -> void:
 	for mi in model.find_children("*", "MeshInstance3D", true, false):
 		var m := mi as MeshInstance3D
-		var box := m.global_transform * m.get_aabb()
-		var far := 0.0
-		for i in 8:
-			var c := box.get_endpoint(i)
-			far = maxf(far, maxf(absf(c.x), absf(c.z)))   # box within the dome's square
-		if far < 2.8 and box.end.y < 5.6 and box.position.y > -0.5:
-			m.layers = LAYER_DOME
+		var outer := _under(m, ["Shutter", "ShutterFlap", "DomeDoor"]) \
+			or m.name.begins_with("DomeShellOuter") or m.name.begins_with("SlitFrame")
+		var inner := m.name == "DomeInterior" or m.name.begins_with("RedLamp") \
+			or _under(m, ["DomeRotator", "RA_Axis"])
+		m.layers = LAYER_DOME_LIT if inner and not outer else LAYER_WORLD
+
+
+func _under(n: Node, names: Array) -> bool:
+	var p := n.get_parent()
+	while p:
+		if p.name in names:
+			return true
+		p = p.get_parent()
+	return false
 
 
 # --- materials --------------------------------------------------------------------------

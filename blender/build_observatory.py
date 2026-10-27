@@ -174,6 +174,33 @@ def desk(name, angle, width, M, parent, top_z=0.82):
     return (x, y), rz
 
 
+def split_sides(o, inner_name, outer_name, horizontal):
+    """Splits a shell into its inner side (faces turned towards the dome's axis or centre)
+    and the rest (outer side, rims, cut edges): Godot lights them differently, the inside
+    only with the red lamps, the outside only with moon and street lights."""
+    parts = []
+    for keep_inner, name in ((True, inner_name), (False, outer_name)):
+        c = o.copy()
+        c.data = o.data.copy()
+        c.name = name
+        bpy.context.collection.objects.link(c)
+        bm = bmesh.new()
+        bm.from_mesh(c.data)
+        drop = []
+        for f in bm.faces:
+            p = f.calc_center_median()
+            n = f.normal
+            d = (n.x * p.x + n.y * p.y) if horizontal else n.dot(p)
+            if (d < -1e-3) != keep_inner:
+                drop.append(f)
+        bmesh.ops.delete(bm, geom=drop, context="FACES")
+        bm.to_mesh(c.data)
+        bm.free()
+        parts.append(c)
+    bpy.data.objects.remove(o, do_unlink=True)
+    return parts
+
+
 def hip_roof(name, w, d, h, loc, material, parent):
     """Pyramid roof w x d (x, y) and h high, base centred at loc."""
     bpy.ops.mesh.primitive_cone_add(vertices=4, radius1=1.0, radius2=0, depth=1.0, rotation=(0, 0, math.radians(45)))
@@ -380,6 +407,7 @@ def build():
     boolean(base, inner)
     door_cut = box("DoorCut", (0.9, 0.5, 1.9), (0.0, -BASE_R, 0.95 + 0.05), M["paint"])
     boolean(base, door_cut)
+    split_sides(base, "DomeWallInner", "DomeWallOuter", True)
     # Door (towards east) on a hinge at its south edge; Godot swings it open outwards.
     door = empty("DomeDoor", (-0.45, -BASE_R - 0.02, 0.0), root)
     box("Door", (0.9, 0.04, 1.9), (0.45, 0.0, 1.0), M["paint"], door)
@@ -460,8 +488,9 @@ def build():
     shell = hemisphere_shell("DomeShell", DOME_R, 0.05, M["dome"])
     slit = box("SlitCut", (SLIT_W, 3.2, 3.2), (0, 1.5, 1.6 + 0.35), M["dome"])
     boolean(shell, slit)
-    shell.location = (0, 0, 0)
-    shell.parent = rot
+    for part in split_sides(shell, "DomeShellInner", "DomeShellOuter", False):
+        part.location = (0, 0, 0)
+        part.parent = rot
     # Shutter in two parts like the Baader dome: the upper part slides over the top to the
     # back (pivot "Shutter" at the centre), the lower flap swings out at its lower edge
     # ("ShutterFlap"). The upper part ends in a hood just beyond the zenith.
@@ -638,16 +667,20 @@ def build():
 
 
 def join_static(root):
-    """All parts that never move into two objects, "DomeInterior" (within the dome) and
-    "Campus" (everything else): a few hundred objects cost a draw call each, every frame.
-    Moving parts (dome, shutter, telescope, door) and the red lamps keep their own objects."""
+    """All parts that never move into two objects: "DomeInterior" (inner side of the dome
+    base, floor, pier, furniture: red light only) and "Campus" (everything else, including
+    the outer side of the base: moon and street lights); a few hundred objects cost a draw
+    call each, every frame. Moving parts (dome, shutter, telescope, door) and the red lamps
+    keep their own objects."""
     inside, outside = [], []
     for o in list(root.children):
         if o.type != "MESH" or o.name.startswith("RedLamp"):
             continue
         bb = [o.matrix_world @ Vector(c) for c in o.bound_box]
         far = max(max(abs(v.x), abs(v.y)) for v in bb)   # box within the dome's square
-        if far < 2.8 and max(v.z for v in bb) < 5.6 and min(v.z for v in bb) > -0.5 and not o.name.startswith("BaseFoot"):
+        if o.name.startswith("DomeWallOuter"):
+            outside.append(o)
+        elif far < 2.8 and max(v.z for v in bb) < 5.6 and min(v.z for v in bb) > -0.5 and not o.name.startswith("BaseFoot"):
             inside.append(o)
         else:
             outside.append(o)
