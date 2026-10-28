@@ -1,6 +1,6 @@
 ## Puts the UI into a specific state for screenshots (used with tools/capture.gd).
 ##   OST_DATA_DIR=/tmp/ost_capture SCENARIO=attract godot --path godot -s res://tools/capture.gd -- res://tools/scenario.tscn captures/attract
-## UI_LANG=en|es switches the language for any scenario.
+## UI_LANG=en|es switches the language for any scenario, LEAVE=1 removes it after 1.5 s.
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 ## obs_* take CAM=px,py,pz,tx,ty,tz, obs_night POINT=ha,dec[,dome_az], obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
@@ -21,6 +21,8 @@ func _ready() -> void:
 		I18n.set_locale(OS.get_environment("UI_LANG"))
 	if OS.get_environment("INGAME") != "":
 		Router._home_btn.visible = true
+	if OS.get_environment("LEAVE") != "":
+		_leave_later()   # LEAVE=1: remove everything after 1.5 s, as when a visitor walks away
 	match scenario:
 		"en", "es":
 			I18n.set_locale(scenario)
@@ -425,3 +427,9 @@ func _fake_gallery() -> void:
 		var sc := AsteroidScenario.load_by_id(str(idx[(i * 7) % idx.size()].id))
 		store.add(names[i % names.size()], sc, 1500 + i * 37, 2)
 
+
+func _leave_later() -> void:
+	await get_tree().create_timer(1.5).timeout
+	for c in get_children():
+		c.queue_free()
+	print("LEFT the scenario")

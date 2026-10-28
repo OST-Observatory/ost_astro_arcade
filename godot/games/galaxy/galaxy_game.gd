@@ -6,6 +6,9 @@
 ##   that form (tails, bridge, ring, merger) earn badges next to real photos.
 extends Control
 
+## The visitor picked a target galaxy or "quick" (awaited instead of polling).
+signal _target_chosen(id: String)
+
 const VIEW := Rect2(40, 170, 1500, 1230)
 const PANEL_X := 1580.0
 const PANEL_W := 940.0
@@ -113,7 +116,6 @@ func _pick_target() -> void:
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
 	row.add_theme_constant_override("separation", 40)
 	v.add_child(row)
-	var chosen := [""]
 	for tg in GalaxyTemplates.targets():
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(680, 420)
@@ -136,15 +138,14 @@ func _pick_target() -> void:
 		var id: String = tg.id
 		b.pressed.connect(func():
 			Audio.play("tap")
-			chosen[0] = id)
+			_target_chosen.emit(id))
 		row.add_child(b)
 	var quick := BigButton.make("GAL_QUICK", "bolt", false, 700)
 	quick.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	quick.pressed.connect(func(): chosen[0] = "quick")
+	quick.pressed.connect(func(): _target_chosen.emit("quick"))
 	v.add_child(quick)
-	while chosen[0] == "":
-		await get_tree().process_frame
-	if chosen[0] == "quick":
+	var picked: String = await _target_chosen
+	if picked == "quick":
 		_target = GalaxyTemplates.get_target("milkyway")
 		_knobs = GalaxyTemplates.reference_knobs(_target)
 		_unlocked = GalaxyTemplates.COMPONENTS.duplicate()
@@ -154,7 +155,7 @@ func _pick_target() -> void:
 		_collisions = 0
 		start_collide()
 	else:
-		start_build(chosen[0])
+		start_build(picked)
 
 
 # --- act 1: build ------------------------------------------------------------------------------
@@ -702,6 +703,8 @@ func _on_collision_finished() -> void:
 		_info.text = tr("GAL_ANALYSING")
 		while _thread.is_alive():
 			await get_tree().process_frame
+			if not is_inside_tree():
+				return   # left the game meanwhile; _exit_tree() takes care of the thread
 	var found: Dictionary = _thread.wait_to_finish()
 	_running = false
 	var fresh := CollideLogic.new_badges(found, _badges)

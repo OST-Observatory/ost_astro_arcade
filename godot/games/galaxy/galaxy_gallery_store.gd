@@ -12,9 +12,10 @@ var entries: Array = []
 func _init(file_path: String) -> void:
 	path = file_path
 	if FileAccess.file_exists(path):
-		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-		if parsed is Array:
-			entries = parsed.filter(func(e): return e is Dictionary and e.has("target") and e.has("knobs"))
+		# A damaged file (power cut) just means an empty gallery; JSON.parse() does not log it.
+		var json := JSON.new()
+		if json.parse(FileAccess.get_file_as_string(path)) == OK and json.data is Array:
+			entries = (json.data as Array).filter(func(e): return e is Dictionary and e.has("target") and e.has("knobs"))
 
 
 ## Saves a galaxy if it is stable; returns false otherwise.

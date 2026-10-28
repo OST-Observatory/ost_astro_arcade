@@ -2,6 +2,9 @@
 ## streak bonus and an explanation after every answer, then a result screen.
 extends Control
 
+## The visitor picked a mode (awaited instead of polling, see puzzle_game.gd).
+signal _mode_chosen(mode: String)
+
 const ANSWER_SIZE := Vector2(1080, 168)
 const LETTERS := ["A", "B", "C", "D"]
 
@@ -56,7 +59,6 @@ func _pick_mode() -> String:
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
 	row.add_theme_constant_override("separation", 60)
 	v.add_child(row)
-	var chosen := [""]
 	for m in [["solo", "person", "QUIZ_MODE_SOLO", "QUIZ_MODE_SOLO_DESC"], ["duel", "groups", "QUIZ_MODE_DUEL", "QUIZ_MODE_DUEL_DESC"]]:
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(760, 520)
@@ -84,12 +86,11 @@ func _pick_mode() -> String:
 		col.add_child(desc)
 		b.pressed.connect(func():
 			Audio.play("tap")
-			chosen[0] = m[0])
+			_mode_chosen.emit(m[0]))
 		row.add_child(b)
-	while chosen[0] == "":
-		await get_tree().process_frame
+	var mode: String = await _mode_chosen
 	v.queue_free()
-	return chosen[0]
+	return mode
 
 
 func _new_round() -> void:

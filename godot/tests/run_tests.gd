@@ -15,6 +15,7 @@ func _initialize() -> void:
 	var passed := 0
 	var failed := 0
 	for path in files:
+		print("  ", path.get_file())   # progress: some files take a few minutes
 		var script: GDScript = load(path)
 		for m in script.get_script_method_list():
 			var method: String = m.name

@@ -4,6 +4,10 @@
 ## is followed by an info card about the object.
 extends Control
 
+## The visitor picked an image (awaited instead of polling: leaving the game mid-choice
+## then simply drops the wait).
+signal _image_chosen(entry: Dictionary)
+
 const DATA := "res://assets/data/puzzle/images.json"
 const BOARD_AREA := Rect2(1000, 170, 1480, 1120)
 const TRAY := Rect2(60, 200, 880, 1100)
@@ -77,7 +81,6 @@ func _pick_image() -> void:
 	var center := CenterContainer.new()
 	center.add_child(grid)
 	v.add_child(center)
-	var chosen := [null]
 	for e in _images:
 		var b := Button.new()
 		b.custom_minimum_size = Vector2(440, 380)
@@ -104,11 +107,9 @@ func _pick_image() -> void:
 		col.add_child(name)
 		b.pressed.connect(func():
 			Audio.play("tap")
-			chosen[0] = e)
+			_image_chosen.emit(e))
 		grid.add_child(b)
-	while chosen[0] == null:
-		await get_tree().process_frame
-	_entry = chosen[0]
+	_entry = await _image_chosen
 	v.queue_free()
 
 
