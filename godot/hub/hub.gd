@@ -52,7 +52,7 @@ func _build_cards() -> void:
 	var center := CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	center.offset_top = 300
-	center.offset_bottom = -150
+	center.offset_bottom = -210
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	center.add_child(grid)
 	add_child(center)
@@ -63,23 +63,33 @@ func _build_cards() -> void:
 		_cards.append(card)
 
 
+## Footer row, kept clear of the screen edges (bezels of the touch display).
+const FOOTER_BOTTOM := -70.0
+const FOOTER_TOP := -180.0
+const FOOTER_SIDE := 64.0
+
+
 func _build_footer() -> void:
 	var langs := LanguageBar.new()
 	langs.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	langs.offset_left = -740
-	langs.offset_top = -140
+	langs.offset_left = -740 - FOOTER_SIDE
+	langs.offset_right = -FOOTER_SIDE
+	langs.offset_top = FOOTER_TOP
+	langs.offset_bottom = FOOTER_BOTTOM
 	add_child(langs)
 
 	var info := BigButton.make("HUB_INFO", "info", false, 0)
 	info.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
-	info.offset_left = 64
-	info.offset_top = -140
+	info.offset_left = FOOTER_SIDE
+	info.offset_top = FOOTER_TOP
+	info.offset_bottom = FOOTER_BOTTOM
 	info.pressed.connect(func(): add_child(InfoPanel.new()))
 	add_child(info)
 	var best := BigButton.make("HUB_LEADERBOARD", "trophy", false, 0)
 	best.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
-	best.offset_left = 64 + 240
-	best.offset_top = -140
+	best.offset_left = FOOTER_SIDE + 240
+	best.offset_top = FOOTER_TOP
+	best.offset_bottom = FOOTER_BOTTOM
 	best.pressed.connect(func(): add_child(LeaderboardOverlay.new()))
 	add_child(best)
 
@@ -87,8 +97,10 @@ func _build_footer() -> void:
 	hint.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	hint.offset_left = -500
 	hint.offset_right = 500
-	hint.offset_top = -120
+	hint.offset_top = FOOTER_TOP
+	hint.offset_bottom = FOOTER_BOTTOM
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hint.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	add_child(hint)
 
 
