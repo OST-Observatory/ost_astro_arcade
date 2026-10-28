@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-time kiosk setup for the OST Space Lab on Ubuntu Server 24.04 LTS (run as root).
+# One-time kiosk setup for the OST Space Lab on Ubuntu Server 24.04 or 26.04 LTS (run as root).
 #   sudo bash kiosk/install.sh [--lan 192.168.0.0/16]
 # Idempotent: safe to run again after changes. Read kiosk/README.md first (BIOS settings,
 # GRUB password, optional read-only root). Make sure your SSH key works BEFORE running it:
@@ -21,9 +21,13 @@ if [[ -z "$(find /home/*/.ssh/authorized_keys /root/.ssh/authorized_keys -size +
 fi
 
 echo "==> Packages"
+# 24.04 needs the HWE kernel for current AMD graphics; 26.04 ships a recent kernel anyway.
+. /etc/os-release
+KERNEL_PKG=linux-generic
+[[ "${VERSION_ID:-}" == "24.04" ]] && KERNEL_PKG=linux-generic-hwe-24.04
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-  linux-generic-hwe-24.04 cage mesa-vulkan-drivers libvulkan1 vulkan-tools \
+  "$KERNEL_PKG" cage mesa-vulkan-drivers libvulkan1 vulkan-tools \
   libgl1 libegl1 libgles2 libwayland-client0 libwayland-cursor0 libwayland-egl1 libxkbcommon0 \
   libasound2t64 pipewire pipewire-pulse wireplumber fonts-dejavu-core \
   polkitd unattended-upgrades ufw openssh-server rsync
@@ -68,11 +72,14 @@ mkdir -p /etc/ssh/sshd_config.d
 printf 'PasswordAuthentication no\nKbdInteractiveAuthentication no\nPermitRootLogin no\n' > /etc/ssh/sshd_config.d/90-ost-kiosk.conf
 systemctl reload ssh || systemctl reload sshd || true
 
-echo "==> Firewall: only SSH from $LAN_CIDR"
+echo "==> Firewall: only SSH from $LAN_CIDR (and over Tailscale, if set up)"
 ufw --force reset >/dev/null
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow from "$LAN_CIDR" to any port 22 proto tcp
+if ip link show tailscale0 &>/dev/null; then
+  ufw allow in on tailscale0 to any port 22 proto tcp
+fi
 ufw --force enable
 
 echo "==> Automatic security updates with reboot at 04:30"

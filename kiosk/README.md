@@ -1,4 +1,4 @@
-# Kiosk setup (NiPoGi E3B, Ubuntu Server 24.04 LTS)
+# Kiosk setup (NiPoGi E3B, Ubuntu Server 24.04 or 26.04 LTS)
 
 The kiosk boots straight into the OST Space Lab: `systemd` → `cage` (a Wayland compositor
 that shows exactly one fullscreen app) → Godot. There is no desktop and no login prompt, and
@@ -12,17 +12,20 @@ If it hangs, the watchdog restarts it (heartbeat older than 60 s).
    - boot only from the internal SSD and disable USB/network boot
    - set *Restore on AC power loss* to **Power On**
    - optional: an RTC wake time for daily auto-start
-2. Install **Ubuntu Server 24.04 LTS** (minimal) with an admin account (e.g. `ostadmin`) and
-   OpenSSH. Optionally create a separate partition for `/var/lib/ost` (scores, telemetry); this
+2. Install **Ubuntu Server 24.04 or 26.04 LTS** (minimal) with an admin account (e.g.
+   `ostadmin`; the OST kiosk uses `arcade_admin`) and OpenSSH. Optionally create a separate partition for `/var/lib/ost` (scores, telemetry); this
    is needed for the read-only root in step 5.
 3. Copy your SSH key: `ssh-copy-id ostadmin@<kiosk>`. Test that a key login works.
+4. Remote access over Tailscale (optional): install Tailscale before running `install.sh`;
+   the firewall then also allows SSH on the `tailscale0` interface. The OST kiosk is reachable
+   as `arcade_admin@astroarcade.tail96a65f.ts.net` and uses Wi-Fi (192.168.0.x).
 
 ## 2. Install
 
 ```bash
-# on the dev machine
+# on the dev machine (scp works too if rsync is missing)
 rsync -a kiosk/ ostadmin@<kiosk>:ost-kiosk/
-ssh ostadmin@<kiosk> 'sudo bash ost-kiosk/install.sh --lan 192.168.0.0/16'
+ssh -t ostadmin@<kiosk> 'sudo bash ost-kiosk/install.sh --lan 192.168.0.0/16'
 ```
 
 `install.sh` does the following:
