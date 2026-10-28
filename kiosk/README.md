@@ -35,7 +35,8 @@ ssh -t ostadmin@<kiosk> 'sudo bash ost-kiosk/install.sh --lan 192.168.0.0/16'
 - adds a polkit rule so that `kiosk` may only power off and reboot
 - disables Ctrl+Alt+Del, SysRq and extra VT logins, and hides the GRUB menu
 - restricts SSH to key login only
-- allows only SSH from the LAN through the firewall (ufw)
+- firewall (ufw): allows only SSH, and only from the local network's address range
+  (`--lan`, default 192.168.0.0/16; Wi-Fi or cable makes no difference) and over Tailscale
 - enables automatic security updates with a reboot at 04:30
 
 ## 3. Deploy the app
