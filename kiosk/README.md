@@ -47,6 +47,8 @@ On the dev machine, the Godot export templates must be installed once (Godot edi
 
 ```bash
 kiosk/deploy.sh ostadmin@<kiosk>     # tests, export, upload, switch, restart
+kiosk/deploy.sh ostadmin@<kiosk> --no-tests   # skip the tests (about 3 min)
+kiosk/deploy.sh ostadmin@<kiosk> --no-build   # upload the existing build/linux as it is
 ```
 
 Releases are kept in `/opt/ost/releases/` (the last 3), and `/opt/ost/current` points to the
