@@ -13,6 +13,7 @@ const BOARD_AREA := Rect2(1000, 170, 1480, 1120)
 const TRAY := Rect2(60, 200, 880, 1100)
 const SNAP_PX := 55.0
 const GHOST_ALPHA := {"explorer": 0.35, "researcher": 0.14, "pro": 0.0}
+const EMPTY_COLOR := Color(0.13, 0.17, 0.27)
 
 var skip_intro := false   # screenshots/tests
 var rng_seed := 0
@@ -51,6 +52,9 @@ func _ready() -> void:
 		await _pick_image()
 	else:
 		_entry = _images[0]
+		for e in _images:   # screenshots: PUZZLE_IMAGE=<id>
+			if e.id == OS.get_environment("PUZZLE_IMAGE"):
+				_entry = e
 	_start()
 
 
@@ -130,7 +134,8 @@ func _start() -> void:
 	var frame := Panel.new()
 	frame.position = _board_origin - Vector2(8, 8)
 	frame.size = size * _scale + Vector2(16, 16)
-	frame.add_theme_stylebox_override("panel", UiTheme.box(Color(0, 0, 0, 0.7), Color(UiTheme.SCIENCE, 0.5), 3, 8))
+	# Empty places are a dark blue-grey, so that pieces of black sky stand out once placed.
+	frame.add_theme_stylebox_override("panel", UiTheme.box(EMPTY_COLOR, Color(UiTheme.SCIENCE, 0.5), 3, 8))
 	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_ui.add_child(frame)
 	var ghost := TextureRect.new()
@@ -342,6 +347,13 @@ class _Piece:
 		modulate = Color(1.12, 1.12, 1.12) if on else Color.WHITE
 		_outline.default_color = Color(UiTheme.ACCENT, 0.9) if on else Color(1, 1, 1, 0.45)
 
+	## Snapped in place: a short flash and a green outline that fades, then it is part of the
+	## picture.
 	func lock() -> void:
 		locked = true
-		create_tween().tween_property(_outline, "modulate:a", 0.0, 0.6)
+		_outline.default_color = Color(UiTheme.SUCCESS, 1.0)
+		_outline.width *= 2.0
+		modulate = Color(1.8, 1.8, 1.8)
+		var tw := create_tween().set_parallel()
+		tw.tween_property(self, "modulate", Color.WHITE, 0.5)
+		tw.tween_property(_outline, "modulate:a", 0.0, 0.9).set_delay(0.2)
