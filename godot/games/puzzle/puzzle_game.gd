@@ -78,16 +78,19 @@ func _pick_image() -> void:
 	var t := UiTheme.label("PUZZLE_PICK", UiTheme.SIZE_H2 + 10, "serif")
 	t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	v.add_child(t)
+	# Three rows; as many columns as needed (at most 6), tiles as large as fits.
+	var cols := clampi(ceili(_images.size() / 3.0), 4, 6)
+	var tile_w := minf(440.0, (2400.0 - (cols - 1) * 24.0) / cols)
 	var grid := GridContainer.new()
-	grid.columns = 5
-	grid.add_theme_constant_override("h_separation", 32)
-	grid.add_theme_constant_override("v_separation", 32)
+	grid.columns = cols
+	grid.add_theme_constant_override("h_separation", 24)
+	grid.add_theme_constant_override("v_separation", 24)
 	var center := CenterContainer.new()
 	center.add_child(grid)
 	v.add_child(center)
 	for e in _images:
 		var b := Button.new()
-		b.custom_minimum_size = Vector2(440, 380)
+		b.custom_minimum_size = Vector2(tile_w, tile_w * 0.86)
 		b.focus_mode = Control.FOCUS_NONE
 		b.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		var col := VBoxContainer.new()
@@ -101,7 +104,7 @@ func _pick_image() -> void:
 		img.texture = load(e.thumb)
 		img.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		img.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		img.custom_minimum_size = Vector2(412, 270)
+		img.custom_minimum_size = Vector2(tile_w - 28, tile_w * 0.86 - 112)
 		img.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		col.add_child(img)
 		var name := _plain(_tr_dict(e.name), UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.TEXT)

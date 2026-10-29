@@ -166,8 +166,8 @@
     "es": "Sol en Luz H-alfa"
    },
    "description": {
-    "de": "Detailaufnahme der Sonnenoberfläche in H-alpha. Zeigt Protuberanzen und Filamente, Strukturen aus ionisiertem Wasserstoff in der Chromosphäre.",
-    "en": "Detailed image of the solar surface in H-alpha. Shows prominences and filaments, structures of ionised hydrogen in the chromosphere.",
+    "de": "Detailaufnahme der Sonnenoberfläche in H-alpha. Zeigt Protuberanzen und Filamente – Strukturen aus ionisiertem Wasserstoff in der Chromosphäre.",
+    "en": "Detailed image of the solar surface in H-alpha. Shows prominences and filaments – structures of ionised hydrogen in the chromosphere.",
     "es": "Imagen detallada de la superficie solar en H-alfa. Muestra protuberancias y filamentos, estructuras de hidrógeno ionizado en la cromosfera."
    }
   },
@@ -188,6 +188,158 @@
     "de": "Nahaufnahme des Sonnenflecks 3413 vom 24.08.2023: Die Umbra und die Penumbra des Sonnenflecks sind deutlich zu erkennen. Ersteres bezeichnet den dunkleren Kernbereich, Letzteres den etwas helleren Rand. Wir blicken hier auf den Teil der Sonnenatmosphäre, aus dem das meiste Licht stammt, das uns auf der Erde erreicht: die sogenannte Photosphäre. Sie ist geprägt durch die hier klar erkennbare granulare Struktur, die in Verbindung mit den Konvektionsströmen im Inneren der Sonne steht.",
     "en": "Close-up of sunspot 3413 from 24 August 2023: the umbra and penumbra of the sunspot are clearly visible. The former refers to the darker central region, the latter to the slightly brighter outer edge. We are looking at the part of the solar atmosphere from which most of the light reaching us on Earth originates: the so-called photosphere. It is characterised by the clearly visible granular structure, which is connected to the convection currents inside the Sun.",
     "es": "Primer plano de la mancha solar 3413 del 24 de agosto de 2023: la umbra y la penumbra de la mancha solar son claramente visibles. La primera designa la región central más oscura, la segunda el borde algo más brillante. Estamos observando la parte de la atmósfera solar de la que procede la mayor parte de la luz que nos llega a la Tierra: la denominada fotosfera. Se caracteriza por la estructura granular claramente visible, relacionada con las corrientes de convección en el interior del Sol."
+   }
+  },
+  {
+   "id": "crab_nebula",
+   "image": "res://assets/puzzle/images/crab_nebula.jpg",
+   "thumb": "res://assets/puzzle/images/crab_nebula_thumb.jpg",
+   "size": [
+    2347,
+    1392
+   ],
+   "name": {
+    "de": "Krebsnebel (Messier 1)",
+    "en": "Crab Nebula (Messier 1)",
+    "es": "Nebulosa del Cangrejo (Messier 1)"
+   },
+   "description": {
+    "de": "Der Überrest einer Supernova im Sternbild Stier, etwa 6500 Lichtjahre entfernt. Chinesische Astronomen sahen die Sternexplosion im Jahr 1054 sogar am Taghimmel. In ihrem Zentrum dreht sich ein Neutronenstern rund 30-mal pro Sekunde.",
+    "en": "The remnant of a supernova in the constellation Taurus, about 6500 light-years away. Chinese astronomers saw the stellar explosion in 1054, even in the daytime sky. At its centre a neutron star spins about 30 times per second.",
+    "es": "Los restos de una supernova en la constelación de Tauro, a unos 6500 años luz. Astrónomos chinos vieron la explosión estelar en el año 1054, incluso en el cielo diurno. En su centro gira una estrella de neutrones unas 30 veces por segundo."
+   }
+  },
+  {
+   "id": "eagle_nebula",
+   "image": "res://assets/puzzle/images/eagle_nebula.jpg",
+   "thumb": "res://assets/puzzle/images/eagle_nebula_thumb.jpg",
+   "size": [
+    2400,
+    1604
+   ],
+   "name": {
+    "de": "Adlernebel (Messier 16)",
+    "en": "Eagle Nebula (Messier 16)",
+    "es": "Nebulosa del Águila (Messier 16)"
+   },
+   "description": {
+    "de": "Ein Sternentstehungsgebiet im Sternbild Schlange, etwa 7000 Lichtjahre entfernt. In der Mitte stehen die berühmten „Säulen der Schöpfung“: dichte Gas- und Staubsäulen, in denen neue Sterne entstehen. Junge, heiße Sterne bringen das Gas zum Leuchten.",
+    "en": "A star-forming region in the constellation Serpens, about 7000 light-years away. In its centre stand the famous “Pillars of Creation”: dense columns of gas and dust in which new stars are born. Young, hot stars make the gas glow.",
+    "es": "Una región de formación estelar en la constelación de la Serpiente, a unos 7000 años luz. En su centro se alzan los famosos «Pilares de la Creación»: densas columnas de gas y polvo donde nacen nuevas estrellas. Estrellas jóvenes y calientes hacen brillar el gas."
+   }
+  },
+  {
+   "id": "Messier_82_HaLRGB",
+   "image": "res://assets/puzzle/images/Messier_82_HaLRGB.jpg",
+   "thumb": "res://assets/puzzle/images/Messier_82_HaLRGB_thumb.jpg",
+   "size": [
+    2400,
+    1569
+   ],
+   "name": {
+    "de": "Zigarren-Galaxie (Messier 82)",
+    "en": "Cigar Galaxy (Messier 82)",
+    "es": "Galaxia del Cigarro (Messier 82)"
+   },
+   "description": {
+    "de": "Eine Galaxie im Großen Bären, etwa 12 Mio. Lichtjahre entfernt, die wir von der Seite sehen. Nach einer nahen Begegnung mit M81 entstehen in ihr rund zehnmal so viele Sterne wie in der Milchstraße. Die roten Fäden sind Wasserstoffgas, das aus der Galaxie herausgeblasen wird. 2014 beobachtete das OST hier die Supernova SN 2014J.",
+    "en": "A galaxy in Ursa Major, about 12 million light-years away, seen edge-on. After a close encounter with M81 it forms about ten times as many stars as the Milky Way. The red filaments are hydrogen gas being blown out of the galaxy. In 2014 the OST observed the supernova SN 2014J here.",
+    "es": "Una galaxia en la Osa Mayor, a unos 12 millones de años luz, que vemos de canto. Tras un encuentro cercano con M81 forma unas diez veces más estrellas que la Vía Láctea. Los filamentos rojos son gas de hidrógeno expulsado de la galaxia. En 2014 el OST observó aquí la supernova SN 2014J."
+   }
+  },
+  {
+   "id": "jones_emberson_1",
+   "image": "res://assets/puzzle/images/jones_emberson_1.jpg",
+   "thumb": "res://assets/puzzle/images/jones_emberson_1_thumb.jpg",
+   "size": [
+    1500,
+    1000
+   ],
+   "name": {
+    "de": "Jones-Emberson 1 (Planetarischer Nebel)",
+    "en": "Jones-Emberson 1 (planetary nebula)",
+    "es": "Jones-Emberson 1 (nebulosa planetaria)"
+   },
+   "description": {
+    "de": "Ein planetarischer Nebel im Sternbild Luchs, etwa 1600 Lichtjahre entfernt. Ein sterbender Stern wie unsere Sonne hat seine äußeren Schichten abgestoßen, sein heißer Kern bringt das Gas zum Leuchten. So wird auch unsere Sonne in rund fünf Milliarden Jahren enden.",
+    "en": "A planetary nebula in the constellation Lynx, about 1600 light-years away. A dying star like our Sun has shed its outer layers, and its hot core makes the gas glow. Our Sun will end like this too, in about five billion years.",
+    "es": "Una nebulosa planetaria en la constelación del Lince, a unos 1600 años luz. Una estrella moribunda como nuestro Sol expulsó sus capas exteriores y su núcleo caliente hace brillar el gas. Así terminará también nuestro Sol, dentro de unos cinco mil millones de años."
+   }
+  },
+  {
+   "id": "aurora_ost",
+   "image": "res://assets/puzzle/images/aurora_ost.jpg",
+   "thumb": "res://assets/puzzle/images/aurora_ost_thumb.jpg",
+   "size": [
+    1800,
+    2400
+   ],
+   "name": {
+    "de": "Polarlicht am OST",
+    "en": "Aurora at the OST",
+    "es": "Aurora junto al OST"
+   },
+   "description": {
+    "de": "Am 10. Oktober 2024 war sogar in Potsdam ein Polarlicht zu sehen, hier neben der Kuppel des OST. Ausgelöst wurde es durch einen gewaltigen Ausbruch auf der Sonne. Das rote Leuchten stammt von Sauerstoff in mehr als 200 km Höhe.",
+    "en": "On 10 October 2024 an aurora could be seen even in Potsdam, here next to the dome of the OST. It was caused by a huge eruption on the Sun. The red glow comes from oxygen more than 200 km up.",
+    "es": "El 10 de octubre de 2024 se pudo ver una aurora incluso en Potsdam, aquí junto a la cúpula del OST. La provocó una enorme erupción en el Sol. El brillo rojo procede del oxígeno a más de 200 km de altura."
+   }
+  },
+  {
+   "id": "moon_2021",
+   "image": "res://assets/puzzle/images/moon_2021.jpg",
+   "thumb": "res://assets/puzzle/images/moon_2021_thumb.jpg",
+   "size": [
+    2400,
+    2390
+   ],
+   "name": {
+    "de": "Vollmond",
+    "en": "Full Moon",
+    "es": "Luna llena"
+   },
+   "description": {
+    "de": "Der Mond, rund 384 000 km von der Erde entfernt. Die dunklen Flächen, die Maria, sind erstarrte Lavaebenen. Die hellen Strahlen unten gehen vom jungen Krater Tycho aus.",
+    "en": "The Moon, about 384,000 km from Earth. The dark areas, the maria, are plains of solidified lava. The bright rays at the bottom spread out from the young crater Tycho.",
+    "es": "La Luna, a unos 384 000 km de la Tierra. Las zonas oscuras, los mares, son llanuras de lava solidificada. Los rayos brillantes de abajo parten del joven cráter Tycho."
+   }
+  },
+  {
+   "id": "messier33",
+   "image": "res://assets/puzzle/images/messier33.jpg",
+   "thumb": "res://assets/puzzle/images/messier33_thumb.jpg",
+   "size": [
+    2400,
+    1659
+   ],
+   "name": {
+    "de": "Dreiecksgalaxie (Messier 33)",
+    "en": "Triangulum Galaxy (Messier 33)",
+    "es": "Galaxia del Triángulo (Messier 33)"
+   },
+   "description": {
+    "de": "Eine Spiralgalaxie im Sternbild Dreieck, etwa 2,7 Mio. Lichtjahre entfernt. Nach Andromeda und der Milchstraße ist sie die drittgrößte Galaxie unserer Lokalen Gruppe. Die rosa Flecken sind Gebiete, in denen gerade Sterne entstehen.",
+    "en": "A spiral galaxy in the constellation Triangulum, about 2.7 million light-years away. After Andromeda and the Milky Way it is the third largest galaxy of our Local Group. The pink patches are regions where stars are forming right now.",
+    "es": "Una galaxia espiral en la constelación del Triángulo, a unos 2,7 millones de años luz. Tras Andrómeda y la Vía Láctea es la tercera galaxia más grande de nuestro Grupo Local. Las manchas rosas son regiones donde se están formando estrellas."
+   }
+  },
+  {
+   "id": "crescent_nebula",
+   "image": "res://assets/puzzle/images/crescent_nebula.jpg",
+   "thumb": "res://assets/puzzle/images/crescent_nebula_thumb.jpg",
+   "size": [
+    2400,
+    1574
+   ],
+   "name": {
+    "de": "Sichelnebel (NGC 6888)",
+    "en": "Crescent Nebula (NGC 6888)",
+    "es": "Nebulosa Creciente (NGC 6888)"
+   },
+   "description": {
+    "de": "Ein Nebel im Sternbild Schwan, etwa 5000 Lichtjahre entfernt. Der Sternwind des sehr heißen, massereichen Sterns WR 136 in der Mitte prallt auf Gas, das der Stern früher abgestoßen hat, und formt so die leuchtende Blase. Der Stern wird vermutlich als Supernova enden.",
+    "en": "A nebula in the constellation Cygnus, about 5000 light-years away. The stellar wind of the very hot, massive star WR 136 in its centre crashes into gas the star shed earlier and shapes the glowing bubble. The star will probably end as a supernova.",
+    "es": "Una nebulosa en la constelación del Cisne, a unos 5000 años luz. El viento estelar de la estrella muy caliente y masiva WR 136, en su centro, choca con el gas que la estrella expulsó antes y forma la burbuja luminosa. Probablemente la estrella terminará como supernova."
    }
   }
  ]

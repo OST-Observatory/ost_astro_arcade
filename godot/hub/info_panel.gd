@@ -3,7 +3,7 @@ class_name InfoPanel
 extends Control
 
 const CREDITS := [
-	"OST-Logo, Fotos & Aufnahmen: OST, Universität Potsdam (Komet 67P: CC BY-NC-SA 3.0)",
+	"OST-Logo, Fotos & Aufnahmen: OST, Universität Potsdam (Komet 67P und Puzzlebilder aus der OST-Galerie: CC BY-NC-SA)",
 	"Quiz-Bilder: siehe Bildnachweis unter jedem Bild",
 	"Galaxien: NASA, ESA & Hubble Heritage Team / ACS Science Team; Wagenrad: NASA, ESA, CSA, STScI (CC BY 4.0)",
 	"Rotationskurven: Eilers et al. 2019 (Gaia), SPARC (Lelli, McGaugh & Schombert 2016)",
