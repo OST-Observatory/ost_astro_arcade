@@ -262,6 +262,8 @@ func _is_open_edge(a: int, b: int) -> bool:
 func _star_at(local: Vector2, max_px: float) -> int:
 	var best := -1
 	var best_d := max_px
+	var member := -1
+	var member_d := max_px
 	for hip in _pos:
 		var d: float = (_pos[hip] as Vector2).distance_to(local)
 		# Bright stars are easier to hit.
@@ -269,7 +271,19 @@ func _star_at(local: Vector2, max_px: float) -> int:
 		if d < best_d:
 			best_d = d
 			best = hip
+		if d < member_d and _members.has(hip):
+			member_d = d
+			member = hip
+	# While the help marks the figure's stars, a tap always takes the marked star in reach
+	# rather than a neighbour that does not belong to the figure.
+	if _helping() and member >= 0:
+		return member
 	return best
+
+
+## The figure's stars are marked (hint, automatic glow or ghost lines).
+func _helping() -> bool:
+	return _glow > 0.3
 
 
 func _connect(a: int, b: int) -> void:
@@ -438,9 +452,11 @@ class _LineLayer:
 		for f in g._wrong_flash:
 			draw_line(f[0], f[1], Color(UiTheme.DANGER, clampf(f[2] / 0.6, 0.0, 1.0)), 5.0, true)
 		if g._active >= 0 and g._pos.has(g._active):
-			draw_arc(g._pos[g._active], 30.0, 0, TAU, 40, UiTheme.ACCENT_HI, 4.0, true)
+			# With the help on, a star outside the figure is marked red: wrong star.
+			var sel: Color = UiTheme.DANGER if g._helping() and not g._members.has(g._active) else UiTheme.ACCENT_HI
+			draw_arc(g._pos[g._active], 30.0, 0, TAU, 40, sel, 4.0, true)
 			if g._dragging:
-				draw_line(g._pos[g._active], g._finger, Color(UiTheme.ACCENT_HI, 0.8), 4.0, true)
+				draw_line(g._pos[g._active], g._finger, Color(sel, 0.8), 4.0, true)
 
 	func _dashed(a: Vector2, b: Vector2, col: Color) -> void:
 		var n := int(a.distance_to(b) / 18.0)

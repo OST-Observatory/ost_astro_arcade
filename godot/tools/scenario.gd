@@ -258,6 +258,26 @@ func _ready() -> void:
 						mm._launch()
 						if scenario == "sol_result":
 							mm._fast = 40.0
+		"con_hint":
+			# Help on: a star outside the figure selected (red ring), and a tap between a
+			# figure star and a closer neighbour that takes the figure star.
+			var ch: Control = load("res://games/constellations/constellation_game.tscn").instantiate()
+			ch.skip_intro = true
+			ch.rng_seed = int(OS.get_environment("SEED")) if OS.get_environment("SEED") != "" else 3
+			add_child(ch)
+			await get_tree().process_frame
+			ch._use_hint()
+			await get_tree().create_timer(0.8).timeout
+			var pair := [-1, -1, 1e9]
+			for m in ch._members:
+				for h in ch._pos:
+					if not ch._members.has(h) and h != m:
+						var d: float = (ch._pos[m] as Vector2).distance_to(ch._pos[h])
+						if d < pair[2]:
+							pair = [m, h, d]
+			var tap: Vector2 = (ch._pos[pair[0]] as Vector2).lerp(ch._pos[pair[1]], 0.7)
+			print("TAP member ", pair[0], " other ", pair[1], " dist ", snappedf(pair[2], 0.1), " -> picked ", ch._star_at(tap, ch.PICK_TAP))
+			ch._active = pair[1]
 		"con", "con_half", "con_done", "con_result":
 			var cg: Control = load("res://games/constellations/constellation_game.tscn").instantiate()
 			cg.skip_intro = true
