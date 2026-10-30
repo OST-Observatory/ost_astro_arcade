@@ -18,3 +18,4 @@ captures/
 build/
 *.log
 tools/.cache/
+/feedback/

@@ -39,6 +39,10 @@ if ! id "$KIOSK_USER" &>/dev/null; then
 fi
 passwd -l "$KIOSK_USER" >/dev/null
 install -d -o "$KIOSK_USER" -g "$KIOSK_USER" -m 750 "$DATA_DIR"
+# The admin account may read the kiosk data (feedback reports, telemetry) without sudo.
+if [[ -n "${SUDO_USER:-}" && "$SUDO_USER" != root ]]; then
+  usermod -aG "$KIOSK_USER" "$SUDO_USER"
+fi
 install -d -m 755 "$APP_DIR/releases" "$APP_DIR/external"
 
 echo "==> PAM + systemd units"

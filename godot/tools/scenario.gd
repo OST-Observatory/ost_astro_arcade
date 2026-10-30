@@ -258,6 +258,18 @@ func _ready() -> void:
 						mm._launch()
 						if scenario == "sol_result":
 							mm._fast = 40.0
+		"feedback", "feedback_sent":
+			# The feedback panel over the hub, with a kind chosen and a sentence typed.
+			_hub()
+			await get_tree().create_timer(0.5).timeout
+			Router._open_feedback()
+			await get_tree().create_timer(0.3).timeout
+			var fp: FeedbackPanel = Router._overlay_root.get_children().filter(func(c): return c is FeedbackPanel)[0]
+			fp._choose("bug")
+			for ch in ["D", "E", "R", " ", "SHIFT", "S", "T", "E", "R", "N", " ", "S", "P", "R", "I", "N", "G", "T", "."]:
+				fp._kb._press("SPACE" if ch == " " else ch)
+			if scenario == "feedback_sent":
+				fp._send()
 		"con_hint":
 			# Help on: a star outside the figure selected (red ring), and a tap between a
 			# figure star and a closer neighbour that takes the figure star.

@@ -18,6 +18,7 @@ const DEFAULTS := {
 	"audio/muted": true,
 	"audio/master_db": -6.0,
 	"display/show_fps": false,
+	"feedback/enabled": true,      # feedback button for testers; switch off for public use
 	"display/quality_3d": "high",   # high | medium | low (FSR upscaling, MSAA, effects)
 	"games/disabled": [],
 	"external/nbody_path": "/opt/ost/external/nbody/nbody_dynamics",

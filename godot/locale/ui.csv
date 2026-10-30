@@ -634,3 +634,14 @@ GAL_Q_HALO_SHAPE_A0,"Eine riesige, ungefähr kugelförmige Wolke, viel größer 
 GAL_Q_HALO_SHAPE_A1,Eine dünne Scheibe wie die der Sterne,A thin disk like that of the stars,Un disco delgado como el de las estrellas
 GAL_Q_HALO_SHAPE_A2,Ein schmaler Ring am Rand,A narrow ring at the edge,Un anillo estrecho en el borde
 GAL_Q_HALO_SHAPE_EXPL,"Der Halo umhüllt die Galaxie wie eine riesige Kugel und reicht weit über die sichtbare Scheibe hinaus. Er ist überall dünn, aber so groß, dass er insgesamt am meisten wiegt.","The halo wraps the galaxy like a huge sphere and reaches far beyond the visible disk. It is thin everywhere, but so large that in total it weighs the most.","El halo envuelve la galaxia como una enorme esfera y se extiende mucho más allá del disco visible. Es tenue en todas partes, pero tan grande que en total es lo que más pesa."
+FB_TITLE,Etwas aufgefallen?,Noticed something?,¿Has notado algo?
+FB_INTRO,"Hilf uns, das OST Space Lab besser zu machen. Ein Bildschirmfoto von eben wird mitgeschickt.",Help us make the OST Space Lab better. A screenshot of the moment before is sent along.,Ayúdanos a mejorar el OST Space Lab. Se envía una captura de pantalla del momento anterior.
+FB_WHAT,Worum geht es?,What is it about?,¿De qué se trata?
+FB_KIND_BUG,Fehler,Bug,Error
+FB_KIND_IDEA,Idee,Idea,Idea
+FB_KIND_OTHER,Sonstiges,Other,Otro
+FB_TEXT_HINT,"Was ist passiert? (optional, ein Satz genügt)","What happened? (optional, one sentence is enough)","¿Qué ha pasado? (opcional, basta una frase)"
+FB_CANCEL,Abbrechen,Cancel,Cancelar
+FB_SEND,Senden,Send,Enviar
+FB_CHOOSE_KIND,"Bitte wähle oben aus, worum es geht.",Please choose above what it is about.,Elige arriba de qué se trata.
+FB_THANKS,Danke! Deine Rückmeldung ist gespeichert.,Thank you! Your feedback has been saved.,¡Gracias! Tu comentario se ha guardado.

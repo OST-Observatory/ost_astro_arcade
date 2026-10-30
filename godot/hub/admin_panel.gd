@@ -156,6 +156,16 @@ func _show_main(message := "") -> void:
 			Scores.store.clear_today()
 			_show_main("Heutige Bestenlisten gelöscht."))])
 
+	_section("Rückmeldungen (Feedback-Knopf für Tests)")
+	var fb := FeedbackStore.new(Settings.data_path("feedback"))
+	_row([
+		_toggle("Feedback-Knopf", Settings.get_value("feedback/enabled"), func(on): Settings.set_value("feedback/enabled", on)),
+		UiTheme.label("%d gespeichert" % fb.count()),
+		_action(Icons.get_char("delete") + " Alle löschen", func():
+			fb.clear()
+			_show_main("Rückmeldungen gelöscht.")),
+	])
+
 	_section("Anzeige & Test")
 	_row([
 		_toggle("FPS anzeigen", Settings.get_value("display/show_fps"), func(on): Settings.set_value("display/show_fps", on)),

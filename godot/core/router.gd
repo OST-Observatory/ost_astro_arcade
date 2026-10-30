@@ -8,10 +8,12 @@ signal game_started(game_id: String)
 const HUB_SCENE := "res://hub/hub.tscn"
 
 var current: Dictionary = {}  # registry entry of the running game, {} in the hub
+var last_step := ""           # last progress step of the running game (for feedback)
 var _busy := false
 
 var _fade: ColorRect
 var _home_btn: BigButton
+var _feedback_btn: BigButton
 var _idle: IdleOverlay
 var _fps: Label
 var _overlay_root: Control
@@ -27,7 +29,11 @@ func _ready() -> void:
 	_build_overlays()
 	Kiosk.activity.connect(_on_activity)
 	Kiosk.external_finished.connect(_on_external_finished)
-	Settings.changed.connect(func(key): if key == "display/show_fps": _fps.visible = Settings.get_value(key))
+	Settings.changed.connect(func(key):
+		if key == "display/show_fps":
+			_fps.visible = Settings.get_value(key)
+		elif key == "feedback/enabled":
+			_feedback_btn.visible = Settings.get_value(key))
 
 
 func _build_overlays() -> void:
@@ -47,6 +53,21 @@ func _build_overlays() -> void:
 	_home_btn.visible = false
 	_home_btn.pressed.connect(_confirm_home)
 	_overlay_root.add_child(_home_btn)
+
+	# Feedback for testers: a tab at the right edge, low enough to miss the hub's cards and
+	# clear of the corners used by the admin gesture. Switched off in the admin menu.
+	_feedback_btn = BigButton.make("", "feedback")
+	_feedback_btn.custom_minimum_size = Vector2(96, 96)
+	_feedback_btn.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+	_feedback_btn.offset_left = -104
+	_feedback_btn.offset_right = -8
+	_feedback_btn.offset_top = 210
+	_feedback_btn.offset_bottom = 306
+	_feedback_btn.add_theme_font_size_override("font_size", 52)
+	_feedback_btn.modulate = Color(1, 1, 1, 0.85)
+	_feedback_btn.visible = Settings.get_value("feedback/enabled")
+	_feedback_btn.pressed.connect(_open_feedback)
+	_overlay_root.add_child(_feedback_btn)
 
 	_idle = IdleOverlay.new()
 	_overlay_root.add_child(_idle)
@@ -102,6 +123,7 @@ func start_game(game_id: String) -> void:
 		return
 	Session.game_id = game_id
 	Session.ensure_name()
+	last_step = ""
 	if GameRegistry.is_external(entry):
 		_start_external(entry)
 		return
@@ -115,6 +137,7 @@ func start_game(game_id: String) -> void:
 
 ## Records a progress step of the running game (for the drop-off funnel in telemetry).
 func step(step_name: String) -> void:
+	last_step = step_name
 	Telemetry.step(step_name)
 
 
@@ -129,6 +152,7 @@ func go_home(reason := "home") -> void:
 	_close_dialogs()
 	Telemetry.game_ended(reason)  # no-op if the game already completed
 	current = {}
+	last_step = ""
 	_home_btn.visible = false
 	_idle.hide_countdown()
 	if reason == "idle":
@@ -173,9 +197,29 @@ func _confirm_home() -> void:
 ## Closes open overlay dialogs (e.g. when the idle timeout fires) and resumes the game.
 func _close_dialogs() -> void:
 	for c in _overlay_root.get_children():
-		if c is Dialog:
+		if c is Dialog or c is FeedbackPanel:
 			c.queue_free()
 	get_tree().paused = false
+
+
+## Feedback: the screenshot first (the panel must not be on it), then the panel; the app
+## waits while it is open.
+func _open_feedback() -> void:
+	if _busy or Kiosk.external_pid > 0:
+		return
+	for c in _overlay_root.get_children():
+		if c is FeedbackPanel or c is Dialog:
+			return
+	_feedback_btn.visible = false
+	await RenderingServer.frame_post_draw
+	var panel := FeedbackPanel.new()
+	panel.shot = get_viewport().get_texture().get_image()
+	var was_paused := get_tree().paused
+	get_tree().paused = true
+	_overlay_root.add_child(panel)
+	await panel.closed
+	get_tree().paused = was_paused
+	_feedback_btn.visible = Settings.get_value("feedback/enabled")
 
 
 func _transition(scene_path: String) -> void:

@@ -37,6 +37,7 @@ if (( BUILD_APP )); then
   mkdir -p "$BUILD"
   godot --headless --path "$REPO/godot" --export-release "Linux" "$BUILD/ost_astro_arcade.x86_64"
 fi
+echo "$STAMP" > "$BUILD/VERSION"   # shown in feedback reports
 
 echo "==> Upload $STAMP"
 "${SSH[@]}" -t "$HOST" "sudo install -d -m 755 /opt/ost/releases/$STAMP && sudo chown \$(id -u) /opt/ost/releases/$STAMP"

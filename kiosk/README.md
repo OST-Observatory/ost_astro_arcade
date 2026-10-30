@@ -57,6 +57,22 @@ active one. To roll back:
 
 External apps (NBodyTouch) go to `/opt/ost/external/nbody/`; see `docs/external_apps.md`.
 
+### Feedback from testers
+
+While the app is being tested (e.g. in the coffee room), a button at the right edge lets
+players report a bug or an idea: kind, a short text on the touch keyboard and a screenshot.
+Reports are stored in `/var/lib/ost/feedback/` (at most 300, oldest go first). Fetch them to
+`feedback/` in the repo (ignored by git):
+
+```bash
+kiosk/fetch_feedback.sh ostadmin@<kiosk>
+```
+
+This needs the admin account in the `kiosk` group (done by `install.sh`; on older setups
+`sudo usermod -aG kiosk ostadmin` once, then log in again). For live operation switch the
+button off in the admin menu (*Rückmeldungen*); the menu also shows the count and can delete
+all reports.
+
 ## 4. Manual hardening
 
 - **GRUB password** (stops editing the kernel command line at boot):
