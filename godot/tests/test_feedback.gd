@@ -30,3 +30,22 @@ func test_without_screenshot_and_clear() -> void:
 	assert_eq(store.count(), 2)
 	store.clear()
 	assert_eq(store.count(), 0)
+
+
+func test_keyboard_sentence_case_and_shift() -> void:
+	var kb := OnscreenKeyboard.new()
+	kb.sentence_mode = true
+	kb.max_length = 300
+	kb._ready()
+	var q: Button = kb._letter_keys[0]
+	assert_eq(q.text, "Q", "capitals at the start")
+	for ch in ["D", "E", "R", "SPACE"]:
+		kb._press(ch)
+	assert_eq(q.text, "q", "small letters inside a sentence")
+	kb._press("SHIFT")
+	assert_eq(q.text, "Q", "shift shows capitals")
+	for ch in ["S", "T", "E", "R", "N", "."]:
+		kb._press(ch)
+	assert_eq(kb.text, "Der Stern.")
+	assert_eq(q.text, "Q", "capitals after a full stop")
+	kb.free()

@@ -266,7 +266,10 @@ func _ready() -> void:
 			await get_tree().create_timer(0.3).timeout
 			var fp: FeedbackPanel = Router._overlay_root.get_children().filter(func(c): return c is FeedbackPanel)[0]
 			fp._choose("bug")
-			for ch in ["D", "E", "R", " ", "SHIFT", "S", "T", "E", "R", "N", " ", "S", "P", "R", "I", "N", "G", "T", "."]:
+			var keys := ["D", "E", "R", " ", "SHIFT", "S", "T", "E", "R", "N", " ", "S", "P", "R", "I", "N", "G", "T", "."]
+			if OS.get_environment("TYPED") != "":   # only the first n keys (to see the key labels)
+				keys.resize(int(OS.get_environment("TYPED")))
+			for ch in keys:
 				fp._kb._press("SPACE" if ch == " " else ch)
 			if scenario == "feedback_sent":
 				fp._send()

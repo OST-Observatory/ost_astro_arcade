@@ -2,7 +2,8 @@
 ## language (QWERTZ with umlauts for German, Ñ for Spanish). Words are capitalised
 ## automatically, so there is no shift key. In sentence_mode (set before adding it) only
 ## the start of a sentence is capitalised, a shift key capitalises the next letter (German
-## nouns) and there are punctuation keys.
+## nouns) and there are punctuation keys. The letter keys always show the case the next
+## letter will get.
 class_name OnscreenKeyboard
 extends VBoxContainer
 
@@ -22,6 +23,7 @@ var sentence_mode := false
 var key_size := KEY_SIZE
 var _shift := false
 var _shift_key: Button
+var _letter_keys: Array[Button] = []
 
 
 func _ready() -> void:
@@ -32,7 +34,10 @@ func _ready() -> void:
 	for row_chars in layout:
 		var row := _row()
 		for ch in row_chars:
-			row.add_child(_key(ch, ch, key_size))
+			var b := _key(ch, ch, key_size)
+			row.add_child(b)
+			if ch.to_lower() != ch:
+				_letter_keys.append(b)
 	var last := _row()
 	last.add_child(_key(Icons.get_char("backspace"), "BACK", Vector2(260, key_size.y), true))
 	if sentence_mode:
@@ -43,6 +48,7 @@ func _ready() -> void:
 	ok.add_theme_stylebox_override("normal", UiTheme.box(Color(UiTheme.ACCENT, 0.9), UiTheme.ACCENT_HI, 2, 20))
 	ok.add_theme_color_override("font_color", UiTheme.BG)
 	last.add_child(ok)
+	_update_labels()
 
 
 func _row() -> HBoxContainer:
@@ -65,6 +71,7 @@ func _key(label: String, id: String, size_px: Vector2, icon := false) -> Button:
 		b.add_theme_font_size_override("font_size", 56)
 	b.add_theme_stylebox_override("normal", UiTheme.box(UiTheme.SURFACE, UiTheme.LINE, 2, 20))
 	b.add_theme_stylebox_override("pressed", UiTheme.box(UiTheme.ACCENT, UiTheme.ACCENT_HI, 2, 20))
+	b.set_meta("id", id)
 	b.pressed.connect(_press.bind(id))
 	return b
 
@@ -85,15 +92,27 @@ func _press(id: String) -> void:
 			return
 		_:
 			if text.length() < max_length:
-				var capital: bool
-				if sentence_mode:
-					var t := text.strip_edges(false, true)
-					capital = t == "" or t.ends_with(".") or t.ends_with("?") or t.ends_with("!")
-				else:
-					capital = text == "" or text.ends_with(" ") or text.ends_with("-")
-				text += id if capital or _shift else id.to_lower()
+				text += id if _capital() else id.to_lower()
 				_set_shift(false)
+	_update_labels()
 	text_changed.emit(text)
+
+
+## Whether the next letter is a capital: start of a word (names) or of a sentence, or shift.
+func _capital() -> bool:
+	if _shift:
+		return true
+	if sentence_mode:
+		var t := text.strip_edges(false, true)
+		return t == "" or t.ends_with(".") or t.ends_with("?") or t.ends_with("!")
+	return text == "" or text.ends_with(" ") or text.ends_with("-")
+
+
+func _update_labels() -> void:
+	var capital := _capital()
+	for b in _letter_keys:
+		var id: String = b.get_meta("id")
+		b.text = id if capital else id.to_lower()
 
 
 func _set_shift(on: bool) -> void:
@@ -101,8 +120,10 @@ func _set_shift(on: bool) -> void:
 	if _shift_key:
 		_shift_key.add_theme_stylebox_override("normal", UiTheme.box(UiTheme.ACCENT if on else UiTheme.SURFACE,
 			UiTheme.ACCENT_HI if on else UiTheme.LINE, 2, 20))
+	_update_labels()
 
 
 func set_text(t: String) -> void:
 	text = t.substr(0, max_length)
+	_update_labels()
 	text_changed.emit(text)
