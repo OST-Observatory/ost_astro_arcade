@@ -29,6 +29,8 @@ func _ready() -> void:
 	_build_overlays()
 	Kiosk.activity.connect(_on_activity)
 	Kiosk.external_finished.connect(_on_external_finished)
+	# Android's back button: handled in _notification instead of quitting at once.
+	get_tree().quit_on_go_back = false
 	Settings.changed.connect(func(key):
 		if key == "display/show_fps":
 			_fps.visible = Settings.get_value(key)
@@ -97,11 +99,27 @@ func _process(_delta: float) -> void:
 		return
 	var warn: float = Settings.get_value("kiosk/idle_warning_sec")
 	var total: float = Settings.get_value("kiosk/idle_countdown_sec")
+	if warn <= 0.0:
+		return
 	if Kiosk.idle_sec >= warn + total:
 		_idle.hide_countdown()
 		go_home("idle")
 	elif Kiosk.idle_sec >= warn:
 		_idle.show_countdown(warn + total - Kiosk.idle_sec, total)
+
+
+## Back (Android): closes an open dialog, in a game asks like the home button, in the hub quits.
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_WM_GO_BACK_REQUEST or _busy:
+		return
+	for c in _overlay_root.get_children():
+		if c is Dialog or c is FeedbackPanel:
+			_close_dialogs()
+			return
+	if is_in_game():
+		_confirm_home()
+	else:
+		get_tree().quit()
 
 
 func _on_activity() -> void:

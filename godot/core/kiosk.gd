@@ -47,8 +47,10 @@ func _process(delta: float) -> void:
 			_check_external()
 
 
-## A systemd timer restarts the app if this file is older than ~60 s.
+## A systemd timer restarts the app if this file is older than ~60 s (kiosk only).
 func _write_heartbeat() -> void:
+	if Settings.app_mode:
+		return
 	var f := FileAccess.open(Settings.data_path("heartbeat"), FileAccess.WRITE)
 	if f:
 		f.store_string(str(int(Time.get_unix_time_from_system())))

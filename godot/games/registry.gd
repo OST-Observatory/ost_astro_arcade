@@ -1,7 +1,7 @@
 ## All games shown in the hub, in display order.
 ## status: "ready" (playable), "soon" (placeholder scene, hidden unless general/show_upcoming).
 ## External apps start a separate process (docs/external_apps.md) and are only shown if
-## the binary exists on this machine.
+## the binary exists on this machine (never in the tablet app).
 class_name GameRegistry
 extends RefCounted
 
@@ -52,7 +52,7 @@ static func visible_games() -> Array:
 			continue
 		if g.status == "soon" and not show_upcoming:
 			continue
-		if is_external(g) and not FileAccess.file_exists(external_path(g)):
+		if is_external(g) and (Settings.app_mode or not FileAccess.file_exists(external_path(g))):
 			continue
 		out.append(g)
 	return out

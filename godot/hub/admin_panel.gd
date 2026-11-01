@@ -181,10 +181,13 @@ func _show_main(message := "") -> void:
 	])
 
 	_section("System")
-	_row([
-		_action("App neu starten", func(): get_tree().quit(3)),
-		_action(Icons.get_char("power") + "  Herunterfahren", _shutdown),
-	])
+	if Settings.app_mode:
+		_row([_action("App beenden", func(): get_tree().quit())])
+	else:
+		_row([
+			_action("App neu starten", func(): get_tree().quit(3)),
+			_action(Icons.get_char("power") + "  Herunterfahren", _shutdown),
+		])
 	_content.add_child(UiTheme.label("Daten: " + ProjectSettings.globalize_path(Settings.data_dir),
 		UiTheme.SIZE_SMALL, "regular", UiTheme.TEXT_DIM))
 

@@ -1,6 +1,8 @@
 ## Kiosk configuration (autoload `Settings`).
 ## Defaults live here; overrides are written by the admin menu to <data_dir>/settings.cfg.
 ## The data directory comes from `-- --data-dir=<path>`, then $OST_DATA_DIR, then user://.
+## In app_mode (tablet app: Android, or OST_APP=1 on the desktop) APP_DEFAULTS replace some
+## kiosk defaults.
 extends Node
 
 signal changed(key: String)
@@ -27,13 +29,23 @@ const DEFAULTS := {
 	"site/lon_deg": 12.9733,
 	"site/elevation_m": 80.0,
 }
+## Tablet app: system language, no idle countdown in games (the tablet's owner decides when
+## to leave), no feedback button, lighter 3D.
+const APP_DEFAULTS := {
+	"general/default_locale": "",   # "" -> the system language
+	"kiosk/idle_warning_sec": 0.0,  # 0 -> off
+	"feedback/enabled": false,
+	"display/quality_3d": "low",
+}
 const DEFAULT_PIN := "1234"
 
 var data_dir := "user://"
+var app_mode := false
 var _cfg := ConfigFile.new()
 
 
 func _enter_tree() -> void:
+	app_mode = OS.has_feature("mobile") or OS.get_environment("OST_APP") != ""
 	data_dir = _resolve_data_dir()
 	DirAccess.make_dir_recursive_absolute(data_dir)
 	_cfg.load(_cfg_path())
@@ -57,7 +69,8 @@ func data_path(file_name: String) -> String:
 
 func get_value(key: String) -> Variant:
 	var parts := key.split("/", true, 1)
-	return _cfg.get_value(parts[0], parts[1], DEFAULTS.get(key))
+	var fallback: Variant = APP_DEFAULTS[key] if app_mode and APP_DEFAULTS.has(key) else DEFAULTS.get(key)
+	return _cfg.get_value(parts[0], parts[1], fallback)
 
 
 func set_value(key: String, value: Variant) -> void:

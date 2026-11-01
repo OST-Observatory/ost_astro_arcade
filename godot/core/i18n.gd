@@ -13,8 +13,12 @@ func _ready() -> void:
 	set_locale(default_locale())
 
 
+## The configured language; without one (tablet app) the system language, else English.
 func default_locale() -> String:
-	return Settings.get_value("general/default_locale")
+	var code: String = Settings.get_value("general/default_locale")
+	if code == "":
+		code = OS.get_locale_language()
+	return code if available().has(code) else "en"
 
 
 func available() -> Array:

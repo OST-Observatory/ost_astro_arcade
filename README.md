@@ -18,6 +18,7 @@ Telescope"), Universität Potsdam, Campus Golm. It replaces `astro_mini_games` (
 | `tools/` | Python pipeline (catalogs, scenarios, image prep, brand assets) |
 | `blender/` | `.blend` sources and bpy scripts |
 | `kiosk/` | Ubuntu kiosk setup, systemd units, deploy |
+| `android/` | Tablet app: tool setup and APK build (`android/README.md`) |
 | `docs/` | Credits/licenses, external-app contract, reference photos |
 
 ## Setup
