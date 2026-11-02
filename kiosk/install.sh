@@ -29,7 +29,7 @@ apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
   "$KERNEL_PKG" cage mesa-vulkan-drivers libvulkan1 vulkan-tools \
   libgl1 libegl1 libgles2 libwayland-client0 libwayland-cursor0 libwayland-egl1 libxkbcommon0 \
-  libasound2t64 pipewire pipewire-pulse wireplumber fonts-dejavu-core \
+  libasound2t64 pipewire pipewire-pulse wireplumber fonts-dejavu-core libsdl2-2.0-0 \
   polkitd unattended-upgrades ufw openssh-server rsync
 
 echo "==> Kiosk user (no sudo, no password, no login shell)"

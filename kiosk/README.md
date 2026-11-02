@@ -56,6 +56,8 @@ active one. To roll back:
 `sudo ln -sfn /opt/ost/releases/<older> /opt/ost/current && sudo systemctl restart ost-arcade`.
 
 External apps (NBodyTouch) go to `/opt/ost/external/nbody/`; see `docs/external_apps.md`.
+NBodyTouch is deployed from its own repo with `./deploy_kiosk.sh ostadmin@<kiosk>`. On kiosks
+set up before SDL2 was added to `install.sh`, run `sudo apt install libsdl2-2.0-0` once.
 
 ### Feedback from testers
 
