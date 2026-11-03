@@ -1,0 +1,83 @@
+% Sign next to the kiosk display: how visitors report bugs and ideas on the screen
+% (feedback button, see godot/ui/overlays/feedback_panel.gd). A5 landscape.
+%   cd docs/signs && pdflatex feedback_sign.tex
+\documentclass[11pt]{article}
+\usepackage[a5paper,landscape,margin=0mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{inter}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Kiosk colours (godot/ui/ui_theme.gd)
+\definecolor{bg}{HTML}{05060C}
+\definecolor{accent}{HTML}{FFB347}
+\definecolor{accentdark}{HTML}{C9781A}
+\definecolor{ink}{HTML}{1B1D26}
+\definecolor{dim}{HTML}{5E6272}
+
+\newcommand{\serif}[1]{{\fontfamily{lmr}\selectfont #1}}
+
+% The feedback button as it looks on screen: a speech bubble with "!".
+\newcommand{\fbicon}[1][0.36]{%
+  \tikz[baseline=-0.6ex,scale=#1]{
+    \fill[bg,rounded corners=1.2pt] (-0.62,-0.62) rectangle (0.62,0.62);
+    \fill[white,rounded corners=0.8pt] (-0.36,-0.2) rectangle (0.36,0.38);
+    \fill[white] (-0.36,-0.12) -- (-0.36,-0.42) -- (-0.1,-0.2) -- cycle;
+    \fill[bg] (-0.04,-0.03) rectangle (0.04,0.27);
+    \fill[bg] (0,-0.12) circle (0.045);
+  }}
+
+% Numbered step: orange disc, text beside it.
+\newcommand{\step}[2]{%
+  \begin{tikzpicture}[baseline=(n.base)]
+    \node[circle,fill=accent,text=bg,font=\bfseries\large,minimum size=8.5mm,inner sep=0] (n) {#1};
+  \end{tikzpicture}\hspace{3.5mm}%
+  \parbox[t]{108mm}{#2}\par\vspace{6mm}}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+  % Dark header band with the OST logo
+  \fill[bg] (current page.north west) rectangle ($(current page.north east)+(0,-34mm)$);
+  \node[anchor=west] at ($(current page.north west)+(9mm,-17mm)$)
+    {\includegraphics[height=24mm]{../../godot/assets/brand/ost_logo_512.png}};
+  \node[anchor=west,text=white,align=left] at ($(current page.north west)+(38mm,-13.5mm)$)
+    {\serif{\fontsize{27}{30}\selectfont Found a bug? Got an idea?}};
+  \node[anchor=west,text=accent,align=left] at ($(current page.north west)+(38.5mm,-24.5mm)$)
+    {\large Tell us right here on the screen. It only takes a moment.};
+  \fill[accent] ($(current page.north west)+(0,-34mm)$) rectangle ($(current page.north east)+(0,-35.2mm)$);
+
+  % Sketch of the display: where the button is (right edge, a little below the middle)
+  \begin{scope}[shift={($(current page.north east)+(-45mm,-78mm)$)}]
+    \fill[ink,rounded corners=2pt] (-31mm,-18.5mm) rectangle (31mm,18.5mm);
+    \fill[bg] (-29mm,-16.5mm) rectangle (29mm,16.5mm);
+    \fill[ink] (-3mm,-18.5mm) rectangle (3mm,-24mm);
+    \fill[ink,rounded corners=1pt] (-12mm,-24mm) rectangle (12mm,-25.5mm);
+    \foreach \x/\y in {-22/9,-10/12,4/7,15/11,-17/-2,9/-6,21/2,-4/-11,-24/-9,13/-12} {
+      \fill[white,opacity=0.75] (\x mm,\y mm) circle (0.35mm);
+    }
+    % 68 % down the screen, like the real button (godot/core/router.gd)
+    \node at (26.2mm,-5.9mm) {\fbicon[0.3]};
+    \draw[accent,line width=1.1pt] (26.2mm,-5.9mm) circle (3.4mm);
+    \draw[accent,line width=1.4pt,-latex] (12mm,-24mm) to[out=40,in=-135] (23.4mm,-9mm);
+    \node[text=dim,font=\small,align=center] at (0mm,-31mm) {Button at the right edge};
+  \end{scope}
+\end{tikzpicture}
+
+\vspace*{45mm}
+\hspace*{11mm}\begin{minipage}[t]{125mm}
+  \color{ink}\large
+  \step{1}{Tap \fbicon\ at the \textbf{right edge} of the screen, right where you noticed it.
+    \textcolor{dim}{\normalsize A screenshot of that moment is sent along.}}
+  \step{2}{Choose \textbf{Bug}, \textbf{Idea} or \textbf{Other}.}
+  \step{3}{If you like, type one short sentence on the on-screen keyboard.}
+  \step{4}{Tap \textbf{Send}. \textcolor{accentdark}{\textbf{Thank you!}}}
+\end{minipage}
+
+\vfill
+\hspace*{11mm}{\small\color{dim}Please don't type names or contact details. \quad
+  OST Space Lab \textperiodcentered{} OST student observatory, University of Potsdam}
+\vspace*{8mm}
+\end{document}
