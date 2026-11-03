@@ -213,26 +213,37 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not _playing:
 		return
 	if event is InputEventScreenTouch:
+		_let_go(event.index)   # on a press too: the release of that finger may have been lost
 		if event.pressed:
 			var p := _piece_at(event.position)
 			if p:
 				_drags[event.index] = {"piece": p, "offset": p.position - event.position}
 				_table.move_child(p, -1)
 				p.lift(true)
-		elif _drags.has(event.index):
-			var p: _Piece = _drags[event.index].piece
-			_drags.erase(event.index)
-			p.lift(false)
-			_try_snap(p)
 	elif event is InputEventScreenDrag and _drags.has(event.index):
 		var d: Dictionary = _drags[event.index]
 		(d.piece as _Piece).position = event.position + d.offset
 
 
+func _let_go(index: int) -> void:
+	if not _drags.has(index):
+		return
+	var p: _Piece = _drags[index].piece
+	_drags.erase(index)
+	p.lift(false)
+	_try_snap(p)
+
+
+## The topmost free piece under `pos`. A piece someone already holds belongs to that finger
+## alone: a second finger on it would move it on after it has snapped in place (and could
+## count it twice).
 func _piece_at(pos: Vector2) -> _Piece:
 	for i in range(_table.get_child_count() - 1, -1, -1):
 		var p := _table.get_child(i) as _Piece
 		if p and not p.locked and p.contains(pos):
+			for d in _drags.values():
+				if d.piece == p:
+					return null
 			return p
 	return null
 
