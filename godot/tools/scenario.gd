@@ -4,7 +4,7 @@
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 ## obs_* take CAM=px,py,pz,tx,ty,tz, obs_night POINT=ha,dec[,dome_az], obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
-## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
+## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, ZOOM=n zoom-out steps inside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -112,6 +112,13 @@ func _ready() -> void:
 					while dv._phase != "point":
 						await get_tree().process_frame
 					dv._obs.switch_view(OS.get_environment("VIEW"))
+				if OS.get_environment("ZOOM") != "":   # ZOOM=n: n mouse-wheel steps out once inside
+					var dz: DomeStep = g._step
+					while dz._phase != "point":
+						await get_tree().process_frame
+					for i in int(OS.get_environment("ZOOM")):
+						dz._obs._zoom(1.0 / 0.9)
+					dz._leave_t = -INF   # the leave hint stays for the screenshots
 			if scenario == "briefing":
 				for c in g.get_children():
 					if c is GameStartScreen:

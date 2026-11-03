@@ -7,6 +7,9 @@ extends Node3D
 
 signal sky_tapped(dir: Vector3)
 signal view_changed(name: String)
+## Zooming out at the widest view inside the dome: 0 just there, towards 1 the visitor
+## leaves the dome (at 1 the view switches to the roof).
+signal leave_pull(amount: float)
 
 const MODEL := "res://assets/models/observatory.glb"
 ## Camera shots: [position, look_at] in metres (scene space, y up).
@@ -42,6 +45,10 @@ const LAYER_DOME_LIT := 2
 
 const FOV := 55.0
 const FOV_MIN := 18.0
+## Inside the dome one can zoom out further than FOV for an overview, before leaving it.
+const FOV_INSIDE_MAX := 85.0
+## How far to zoom out on (factor) at the widest view inside the dome to leave it.
+const PULL_TO_LEAVE := 1.5
 const PITCH_MIN := -30.0
 const PITCH_MAX := 86.0
 
@@ -430,15 +437,21 @@ func _on_drag(d: Vector2) -> void:
 func _zoom(f: float) -> void:
 	if not look_enabled:
 		return
+	var inside := view_name == "inside"
+	var widest := FOV_INSIDE_MAX if inside else FOV
 	# Zooming out further than the widest view takes you out of the dome onto the roof.
-	if f > 1.0 and camera.fov >= FOV - 0.01 and view_name == "inside":
+	if f > 1.0 and inside and camera.fov >= widest - 0.01:
 		_pull *= f
-		if _pull > 1.35:
+		if _pull >= PULL_TO_LEAVE:
 			_pull = 1.0
 			switch_view("roof")
+		else:
+			leave_pull.emit((_pull - 1.0) / (PULL_TO_LEAVE - 1.0))
 		return
 	_pull = 1.0
-	camera.fov = clampf(camera.fov * f, FOV_MIN, maxf(FOV, camera.fov))   # a wider view zooms in smoothly
+	camera.fov = clampf(camera.fov * f, FOV_MIN, maxf(widest, camera.fov))   # a wider view zooms in smoothly
+	if f > 1.0 and inside and camera.fov >= widest - 0.01:
+		leave_pull.emit(0.0)
 
 
 func _apply_look() -> void:

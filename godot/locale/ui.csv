@@ -200,6 +200,7 @@ DOME_NEXT,Weiter zum Feinausrichten,On to fine alignment,Seguir con la alineaci�
 DOME_FIGURES,Sternbilder,Constellations,Constelaciones
 DOME_GO_OUT,Nach draußen,Go outside,Salir
 DOME_GO_IN,In die Kuppel,Into the dome,Entrar en la cúpula
+DOME_LEAVE_HINT,Weiter herauszoomen: Du verlässt die Kuppel,Keep zooming out to leave the dome,Sigue alejando el zoom para salir de la cúpula
 DIR8_0,im Norden,in the north,al norte
 DIR8_1,im Nordosten,in the north-east,al noreste
 DIR8_2,im Osten,in the east,al este

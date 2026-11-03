@@ -9,17 +9,20 @@ extends MissionStep
 ## Pointing tolerance (deg) per difficulty; after a few misses the marker helps everyone.
 const TOLERANCE := {"explorer": 30.0, "researcher": 22.0, "pro": 15.0}
 const MISSES_FOR_MARKER := 2
-## Dome parked with the slit towards the roof view, so the visitor sees it open; once the
-## visitor is inside it stands at home, slit to the north where the parked telescope points,
-## so that turning to the target is clearly seen.
+## Dome parked with the slit towards the roof view (south), so the visitor sees it open; it
+## stays there inside the dome until it turns to the target.
 const PARK_AZ := 200.0
-const HOME_AZ := 0.0
 var _obs: ObservatoryScene
 var _btn: BigButton
 var _next: BigButton
 var _figures: BigButton
 var _go_out: BigButton
 var _go_in: BigButton
+var _leave: PanelContainer
+var _leave_bar: ColorRect
+var _leave_fill: ColorRect
+var _leave_t := 99.0        # seconds since the last zoom out at the widest view inside
+var _leave_amount := 0.0    # how far that zooming out went towards leaving (0..1)
 var _title: Label
 var _task: Label
 var _header: VBoxContainer
@@ -146,7 +149,41 @@ func _ready() -> void:
 	_go_out.pressed.connect(func(): _obs.switch_view("roof"))
 	_go_in.pressed.connect(func(): _obs.switch_view("inside"))
 	_obs.view_changed.connect(func(_n: String):
+		_leave_t = 99.0
 		_update_view_buttons())
+	# Zoomed out as far as it goes inside: zooming on leaves the dome. Says so, with a bar
+	# that fills up until it happens.
+	_leave = PanelContainer.new()
+	_leave.add_theme_stylebox_override("panel", UiTheme.box(Color(0.06, 0.04, 0.02, 0.8), UiTheme.ACCENT, 3))
+	_leave.anchor_left = 0.5
+	_leave.anchor_right = 0.5
+	_leave.anchor_top = 0.62
+	_leave.anchor_bottom = 0.62
+	_leave.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_leave.grow_vertical = Control.GROW_DIRECTION_BOTH
+	var lv := VBoxContainer.new()
+	lv.add_theme_constant_override("separation", 14)
+	var lh := HBoxContainer.new()
+	lh.add_theme_constant_override("separation", 18)
+	lh.add_child(UiTheme.icon("zoom_out", 56, UiTheme.ACCENT))
+	lh.add_child(UiTheme.label("DOME_LEAVE_HINT", UiTheme.SIZE_BODY, "semibold", UiTheme.ACCENT_HI))
+	lv.add_child(lh)
+	_leave_bar = ColorRect.new()
+	_leave_bar.color = Color(1, 1, 1, 0.15)
+	_leave_bar.custom_minimum_size = Vector2(0, 10)
+	_leave_fill = ColorRect.new()
+	_leave_fill.color = UiTheme.ACCENT
+	_leave_fill.size = Vector2(0, 10)
+	_leave_bar.add_child(_leave_fill)
+	lv.add_child(_leave_bar)
+	_leave.add_child(lv)
+	for c in [_leave, lv, lh, _leave_bar, _leave_fill]:
+		c.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_leave.visible = false
+	add_child(_leave)
+	_obs.leave_pull.connect(func(amount: float):
+		_leave_t = 0.0
+		_leave_amount = amount)
 	_btn = BigButton.make("DOME_OPEN", "power", true, 620)
 	_btn.custom_minimum_size.y = 150
 	_btn.add_theme_font_size_override("font_size", 54)
@@ -176,6 +213,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_t += delta
 	_overlay.queue_redraw()
+	_leave_t += delta
+	_leave.modulate.a = clampf(2.5 - _leave_t, 0.0, 1.0)   # stays 1.5 s, then fades out
+	_leave.visible = _leave.modulate.a > 0.0
+	_leave_fill.size.x = _leave_bar.size.x * _leave_amount
 	var shown := _status.text != "" or _where_box.visible
 	_bottom_band.visible = shown
 	if shown:
@@ -202,7 +243,7 @@ func _open() -> void:
 	tw.tween_method(_obs.set_shutter, 0.0, 1.0, 3.0).set_trans(Tween.TRANS_SINE)
 	await tw.finished
 	_status.text = ""
-	await _obs.switch_view("inside", true, func(): _obs.set_dome_azimuth(HOME_AZ))
+	await _obs.switch_view("inside", true)
 	_obs.set_look(true)
 	_phase = "point"
 	_title.text = "DOME_TITLE_POINT"   # the observatory is open now: next comes the pointing
@@ -286,14 +327,14 @@ func _slew() -> void:
 	var az_end := _obs.slit_azimuth()
 	_obs.set_telescope(0.0, 90.0)   # back to park until the slew starts (no one-frame jump)
 	# Watched from in front of where the slit will stand, a little raised: the slit swings
-	# round from the north into view, then the telescope turns out of it.
+	# round from where it was parked into view, then the telescope turns out of it.
 	var aa := RealSky.alt_az(_target)
 	await _obs.view_from(Vector3(0, 3.2, 0) + RealSky.horizon_dir(aa.x * 0.45, az_end) * 11.0, Vector3(0, 2.9, 0), "roof")
 	var slew := create_tween()
 	slew.tween_method(func(t: float):
 		var td := smoothstep(0.0, 0.45, t)
 		var tt := smoothstep(0.4, 1.0, t)
-		_obs.set_dome_azimuth(rad_to_deg(lerp_angle(deg_to_rad(HOME_AZ), deg_to_rad(az_end), td)))
+		_obs.set_dome_azimuth(rad_to_deg(lerp_angle(deg_to_rad(PARK_AZ), deg_to_rad(az_end), td)))
 		_obs.set_telescope(ha * tt, lerpf(90.0, dec, tt)), 0.0, 1.0, 9.0)
 	Audio.play("whoosh", "SFX", 0.45)
 	await slew.finished
