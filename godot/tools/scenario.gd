@@ -4,7 +4,7 @@
 ## Scenarios: hub, en, es, attract, leaderboard, info, admin, dialog, idle, placeholder, start, keyboard,
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 ## obs_* take CAM=px,py,pz,tx,ty,tz, obs_night POINT=ha,dec[,dome_az], obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
-## dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, ZOOM=n zoom-out steps inside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
+## puzzle_half LOOSE=n, dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, ZOOM=n zoom-out steps inside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -167,6 +167,9 @@ func _ready() -> void:
 					var p = pg._pieces[k]
 					p.position = p.target
 					pg._try_snap(p)
+				for k in int(OS.get_environment("LOOSE")):   # LOOSE=n: n more pieces put down next to their place
+					var p = pg._pieces[n + k]
+					p.position = p.target + Vector2(90, 70)
 		"comet", "comet_found":
 			var cb := CometBonus.new()
 			add_child(cb)

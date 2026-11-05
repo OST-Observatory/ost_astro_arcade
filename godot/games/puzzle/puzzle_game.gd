@@ -1,6 +1,6 @@
 ## Astro puzzle: pick one of the OST's own images, then assemble real jigsaw pieces on
 ## the board. Several fingers can drag pieces at once (two kids can puzzle together).
-## A faint template helps (stronger for explorers, none for pros). The finished picture
+## A faint template helps (stronger for explorers, very faint for pros). The finished picture
 ## is followed by an info card about the object.
 extends Control
 
@@ -12,7 +12,7 @@ const DATA := "res://assets/data/puzzle/images.json"
 const BOARD_AREA := Rect2(1000, 170, 1480, 1120)
 const TRAY := Rect2(60, 200, 880, 1100)
 const SNAP_PX := 55.0
-const GHOST_ALPHA := {"explorer": 0.35, "researcher": 0.14, "pro": 0.0}
+const GHOST_ALPHA := {"explorer": 0.35, "researcher": 0.14, "pro": 0.07}
 const EMPTY_COLOR := Color(0.13, 0.17, 0.27)
 
 var skip_intro := false   # screenshots/tests
@@ -264,6 +264,8 @@ func _try_snap(p: _Piece) -> void:
 
 func _finished() -> void:
 	_playing = false
+	for p in _pieces:
+		p.settle()
 	Router.step("solved")
 	Audio.play("success")
 	Confetti.burst(self)
@@ -329,6 +331,7 @@ class _Piece:
 	var locked := false
 	var _poly: PackedVector2Array
 	var _outline: Line2D
+	var _lock_tween: Tween
 
 	func setup(logic: PuzzleLogic, col: int, row: int, tex: Texture2D, s: float) -> void:
 		c = col
@@ -361,13 +364,23 @@ class _Piece:
 		modulate = Color(1.12, 1.12, 1.12) if on else Color.WHITE
 		_outline.default_color = Color(UiTheme.ACCENT, 0.9) if on else Color(1, 1, 1, 0.45)
 
-	## Snapped in place: a short flash and a green outline that fades, then it is part of the
-	## picture.
+	## Snapped in place: a bright flash and a thick green outline that settles to a thin one.
+	## It stays while playing, so placed pieces are told apart from pieces only put down on
+	## the board (hard to see in pictures that are mostly sky).
 	func lock() -> void:
 		locked = true
-		_outline.default_color = Color(UiTheme.SUCCESS, 1.0)
-		_outline.width *= 2.0
-		modulate = Color(1.8, 1.8, 1.8)
-		var tw := create_tween().set_parallel()
-		tw.tween_property(self, "modulate", Color.WHITE, 0.5)
-		tw.tween_property(_outline, "modulate:a", 0.0, 0.9).set_delay(0.2)
+		var w := _outline.width
+		_outline.default_color = UiTheme.SUCCESS
+		_outline.width = w * 4.0
+		modulate = Color(2.2, 2.2, 2.2)
+		_lock_tween = create_tween().set_parallel()
+		_lock_tween.tween_property(self, "modulate", Color.WHITE, 0.6)
+		_lock_tween.tween_property(_outline, "width", w * 1.5, 0.8).set_delay(0.2)
+		_lock_tween.tween_property(_outline, "modulate:a", 0.55, 0.8).set_delay(0.2)
+
+	## The picture is complete: the outlines go, the pieces become one picture.
+	func settle() -> void:
+		if _lock_tween:
+			_lock_tween.kill()   # the last piece may still be settling
+		modulate = Color.WHITE
+		create_tween().tween_property(_outline, "modulate:a", 0.0, 0.8)
