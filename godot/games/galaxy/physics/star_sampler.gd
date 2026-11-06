@@ -75,13 +75,14 @@ static func sample(index: int, g: Dictionary) -> Array:
 		var zh := sc * (0.06 if kind == DISK else 0.025)
 		var h := (2.0 * u[3] - 1.0) * zh
 		pos = Vector3(rr * cos(th), h, rr * sin(th))
-		# A little random motion around the circular orbit (epicycle), each star at its own
-		# phase of it: 5 % radial, 3.5 % along the orbit (ratio of a flat rotation curve).
-		# All stars at the same phase would swing in step and draw rings that are not there.
+		# Random motion around the circular orbit (epicycle), each star at its own phase of it:
+		# `warm` radial, 0.7 of that along the orbit (ratio of a flat rotation curve). All stars
+		# at the same phase would swing in step and draw rings that are not there.
 		var ph := TAU * u[4]
 		var vc := vtab_at(g, rr)
-		vel = Vector3(-sin(th), 0.0, cos(th)) * (vc * (1.0 + 0.035 * cos(ph)) * float(g.spin)) \
-			+ Vector3(cos(th), 0.0, sin(th)) * (vc * 0.05 * sin(ph))
+		var w := float(g.get("warm", 0.05))
+		vel = Vector3(-sin(th), 0.0, cos(th)) * (vc * (1.0 + 0.7 * w * cos(ph)) * float(g.spin)) \
+			+ Vector3(cos(th), 0.0, sin(th)) * (vc * w * sin(ph))
 	return [pos, vel, kind]
 
 

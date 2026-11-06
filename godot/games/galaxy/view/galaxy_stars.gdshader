@@ -19,6 +19,7 @@ uniform float a_bulge[2];
 uniform float r_disk[2];
 uniform float r_gas[2];
 uniform float spin[2];
+uniform float warm[2];                 // random motion of disk stars (StarSampler)
 uniform vec3 start_center[2];
 uniform vec3 start_vel[2];
 uniform vec3 centers[48];              // per step k: galaxy 0 at 2k, galaxy 1 at 2k+1
@@ -129,8 +130,8 @@ void start() {
 		// Epicycle at a random phase per star (see StarSampler).
 		float ph = 6.28318530718 * u[4];
 		float vc = vtab_at(g, rr);
-		vel = vec3(-sin(th), 0.0, cos(th)) * (vc * (1.0 + 0.035 * cos(ph)) * spin[g])
-			+ vec3(cos(th), 0.0, sin(th)) * (vc * 0.05 * sin(ph));
+		vel = vec3(-sin(th), 0.0, cos(th)) * (vc * (1.0 + 0.7 * warm[g] * cos(ph)) * spin[g])
+			+ vec3(cos(th), 0.0, sin(th)) * (vc * warm[g] * sin(ph));
 		frac = clamp(rr / rmax, 0.0, 1.0);
 	}
 	TRANSFORM = mat4(1.0);

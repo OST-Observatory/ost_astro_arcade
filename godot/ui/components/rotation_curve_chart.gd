@@ -78,13 +78,24 @@ func _draw() -> void:
 		l_halo.append(to_px.call(rr, sqrt(maxf(v2.halo, 0.0))))
 		total.append(to_px.call(rr, pot.v_circ(rr)))
 	var parts := {"bh": l_bh, "stars": l_stars, "gas": l_gas, "halo": l_halo}
+	var labels := []   # [y, block] at the right end of each line
 	for k in ["bh", "stars", "gas", "halo"]:
 		if not unlocked.has(k):
 			continue
 		var line: PackedVector2Array = parts[k]
 		draw_polyline(line, Color(COLORS[k], 0.85), 3.0, true)
-		var end := line[line.size() - 1]
-		draw_string(_font, end + Vector2(12, 8), tr("GAL_BLOCK_" + k.to_upper()), HORIZONTAL_ALIGNMENT_LEFT, 180, fs - 4, COLORS[k])
+		labels.append([line[line.size() - 1].y, k])
+	# Lines that end close together: push their labels apart, but keep them inside the box.
+	labels.sort_custom(func(a: Array, b: Array) -> bool: return a[0] < b[0])
+	var gap := float(fs)
+	for i in range(1, labels.size()):
+		labels[i][0] = maxf(labels[i][0], labels[i - 1][0] + gap)
+	for i in range(labels.size() - 1, -1, -1):
+		var lowest := size.y - 20.0 if i == labels.size() - 1 else float(labels[i + 1][0]) - gap
+		labels[i][0] = minf(labels[i][0], lowest)
+	var label_x := total[total.size() - 1].x + 12.0
+	for l in labels:
+		draw_string(_font, Vector2(label_x, l[0] + 8), tr("GAL_BLOCK_" + str(l[1]).to_upper()), HORIZONTAL_ALIGNMENT_LEFT, 180, fs - 4, COLORS[l[1]])
 	draw_polyline(total, TOTAL_COLOR, 6.0, true)
 
 	# Measurements with error bars.

@@ -9,8 +9,9 @@ extends Control
 ## The visitor picked a target galaxy or "quick" (awaited instead of polling).
 signal _target_chosen(id: String)
 
-const VIEW := Rect2(40, 170, 1500, 1230)
-const PANEL_X := 1580.0
+const VIEW := Rect2(40, 170, 1420, 1230)
+## The panel ends at 2440, clear of the feedback tab at the right screen edge (Router).
+const PANEL_X := 1500.0
 const PANEL_W := 940.0
 const BLOCK_W := 460.0
 const GPU_STARS := 50000         # test stars per galaxy for the analysis on the graphics card
@@ -32,6 +33,8 @@ var _match_label: Label
 var _hint_label: Label
 var _blocks_box: GridContainer
 var _continue_btn: BigButton
+var _why_btn: BigButton      # "what is happening here?" while the stars form rings
+var _why_card: Control
 var _time_label: Label
 # act 2
 var _badges: Array = []
@@ -221,6 +224,10 @@ func start_build(target_id: String) -> void:
 		_view.set_potential(_current_pot(), _match)
 		_view.play())
 	add_child(restart)
+	_why_btn = BigButton.make("GAL_WHY", "info", false, 0)
+	_why_btn.position = VIEW.position + Vector2(28, VIEW.size.y - 200)
+	_why_btn.pressed.connect(_show_why)
+	add_child(_why_btn)
 
 	_rebuild_blocks()
 	_view.show_build(_target, _current_pot(), _match)
@@ -251,6 +258,35 @@ func _show_intro() -> void:
 		card.queue_free()
 		_view.play())
 	v.add_child(go)
+
+
+## Why the stars form rings while the model does not fit (button in the view): they are too
+## fast for the gravity of the model, swing out and back in step, and crowd where they turn.
+func _show_why() -> void:
+	if is_instance_valid(_why_card):
+		return
+	_why_card = PanelContainer.new()
+	_why_card.add_theme_stylebox_override("panel", UiTheme.box(UiTheme.SURFACE_HI, Color(UiTheme.SCIENCE, 0.6), 3))
+	_why_card.position = VIEW.position + Vector2(100, 130)
+	_why_card.custom_minimum_size = Vector2(VIEW.size.x - 200, 0)
+	add_child(_why_card)
+	var v := VBoxContainer.new()
+	v.add_theme_constant_override("separation", 20)
+	_why_card.add_child(v)
+	v.add_child(UiTheme.label("GAL_WHY_TITLE", UiTheme.SIZE_H2 - 4, "serif", UiTheme.ACCENT_HI))
+	for key in ["GAL_WHY_1", "GAL_WHY_2", "GAL_WHY_3", "GAL_WHY_4", "GAL_WHY_FACT"]:
+		var l := UiTheme.label(key, UiTheme.SIZE_BODY - 4, "regular", UiTheme.TEXT_DIM if key == "GAL_WHY_FACT" else UiTheme.TEXT)
+		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		l.custom_minimum_size = Vector2(VIEW.size.x - 260, 0)
+		v.add_child(l)
+	var close := BigButton.make("CLOSE", "close", true, 360)
+	close.size_flags_horizontal = Control.SIZE_SHRINK_END
+	close.pressed.connect(func():
+		_why_card.queue_free()
+		_why_card = null
+		_refresh())
+	v.add_child(close)
+	_why_btn.visible = false
 
 
 func _make_view() -> void:
@@ -368,6 +404,9 @@ func _refresh() -> void:
 	_match_label.add_theme_color_override("font_color", UiTheme.SUCCESS if stable else UiTheme.ACCENT_HI)
 	_continue_btn.disabled = not (stable and _unlocked.has("halo"))
 	_hint_label.text = _hint(stable)
+	if is_instance_valid(_why_btn):
+		_why_btn.visible = not is_instance_valid(_why_card) and not _unlocked.is_empty() \
+			and GalaxyView.rings_likely(_match)
 
 
 func _hint(stable: bool) -> String:

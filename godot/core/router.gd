@@ -13,7 +13,7 @@ var _busy := false
 
 var _fade: ColorRect
 var _home_btn: BigButton
-var _feedback_btn: BigButton
+var _feedback_btn: Button
 var _idle: IdleOverlay
 var _fps: Label
 var _overlay_root: Control
@@ -56,16 +56,30 @@ func _build_overlays() -> void:
 	_home_btn.pressed.connect(_confirm_home)
 	_overlay_root.add_child(_home_btn)
 
-	# Feedback for testers: a tab at the right edge, low enough to miss the hub's cards and
-	# clear of the corners used by the admin gesture. Switched off in the admin menu.
-	_feedback_btn = BigButton.make("", "feedback")
-	_feedback_btn.custom_minimum_size = Vector2(96, 96)
+	# Feedback for testers: a slim tab flush with the right edge, low enough to miss the hub's
+	# cards and clear of the corners used by the admin gesture. Narrow so that it stays off the
+	# games' right-hand panels (they end at x <= 2510). Switched off in the admin menu.
+	_feedback_btn = Button.new()
+	_feedback_btn.focus_mode = Control.FOCUS_NONE
 	_feedback_btn.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
-	_feedback_btn.offset_left = -104
-	_feedback_btn.offset_right = -8
-	_feedback_btn.offset_top = 210
-	_feedback_btn.offset_bottom = 306
-	_feedback_btn.add_theme_font_size_override("font_size", 52)
+	_feedback_btn.offset_left = -44
+	_feedback_btn.offset_right = 0
+	_feedback_btn.offset_top = 200
+	_feedback_btn.offset_bottom = 332
+	for st in [["normal", UiTheme.SURFACE, UiTheme.LINE], ["hover", UiTheme.SURFACE_HI, Color(UiTheme.ACCENT, 0.6)],
+			["pressed", UiTheme.ACCENT, UiTheme.ACCENT_HI]]:
+		var sb := UiTheme.box(st[1], st[2])
+		sb.set_content_margin_all(0)
+		sb.corner_radius_top_right = 0
+		sb.corner_radius_bottom_right = 0
+		sb.border_width_right = 0
+		_feedback_btn.add_theme_stylebox_override(st[0], sb)
+	var fb_icon := UiTheme.icon("feedback", 36, UiTheme.TEXT)
+	fb_icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fb_icon.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	fb_icon.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	fb_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_feedback_btn.add_child(fb_icon)
 	_feedback_btn.modulate = Color(1, 1, 1, 0.85)
 	_feedback_btn.visible = Settings.get_value("feedback/enabled")
 	_feedback_btn.pressed.connect(_open_feedback)

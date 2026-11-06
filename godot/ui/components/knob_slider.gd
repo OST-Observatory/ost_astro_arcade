@@ -8,6 +8,7 @@ signal changed(value: float)
 var slider: HSlider
 var formatter: Callable    # float -> String shown next to the title
 var _value_label: Label
+var _title: Label
 var _buttons: Array[Button] = []
 
 
@@ -17,11 +18,16 @@ static func make(title_key: String, min_v: float, max_v: float, step: float, val
 	k.formatter = fmt
 	k.add_theme_constant_override("separation", 6)
 	var top := HBoxContainer.new()
-	var title := UiTheme.label(title_key, UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.TEXT)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	top.add_child(title)
+	if title_key != "":
+		k._title = UiTheme.label(title_key, UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.TEXT)
+		top.add_child(k._title)   # its own width; the value takes the rest, right-aligned
 	k._value_label = UiTheme.label("", UiTheme.SIZE_SMALL + 2, "semibold", UiTheme.SCIENCE)
 	k._value_label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
+	# Long values ("177 mil millones de masas solares") get a smaller font (_fit_value), and
+	# wrap only if that is not enough, instead of widening the layout.
+	k._value_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	k._value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	k._value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(k._value_label)
 	k.add_child(top)
 
@@ -93,8 +99,27 @@ func _on_value(_v: float) -> void:
 	changed.emit(slider.value)
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED and _value_label:
+		_fit_value()
+
+
 func _refresh() -> void:
 	_value_label.text = formatter.call(slider.value) if formatter.is_valid() else str(slider.value)
+	_fit_value()
+
+
+## The value on one line if a slightly smaller font makes it fit.
+func _fit_value() -> void:
+	var room := size.x
+	if _title:
+		room -= _title.get_minimum_size().x + 4.0
+	var font := _value_label.get_theme_font("font")
+	var fs := UiTheme.SIZE_SMALL + 2
+	while fs > UiTheme.SIZE_SMALL - 6 and room > 0.0 \
+			and font.get_string_size(_value_label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x > room:
+		fs -= 2
+	_value_label.add_theme_font_size_override("font_size", fs)
 
 
 static func _knob_texture(size: int, col: Color) -> ImageTexture:

@@ -20,6 +20,10 @@ const PRO_RANGE := {"bh": [0.0, 100.0], "stars": [0.0, 2.5], "gas": [0.0, 2.5], 
 ## Typical central black hole (Msun): Sgr A* for the Milky Way; small late-type spirals and
 ## dwarfs host much lighter ones (if any).
 const BH_TYPICAL := {"milkyway": 4.3e6, "ngc3198": 1e6, "ddo154": 1e4}
+## Random motion of the disk stars (fraction of the circular speed, see star_setup): galaxies
+## in balance (act 2, pictures) and the player's galaxy while building (act 1).
+const WARM := 0.05
+const WARM_BUILD := 0.15
 
 ## Look of each target: particle fractions (bulge, gas), colours, display size.
 const LOOK := {
@@ -83,6 +87,9 @@ static func reference_knobs(t: Dictionary) -> Dictionary:
 ## better the model fits, the closer the stars start to its speeds, otherwise the few per cent
 ## left between model and data make all stars at one radius swing in step (rings that would
 ## not be there in a galaxy in balance).
+## warm: random motion of the disk stars as a fraction of the circular speed (StarSampler).
+## Larger in act 1, where the start speeds do not fit the model yet: stars at one radius then
+## swing out of step, and what would be sharp rings blurs into a disk that spreads out.
 static func star_setup(t: Dictionary, pot: GalaxyPotential, measured: bool, spin := 1.0, blend := 0.0) -> Dictionary:
 	var ref: GalaxyPotential = t.reference
 	var rmax := float(t.r_last)
@@ -94,7 +101,7 @@ static func star_setup(t: Dictionary, pot: GalaxyPotential, measured: bool, spin
 		tab[i] = lerpf(measured_v(t, r), pot.v_circ(r), blend) if measured else pot.v_circ(r)
 	return {"f_bulge": t.look.f_bulge, "f_gas": t.look.f_gas, "r_max": rmax, "a_bulge": maxf(ref.a_bulge, 0.05),
 		"r_disk": maxf(ref.a_disk * 0.9, 0.1), "r_gas": maxf(ref.a_gas * 0.6, 0.15), "spin": spin,
-		"vtab": tab, "vtab_rmax": vtab_rmax}
+		"vtab": tab, "vtab_rmax": vtab_rmax, "warm": WARM_BUILD if measured else WARM}
 
 
 ## Measured circular speed at radius r (model units): the data where available, the reference

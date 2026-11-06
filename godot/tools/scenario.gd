@@ -5,6 +5,7 @@
 ## psf, briefing and the asteroid mission steps: plan, align, expose, blink(_loupe/_hint/_wrong), measure, orbit, cert
 ## obs_* take CAM=px,py,pz,tx,ty,tz, obs_night POINT=ha,dec[,dome_az], obs_day also SHOT=<shot> and SHUTTER=0..1, obs_street FLY=<seconds> for the intro flight,
 ## puzzle_half LOOSE=n, dome_open TAP=miss|hit for a tap in the pointing phase, VIEW=roof to step outside, ZOOM=n zoom-out steps inside, dome FIGURES=1 and LOOK=alt,az, measure FRAME=0..2.
+## gal_* take GAL=<target>, gal_stars/gal_stable RUN=1 to let the stars move, gal_stars UNLOCK=bh,stars, KNOBS=bh:100,stars:2.5 and WHY=1.
 extends Control
 
 const HUB := "res://hub/hub.tscn"
@@ -337,12 +338,18 @@ func _ready() -> void:
 					if scenario in ["gal_stars", "gal_stable"]:
 						gg._unlocked = ["bh", "stars", "gas"] + (["halo"] as Array if scenario == "gal_stable" else [])
 						gg._knobs = GalaxyTemplates.reference_knobs(gg._target)
+						if OS.get_environment("UNLOCK") != "":   # UNLOCK=bh,stars: only these blocks
+							gg._unlocked = Array(OS.get_environment("UNLOCK").split(","))
+						for kv in OS.get_environment("KNOBS").split(",", false):   # KNOBS=bh:100,stars:2.5
+							gg._knobs[kv.get_slice(":", 0)] = float(kv.get_slice(":", 1))
 						gg._rebuild_blocks()
 						gg._on_knob()
 						if OS.get_environment("RUN") != "":   # close the intro, let the stars move
 							for b in gg.find_children("*", "BigButton", true, false):
 								if b.text_key == "GAL_INTRO_GO":
 									b.pressed.emit()
+						if OS.get_environment("WHY") != "":   # WHY=1: the card that explains the rings
+							gg._show_why()
 					elif scenario == "gal_quiz":
 						gg._unlock("bh")
 				"gal_collide", "gal_badge", "gal_partners", "gal_none":

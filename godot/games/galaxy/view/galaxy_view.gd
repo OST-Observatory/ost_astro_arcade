@@ -158,6 +158,12 @@ static func _blend(match_pct: float) -> float:
 	return smoothstep(88.0, 96.0, match_pct)
 
 
+## True while the stars still start (mostly) at the measured speeds: then they swing in step
+## and form rings (see GalaxyTemplates.star_setup).
+static func rings_likely(match_pct: float) -> bool:
+	return _blend(match_pct) < 0.5
+
+
 ## Names over the two galaxies ([] hides them): the player's in orange.
 func set_names(names: Array) -> void:
 	for i in 2:
@@ -200,7 +206,7 @@ func _apply_galaxies(gals: Array, c0: Array, v0: Array) -> void:
 	var pot := PackedFloat32Array()
 	var vtab := PackedFloat32Array()
 	var bases := []
-	var keys := ["f_bulge", "f_gas", "r_max", "a_bulge", "r_disk", "r_gas", "spin"]
+	var keys := ["f_bulge", "f_gas", "r_max", "a_bulge", "r_disk", "r_gas", "spin", "warm"]
 	var per := {}
 	for k in keys:
 		per[k] = PackedFloat32Array()
